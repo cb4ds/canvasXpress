@@ -6,6 +6,9 @@ information on changes to the stand-alone JavaScript CanvasXpress library see th
 
 ---
 
+## v0.14.3
+* Updated CanvasXpress JavaScript and CSS libraries to v14.3
+
 ## v0.14.0
 * Updated CanvasXpress JavasScript and CSS libraries to v14.0
 * Updated TravisCI parameters
