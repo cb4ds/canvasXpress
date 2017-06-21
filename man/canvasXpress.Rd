@@ -9,7 +9,7 @@ canvasXpress(data = NULL, smpAnnot = NULL, varAnnot = NULL,
   pretty = FALSE, digits = 4, width = 600, height = 400, ...)
 }
 \value{
-htmlwidget object
+htmlwidgets object
 }
 \description{
 Custom HTML widget creation function based on widget YAML and JavaScript for 

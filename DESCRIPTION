@@ -15,7 +15,8 @@ Maintainer: Connie Brett <connie@aggregate-genius.com>
 Depends:
     R (>= 3.2.1)
 Imports:
-    htmlwidgets (>= 0.7)
+    htmlwidgets (>= 0.7),
+    magrittr (>= 1.5)
 RoxygenNote: 6.0.0
 Suggests:
     shiny (>= 0.13.2),

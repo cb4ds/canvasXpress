@@ -23,7 +23,7 @@
 #' use in any html-compatible context
 #'  
 #' 
-#' @return htmlwidget object
+#' @return htmlwidgets object
 #'
 #' @export
 canvasXpress <- function(data = NULL,     # y

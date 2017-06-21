@@ -2,7 +2,10 @@ assertDataCorrectness <- function(data, graphType) {
     if (is.null(data))      stop("data cannot be NULL!")
     if (is.null(graphType)) stop("graphType cannot be NULL!")
     
-    validTypes <- c("Bar", "Line", "Scatter2D", "Scatter3D", "Stacked")
+    validTypes <- c("Scatter2D", "Scatter3D",
+                    "Bar", "Stacked",
+                    "Area")
+                    
     
     # validTypes <- c("Bar", "Line", "Area", "AreaLine", "BarLine", "Boxplot", 
                     # "Dotplot", "DotLine", "Heatmap", "Candlestick", "Stacked", 
