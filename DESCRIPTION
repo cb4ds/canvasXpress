@@ -13,7 +13,7 @@ Author: Isaac Neuhaus [aut, cre],
     Connie Brett [ctb]
 Maintainer: Connie Brett <connie@aggregate-genius.com>
 Depends:
-    R (>= 3.2.1)
+    R (>= 3.2.5)
 Imports:
     htmlwidgets (>= 0.7),
     magrittr (>= 1.5)
