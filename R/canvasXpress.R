@@ -48,11 +48,11 @@ canvasXpress <- function(data = NULL,     # y
         vars = as.list(assignCanvasXpressRownames(data))
         smps = as.list(assignCanvasXpressColnames(data))
 
-        dy <- as.matrix(data, dimnames = list())
+        data.y <- as.matrix(data, dimnames = list())
         # dimnames(dy) <- NULL
         y <- list(vars = vars, 
                   smps = smps, 
-                  data = dy)
+                  data = data.y)
         
         x <- NULL
         z <- NULL

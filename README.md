@@ -25,14 +25,18 @@ class.
 ***canvasXpress*** can be now simply used within R at the console to generate conventional plots, in R-Studio
 or seamlessly embeded in [Shiny](http://shiny.rstudio.com) web applications. An full-fledged example of the ***canvasXpress*** library including the mouse events, zooming, and broadcasting capabilities is included in this package in the [shiny](shiny/example3) directory. This ***canvasXpress*** R library was created with the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) package.
 
-### Getting Started
+### Installation
 
-You can install the latest version of ***canvasXpress*** from GitHub as follows:
+canvasXpress is available for installation from [CRAN](http://cran.org..... or
+you can install the latest version of ***canvasXpress*** from GitHub as follows:
 
 ```r
 devtools::install_github('neuhausi/canvasXpress')
 ```
-### Scatter 3D Plot Example
+
+### Examples
+
+#### Scatter 3D Plot
 
 ```r
 data <- t(iris[,1:4])
@@ -42,7 +46,7 @@ canvasXpress(t(data), varAnnot=varAnnot, graphType='Scatter3D', colorBy='Species
 ```
 ![Scatter3D](vignettes/images/R-Scatter3D.png)
 
-### Scatter 2D Matrix Plot Example
+#### Scatter 2D Matrix Plot
 
 ```r
 data <- t(iris[,1:4])
@@ -52,7 +56,7 @@ canvasXpress(t(data), varAnnot=varAnnot, scatterPlotMatrix=1, colorBy='Species')
 ```
 ![Scatter2DMatrix](vignettes/images/R-Scatter2DMatrix.png)
 
-### Boxplot Example
+#### Boxplot
 
 ```r
 data <- t(iris[,1:4])
@@ -64,7 +68,7 @@ canvasXpress(data, smpAnnot=smpAnnot, graphType='Boxplot', afterRender=list(list
 ```
 ![Boxplot](vignettes/images/R-Boxplot.png)
 
-### Heatmap Example
+#### Heatmap
 
 ```r
 data <- t(iris[,1:4])
@@ -74,7 +78,7 @@ canvasXpress(data, smpAnnot=smpAnnot, graphType='Heatmap', smpOverlays=list('Spe
 ```
 ![Heatmap](vignettes/images/R-Heatmap.png)
 
-### Four way Venn Diagram Example
+#### Four way Venn Diagram
 
 ```r
 vennData <- data.frame(A=57, B=12, C=67, D=72, AB=4, AC=67, AD=25, BC=67, BD=27, CD=38, ABC=69, ABD=28, ACD=52, BCD=46, ABCD=3)
@@ -82,6 +86,24 @@ canvasXpress(vennData=vennData, graphType='Venn', vennGroups=4, vennLegend=list(
 ```
 ![Venn](vignettes/images/R-Venn.png)
 
-Additional information and many examples with the JavaScript ***canvasXpress*** library can be found
-[here](http://www.canvasxpress.org).
+
+### More Examples and Resources
+
+In addition to the built-in package documentation there are vignettes with 
+more information on getting started and additional examples:
+
+```r
+TBD
+```
+
+For the use of canvasXpress plots in shiny there are interactive examples available through the
+package function *cxShinyExample*
+
+```r
+TBD
+```
+
+Finally, there is a wealth of additional information including full API documentation and 
+Javascript examples [here](http://www.canvasxpress.org).
+
 
