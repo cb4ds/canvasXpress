@@ -27,8 +27,9 @@ or seamlessly embeded in [Shiny](http://shiny.rstudio.com) web applications. An 
 
 ### Installation
 
-canvasXpress is available for installation from [CRAN](http://cran.org..... or
-you can install the latest version of ***canvasXpress*** from GitHub as follows:
+canvasXpress is available for installation from 
+[CRAN](https://CRAN.R-project.org/package=canvasXpress) or you can install the
+latest version of ***canvasXpress*** from GitHub as follows:
 
 ```r
 devtools::install_github('neuhausi/canvasXpress')
@@ -93,17 +94,25 @@ In addition to the built-in package documentation there are vignettes with
 more information on getting started and additional examples:
 
 ```r
-TBD
+#List all package vignettes
+vignette(package = "canvasXpress")
+
+#View a specific vignette
+vignette("getting_started", package = "canvasXpress")
+vignette("additional_examples", package = "canvasXpress")
 ```
 
 For the use of canvasXpress plots in shiny there are interactive examples available through the
 package function *cxShinyExample*
 
 ```r
-TBD
+#List example names
+cxShinyExample()
+
+#Run an interactive shiny example
+cxShinyExample(example = "example1")
 ```
 
-Finally, there is a wealth of additional information including full API documentation and 
-Javascript examples [here](http://www.canvasxpress.org).
-
-
+There is also a wealth of additional information including full API 
+documentation and Javascript examples at 
+[http://www.canvasxpress.org](http://www.canvasxpress.org).
