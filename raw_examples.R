@@ -8,40 +8,114 @@ library(tidyr)
 
 data <- t(iris[,1:4])
 varAnnot <- as.matrix(iris[,5])
+smpAnnot <- t(as.matrix(iris[,5]))
 colnames(varAnnot) <- "Species"
-vennData <- data.frame(A=57, B=12, C=67, D=72, AB=4, AC=67, AD=25, BC=67, BD=27, CD=38, ABC=69, ABD=28, ACD=52, BCD=46, ABCD=3)
+colnames(smpAnnot) <- colnames(data)
+rownames(smpAnnot) <- "Species"
 
-canvasXpress(t(data), varAnnot = varAnnot,
-             graphType = 'Scatter2D', colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = 'Scatter3D', colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot,
-             graphType = "Scatter2D", 
-             scatterPlotMatrix = 1, colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "Bar", colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "Stacked", colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "StackedPercent", colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "Area", colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "Line", colorBy = 'Species')
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species', 
+             graphType = 'Scatter2D')
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
+             graphType = 'Scatter3D')
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
+             graphType = "Scatter2D", scatterPlotMatrix = 1)
+
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
+             graphType = "Bar")
+canvasXpress(data, smpAnnot = smpAnnot, colorBy = 'Species',
+             graphType = "Bar")
+
+canvasXpress(t(data), varAnnot = varAnnot,  colorBy = 'Species',
+             graphOrientation = "vertical", graphType = "Stacked")
+canvasXpress(data, smpAnnot = smpAnnot,  colorBy = 'Species',
+             graphOrientation = "vertical", graphType = "Stacked")
+
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
+             graphType = "StackedPercent")
+canvasXpress(data, smpAnnot = smpAnnot, colorBy = 'Species',
+             graphType = "StackedPercent")
+
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
+             graphOrientation = "vertical", graphType = "Area")
+canvasXpress(data, smpAnnot = smpAnnot, colorBy = 'Species',
+             graphOrientation = "vertical", graphType = "Area")
+
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
+             graphOrientation = "vertical", graphType = "Line")
+canvasXpress(data, smpAnnot = smpAnnot, , colorBy = 'Species',
+             graphOrientation = "vertical", graphType = "Line")
+
 canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
              graphType = "Dotplot", colorBy = 'Species')
+canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
+             graphType = "Dotplot", colorBy = 'Species')
+
 canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
              graphType = "BarLine", colorBy = 'Species')
+canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
+             graphType = "BarLine", colorBy = 'Species')
+
 canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
              graphType = "StackedLine", colorBy = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
+canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
+             graphType = "StackedLine", colorBy = 'Species')
+
+canvasXpress(t(data), varAnnot = varAnnot,
              graphType = "StackedPercentLine", colorBy = 'Species')
+canvasXpress(data, smpAnnot = smpAnnot,
+             graphType = "StackedPercentLine", colorBy = 'Species')
+
 canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
              graphType = "AreaLine", colorBy = 'Species')
+canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
+             graphType = "AreaLine", colorBy = 'Species')
+
 canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
              graphType = "DotLine", colorBy = 'Species')
+canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
+             graphType = "DotLine", colorBy = 'Species')
 
-canvasXpress(vennData=vennData, graphType='Venn', vennGroups=4, vennLegend=list(A="List1", B="List2", C="List3", D="List4"))
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "Boxplot", groupingFactors = 'Species')
+
+#precalculated boxplot data
+
+vennData <- data.frame(A=57, B=12, C=67, D=72, AB=4, AC=67, AD=25, BC=67, BD=27, CD=38, ABC=69, ABD=28, ACD=52, BCD=46, ABCD=3)
+canvasXpress(vennData, graphType='Venn', vennGroups=4, vennLegend=list(A="List1", B="List2", C="List3", D="List4"))
+
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "Heatmap", groupingFactors = 'Species')
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Heatmap")
+
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "Treemap", groupingFactors = "Species")
+
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "ParallelCoordinates")
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "ParallelCoordinates", groupingFactors = "Species")
+
+canvasXpress(t(data), varAnnot = varAnnot, colorBy = "Species", 
+             graphType = "ScatterBubble2D")
+
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Pie")
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "Pie")
+
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Correlation")
+
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Circular")
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "Circular")
+
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "TagCloud")
+canvasXpress(data, smpAnnot = smpAnnot, 
+             graphType = "TagCloud")
 
 
 canvasXpress(data, smpAnnot=smpAnnot, graphType='Boxplot', groupingFactors=list('Species'))
