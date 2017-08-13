@@ -3,15 +3,15 @@ assertDataCorrectness <- function(data, graphType) {
     if (is.null(graphType)) stop("graphType cannot be NULL!")
     
     validTypes <- c("Scatter2D", "Scatter3D",
-                    "Bar", "Stacked",
-                    "Area")
+                    "Bar", "Stacked", "StackedPercent" "Area", "Line", "Dotplot",
+                    "BarLine", "StackedLine", "AreaLine", "DotLine", "StackedPercentLine"
+                    
+                    )
                     
     
-    # validTypes <- c("Bar", "Line", "Area", "AreaLine", "BarLine", "Boxplot", 
-                    # "Dotplot", "DotLine", "Heatmap", "Candlestick", "Stacked", 
-                    # "StackedLine", "StackedPercent", "StackedPercentLine", 
+    # validTypes <- c("Boxplot", "Heatmap", "Candlestick",, 
                     # "Tree", "Treemap", "TagCloud", "ParallelCoordinates", 
-                    # "Sankey", "Scatter2D", "ScatterBubble2D", "Scatter3D", 
+                    # "Sankey", "ScatterBubble2D", 
                     # "Correlation", "Pie", "Venn", "Network", "Genome", 
                     # "Circular")
 
