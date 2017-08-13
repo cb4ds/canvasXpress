@@ -11,8 +11,20 @@ varAnnot <- as.matrix(iris[,5])
 colnames(varAnnot) <- "Species"
 vennData <- data.frame(A=57, B=12, C=67, D=72, AB=4, AC=67, AD=25, BC=67, BD=27, CD=38, ABC=69, ABD=28, ACD=52, BCD=46, ABCD=3)
 
-canvasXpress(t(data), varAnnot=varAnnot, graphType='Scatter3D', colorBy='Species')
-canvasXpress(t(data), varAnnot=varAnnot, scatterPlotMatrix=1, colorBy='Species')
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = 'Scatter3D', colorBy = 'Species')
+canvasXpress(t(data), varAnnot = varAnnot,
+             graphType = 'Scatter2D', colorBy = 'Species')
+canvasXpress(t(data), varAnnot = varAnnot,
+             scatterPlotMatrix = 1, colorBy = 'Species')
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Bar", colorBy = 'Species')
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Stacked", colorBy = 'Species', graphOrientation = "vertical")
+canvasXpress(t(data), varAnnot = varAnnot, 
+             graphType = "Area", colorBy = 'Species', graphOrientation = "vertical")
+
+
 canvasXpress(data, smpAnnot=smpAnnot, graphType='Boxplot', groupingFactors=list('Species'))
 canvasXpress(data, smpAnnot=smpAnnot, graphType='Boxplot', afterRender=list(list('groupSamples', list('Species'))))
 canvasXpress(data, smpAnnot=smpAnnot, graphType='Heatmap', smpOverlays=list('Species'), variablesClustered=TRUE, showSampleNames=FALSE)
