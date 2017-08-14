@@ -2,11 +2,22 @@ assertDataCorrectness <- function(data, graphType) {
     if (is.null(data))      stop("data cannot be NULL!")
     if (is.null(graphType)) stop("graphType cannot be NULL!")
     
-    validTypes <- c("Scatter2D", "Scatter3D",
-                    "Bar", "Stacked", "StackedPercent", "Area", "Line", "Dotplot",
-                    "BarLine", "StackedLine", "AreaLine", "DotLine", "StackedPercentLine",
+    validTypes <- c("Scatter2D", 
+                    "Scatter3D",
+                    "Bar", 
+                    "Stacked", 
+                    "StackedPercent", 
+                    "Area", 
+                    "Line", 
+                    "Dotplot",
+                    "BarLine", 
+                    "StackedLine", 
+                    "AreaLine", 
+                    "DotLine", 
+                    "StackedPercentLine",
                     "Boxplot",
-                    "Heatmap", "Treemap",
+                    "Heatmap", 
+                    "Treemap",
                     "ParallelCoordinates",
                     "ScatterBubble2D",
                     "Pie",
@@ -16,24 +27,18 @@ assertDataCorrectness <- function(data, graphType) {
 
       
     # To Be Programmed
+    # ----------------
     # Candlestick
     # Venn
     # Tree
     # Sankey
     # Network
     # Genome
+    # Precalculated Boxplot
     
 
     if (!(graphType %in% validTypes)) stop("graphType is invalid, must be one of <",
-                                           paste(validTypes, collapse =", "), ">")
-    
-    
-    
-    #Network
-    #Venn
-    #Genome
-    #Boxplot w/ precalc. flag
-    
+                                           paste(validTypes, collapse = ", "), ">")
 }
 
 

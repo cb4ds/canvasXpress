@@ -118,11 +118,6 @@ canvasXpress(data, smpAnnot = smpAnnot,
              graphType = "TagCloud")
 
 
-canvasXpress(data, smpAnnot=smpAnnot, graphType='Boxplot', groupingFactors=list('Species'))
-canvasXpress(data, smpAnnot=smpAnnot, graphType='Boxplot', afterRender=list(list('groupSamples', list('Species'))))
-canvasXpress(data, smpAnnot=smpAnnot, graphType='Heatmap', smpOverlays=list('Species'), variablesClustered=TRUE, showSampleNames=FALSE)
-
-
 # ---
 # FROM VIGNETTE
 # ---
