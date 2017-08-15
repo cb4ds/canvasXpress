@@ -20,60 +20,6 @@ canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
 canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
              graphType = "Scatter2D", scatterPlotMatrix = 1)
 
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
-             graphType = "Bar")
-canvasXpress(data, smpAnnot = smpAnnot, colorBy = 'Species',
-             graphType = "Bar")
-
-canvasXpress(t(data), varAnnot = varAnnot,  colorBy = 'Species',
-             graphOrientation = "vertical", graphType = "Stacked")
-canvasXpress(data, smpAnnot = smpAnnot,  colorBy = 'Species',
-             graphOrientation = "vertical", graphType = "Stacked")
-
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
-             graphType = "StackedPercent")
-canvasXpress(data, smpAnnot = smpAnnot, colorBy = 'Species',
-             graphType = "StackedPercent")
-
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
-             graphOrientation = "vertical", graphType = "Area")
-canvasXpress(data, smpAnnot = smpAnnot, colorBy = 'Species',
-             graphOrientation = "vertical", graphType = "Area")
-
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
-             graphOrientation = "vertical", graphType = "Line")
-canvasXpress(data, smpAnnot = smpAnnot, , colorBy = 'Species',
-             graphOrientation = "vertical", graphType = "Line")
-
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "Dotplot", colorBy = 'Species')
-canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
-             graphType = "Dotplot", colorBy = 'Species')
-
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "BarLine", colorBy = 'Species')
-canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
-             graphType = "BarLine", colorBy = 'Species')
-
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "StackedLine", colorBy = 'Species')
-canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
-             graphType = "StackedLine", colorBy = 'Species')
-
-canvasXpress(t(data), varAnnot = varAnnot,
-             graphType = "StackedPercentLine", colorBy = 'Species')
-canvasXpress(data, smpAnnot = smpAnnot,
-             graphType = "StackedPercentLine", colorBy = 'Species')
-
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "AreaLine", colorBy = 'Species')
-canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
-             graphType = "AreaLine", colorBy = 'Species')
-
-canvasXpress(t(data), varAnnot = varAnnot, graphOrientation = "vertical",
-             graphType = "DotLine", colorBy = 'Species')
-canvasXpress(data, smpAnnot = smpAnnot, graphOrientation = "vertical",
-             graphType = "DotLine", colorBy = 'Species')
 
 canvasXpress(data, smpAnnot = smpAnnot, 
              graphType = "Boxplot", groupingFactors = 'Species')
