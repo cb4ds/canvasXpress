@@ -6,54 +6,9 @@ library(tidyr)
 # ---
 # FROM README
 
-data <- t(iris[,1:4])
-varAnnot <- as.matrix(iris[,5])
-smpAnnot <- t(as.matrix(iris[,5]))
-colnames(varAnnot) <- "Species"
-colnames(smpAnnot) <- colnames(data)
-rownames(smpAnnot) <- "Species"
-
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species', 
-             graphType = 'Scatter2D')
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
-             graphType = 'Scatter3D')
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = 'Species',
-             graphType = "Scatter2D", scatterPlotMatrix = 1)
-
-
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "Boxplot", groupingFactors = 'Species')
-
-#precalculated boxplot data
 
 vennData <- data.frame(A=57, B=12, C=67, D=72, AB=4, AC=67, AD=25, BC=67, BD=27, CD=38, ABC=69, ABD=28, ACD=52, BCD=46, ABCD=3)
 canvasXpress(vennData, graphType='Venn', vennGroups=4, vennLegend=list(A="List1", B="List2", C="List3", D="List4"))
-
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "ParallelCoordinates")
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "ParallelCoordinates", groupingFactors = "Species")
-
-canvasXpress(t(data), varAnnot = varAnnot, colorBy = "Species", 
-             graphType = "ScatterBubble2D")
-
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "Pie")
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "Pie")
-
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "Correlation")
-
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "Circular")
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "Circular")
-
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "TagCloud")
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "TagCloud")
 
 
 # ---
