@@ -29,14 +29,6 @@ canvasXpress(data, smpAnnot = smpAnnot,
 vennData <- data.frame(A=57, B=12, C=67, D=72, AB=4, AC=67, AD=25, BC=67, BD=27, CD=38, ABC=69, ABD=28, ACD=52, BCD=46, ABCD=3)
 canvasXpress(vennData, graphType='Venn', vennGroups=4, vennLegend=list(A="List1", B="List2", C="List3", D="List4"))
 
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "Heatmap", groupingFactors = 'Species')
-canvasXpress(t(data), varAnnot = varAnnot, 
-             graphType = "Heatmap")
-
-canvasXpress(data, smpAnnot = smpAnnot, 
-             graphType = "Treemap", groupingFactors = "Species")
-
 canvasXpress(t(data), varAnnot = varAnnot, 
              graphType = "ParallelCoordinates")
 canvasXpress(data, smpAnnot = smpAnnot, 

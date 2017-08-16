@@ -4,7 +4,9 @@ test_that("Main Function - Check Return Type", {
     data <- t(iris[,1:4])
     varAnnot <- as.matrix(iris[,5])
     colnames(varAnnot) <- "Species"
-    result <- canvasXpress(t(data), varAnnot=varAnnot, scatterPlotMatrix = 1)
+    result <- canvasXpress(t(data), 
+                           varAnnot = varAnnot, 
+                           scatterPlotMatrix = 1)
 
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -79,28 +81,6 @@ test_that("Main Function - Check Return Type", {
 #     expect_silent(canvasXpress(data = data.df, varAnnot = A.df))   
 # })
 # 
-# test_that("Summarized Boxplot Input", {
-#     data <- data.frame(iqr1   = c(3,  25),
-#                        iqr3   = c(10, 30),
-#                        qtl1   = c(6,  25),
-#                        qtl3   = c(10, 29),
-#                        median = c(8,  27))
-#     
-#     data.box <- t(data)
-#     
-#     data.box.out <- data
-#     data.box.out$outliers <- c("2, 40", NA)
-#     data.box.out <- t(data.box.out)
-#         
-#     expect_silent(canvasXpress(graphType = "Boxplot",
-#                                data = data.box,
-#                                boxplotGroupData = "TESTING"))
-#     
-#     expect_silent(canvasXpress(graphType = "Boxplot",
-#                                data = data.box.out,
-#                                boxplotGroupData = "TESTING"))
-# })
-# 
 # test_that("Network Graph Input", {
 #     ndata <- matrix(1:10, nrow = 2, dimnames = list(c("row1", "row2"), c("id", "C2", "C3", "C4", "C5")))
 #     edata <- matrix(1:10, nrow = 2, dimnames = list(c("row1", "row2"), c("id1", "id2", "C3", "C4", "C5")))
@@ -162,25 +142,28 @@ test_that("Main Function - Check Return Type", {
 # })
 # 
 # 
-# # Shiny Functionality
-# test_that("Shiny UI Object Creation", {
-#     obj <- suppressWarnings(canvasXpressOutput("testID"))
-#     
-#     expect_s3_class(obj, "shiny.tag.list")
-#     expect_match(obj[[1]]$name,  "div")
-#     expect_match(obj[[1]]$attribs$id,    "testID")
-#     expect_match(obj[[1]]$attribs$class, "canvasXpress html-widget html-widget-output")
-#     expect_match(obj[[1]]$attribs$style, "width:100%; height:400px;")
-# })
-# 
-# test_that("Shiny Render", {
-#     expect_s3_class(renderCanvasXpress(NULL), "shiny.render.function")
-# })
-# 
-# test_that("Shiny Examples", {
-#     expect_error(cxShinyExample("badexample"),
-#                  regexpr = "Valid examples are: 'example1', 'example2', 'example3'")
-#     expect_message(cxShinyExample(NULL),
-#                  regexpr = "Valid examples are: 'example1', 'example2', 'example3'")
-# })
-# 
+
+
+
+# Shiny Functionality
+test_that("Shiny UI Object Creation", {
+    obj <- suppressWarnings(canvasXpressOutput("testID"))
+
+    expect_s3_class(obj, "shiny.tag.list")
+    expect_match(obj[[1]]$name,  "div")
+    expect_match(obj[[1]]$attribs$id,    "testID")
+    expect_match(obj[[1]]$attribs$class, "canvasXpress html-widget html-widget-output")
+    expect_match(obj[[1]]$attribs$style, "width:100%; height:400px;")
+})
+
+test_that("Shiny Render", {
+    expect_s3_class(renderCanvasXpress(NULL), "shiny.render.function")
+})
+
+test_that("Shiny Examples", {
+    expect_error(cxShinyExample("badexample"),
+                 regexpr = "Valid examples are: 'example1', 'example2', 'example3'")
+    expect_message(cxShinyExample(NULL),
+                 regexpr = "Valid examples are: 'example1', 'example2', 'example3'")
+})
+

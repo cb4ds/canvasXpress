@@ -1,11 +1,16 @@
 context("canvasXpress")
 
 
+data <- t(iris[,1:4])
+smpAnnot <- t(as.matrix(iris[,5]))
+colnames(smpAnnot) <- colnames(data)
+rownames(smpAnnot) <- "Species"
+varAnnot <- as.matrix(iris[,5])
+colnames(varAnnot) <- "Species"
+
+
+
 test_that("BarLine Chart - basic 1", {
-    data <- t(iris[,1:4])
-    varAnnot <- as.matrix(iris[,5])
-    colnames(varAnnot) <- "Species"
-    
     result <- canvasXpress(t(data), 
                            varAnnot = varAnnot, 
                            graphOrientation = "vertical",
@@ -18,11 +23,6 @@ test_that("BarLine Chart - basic 1", {
 
 
 test_that("BarLine Chart - basic 2", {
-    data <- t(iris[,1:4])
-    smpAnnot <- t(as.matrix(iris[,5]))
-    colnames(smpAnnot) <- colnames(data)
-    rownames(smpAnnot) <- "Species"
-    
     result <- canvasXpress(data, 
                            smpAnnot = smpAnnot, 
                            graphOrientation = "vertical",
@@ -35,6 +35,6 @@ test_that("BarLine Chart - basic 2", {
 
 
 test_that("BarLine Chart - x2specified", {
-    warning('not done - need a implemented')
+    warning('barline - need <a> implemented')
 })
 

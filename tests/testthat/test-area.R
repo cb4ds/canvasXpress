@@ -1,8 +1,10 @@
 context("canvasXpress")
 
 
+data <- t(iris[,1:4])
+
+
 test_that("Area Chart 1 normal", {
-    data <- t(iris[,1:4])
     result <- canvasXpress(data, 
                            graphType = "Area")
     
@@ -12,7 +14,6 @@ test_that("Area Chart 1 normal", {
 
 
 test_that("Area Chart 1 percent", {
-    data <- t(iris[,1:4])
     result <- canvasXpress(data, 
                            graphType = "Area",
                            areaType = "percent")
@@ -23,7 +24,6 @@ test_that("Area Chart 1 percent", {
 
 
 test_that("Area Chart 1 stacked", {
-    data <- t(iris[,1:4])
     result <- canvasXpress(data, 
                            graphType = "Area",
                            areaType = "stacked")

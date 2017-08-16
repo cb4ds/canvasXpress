@@ -1,11 +1,15 @@
 context("canvasXpress")
 
 
+data <- t(iris[,1:4])
+smpAnnot <- t(as.matrix(iris[,5]))
+colnames(smpAnnot) <- colnames(data)
+rownames(smpAnnot) <- "Species"
+varAnnot <- as.matrix(iris[,5])
+colnames(varAnnot) <- "Species"
+
+
 test_that("StackedLine Chart - basic 1", {
-    data <- t(iris[,1:4])
-    varAnnot <- as.matrix(iris[,5])
-    colnames(varAnnot) <- "Species"
-    
     result <- canvasXpress(t(data), 
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
@@ -16,12 +20,7 @@ test_that("StackedLine Chart - basic 1", {
 })
 
 
-test_that("StackedPercent Chart - basic 2", {
-    data <- t(iris[,1:4])
-    smpAnnot <- t(as.matrix(iris[,5]))
-    colnames(smpAnnot) <- colnames(data)
-    rownames(smpAnnot) <- "Species"
-    
+test_that("StackedLine Chart - basic 2", {
     result <- canvasXpress(data, 
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
@@ -32,12 +31,7 @@ test_that("StackedPercent Chart - basic 2", {
 })
 
 
-test_that("StackedPercent Chart - grouped", {
-    data <- t(iris[,1:4])
-    smpAnnot <- t(as.matrix(iris[,5]))
-    colnames(smpAnnot) <- colnames(data)
-    rownames(smpAnnot) <- "Species"
-    
+test_that("StackedLine Chart - grouped", {
     result <- canvasXpress(data, 
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),

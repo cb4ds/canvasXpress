@@ -9,30 +9,26 @@ varAnnot <- as.matrix(iris[,5])
 colnames(varAnnot) <- "Species"
 
 
-test_that("AreaLine Chart - basic 1", {
+test_that("ParallelCoordinates - basic 1", {
     result <- canvasXpress(t(data), 
                            varAnnot = varAnnot, 
-                           graphOrientation = "vertical",
-                           graphType = "AreaLine", 
-                           colorBy = 'Species')
+                           colorBy = 'Species',
+                           graphType = "ParallelCoordinates")
     
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
 
-test_that("AreaLine Chart - basic 2", {
+test_that("Bar Chart - basic 2", {
     result <- canvasXpress(data, 
                            smpAnnot = smpAnnot, 
-                           graphOrientation = "vertical",
-                           graphType = "AreaLine", 
-                           colorBy = 'Species')
+                           colorBy = 'Species',
+                           graphType = "ParallelCoordinates")
+    
+    warning('line - graph incorrect - no lines, shaped points')
     
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
-})         
-
-
-test_that("AreaLine Chart - x2specified", {
-    warning('arealine - need <a> implemented')
 })
+
