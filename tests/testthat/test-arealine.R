@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - AreaLine")
 
 
 data <- t(iris[,1:4])
@@ -15,7 +15,7 @@ test_that("AreaLine Chart - basic 1", {
                            graphOrientation = "vertical",
                            graphType = "AreaLine", 
                            colorBy = 'Species')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -27,7 +27,7 @@ test_that("AreaLine Chart - basic 2", {
                            graphOrientation = "vertical",
                            graphType = "AreaLine", 
                            colorBy = 'Species')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })         

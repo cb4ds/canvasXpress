@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Treemap")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("Treemap - basic 1", {
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Treemap")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

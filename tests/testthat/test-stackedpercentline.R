@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - StackedPercentLine")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("StackedPercentLine Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedPercentLine")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -25,7 +25,7 @@ test_that("StackedPercentLine Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedPercentLine")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -39,10 +39,8 @@ test_that("StackedPercentLine Chart - grouped", {
                            graphOrientation = "vertical",
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
-                           legendColumns = 2,
-                           xAxis2Show = FALSE,
-                           showTransition = TRUE)
-    
+                           legendColumns = 2)
+    result
     warning('stackedpercentline - graph incorrect - axis issue')
     
     expect_s3_class(result, "canvasXpress")

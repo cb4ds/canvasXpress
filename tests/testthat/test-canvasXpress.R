@@ -1,16 +1,5 @@
-context("canvasXpress")
+context("canvasXpress BASE")
 
-test_that("Main Function - Check Return Type", {
-    data <- t(iris[,1:4])
-    varAnnot <- as.matrix(iris[,5])
-    colnames(varAnnot) <- "Species"
-    result <- canvasXpress(t(data), 
-                           varAnnot = varAnnot, 
-                           scatterPlotMatrix = 1)
-
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-})
 
 
 # Temporarily Removing Tests during Rewrite

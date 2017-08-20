@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Dotplot")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("Dotplot Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "Dotplot")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -25,7 +25,7 @@ test_that("Dotplot Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "Dotplot")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -39,10 +39,8 @@ test_that("Dotplot Chart - grouped", {
                            graphOrientation = "vertical",
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
-                           legendColumns = 2,
-                           xAxis2Show = FALSE,
-                           showTransition = TRUE)
-    
+                           legendColumns = 2)
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

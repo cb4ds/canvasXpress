@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - ParallelCoordinates")
 
 
 data <- t(iris[,1:4])

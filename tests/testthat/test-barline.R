@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - BarLine")
 
 
 data <- t(iris[,1:4])
@@ -16,7 +16,7 @@ test_that("BarLine Chart - basic 1", {
                            graphOrientation = "vertical",
                            graphType = "BarLine", 
                            colorBy = 'Species')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -28,7 +28,7 @@ test_that("BarLine Chart - basic 2", {
                            graphOrientation = "vertical",
                            graphType = "BarLine", 
                            colorBy = 'Species')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

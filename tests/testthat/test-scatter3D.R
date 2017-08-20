@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Scatter3D")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("Scatter3D Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = 'Scatter3D')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Heatmap")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("Heatmap - basic 1", {
                            varAnnot = varAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Heatmap")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -25,7 +25,7 @@ test_that("Heatmap - basic 2", {
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Heatmap")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

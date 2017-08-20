@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Boxplot")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("Boxplot - basic 1", {
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Boxplot")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -37,7 +37,7 @@ test_that("Boxplot - summarized input", {
     result <- canvasXpress(graphType = "Boxplot",
                                data = data.box,
                                boxplotGroupData = "TESTING")
-    
+    result
     warning('boxplot - summarized data not handled yet')
     
     expect_s3_class(result, "canvasXpress")
@@ -46,7 +46,7 @@ test_that("Boxplot - summarized input", {
     result <- canvasXpress(graphType = "Boxplot",
                            data = data.box.out,
                            boxplotGroupData = "TESTING")
-    
+    result
     warning('boxplot - summarized data not handled yet')
     
     expect_s3_class(result, "canvasXpress")

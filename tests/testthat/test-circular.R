@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Circular")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("Circular Chart - basic 1", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "Circular")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

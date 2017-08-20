@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - DotLine")
 
 
 data <- t(iris[,1:4])
@@ -14,7 +14,7 @@ test_that("DotLine Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "DotLine")
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -25,7 +25,7 @@ test_that("DotLine Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "DotLine")
-    
+    result
     warning('dotline - graph incorrect - no lines')
     
     expect_s3_class(result, "canvasXpress")
@@ -41,10 +41,8 @@ test_that("DotLine Chart - grouped", {
                            graphOrientation = "vertical",
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
-                           legendColumns = 2,
-                           xAxis2Show = FALSE,
-                           showTransition = TRUE)
-    
+                           legendColumns = 2)
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

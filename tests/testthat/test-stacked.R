@@ -1,4 +1,4 @@
-context("canvasXpress")
+context("canvasXpress Charts - Stacked")
 
 
 data <- t(iris[,1:4])
