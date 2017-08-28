@@ -43,7 +43,7 @@ test_that("AreaLine Chart - x2specified", {
 
 
 # -- From Isaac, web examples --
-arealine.y <- readRDS(system.file("extdata", "cX-arealine-dat.RData",  package = "canvasXpress"))
+arealine.y <- readRDS(system.file("extdata", "cX-arealine-dat.RData", package = "canvasXpress"))
 
 test_that("cX-arealine-1", {
     result <- canvasXpress(

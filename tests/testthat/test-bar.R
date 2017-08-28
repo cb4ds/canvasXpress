@@ -51,18 +51,18 @@ test_that("Bar Chart - grouped", {
 
 
 # -- From Isaac, web examples --
-stacked1.y <- readRDS(system.file("extdata", "cX-stacked1-dat.RData",  package = "canvasXpress"))
-stacked1.x <- readRDS(system.file("extdata", "cX-stacked1-smp.RData",  package = "canvasXpress"))
-basic.y    <- readRDS(system.file("extdata", "cX-basic-dat.RData",  package = "canvasXpress"))
-basic2.y   <- readRDS(system.file("extdata", "cX-basic2-dat.RData",  package = "canvasXpress"))
-iris.y     <- readRDS(system.file("extdata", "cX-iris-dat.RData",  package = "canvasXpress"))
-iris.x     <- readRDS(system.file("extdata", "cX-iris-smp.RData",  package = "canvasXpress"))
-generic.y  <- readRDS(system.file("extdata", "cX-generic-dat.RData",  package = "canvasXpress"))
-generic.x  <- readRDS(system.file("extdata", "cX-generic-smp.RData",  package = "canvasXpress"))
-generic.z  <- readRDS(system.file("extdata", "cX-generic-var.RData",  package = "canvasXpress"))
-simple.y   <- readRDS(system.file("extdata", "cX-simple-dat.RData",  package = "canvasXpress"))
-simple.x   <- readRDS(system.file("extdata", "cX-simple-smp.RData",  package = "canvasXpress"))
-lollipop.y <- readRDS(system.file("extdata", "cX-lollipop-var.RData",  package = "canvasXpress"))
+stacked1.y <- readRDS(system.file("extdata", "cX-stacked1-dat.RData", package = "canvasXpress"))
+stacked1.x <- readRDS(system.file("extdata", "cX-stacked1-smp.RData", package = "canvasXpress"))
+basic.y    <- readRDS(system.file("extdata", "cX-basic-dat.RData", package = "canvasXpress"))
+basic2.y   <- readRDS(system.file("extdata", "cX-basic2-dat.RData", package = "canvasXpress"))
+iris.y     <- readRDS(system.file("extdata", "cX-iris-dat.RData", package = "canvasXpress"))
+iris.x     <- readRDS(system.file("extdata", "cX-iris-smp.RData", package = "canvasXpress"))
+generic.y  <- readRDS(system.file("extdata", "cX-generic-dat.RData", package = "canvasXpress"))
+generic.x  <- readRDS(system.file("extdata", "cX-generic-smp.RData", package = "canvasXpress"))
+generic.z  <- readRDS(system.file("extdata", "cX-generic-var.RData", package = "canvasXpress"))
+simple.y   <- readRDS(system.file("extdata", "cX-simple-dat.RData", package = "canvasXpress"))
+simple.x   <- readRDS(system.file("extdata", "cX-simple-smp.RData", package = "canvasXpress"))
+lollipop.y <- readRDS(system.file("extdata", "cX-lollipop-var.RData", package = "canvasXpress"))
 
 test_that("cX-bar-1", {
     result <- canvasXpress(

@@ -59,17 +59,17 @@ test_that("Boxplot - summarized input", {
 
 
 # -- From Isaac, web examples --
-iris.y           <- readRDS(system.file("extdata", "cX-iris-dat.RData",  package = "canvasXpress"))
-iris.x           <- readRDS(system.file("extdata", "cX-iris-smp.RData",  package = "canvasXpress"))
-boxplot.y        <- readRDS(system.file("extdata", "cX-boxplot-dat.RData",  package = "canvasXpress"))
-boxplot.x        <- readRDS(system.file("extdata", "cX-boxplot-smp.RData",  package = "canvasXpress"))
-boxplot1.y       <- readRDS(system.file("extdata", "cX-boxplot1-dat.RData",  package = "canvasXpress"))
-boxplot1.x       <- readRDS(system.file("extdata", "cX-boxplot1-smp.RData",  package = "canvasXpress"))
-scents.y         <- readRDS(system.file("extdata", "cX-scents-dat.RData",  package = "canvasXpress"))
-scents.x         <- readRDS(system.file("extdata", "cX-scents-smp.RData",  package = "canvasXpress"))
-cancersurvival.y <- readRDS(system.file("extdata", "cX-cancersurvival-dat.RData",  package = "canvasXpress"))
-cancersurvival.x <- readRDS(system.file("extdata", "cX-cancersurvival-smp.RData",  package = "canvasXpress"))
-cancersurvival.z <- readRDS(system.file("extdata", "cX-cancersurvival-var.RData",  package = "canvasXpress"))
+iris.y           <- readRDS(system.file("extdata", "cX-iris-dat.RData", package = "canvasXpress"))
+iris.x           <- readRDS(system.file("extdata", "cX-iris-smp.RData", package = "canvasXpress"))
+boxplot.y        <- readRDS(system.file("extdata", "cX-boxplot-dat.RData", package = "canvasXpress"))
+boxplot.x        <- readRDS(system.file("extdata", "cX-boxplot-smp.RData", package = "canvasXpress"))
+boxplot1.y       <- readRDS(system.file("extdata", "cX-boxplot1-dat.RData", package = "canvasXpress"))
+boxplot1.x       <- readRDS(system.file("extdata", "cX-boxplot1-smp.RData", package = "canvasXpress"))
+scents.y         <- readRDS(system.file("extdata", "cX-scents-dat.RData", package = "canvasXpress"))
+scents.x         <- readRDS(system.file("extdata", "cX-scents-smp.RData", package = "canvasXpress"))
+cancersurvival.y <- readRDS(system.file("extdata", "cX-cancersurvival-dat.RData", package = "canvasXpress"))
+cancersurvival.x <- readRDS(system.file("extdata", "cX-cancersurvival-smp.RData", package = "canvasXpress"))
+cancersurvival.z <- readRDS(system.file("extdata", "cX-cancersurvival-var.RData", package = "canvasXpress"))
 
 test_that("cX-boxplot-1", {
     result <- canvasXpress(
@@ -100,6 +100,9 @@ test_that("cX-boxplot-1", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-2", {
@@ -131,6 +134,9 @@ test_that("cX-boxplot-2", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-3", {
@@ -162,6 +168,9 @@ test_that("cX-boxplot-3", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-4", {
@@ -194,6 +203,9 @@ test_that("cX-boxplot-4", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-5", {
@@ -211,6 +223,9 @@ test_that("cX-boxplot-5", {
         title = "Random Data",
         xAxisTickFormat = "%.0f M"
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-6", {
@@ -228,6 +243,9 @@ test_that("cX-boxplot-6", {
         subtitle = "Boxplot Graph",
         title = "Random Data"
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-7", {
@@ -247,6 +265,9 @@ test_that("cX-boxplot-7", {
         smpTitleFontStyle = "italic",
         title = "Data on the time subjects required to complete a pencil and paper maze\nwhen they were smelling a floral scent and when they were not."
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-boxplot-8", {
@@ -263,4 +284,7 @@ test_that("cX-boxplot-8", {
         title = "Patients with advanced cancers of the stomach,\nbronchus, colon, ovary or breast treated with ascorbate.",
         xAxisTitle = "Survival time (days)"
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })

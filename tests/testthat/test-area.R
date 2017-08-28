@@ -32,7 +32,7 @@ test_that("Area Chart 1 stacked", {
 
 
 # -- From Isaac, web examples --
-area1.y <- readRDS(system.file("extdata", "cX-area-dat.RData",  package = "canvasXpress"))
+area1.y <- readRDS(system.file("extdata", "cX-area-dat.RData", package = "canvasXpress"))
 area2.y <- readRDS(system.file("extdata", "cX-area2-dat.RData", package = "canvasXpress"))
 area3.y <- readRDS(system.file("extdata", "cX-area3-dat.RData", package = "canvasXpress"))
 
