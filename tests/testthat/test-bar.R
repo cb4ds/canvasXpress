@@ -62,7 +62,7 @@ generic.x  <- readRDS(system.file("extdata", "cX-generic-smp.RData", package = "
 generic.z  <- readRDS(system.file("extdata", "cX-generic-var.RData", package = "canvasXpress"))
 simple.y   <- readRDS(system.file("extdata", "cX-simple-dat.RData", package = "canvasXpress"))
 simple.x   <- readRDS(system.file("extdata", "cX-simple-smp.RData", package = "canvasXpress"))
-lollipop.y <- readRDS(system.file("extdata", "cX-lollipop-var.RData", package = "canvasXpress"))
+lollipop.y <- readRDS(system.file("extdata", "cX-lollipop-dat.RData", package = "canvasXpress"))
 
 test_that("cX-bar-1", {
     result <- canvasXpress(

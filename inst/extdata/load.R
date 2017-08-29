@@ -33,10 +33,14 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-stacked2-dat", "cX-stacked2-smp", "cX-diverging-dat"
             )
 
+exdata <- c("stacked1.y", "iris.y", "generic.y", "simple.y", "boxplot.y")
+
 for (file in exdata) {
+    message(file)
     data <- read.table(paste0("https://canvasxpress.org/data/", file, ".txt"),
                        header = T, sep = "\t", row.names = 1)
     saveRDS(data, 
-            file = paste0("inst/extdata/", file, ".RData"))
+            file = paste0("inst/extdata/", file, ".RData"),
+            ascii = TRUE)
 }
    
