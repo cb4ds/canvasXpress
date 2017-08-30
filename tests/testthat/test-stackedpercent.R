@@ -1,12 +1,13 @@
  context("canvasXpress Charts - StackedPercent")
 
 
-data <- t(iris[,1:4])
-smpAnnot <- t(as.matrix(iris[,5]))
-colnames(smpAnnot) <- colnames(data)
-rownames(smpAnnot) <- "Species"
-varAnnot <- as.matrix(iris[,5])
-colnames(varAnnot) <- "Species"
+data <- t(iris[, 1:4])
+smpAnnot <- as.matrix(iris[, 5])
+colnames(data) <- make.names(rep("S", ncol(data)), unique = T)
+rownames(smpAnnot) <- colnames(data)
+colnames(smpAnnot) <- "Species"
+varAnnot <- t(data.frame(color = c("red", "blue", "green", "yellow")))
+colnames(varAnnot) <- rownames(data)
 
 
 test_that("StackedPercent Chart - basic 1", {

@@ -2,20 +2,19 @@ context("canvasXpress Charts - Bar")
 
 
 data <- t(iris[, 1:4])
-smpAnnot <- t(as.matrix(iris[, 5]))
-colnames(smpAnnot) <- colnames(data)
-rownames(smpAnnot) <- "Species"
-varAnnot <- as.matrix(iris[, 5])
-colnames(varAnnot) <- "Species"
+smpAnnot <- as.matrix(iris[, 5])
+colnames(data) <- make.names(rep("S", ncol(data)), unique = T)
+rownames(smpAnnot) <- colnames(data)
+colnames(smpAnnot) <- "Species"
+varAnnot <- t(data.frame(color = c("red", "blue", "green", "yellow")))
+colnames(varAnnot) <- rownames(data)
 
 
 test_that("Bar Chart - basic 1", {
-    result <- canvasXpress(
-        t(data),
-        varAnnot = varAnnot,
-        colorBy = 'Species',
-        graphType = "Bar"
-    )
+    result <- canvasXpress(t(data),
+                           varAnnot = varAnnot,
+                           colorBy = "Species",
+                           graphType = "Bar")
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
