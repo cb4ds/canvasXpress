@@ -138,8 +138,6 @@ test_that("cX-donnut-2", {
     expect_s3_class(result, "htmlwidget")
 })
 
-
-
 test_that("cX-radar-1", {
     result <- canvasXpress(
         data = generic.y,
@@ -291,6 +289,80 @@ test_that("cX-radar-8", {
         showTransition = TRUE,
         smpOverlays = c("Factor3", "-", "Factor1", "Factor2"),
         title = "Radar with Overlays"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-sunburst-1", {
+    result <- canvasXpress(
+        data = sunburst.y,
+        smpAnnot = sunburst.x,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "sunburst",
+        colorBy = "Quarter",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        hierarchy = c("Quarter", "Month", "Week"),
+        showTransition = TRUE,
+        title = "Simple Sunburst"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-sunburst-2", {
+    result <- canvasXpress(
+        data = sunburst.y,
+        smpAnnot = sunburst.x,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "sunburst",
+        colorBy = "Month",
+        colorScheme = "RdYlBu",
+        graphType = "Circular",
+        hierarchy = c("Quarter", "Month", "Week"),
+        showTransition = TRUE,
+        title = "Simple Sunburst Colored by Category"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-sunburst-3", {
+    result <- canvasXpress(
+        data = sunburst.y,
+        smpAnnot = sunburst.x,
+        circularArc = 360,
+        circularRotate = -90,
+        circularType = "sunburst",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        hierarchy = c("Quarter", "Month", "Week"),
+        showTransition = TRUE,
+        title = "Rotated Sunburst"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-sunburst-4", {
+    result <- canvasXpress(
+        data = sunburst.y,
+        smpAnnot = sunburst.x,
+        circularArc = 180,
+        circularRotate = -90,
+        circularType = "sunburst",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        hierarchy = c("Quarter", "Month", "Week"),
+        showTransition = TRUE,
+        title = "Rotated Half Sunburst"
     )
     result
     expect_s3_class(result, "canvasXpress")
