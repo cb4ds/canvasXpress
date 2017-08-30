@@ -30,16 +30,10 @@ test_that("Line Chart - basic 2", {
                            colorBy = 'Species')
     
     warning('line - graph incorrect - no lines, shaped points')
-    
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })         
-
-
-test_that("AreaLine Chart - x2specified", {
-    warning('arealine - need <a> implemented')
-})
 
 
 # -- From Isaac, web examples --

@@ -41,7 +41,7 @@ test_that("StackedPercentLine Chart - grouped", {
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
                            legendColumns = 2)
-    warning('stackedpercentline - graph incorrect - axis issue')
+    warning('stackedpercentline - graph incorrect - grouping')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

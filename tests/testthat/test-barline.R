@@ -38,11 +38,6 @@ test_that("BarLine Chart - basic 2", {
 })
 
 
-test_that("BarLine Chart - x2specified", {
-    warning('barline - need <a> implemented')
-})
-
-
 # -- From Isaac, web examples --
 generic.y  <- readRDS(system.file("extdata", "cX-generic-dat.RData",  package = "canvasXpress"))
 generic.x  <- readRDS(system.file("extdata", "cX-generic-smp.RData",  package = "canvasXpress"))
