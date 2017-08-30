@@ -11,7 +11,7 @@ colnames(varAnnot) <- rownames(data)
 
 
 test_that("Dotplot Chart - basic 1", {
-    result <- canvasXpress(t(data), 
+    result <- canvasXpress(data, 
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "Dotplot")
@@ -146,7 +146,7 @@ test_that("cX-dotplot-4", {
         xAxis2Title = "Annual Salary",
         xAxisMinorTicks = FALSE,
         xAxisShow = FALSE,
-        xAxisTickFormat = "\$%sK",
+        xAxisTickFormat = "\\$%sK",
         xAxisTitle = "Annual Salary"
     )
 })

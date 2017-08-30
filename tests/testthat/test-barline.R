@@ -12,7 +12,7 @@ colnames(varAnnot) <- rownames(data)
 
 test_that("BarLine Chart - basic 1", {
     result <- canvasXpress(
-        t(data),
+        data,
         varAnnot = varAnnot,
         graphOrientation = "vertical",
         graphType = "BarLine",
