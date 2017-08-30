@@ -46,7 +46,7 @@ assignCanvasXpressColnames <- function(x) {
     if (is.null(colnames(x))) {
         paste("V", seq(length = ncol(x)), sep = "")
     } else {
-        colnames(x)
+        make.names(colnames(x), unique = TRUE)
     }
 }
 
@@ -55,7 +55,7 @@ assignCanvasXpressRownames <- function(x) {
     if (is.null(rownames(x))) {
         paste("V", seq(length = nrow(x)), sep = "")
     } else {
-        rownames(x)
+        make.names(rownames(x), unique = TRUE)
     }
 }
 
@@ -68,5 +68,5 @@ convertRowsToList <- function(x) {
     
     # From BBmisc
     res = lapply(seq_row(x), function(i) stats::setNames(x[i,], NULL))
-    stats::setNames(res, rownames(x))
+    stats::setNames(res, make.names(rownames(x), unique = TRUE))
 }
