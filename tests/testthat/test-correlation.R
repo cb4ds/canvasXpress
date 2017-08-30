@@ -5,7 +5,7 @@ data <- t(iris[,1:4])
 
 
 test_that("Correlation - basic 1", {
-    result <- canvasXpress(t(data), 
+    result <- canvasXpress(data, 
                            graphType = "Correlation")
     result
     expect_s3_class(result, "canvasXpress")

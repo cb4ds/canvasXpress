@@ -55,16 +55,17 @@ iris.y     <- readRDS(system.file("extdata", "cX-iris-dat.RData",  package = "ca
 iris.x     <- readRDS(system.file("extdata", "cX-iris-smp.RData",  package = "canvasXpress"))
 cars.y     <- readRDS(system.file("extdata", "cX-cars-dat.RData",  package = "canvasXpress"))
 cars.x     <- readRDS(system.file("extdata", "cX-cars-smp.RData",  package = "canvasXpress"))
+cars.z     <- readRDS(system.file("extdata", "cX-cars-var.RData",  package = "canvasXpress"))
 dumbbell.y <- readRDS(system.file("extdata", "cX-dumbbell-dat.RData",  package = "canvasXpress"))
-dumbbell.x <- readRDS(system.file("extdata", "cX-dumbbell-smp.RData",  package = "canvasXpress"))
+dumbbell.z <- readRDS(system.file("extdata", "cX-dumbbell-var.RData",  package = "canvasXpress"))
 
 
 
 test_that("cX-dotplot-1", {
     result <- canvasXpress(
-        data = y,
-        smpAnnot = x,
-        varAnnot = z,
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
         colorScheme = "basic",
         graphOrientation = "vertical",
         graphType = "Dotplot",
@@ -81,12 +82,15 @@ test_that("cX-dotplot-1", {
         title = "Dotplot Graph",
         xAxisTickFormat = "%.0f Mil."
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-dotplot-2", {
     result <- canvasXpress(
-        data = y,
-        smpAnnot = x,
+        data = iris.y,
+        smpAnnot = iris.x,
         axisTickFontStyle = "bold",
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
@@ -113,13 +117,16 @@ test_that("cX-dotplot-2", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-dotplot-3", {
     result <- canvasXpress(
-        data = y,
-        smpAnnot = x,
-        varAnnot = z,
+        data = cars.y,
+        smpAnnot = cars.x,
+        varAnnot = cars.z,
         citation = "Henderson, H. V. and Velleman, P. F. (1981), Building Regression Models Interactively. Biometrics, 37, 391-411.",
         citationFontStyle = "italic",
         graphType = "Dotplot",
@@ -129,12 +136,15 @@ test_that("cX-dotplot-3", {
         showTransition = TRUE,
         title = "Measurements on 38 1978-79 model automobiles.\nThe gas mileage in miles per gallon as measured by Consumers Union on a test track."
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-dotplot-4", {
     result <- canvasXpress(
-        data = y,
-        varAnnot = z,
+        data = dumbbell.y,
+        varAnnot = dumbbell.z,
         axisAlgorithm = "wilkinson",
         connectBy = "Connect",
         dotplotType = "stacked",
@@ -149,4 +159,7 @@ test_that("cX-dotplot-4", {
         xAxisTickFormat = "\\$%sK",
         xAxisTitle = "Annual Salary"
     )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })

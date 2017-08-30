@@ -11,7 +11,7 @@ colnames(varAnnot) <- rownames(data)
 
 
 test_that("Scatter3D Chart - basic 1", {
-    result <- canvasXpress(t(data), 
+    result <- canvasXpress(data, 
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = 'Scatter3D')

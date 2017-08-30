@@ -5,7 +5,7 @@ data <- t(iris[,1:4])
 
 
 test_that("Bar Chart - basic 1", {
-    result <- canvasXpress(t(data), 
+    result <- canvasXpress(data, 
                            graphType = "Pie")
     result
     expect_s3_class(result, "canvasXpress")
