@@ -45,9 +45,9 @@ canvasXpress <- function(data = NULL,     # y
     
         #build y
     
-        vars = as.list(assignCanvasXpressColnames(data))
+        vars = as.list(assignCanvasXpressRownames(data))
         smps = as.list(assignCanvasXpressColnames(data))
-
+      
         data.y <- as.matrix(data, dimnames = list())
         # dimnames(dy) <- NULL
         y <- list(vars = vars, 
@@ -57,12 +57,20 @@ canvasXpress <- function(data = NULL,     # y
         x <- NULL
         z <- NULL
         if (!is.null(smpAnnot)) {
+            if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), smps)) {
+                smpAnnot <- t(smpAnnot)
+            }
+            
             if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), smps)) {
                 stop("Rownames in smpAnnot are different from column names in data")
             }
             x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
         }
         if (!is.null(varAnnot)) {
+            if (identical(as.list(assignCanvasXpressRownames(varAnnot)), vars)) {
+                varAnnot <- t(varAnnot)
+            }
+
             if (!identical(as.list(assignCanvasXpressColnames(varAnnot)), vars)) {
                 stop("Column names in varAnnot are different from row names in data")
             }

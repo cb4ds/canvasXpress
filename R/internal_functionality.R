@@ -44,19 +44,21 @@ assertDataCorrectness <- function(data, graphType) {
 
 assignCanvasXpressColnames <- function(x) {
     if (is.null(colnames(x))) {
-        paste("V", seq(length = ncol(x)), sep = "")
+        names <- paste("V", seq(length = ncol(x)), sep = "")
     } else {
-        make.names(colnames(x), unique = TRUE)
+        names <- make.names(colnames(x), unique = TRUE)
     }
+    return(names)
 }
 
 
 assignCanvasXpressRownames <- function(x) {
     if (is.null(rownames(x))) {
-        paste("V", seq(length = nrow(x)), sep = "")
+        names <- paste("V", seq(length = nrow(x)), sep = "")
     } else {
-        make.names(rownames(x), unique = TRUE)
+        names <- make.names(rownames(x), unique = TRUE)
     }
+    return(names)
 }
 
 
