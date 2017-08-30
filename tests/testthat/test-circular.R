@@ -30,6 +30,9 @@ circular2.x <- readRDS(system.file("extdata", "cX-circular2-smp.RData", package 
 circular2.z <- readRDS(system.file("extdata", "cX-circular2-var.RData", package = "canvasXpress"))
 sunburst.y  <- readRDS(system.file("extdata", "cX-sunburst-dat.RData", package = "canvasXpress"))
 sunburst.x  <- readRDS(system.file("extdata", "cX-sunburst-smp.RData", package = "canvasXpress"))
+generic.y   <- readRDS(system.file("extdata", "cX-generic-dat.RData", package = "canvasXpress"))
+generic.x   <- readRDS(system.file("extdata", "cX-generic-smp.RData", package = "canvasXpress"))
+generic.z   <- readRDS(system.file("extdata", "cX-generic-var.RData", package = "canvasXpress"))
 
 test_that("cX-circular-1", {
     result <- canvasXpress(
@@ -129,6 +132,165 @@ test_that("cX-donnut-2", {
         hierarchy = c("Quarter", "Month"),
         showTransition = TRUE,
         title = "Donnut with two levels"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+
+
+test_that("cX-radar-1", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        ringsType = c("line"),
+        showTransition = TRUE,
+        title = "Radar - Line"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-2", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        legendPosition = "top",
+        ringsType = c("area"),
+        showTransition = TRUE,
+        title = "Radar - Area"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-3", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        ringsType = c("bar"),
+        showTransition = TRUE,
+        title = "Radar - Bar"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-4", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        legendPosition = "top",
+        ringsType = c("dot"),
+        showTransition = TRUE,
+        title = "Radar - Scatter"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-5", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        legendPosition = "top",
+        ringsType = c("stacked"),
+        showTransition = TRUE,
+        title = "Radar - Stacked"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-6", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 180,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        ringsType = c("line"),
+        showTransition = TRUE,
+        title = "Half Radar"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-7", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 180,
+        circularRotate = -90,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        legendPosition = "top",
+        ringsType = c("line"),
+        showTransition = TRUE,
+        title = "Rotated Half Radar"
+    )
+    result
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-radar-8", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        circularArc = 360,
+        circularRotate = 0,
+        circularType = "radar",
+        colorScheme = "Bootstrap",
+        graphType = "Circular",
+        ringsType = c("line"),
+        showTransition = TRUE,
+        smpOverlays = c("Factor3", "-", "Factor1", "Factor2"),
+        title = "Radar with Overlays"
     )
     result
     expect_s3_class(result, "canvasXpress")
