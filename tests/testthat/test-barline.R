@@ -77,6 +77,7 @@ test_that("cX-barline-1", {
         xAxisTickColor = "rgb(0,0,0)",
         xAxisTickFormat = "%.0f M"
     )
+    warning('barline - not appearing correctly - missing second line')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -100,6 +101,7 @@ test_that("cX-barline-2", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
+    warning('barline - not appearing correctly - missing second line')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -126,6 +128,7 @@ test_that("cX-barline-3", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4") 
     )
+    warning('barline - not appearing correctly - missing second line')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

@@ -103,6 +103,7 @@ test_that("cX-bar-1", {
         widthFactor = 4,
         xAxisMinorTicks = FALSE
     )
+    warning('bar - not appearing correctly - missing treemaps, etc')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -143,6 +144,7 @@ test_that("cX-bar-3", {
         graphType = "Bar",
         title = "Simple Bar graph with annotations"
     )
+    warning('bar - not appearing correctly - missing decoration')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -173,6 +175,7 @@ test_that("cX-bar-4", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    warning('bar - not appearing correctly - not grouped, etc')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -197,6 +200,7 @@ test_that("cX-bar-5", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
+    warning('bar - not appearing correctly - missing decoration, colors')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -227,6 +231,7 @@ test_that("cX-bar-6", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
+    warning('bar - not appearing correctly - missing decoration')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -258,6 +263,7 @@ test_that("cX-bar-7", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
+    warning('bar - not appearing correctly - missing decoration, overlays, colors')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

@@ -17,9 +17,12 @@ test_that("Boxplot - basic 1", {
         groupingFactors = list('Species'),
         graphType = "Boxplot"
     )
+    warning('boxplot - not appearing correctly')
+    
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
+    
 })
 
 
@@ -42,18 +45,16 @@ test_that("Boxplot - summarized input", {
     result <- canvasXpress(graphType = "Boxplot",
                            data = data.box,
                            boxplotGroupData = "TESTING")
-    result
     warning('boxplot - summarized data not handled yet')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
     
     result <- canvasXpress(graphType = "Boxplot",
                            data = data.box.out,
                            boxplotGroupData = "TESTING")
-    result
     warning('boxplot - summarized data not handled yet')
-    
+    result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

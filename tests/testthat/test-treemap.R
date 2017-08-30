@@ -112,4 +112,4 @@ test_that("cX-treemap-3", {
         widthFactor = 4,
         xAxisMinorTicks = FALSE
     )
-}
+})
