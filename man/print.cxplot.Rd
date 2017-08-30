@@ -15,3 +15,4 @@ htmlwidgets object
 \description{
 Explicitly creates htmlwidgets object for output
 }
+

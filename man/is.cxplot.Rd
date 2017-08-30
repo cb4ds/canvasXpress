@@ -9,3 +9,4 @@ is.cxplot(x)
 \description{
 Reports whether x is a cxplot object
 }
+
