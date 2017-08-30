@@ -45,7 +45,7 @@ canvasXpress <- function(data = NULL,     # y
     
         #build y
     
-        vars = as.list(assignCanvasXpressRownames(data))
+        vars = as.list(assignCanvasXpressColnames(data))
         smps = as.list(assignCanvasXpressColnames(data))
 
         data.y <- as.matrix(data, dimnames = list())
@@ -89,7 +89,7 @@ canvasXpress <- function(data = NULL,     # y
     options(htmlwidgets.TOJSON_ARGS = list(dataframe = "columns", 
                                            pretty    = pretty, 
                                            digits    = digits))
-    
+
     htmlwidgets::createWidget("canvasXpress", 
                               cx_object, 
                               width  = width,
