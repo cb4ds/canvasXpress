@@ -39,7 +39,7 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
 for (file in exdata) {
     message(file)
     data <- read.delim(paste0("https://canvasxpress.org/data/", file, ".txt"),
-                       row.names = 1)
+                       row.names = 1, check.names = F)
     saveRDS(data, 
             file = paste0("inst/extdata/", file, ".RData"),
             ascii = TRUE)
