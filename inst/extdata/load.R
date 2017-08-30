@@ -19,9 +19,12 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-multidimensionalheatmap2-dat", "cX-cancersurvivalt-dat", 
             "cX-cancersurvivalt-smp", "cX-cancersurvivalt-var",
             "cX-alcoholtobaccot-dat", "cX-alcoholtobaccot-smp",
-            "cX-kaplanmeier-dat", "cX-kaplanmeier-var", "cX-irist-dat",
+        # "cX-kaplanmeier-dat", 
+            "cX-kaplanmeier-var", "cX-irist-dat",
             "cX-irist-var", "cX-irist-smp", "cX-line-dat", "cX-line-smp",
-            "cX-map-dat", "cX-map-var", "cX-nonlinearfit-dat", "cX-oncoprint-dat",
+        # "cX-map-dat", "cX-map-var", 
+            "cX-nonlinearfit-dat", 
+        #"cX-oncoprint-dat",
             "cX-oncoprint-dat4", "cX-oncoprint-smp", "cX-oncoprint-var", 
             "cX-sankey-dat", "cX-sankey-smp", "cX-sankey2-dat", "cX-sankey2-smp",
             "cX-scentst-dat", "cX-scentst-var", "cX-ageheightt-dat", 
@@ -33,7 +36,10 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-stacked2-dat", "cX-stacked2-smp", "cX-diverging-dat"
             )
 
-exdata <- c("stacked1.y", "iris.y", "generic.y", "simple.y", "boxplot.y")
+exdata <- c("cX-kaplanmeier-dat", "cX-map-dat", "cX-map-var", 
+            "cX-oncoprint-dat")
+
+
 
 for (file in exdata) {
     message(file)
