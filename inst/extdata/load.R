@@ -19,12 +19,11 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-multidimensionalheatmap2-dat", "cX-cancersurvivalt-dat", 
             "cX-cancersurvivalt-smp", "cX-cancersurvivalt-var",
             "cX-alcoholtobaccot-dat", "cX-alcoholtobaccot-smp",
-        # "cX-kaplanmeier-dat", 
-            "cX-kaplanmeier-var", "cX-irist-dat",
+            "cX-kaplanmeier-dat", "cX-kaplanmeier-var", "cX-irist-dat",
             "cX-irist-var", "cX-irist-smp", "cX-line-dat", "cX-line-smp",
-        # "cX-map-dat", "cX-map-var", 
+        # "cX-map-dat", "cX-map-var",
             "cX-nonlinearfit-dat", 
-        #"cX-oncoprint-dat",
+        # "cX-oncoprint-dat",
             "cX-oncoprint-dat4", "cX-oncoprint-smp", "cX-oncoprint-var", 
             "cX-sankey-dat", "cX-sankey-smp", "cX-sankey2-dat", "cX-sankey2-smp",
             "cX-scentst-dat", "cX-scentst-var", "cX-ageheightt-dat", 
@@ -36,15 +35,11 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-stacked2-dat", "cX-stacked2-smp", "cX-diverging-dat"
             )
 
-exdata <- c("cX-kaplanmeier-dat", "cX-map-dat", "cX-map-var", 
-            "cX-oncoprint-dat")
-
-
 
 for (file in exdata) {
     message(file)
-    data <- read.table(paste0("https://canvasxpress.org/data/", file, ".txt"),
-                       header = T, sep = "\t", row.names = 1)
+    data <- read.delim(paste0("https://canvasxpress.org/data/", file, ".txt"),
+                       row.names = 1)
     saveRDS(data, 
             file = paste0("inst/extdata/", file, ".RData"),
             ascii = TRUE)
