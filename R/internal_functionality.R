@@ -23,7 +23,8 @@ assertDataCorrectness <- function(data, graphType) {
                     "Pie",
                     "Correlation",
                     "Circular",
-                    "TagCloud" )
+                    "TagCloud",
+                    "Map")
 
       
     # To Be Programmed

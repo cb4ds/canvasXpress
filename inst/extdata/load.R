@@ -21,9 +21,7 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-alcoholtobaccot-dat", "cX-alcoholtobaccot-smp",
             "cX-kaplanmeier-dat", "cX-kaplanmeier-var", "cX-irist-dat",
             "cX-irist-var", "cX-irist-smp", "cX-line-dat", "cX-line-smp",
-        # "cX-map-dat", "cX-map-var",
             "cX-nonlinearfit-dat", 
-        # "cX-oncoprint-dat",
             "cX-oncoprint-dat4", "cX-oncoprint-smp", "cX-oncoprint-var", 
             "cX-sankey-dat", "cX-sankey-smp", "cX-sankey2-dat", "cX-sankey2-smp",
             "cX-scentst-dat", "cX-scentst-var", "cX-ageheightt-dat", 
@@ -35,7 +33,6 @@ exdata <- c("cX-area3-dat", "cX-area-dat", "cX-area2-dat", "cX-arealine-dat",
             "cX-stacked2-dat", "cX-stacked2-smp", "cX-diverging-dat"
             )
 
-
 for (file in exdata) {
     message(file)
     data <- read.delim(paste0("https://canvasxpress.org/data/", file, ".txt"),
@@ -45,3 +42,13 @@ for (file in exdata) {
             ascii = TRUE)
 }
    
+# files without rownames
+exdata2 <- c("cX-map-dat", "cX-map-var", "cX-oncoprint-dat")
+for (file in exdata2) {
+    message(file)
+    data <- read.delim(paste0("https://canvasxpress.org/data/", file, ".txt"))
+    saveRDS(data, 
+            file = paste0("inst/extdata/", file, ".RData"),
+            ascii = TRUE)
+}
+
