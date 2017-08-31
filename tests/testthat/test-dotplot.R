@@ -59,8 +59,6 @@ cars.z     <- readRDS(system.file("extdata", "cX-cars-var.RData",  package = "ca
 dumbbell.y <- readRDS(system.file("extdata", "cX-dumbbell-dat.RData",  package = "canvasXpress"))
 dumbbell.z <- readRDS(system.file("extdata", "cX-dumbbell-var.RData",  package = "canvasXpress"))
 
-
-
 test_that("cX-dotplot-1", {
     result <- canvasXpress(
         data = generic.y,
@@ -82,6 +80,7 @@ test_that("cX-dotplot-1", {
         title = "Dotplot Graph",
         xAxisTickFormat = "%.0f Mil."
     )
+    warning('dotplot - not appearing correctly - no overlays')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -117,6 +116,7 @@ test_that("cX-dotplot-2", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    warning('dotplot - not appearing correctly - not grouped')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -136,6 +136,7 @@ test_that("cX-dotplot-3", {
         showTransition = TRUE,
         title = "Measurements on 38 1978-79 model automobiles.\nThe gas mileage in miles per gallon as measured by Consumers Union on a test track."
     )
+    warning('dotplot - not appearing correctly - not grouped')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -159,6 +160,7 @@ test_that("cX-dotplot-4", {
         xAxisTickFormat = "\\$%sK",
         xAxisTitle = "Annual Salary"
     )
+    warning('dotplot - not appearing correctly - no lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

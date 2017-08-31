@@ -67,7 +67,7 @@ test_that("cX-circular-1", {
         smpOverlays = c("Species"),
         title = "Iris flower data set (1D Circular Plot)"
     )
-    
+    warning('circular - not appearing correctly - loading')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -117,7 +117,7 @@ test_that("cX-donnut-1", {
         showTransition = TRUE,
         title = "Simple Donnut"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - blank')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -137,7 +137,7 @@ test_that("cX-donnut-2", {
         showTransition = TRUE,
         title = "Donnut with two levels"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - blank')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -178,7 +178,7 @@ test_that("cX-radar-2", {
         showTransition = TRUE,
         title = "Radar - Area"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - no lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -198,7 +198,7 @@ test_that("cX-radar-3", {
         showTransition = TRUE,
         title = "Radar - Bar"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - no lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -219,7 +219,7 @@ test_that("cX-radar-4", {
         showTransition = TRUE,
         title = "Radar - Scatter"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - no lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -240,7 +240,7 @@ test_that("cX-radar-5", {
         showTransition = TRUE,
         title = "Radar - Stacked"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - no lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -260,7 +260,7 @@ test_that("cX-radar-6", {
         showTransition = TRUE,
         title = "Half Radar"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - no lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -282,7 +282,7 @@ test_that("cX-radar-7", {
         title = "Rotated Half Radar"
     )
     result
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - no lines')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -302,7 +302,7 @@ test_that("cX-radar-8", {
         smpOverlays = c("Factor3", "-", "Factor1", "Factor2"),
         title = "Radar with Overlays"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - loading')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -322,7 +322,7 @@ test_that("cX-sunburst-1", {
         showTransition = TRUE,
         title = "Simple Sunburst"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - blank')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -342,7 +342,7 @@ test_that("cX-sunburst-2", {
         showTransition = TRUE,
         title = "Simple Sunburst Colored by Category"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - blank')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -361,7 +361,7 @@ test_that("cX-sunburst-3", {
         showTransition = TRUE,
         title = "Rotated Sunburst"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - blank')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -380,7 +380,7 @@ test_that("cX-sunburst-4", {
         showTransition = TRUE,
         title = "Rotated Half Sunburst"
     )
-    warning('circular - not appearing correctly')
+    warning('circular - not appearing correctly - blank')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

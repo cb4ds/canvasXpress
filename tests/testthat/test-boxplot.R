@@ -102,6 +102,7 @@ test_that("cX-boxplot-1", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    warning('boxplot - not appearing correctly - not grouped')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -136,6 +137,7 @@ test_that("cX-boxplot-2", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    warning('boxplot - not appearing correctly - not grouped')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -171,6 +173,7 @@ test_that("cX-boxplot-3", {
         xAxis2Show = FALSE
     )
     result
+    warning('boxplot - not appearing correctly - not grouped')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -205,6 +208,7 @@ test_that("cX-boxplot-4", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
+    warning('boxplot - not appearing correctly - not grouped')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -226,6 +230,7 @@ test_that("cX-boxplot-5", {
         xAxisTickFormat = "%.0f M"
     )
     result
+    warning('boxplot - not appearing correctly - not grouped')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -246,6 +251,7 @@ test_that("cX-boxplot-6", {
         title = "Random Data"
     )
     result
+    warning('boxplot - not appearing correctly - not grouped')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -268,6 +274,7 @@ test_that("cX-boxplot-7", {
         title = "Data on the time subjects required to complete a pencil and paper maze\nwhen they were smelling a floral scent and when they were not."
     )
     result
+    warning('boxplot - not appearing correctly - not grouped')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -287,6 +294,7 @@ test_that("cX-boxplot-8", {
         xAxisTitle = "Survival time (days)"
     )
     result
+    warning('boxplot - not appearing correctly - not grouped')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
