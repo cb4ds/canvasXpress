@@ -15,7 +15,7 @@ test_that("Scatter2D Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = 'ScatterBubble2D')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -41,7 +41,7 @@ test_that("cX-scatterbubble2d-1", {
         zAxis = c("Population")
     )
     warning('scatterbubble2d - not appearing correctly - loading')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -56,7 +56,7 @@ test_that("cX-scatterbubble2d-2", {
         yAxis = c("Sample2", "Sample5"),
         zAxis = c("Sample3", "Sample6")
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -74,7 +74,7 @@ test_that("cX-scatterbubble2d-3", {
         zAxis = c("Population")
     )
     warning('scatterbubble2d - not appearing correctly - loading')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

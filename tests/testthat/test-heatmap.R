@@ -15,7 +15,7 @@ test_that("Heatmap - basic 1", {
                            varAnnot = varAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Heatmap")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("Heatmap - basic 2", {
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Heatmap")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -52,7 +52,7 @@ test_that("cX-heatmap-1", {
         graphType = "Heatmap",
         title = "Simple Heatmap"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -70,7 +70,7 @@ test_that("cX-heatmap-2", {
         title = "Clustered data",
         variablesClustered = TRUE
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -90,7 +90,7 @@ test_that("cX-heatmap-3", {
         title = "Custom color breaks",
         variablesClustered = TRUE
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -109,7 +109,7 @@ test_that("cX-heatmap-4", {
         title = "Cluster Heatmap Without Trees",
         variablesClustered = TRUE
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -128,7 +128,7 @@ test_that("cX-heatmap-5", {
         title = "Symetrical Colors in Heatmap",
         variablesClustered = TRUE
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -151,7 +151,7 @@ test_that("cX-heatmap-6", {
         variablesClustered = TRUE
     )
     warning('heatmap - not appearing correctly - dendrogram not colored')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -176,7 +176,7 @@ test_that("cX-heatmap-7", {
         variablesClustered = TRUE
     )
     warning('heatmap - not appearing correctly - dendrogram not colored, overlays missing')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -202,7 +202,7 @@ test_that("cX-heatmap-8", {
         title = "Highlight cells in Heatmap",
         variablesClustered = TRUE
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -251,7 +251,7 @@ test_that("cX-heatmap-9", {
         variablesClustered = TRUE
     )
     warning('heatmap - not appearing correctly - dendrogram not colored, overlays missing')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -271,7 +271,7 @@ test_that("cX-heatmap-10", {
         sizeByData = "data4"
     )
     warning('heatmap - not appearing correctly - multidimensionality missing')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -288,7 +288,7 @@ test_that("cX-heatmap-11", {
         sizeByData = "data",
         title = "A good old Northern Blot"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

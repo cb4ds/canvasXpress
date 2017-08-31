@@ -15,7 +15,7 @@ test_that("Dotplot Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "Dotplot")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("Dotplot Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "Dotplot")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -41,7 +41,7 @@ test_that("Dotplot Chart - grouped", {
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
                            legendColumns = 2)
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -81,7 +81,7 @@ test_that("cX-dotplot-1", {
         xAxisTickFormat = "%.0f Mil."
     )
     warning('dotplot - not appearing correctly - no overlays')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -117,7 +117,7 @@ test_that("cX-dotplot-2", {
         xAxis2Show = FALSE
     )
     warning('dotplot - not appearing correctly - not grouped')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -137,7 +137,7 @@ test_that("cX-dotplot-3", {
         title = "Measurements on 38 1978-79 model automobiles.\nThe gas mileage in miles per gallon as measured by Consumers Union on a test track."
     )
     warning('dotplot - not appearing correctly - not grouped')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -161,7 +161,7 @@ test_that("cX-dotplot-4", {
         xAxisTitle = "Annual Salary"
     )
     warning('dotplot - not appearing correctly - no lines')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

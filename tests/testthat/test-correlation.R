@@ -7,7 +7,7 @@ data <- t(iris[,1:4])
 test_that("Correlation - basic 1", {
     result <- canvasXpress(t(data), 
                            graphType = "Correlation")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -30,7 +30,7 @@ test_that("cX-correlation-1", {
         title = "Correlation Plot",
         yAxisTitle = "Correlation Title"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -47,7 +47,7 @@ test_that("cX-correlation-2", {
         title = "Correlation Plot",
         yAxisTitle = "Correlation Title"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

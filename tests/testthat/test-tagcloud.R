@@ -7,7 +7,7 @@ data <- t(iris[,1:4])
 test_that("Tag Cloud - basic 1", {
     result <- canvasXpress(data,
                            graphType = "TagCloud")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -16,7 +16,7 @@ test_that("Tag Cloud - basic 1", {
 test_that("Tag Cloud - basic 2", {
     result <- canvasXpress(data, 
                            graphType = "TagCloud")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -37,7 +37,7 @@ test_that("cX-tagcloud-1", {
         showTransition = TRUE
     )
     warning('tagcloud - not appearing correctly - color')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

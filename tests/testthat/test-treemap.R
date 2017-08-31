@@ -16,7 +16,7 @@ test_that("Treemap - basic 1", {
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Treemap")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -62,7 +62,7 @@ test_that("cX-treemap-1", {
         title = "Population colored by Gross National Income 2014"
     )
     warning('treemap - not appearing correctly - grouping, coloring')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -74,7 +74,7 @@ test_that("cX-treemap-2", {
         varAnnot = generic.z,
         graphType = "Treemap"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -120,7 +120,7 @@ test_that("cX-treemap-3", {
         xAxisMinorTicks = FALSE
     )
     warning('treemap - not appearing correctly - grouping, treemaps missing')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

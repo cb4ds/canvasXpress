@@ -15,7 +15,7 @@ test_that("DotLine Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "DotLine")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,9 +26,8 @@ test_that("DotLine Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "DotLine")
-    print(result)
     warning('dotline - graph incorrect - no lines')
-    
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -43,7 +42,7 @@ test_that("DotLine Chart - grouped", {
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
                            legendColumns = 2)
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -81,7 +80,7 @@ test_that("cX-dotline-1", {
         xAxis2 = c("Variable3", "Variable4"),
         xAxisTickColor = "rgb(0,0,0)"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -103,7 +102,7 @@ test_that("cX-dotline-2", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -128,7 +127,7 @@ test_that("cX-dotline-3 ", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

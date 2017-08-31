@@ -16,7 +16,7 @@ test_that("Line Chart - basic 1", {
                            graphOrientation = "vertical",
                            graphType = "Line", 
                            colorBy = 'Species')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -30,7 +30,7 @@ test_that("Line Chart - basic 2", {
                            colorBy = 'Species')
     
     warning('line - graph incorrect - no lines, shaped points')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })         
@@ -63,7 +63,7 @@ test_that("cX-line-1", {
         title = "Line Graphs"
     )
     warning('line - graph incorrect - missing overlays')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -90,7 +90,7 @@ test_that("cX-line-2", {
         title = "Random Data"
     )
     warning('line - graph incorrect - missing overlays, incorrect direction')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -106,7 +106,7 @@ test_that("cX-line-3", {
         showTransition = TRUE
     )
     warning('line - graph incorrect - missing smoothing/grouping')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

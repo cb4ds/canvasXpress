@@ -16,7 +16,7 @@ test_that("ParallelCoordinates - basic 1", {
                            colorBy = 'Species',
                            graphType = "ParallelCoordinates")
     warning('line - graph incorrect - no lines, shaped points')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -29,7 +29,7 @@ test_that("Bar Chart - basic 2", {
                            graphType = "ParallelCoordinates")
     
     warning('line - graph incorrect - no lines, shaped points')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -52,7 +52,7 @@ test_that("cX-parallelcoordinates-1", {
         title = "Iris flower data set"
     )
     warning('parallelcoordinates - graph incorrect - grouping/coloring')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -69,7 +69,7 @@ test_that("cX-parallelcoordinates-2", {
         title = "Iris flower data set"
     )
     warning('parallelcoordinates - graph incorrect - grouping/coloring')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

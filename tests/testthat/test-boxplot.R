@@ -18,7 +18,7 @@ test_that("Boxplot - basic 1", {
         graphType = "Boxplot"
     )
     warning('boxplot - not appearing correctly')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
     
@@ -45,7 +45,7 @@ test_that("Boxplot - summarized input", {
                            data = data.box,
                            boxplotGroupData = "TESTING")
     warning('boxplot - summarized data not handled yet')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
     
@@ -53,7 +53,7 @@ test_that("Boxplot - summarized input", {
                            data = data.box.out,
                            boxplotGroupData = "TESTING")
     warning('boxplot - summarized data not handled yet')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -102,7 +102,7 @@ test_that("cX-boxplot-1", {
         xAxis2Show = FALSE
     )
     warning('boxplot - not appearing correctly - not grouped')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -137,7 +137,7 @@ test_that("cX-boxplot-2", {
         xAxis2Show = FALSE
     )
     warning('boxplot - not appearing correctly - not grouped')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -171,8 +171,8 @@ test_that("cX-boxplot-3", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
-    print(result)
     warning('boxplot - not appearing correctly - not grouped')
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -208,7 +208,7 @@ test_that("cX-boxplot-4", {
         xAxis2Show = FALSE
     )
     warning('boxplot - not appearing correctly - not grouped')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -228,8 +228,8 @@ test_that("cX-boxplot-5", {
         title = "Random Data",
         xAxisTickFormat = "%.0f M"
     )
-    print(result)
     warning('boxplot - not appearing correctly - not grouped')
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -249,8 +249,8 @@ test_that("cX-boxplot-6", {
         subtitle = "Boxplot Graph",
         title = "Random Data"
     )
-    print(result)
     warning('boxplot - not appearing correctly - not grouped')
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -272,8 +272,8 @@ test_that("cX-boxplot-7", {
         smpTitleFontStyle = "italic",
         title = "Data on the time subjects required to complete a pencil and paper maze\nwhen they were smelling a floral scent and when they were not."
     )
-    print(result)
     warning('boxplot - not appearing correctly - not grouped')
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -292,8 +292,8 @@ test_that("cX-boxplot-8", {
         title = "Patients with advanced cancers of the stomach,\nbronchus, colon, ovary or breast treated with ascorbate.",
         xAxisTitle = "Survival time (days)"
     )
-    print(result)
     warning('boxplot - not appearing correctly - not grouped')
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

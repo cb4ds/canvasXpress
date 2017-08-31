@@ -5,7 +5,7 @@ iris.data <- t(iris[, 1:4])
 test_that("Area Chart 1 normal", {
     result <- canvasXpress(iris.data,
                            graphType = "Area")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -15,7 +15,7 @@ test_that("Area Chart 1 percent", {
     result <- canvasXpress(iris.data,
                            graphType = "Area",
                            areaType = "percent")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -25,7 +25,7 @@ test_that("Area Chart 1 stacked", {
     result <- canvasXpress(iris.data,
                            graphType = "Area",
                            areaType = "stacked")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -51,7 +51,7 @@ test_that("cX-area-1", {
         subtitle = "http://menugget.blogspot.com/2013/12/data-mountains-and-streams-stacked-area.html",
         title = "Steam Plot"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -74,7 +74,7 @@ test_that("cX-area-2", {
         xAxis2Show = FALSE,
         xAxisTitle = "Number of People (1000's)"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -97,7 +97,7 @@ test_that("cX-area-3", {
         xAxis2Show = FALSE,
         xAxisTitle = "Normalized Percentage of People"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -119,7 +119,7 @@ test_that("cX-area-4", {
         xAxis2Show = FALSE,
         xAxisTitle = "Number of People (1000's)"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -144,7 +144,7 @@ test_that("cX-area-5", {
         xAxis2Show = FALSE,
         xAxisTitle = "Normalized Scores of Number of People"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -165,7 +165,7 @@ test_that("cX-area-6", {
         subtitle = "http://menugget.blogspot.com/2013/12/data-mountains-and-streams-stacked-area.html",
         title = "Data Mountain"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

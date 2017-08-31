@@ -15,7 +15,7 @@ test_that("StackedPercent Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedPercent")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("StackedPercent Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedPercent")
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -42,7 +42,7 @@ test_that("StackedPercent Chart - grouped", {
                            legendPosition = "bottom",
                            legendColumns = 2)
     warning('stackedpercent - graph incorrect - axis issue')
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -70,7 +70,7 @@ test_that("cX-stackedpercent-1", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -90,7 +90,7 @@ test_that("cX-stackedpercent-2", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -110,7 +110,7 @@ test_that("cX-stackedpercent-3", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -128,7 +128,7 @@ test_that("cX-stackedpercent-4", {
         title = "Diverging Stacked Percent Graph",
         xAxisTickFormat = "%s%%"
     )
-    print(result)
+    if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
