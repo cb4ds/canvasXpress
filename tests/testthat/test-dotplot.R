@@ -165,3 +165,21 @@ test_that("cX-dotplot-4", {
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
+
+test_that("cX-layout-5", {
+    result <- canvasXpress(
+        data = cars.y,
+        smpAnnot = cars.x,
+        varAnnot = cars.z,
+        graphOrientation = "vertical",
+        graphType = "Dotplot",
+        legendColumns = 3,
+        legendPosition = "bottom",
+        showTransition = TRUE,
+        title = "Measurements on 38 1978-79 model automobiles.\nThe gas mileage in miles per gallon as measured by Consumers Union on a test track."
+    )
+    warning('dotplot - not appearing correctly - no layout')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})

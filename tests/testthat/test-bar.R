@@ -297,3 +297,34 @@ test_that("cX-bar-9", {
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
+
+
+test_that("cX-layout-6", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        graphOrientation = "vertical",
+        graphType = "Bar",
+        showTransition = TRUE
+    )
+    warning('bar - not appearing correctly - no layout')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-layout-7", {
+    result <- canvasXpress(
+        data = generic.y,
+        smpAnnot = generic.x,
+        varAnnot = generic.z,
+        graphOrientation = "horizontal",
+        graphType = "Bar",
+        showTransition = TRUE
+    )
+    warning('bar - not appearing correctly - no layout')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})

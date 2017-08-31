@@ -42,6 +42,8 @@ scatterR2.z       <- readRDS(system.file("extdata", "cX-scatterR2-var.RData", pa
 scatterR3.y       <- readRDS(system.file("extdata", "cX-scatterR3-dat.RData", package = "canvasXpress"))
 scatterR3.z       <- readRDS(system.file("extdata", "cX-scatterR3-var.RData", package = "canvasXpress"))
 scatterR4.y       <- readRDS(system.file("extdata", "cX-scatterR3-dat.RData", package = "canvasXpress"))
+kaplanmeier.y     <- readRDS(system.file("extdata", "cX-kaplanmeier-dat.RData", package = "canvasXpress"))
+kaplanmeier.z     <- readRDS(system.file("extdata", "cX-kaplanmeier-var.RData", package = "canvasXpress"))
 
 test_that("cX-histogram-1", {
     result <- canvasXpress(
@@ -452,3 +454,75 @@ test_that("cX-scatter2d-10", {
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
+
+test_that("cX-kaplan-meier-1", {
+    warning('scatter2d - missing test - 1st chart on web for KaplanMeier')
+})
+
+test_that("cX-kaplan-meier-2", {
+    result <- canvasXpress(
+        data = kaplanmeier.y,
+        varAnnot = kaplanmeier.z,
+        graphType = "Scatter2D",
+        showDecorations = TRUE,
+        showDecorationsKaplanMeierConfidence = TRUE,
+        showLegend = FALSE,
+        showTransition = TRUE,
+        title = "Kaplan-Meier Plot"
+    )
+    warning('scatter2d - graph incorrect - kaplanmeier lines/etc')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-layout-1", {
+    result <- canvasXpress(
+        data = irist.y,
+        varAnnot = irist.z,
+        broadcast = TRUE,
+        colorBy = "Species",
+        graphType = "Scatter2D",
+        layoutAdjust = TRUE,
+        scatterPlotMatrix = TRUE,
+        showTransition = TRUE
+    )
+    warning('scatter2d - graph incorrect - layout missing areas')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-layout-2", {
+    result <- canvasXpress(
+        data = irist.y,
+        varAnnot = irist.z,
+        broadcast = TRUE,
+        colorBy = "Species",
+        graphType = "Scatter2D",
+        layoutAdjust = FALSE,
+        scatterPlotMatrix = TRUE,
+        showTransition = TRUE
+    )
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-layout-3", {
+    result <- canvasXpress(
+        data = irist.y,
+        varAnnot = irist.z,
+        broadcast = TRUE,
+        colorBy = "Species",
+        graphType = "Scatter2D",
+        layoutAdjust = FALSE,
+        scatterPlotMatrix = TRUE,
+        scatterPlotMatrixType = "first"
+    )
+    warning('scatter2d - graph incorrect - layout colors, missing areas')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
