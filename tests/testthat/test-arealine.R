@@ -59,7 +59,6 @@ test_that("cX-arealine-1", {
         xAxis2 = c("35-44", "45-54", "55-64", ">64"),
         xAxisTitle = "Number of People (1000's)"
     )
-    warning('arealine - not appearing correctly - missing lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -84,7 +83,6 @@ test_that("cX-arealine-2", {
         xAxis2 = c("35-44", "45-54", "55-64", ">64"),
         xAxisTitle = "Number of People (1000's)"
     )
-    warning('arealine - not appearing correctly - missing lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -109,7 +107,6 @@ test_that("cX-arealine-3", {
         xAxis2 = c("35-44", "45-54", "55-64", ">64"),
         xAxisTitle = "Number of People (1000's)"
     )
-    warning('arealine - not appearing correctly - missing lines')
     result
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
