@@ -15,7 +15,7 @@ test_that("StackedPercentLine Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedPercentLine")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("StackedPercentLine Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedPercentLine")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -42,7 +42,7 @@ test_that("StackedPercentLine Chart - grouped", {
                            legendPosition = "bottom",
                            legendColumns = 2)
     warning('stackedpercentline - graph incorrect - grouping')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -71,7 +71,7 @@ test_that("cX-stackedpercentline-1", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -95,7 +95,7 @@ test_that("cX-stackedpercentline-2", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

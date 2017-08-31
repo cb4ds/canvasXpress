@@ -15,7 +15,7 @@ test_that("Stacked Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "Stacked")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("Stacked Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "Stacked")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -43,7 +43,7 @@ test_that("Stacked Chart - grouped", {
                            legendColumns = 2,
                            xAxis2Show = FALSE,
                            showTransition = TRUE)
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -71,7 +71,8 @@ test_that("cX-stacked-1", {
         title = "Random Data",
         treemapBy = c("Factor2", "Factor3")
     )
-    result
+    warning('stacked - not appearing correctly - treemap missing')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -91,7 +92,7 @@ test_that("cX-stacked-2", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -111,7 +112,7 @@ test_that("cX-stacked-3", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -131,7 +132,7 @@ test_that("cX-stacked-4", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -149,7 +150,7 @@ test_that("cX-stacked-5", {
         title = "Diverging Stacked Graph",
         xAxisTickFormat = "%s%%"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

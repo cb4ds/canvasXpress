@@ -15,7 +15,7 @@ test_that("StackedLine Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedLine")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("StackedLine Chart - basic 2", {
                            smpAnnot = smpAnnot, 
                            colorBy = 'Species',
                            graphType = "StackedLine")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -41,7 +41,7 @@ test_that("StackedLine Chart - grouped", {
                            smpLabelRotate = 90,
                            legendPosition = "bottom",
                            legendColumns = 2)
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -71,7 +71,7 @@ test_that("cX-stackedline-1", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -96,7 +96,7 @@ test_that("cX-stackedline-2", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

@@ -14,7 +14,7 @@ test_that("Scatter2D Chart - basic 1", {
     result <- canvasXpress(data, 
                            varAnnot = varAnnot, 
                            colorBy = 'Species')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -58,7 +58,8 @@ test_that("cX-histogram-1", {
         xAxisTitle = "Survival (days)",
         yAxisTitle = "Number of Subjects"
     )
-    result
+    warning('scatter2d - not appearing correctly - histogram grouping')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -78,7 +79,8 @@ test_that("cX-histogram-2", {
         xAxisTitle = "Survival (days)",
         yAxisTitle = "Number of Subjects"
     )
-    result
+    warning('scatter2d - not appearing correctly - histogram grouping')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -104,7 +106,8 @@ test_that("cX-histogram-3", {
         xAxisTitle = "Pounds Spent",
         yAxisTitle = "Frequency"
     )
-    result
+    warning('scatter2d - not appearing correctly - histogram grouping')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -121,7 +124,7 @@ test_that("cX-nonlinear-fit-1", {
         xAxisTransformTicks = FALSE,
         yAxisExact = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -136,9 +139,14 @@ test_that("cX-nonlinear-fit-2", {
         xAxis = c("Sepal.Length", "Sepal.Width"),
         yAxis = c("Petal.Length", "Petal.Width")
     )
-    result
+    warning('scatter2d - not appearing correctly - nonlinear fit line missing')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-scatter2d-1", {
+    warning('scatter2d - missing test - 1st chart on web for Scatter2D')
 })
 
 test_that("cX-scatter2d-2", {
@@ -162,7 +170,8 @@ test_that("cX-scatter2d-2", {
         yAxisExact = TRUE,
         yAxisHistogramShow = TRUE
     )
-    result
+    warning('scatter2d - not appearing correctly - histograms, shapes, colors')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -188,7 +197,8 @@ test_that("cX-scatter2d-3", {
         yAxisExact = TRUE,
         yAxisHistogramShow = TRUE
     )
-    result
+    warning('scatter2d - not appearing correctly - histograms, shapes, colors')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -203,7 +213,8 @@ test_that("cX-scatter2d-4", {
         xAxis = c("Age"),
         yAxis = c("Height")
     )
-    result
+    warning('scatter2d - not appearing correctly - missing points and area')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -230,7 +241,8 @@ test_that("cX-scatter2d-5", {
         yAxis = c("Temperature"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    result
+    warning('scatter2d - not appearing correctly - missing points and area')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -260,7 +272,8 @@ test_that("cX-scatter2d-6", {
         yAxis = c("Variable1"),
         yAxisExact = TRUE
     )
-    result
+    warning('scatter2d - not appearing correctly - loading')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -307,7 +320,8 @@ test_that("cX-scatter2d-7", {
         yAxis = c("logFC"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    result
+    warning('scatter2d - not appearing correctly - missing points, lines, decorations')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -351,7 +365,8 @@ test_that("cX-scatter2d-8", {
         yAxis = c("-log-pVal"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    result
+    warning('scatter2d - not appearing correctly - missing points, lines, decorations')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -407,7 +422,8 @@ test_that("cX-scatter2d-9", {
         yAxis = c("logFC-Y"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    result
+    warning('scatter2d - not appearing correctly - missing lines, decorations')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -431,7 +447,8 @@ test_that("cX-scatter2d-10", {
         yAxis = c("Sample1", "Sample2"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    result
+    warning('scatter2d - not appearing correctly - grouping, coloring')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

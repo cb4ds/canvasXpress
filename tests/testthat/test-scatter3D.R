@@ -15,7 +15,7 @@ test_that("Scatter3D Chart - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = 'Scatter3D')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -42,7 +42,8 @@ test_that("cX-scatter3d-1", {
         yAxis = c("Sepal.Width"),
         zAxis = c("Petal.Length")
     )
-    result
+    warning('scatter3d - not appearing correctly - missing points')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -61,7 +62,8 @@ test_that("cX-scatter3d-2", {
         yAxis = c("Petal.Width"),
         zAxis = c("Petal.Length")
     )
-    result
+    warning('scatter3d - not appearing correctly - missing points')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -74,7 +76,8 @@ test_that("cX-scatter3d-", {
         yAxis = c("Sample2"),
         zAxis = c("Sample3")
     )
-    result
+    warning('scatter3d - not appearing correctly - missing points')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -88,7 +91,8 @@ test_that("cX-scatter3d-4", {
         yAxis = c("Sample2"),
         zAxis = c("Sample3")
     )
-    result
+    warning('scatter3d - not appearing correctly - missing points')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -106,7 +110,8 @@ test_that("cX-scatter3d-5", {
         yAxis = c("Sample2"),
         zAxis = c("Sample3")
     )
-    result
+    warning('scatter3d - not appearing correctly - loading')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
