@@ -15,7 +15,7 @@ test_that("Bar Chart - basic 1", {
                            varAnnot = varAnnot,
                            colorBy = "Species",
                            graphType = "Bar")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("Bar Chart - basic 2", {
                            smpAnnot = smpAnnot,
                            colorBy = 'Species',
                            graphType = "Bar")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -43,7 +43,7 @@ test_that("Bar Chart - grouped", {
         legendPosition = "bottom",
         legendColumns = 2
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -104,7 +104,7 @@ test_that("cX-bar-1", {
         xAxisMinorTicks = FALSE
     )
     warning('bar - not appearing correctly - missing treemaps, etc')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -116,7 +116,7 @@ test_that("cX-bar-2", {
         graphType = "Bar",
         title = "Simple Bar graph"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -145,7 +145,7 @@ test_that("cX-bar-3", {
         title = "Simple Bar graph with annotations"
     )
     warning('bar - not appearing correctly - missing decoration')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -176,7 +176,7 @@ test_that("cX-bar-4", {
         xAxis2Show = FALSE
     )
     warning('bar - not appearing correctly - not grouped, etc')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -201,7 +201,7 @@ test_that("cX-bar-5", {
         xAxis2Show = FALSE
     )
     warning('bar - not appearing correctly - missing decoration, colors')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -232,7 +232,7 @@ test_that("cX-bar-6", {
         xAxis2Show = FALSE
     )
     warning('bar - not appearing correctly - missing decoration')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -264,7 +264,7 @@ test_that("cX-bar-7", {
         xAxis2Show = FALSE
     )
     warning('bar - not appearing correctly - missing decoration, overlays, colors')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -277,7 +277,7 @@ test_that("cX-bar-8", {
         showTransition = TRUE,
         widthFactor = 0.1
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -293,7 +293,7 @@ test_that("cX-bar-9", {
         scatterType = "bar",
         x3DRatio = 0.5
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

@@ -15,7 +15,7 @@ test_that("Heatmap - basic 1", {
                            varAnnot = varAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Heatmap")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -26,7 +26,7 @@ test_that("Heatmap - basic 2", {
                            smpAnnot = smpAnnot, 
                            groupingFactors = list('Species'),
                            graphType = "Heatmap")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -43,7 +43,6 @@ multidimensionalheatmap.y4 <- readRDS(system.file("extdata", "cX-multidimensiona
 multidimensionalheatmap.x  <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-smp.RData", package = "canvasXpress"))
 multidimensionalheatmap.z  <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-var.RData", package = "canvasXpress"))
 
-
 test_that("cX-heatmap-1", {
     result <- canvasXpress(
         data = heatmapR.y,
@@ -53,7 +52,7 @@ test_that("cX-heatmap-1", {
         graphType = "Heatmap",
         title = "Simple Heatmap"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -71,7 +70,7 @@ test_that("cX-heatmap-2", {
         title = "Clustered data",
         variablesClustered = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -91,7 +90,7 @@ test_that("cX-heatmap-3", {
         title = "Custom color breaks",
         variablesClustered = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -110,7 +109,7 @@ test_that("cX-heatmap-4", {
         title = "Cluster Heatmap Without Trees",
         variablesClustered = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -129,7 +128,7 @@ test_that("cX-heatmap-5", {
         title = "Symetrical Colors in Heatmap",
         variablesClustered = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -151,7 +150,8 @@ test_that("cX-heatmap-6", {
         title = "R Heatmap",
         variablesClustered = TRUE
     )
-    result
+    warning('heatmap - not appearing correctly - dendrogram not colored')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -175,7 +175,8 @@ test_that("cX-heatmap-7", {
         title = "Overlays in Heatmap",
         variablesClustered = TRUE
     )
-    result
+    warning('heatmap - not appearing correctly - dendrogram not colored, overlays missing')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -201,7 +202,7 @@ test_that("cX-heatmap-8", {
         title = "Highlight cells in Heatmap",
         variablesClustered = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -249,7 +250,8 @@ test_that("cX-heatmap-9", {
         varOverlays = c("Type", "Sens"),
         variablesClustered = TRUE
     )
-    result
+    warning('heatmap - not appearing correctly - dendrogram not colored, overlays missing')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -268,7 +270,8 @@ test_that("cX-heatmap-10", {
         sizeBy = "Size",
         sizeByData = "data4"
     )
-    result
+    warning('heatmap - not appearing correctly - multidimensionality missing')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -285,7 +288,7 @@ test_that("cX-heatmap-11", {
         sizeByData = "data",
         title = "A good old Northern Blot"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

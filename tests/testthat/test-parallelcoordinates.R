@@ -15,7 +15,8 @@ test_that("ParallelCoordinates - basic 1", {
                            varAnnot = varAnnot, 
                            colorBy = 'Species',
                            graphType = "ParallelCoordinates")
-    result
+    warning('line - graph incorrect - no lines, shaped points')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -28,7 +29,7 @@ test_that("Bar Chart - basic 2", {
                            graphType = "ParallelCoordinates")
     
     warning('line - graph incorrect - no lines, shaped points')
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -50,7 +51,8 @@ test_that("cX-parallelcoordinates-1", {
         smpLabelRotate = 90,
         title = "Iris flower data set"
     )
-    result
+    warning('parallelcoordinates - graph incorrect - grouping/coloring')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -66,7 +68,8 @@ test_that("cX-parallelcoordinates-2", {
         smpLabelRotate = 90,
         title = "Iris flower data set"
     )
-    result
+    warning('parallelcoordinates - graph incorrect - grouping/coloring')
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

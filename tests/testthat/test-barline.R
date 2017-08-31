@@ -18,7 +18,7 @@ test_that("BarLine Chart - basic 1", {
         graphType = "BarLine",
         colorBy = 'Species'
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -32,7 +32,7 @@ test_that("BarLine Chart - basic 2", {
         graphType = "BarLine",
         colorBy = 'Species'
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -72,7 +72,7 @@ test_that("cX-barline-1", {
         xAxisTickColor = "rgb(0,0,0)",
         xAxisTickFormat = "%.0f M"
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -95,7 +95,7 @@ test_that("cX-barline-2", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4")
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -121,7 +121,7 @@ test_that("cX-barline-3", {
         xAxis = c("Variable1", "Variable2"),
         xAxis2 = c("Variable3", "Variable4") 
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

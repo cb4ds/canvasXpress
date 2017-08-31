@@ -7,7 +7,7 @@ data <- t(iris[,1:4])
 test_that("Bar Chart - basic 1", {
     result <- canvasXpress(data, 
                            graphType = "Pie")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -16,7 +16,7 @@ test_that("Bar Chart - basic 1", {
 test_that("Bar Chart - basic 2", {
     result <- canvasXpress(data, 
                            graphType = "Pie")
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -49,7 +49,7 @@ test_that("cX-pie-1", {
             "Sample6"
         )
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -66,7 +66,7 @@ test_that("cX-pie-2", {
         pieType = "solid",
         showTransition = TRUE
     )
-    result
+    print(result)
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
