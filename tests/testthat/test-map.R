@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Chord")
+context("canvasXpress Charts - Map")
 
 
 # -- From Isaac, web examples --

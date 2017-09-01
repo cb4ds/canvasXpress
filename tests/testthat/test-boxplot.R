@@ -1,65 +1,6 @@
 context("canvasXpress Charts - Boxplot")
 
 
-data <- t(iris[, 1:4])
-smpAnnot <- as.matrix(iris[, 5])
-colnames(data) <- make.names(rep("S", ncol(data)), unique = T)
-rownames(smpAnnot) <- colnames(data)
-colnames(smpAnnot) <- "Species"
-varAnnot <- t(data.frame(color = c("red", "blue", "green", "yellow")))
-colnames(varAnnot) <- rownames(data)
-
-
-test_that("Boxplot - basic 1", {
-    result <- canvasXpress(
-        data,
-        smpAnnot = smpAnnot,
-        groupingFactors = list('Species'),
-        graphType = "Boxplot"
-    )
-    warning('boxplot - not appearing correctly')
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-    
-})
-
-
-test_that("Boxplot - summarized input", {
-    data <- data.frame(
-        iqr1   = c(3,  25),
-        iqr3   = c(10, 30),
-        qtl1   = c(6,  25),
-        qtl3   = c(10, 29),
-        median = c(8,  27)
-    )
-    
-    data.box <- t(data)
-    
-    data.box.out <- data
-    data.box.out$outliers <- c("2, 40", NA)
-    data.box.out <- t(data.box.out)
-    
-    
-    result <- canvasXpress(graphType = "Boxplot",
-                           data = data.box,
-                           boxplotGroupData = "TESTING")
-    warning('boxplot - summarized data not handled yet')
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-    
-    result <- canvasXpress(graphType = "Boxplot",
-                           data = data.box.out,
-                           boxplotGroupData = "TESTING")
-    warning('boxplot - summarized data not handled yet')
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-})
-
-
-# -- From Isaac, web examples --
 iris.y           <- readRDS(system.file("extdata", "cX-iris-dat.RData", package = "canvasXpress"))
 iris.x           <- readRDS(system.file("extdata", "cX-iris-smp.RData", package = "canvasXpress"))
 boxplot.y        <- readRDS(system.file("extdata", "cX-boxplot-dat.RData", package = "canvasXpress"))
@@ -94,7 +35,7 @@ test_that("cX-boxplot-1", {
         graphType = "Boxplot",
         legendBox = FALSE,
         showShadow = TRUE,
-        showTransition = TRUE,
+        # showTransition = TRUE,
         smpLabelFontStyle = "italic",
         smpLabelRotate = 90,
         smpTitle = "Species",

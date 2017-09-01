@@ -1,37 +1,6 @@
 context("canvasXpress Charts - Area")
 
-iris.data <- t(iris[, 1:4])
 
-test_that("Area Chart 1 normal", {
-    result <- canvasXpress(iris.data,
-                           graphType = "Area")
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-})
-
-
-test_that("Area Chart 1 percent", {
-    result <- canvasXpress(iris.data,
-                           graphType = "Area",
-                           areaType = "percent")
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-})
-
-
-test_that("Area Chart 1 stacked", {
-    result <- canvasXpress(iris.data,
-                           graphType = "Area",
-                           areaType = "stacked")
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-})
-
-
-# -- From Isaac, web examples --
 area1.y <- readRDS(system.file("extdata", "cX-area-dat.RData", package = "canvasXpress"))
 area2.y <- readRDS(system.file("extdata", "cX-area2-dat.RData", package = "canvasXpress"))
 area3.y <- readRDS(system.file("extdata", "cX-area3-dat.RData", package = "canvasXpress"))

@@ -1,19 +1,6 @@
 context("canvasXpress Charts - Correlation")
 
 
-data <- t(iris[,1:4])
-
-
-test_that("Correlation - basic 1", {
-    result <- canvasXpress(t(data), 
-                           graphType = "Correlation")
-    if (interactive()) { print(result) }
-    expect_s3_class(result, "canvasXpress")
-    expect_s3_class(result, "htmlwidget")
-})
-
-
-# -- From Isaac, web examples --
 generic.y  <- readRDS(system.file("extdata", "cX-generic-dat.RData", package = "canvasXpress"))
 generic.x  <- readRDS(system.file("extdata", "cX-generic-smp.RData", package = "canvasXpress"))
 generic.z  <- readRDS(system.file("extdata", "cX-generic-var.RData", package = "canvasXpress"))
