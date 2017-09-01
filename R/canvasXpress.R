@@ -23,6 +23,19 @@
 #' use in any html-compatible context
 #'  
 #' 
+#' @param data data.frame or matrix classed object
+#' \emph{(rows are referred to as variables; columns are referred to as samples)}
+#' @param smpAnnot additional data that applies to samples (columns)
+#' @param varAnnot additional data that applies to variables (rows)
+#' @param graphType type of graph to be plotted - default = 'Scatter2D'
+#' @param events user-defined events (e.g. mousemove, mouseout, click and dblclick)
+#' @param afterRender event triggered after rendering
+#' @param pretty print tagged code (json/html) nicely - default = FALSE
+#' @param digits display digits - default = 4
+#' @param width plot width (valid CSS units) - default = 600px
+#' @param height plot height (valid CSS units) - default = 400px
+#' @param ... additional parameters passed to canvasXpress
+#'
 #' @return htmlwidgets object
 #'
 #' @export
@@ -49,7 +62,6 @@ canvasXpress <- function(data = NULL,     # y
         smps = as.list(assignCanvasXpressColnames(data))
       
         data.y <- as.matrix(data, dimnames = list())
-        # dimnames(dy) <- NULL
         y <- list(vars = vars, 
                   smps = smps, 
                   data = data.y)

@@ -8,6 +8,30 @@ canvasXpress(data = NULL, smpAnnot = NULL, varAnnot = NULL,
   graphType = "Scatter2D", events = NULL, afterRender = NULL,
   pretty = FALSE, digits = 4, width = 600, height = 400, ...)
 }
+\arguments{
+\item{data}{data.frame or matrix classed object
+\emph{(rows are referred to as variables; columns are referred to as samples)}}
+
+\item{smpAnnot}{additional data that applies to samples (columns)}
+
+\item{varAnnot}{additional data that applies to variables (rows)}
+
+\item{graphType}{type of graph to be plotted - default = 'Scatter2D'}
+
+\item{events}{user-defined events (e.g. mousemove, mouseout, click and dblclick)}
+
+\item{afterRender}{event triggered after rendering}
+
+\item{pretty}{print tagged code (json/html) nicely - default = FALSE}
+
+\item{digits}{display digits - default = 4}
+
+\item{width}{plot width (valid CSS units) - default = 600px}
+
+\item{height}{plot height (valid CSS units) - default = 400px}
+
+\item{...}{additional parameters passed to canvasXpress}
+}
 \value{
 htmlwidgets object
 }
