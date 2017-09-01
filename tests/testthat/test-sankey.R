@@ -4,7 +4,7 @@ context("canvasXpress Charts - Sankey")
 sankey.y <- readRDS(system.file("extdata", "cX-sankey-dat.RData", package = "canvasXpress"))
 sankey.x <- readRDS(system.file("extdata", "cX-sankey-smp.RData", package = "canvasXpress"))
 
-test_that("cX-sankey-1 ", {
+test_that("cX-sankey-1", {
     result <- canvasXpress(
         data = sankey.y,
         smpAnnot = sankey.x,
@@ -21,7 +21,7 @@ test_that("cX-sankey-1 ", {
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-sankey-2 ", {
+test_that("cX-sankey-2", {
     result <- canvasXpress(
         data = sankey.y,
         smpAnnot = sankey.x,
