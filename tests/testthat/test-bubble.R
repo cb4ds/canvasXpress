@@ -1,7 +1,6 @@
 context("canvasXpress Charts - Bubble")
 
 
-# -- From Isaac, web examples --
 tree.y <- readRDS(system.file("extdata", "cX-tree-dat.RData", package = "canvasXpress"))
 tree.x <- readRDS(system.file("extdata", "cX-tree-dat.RData", package = "canvasXpress"))
 

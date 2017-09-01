@@ -1,7 +1,6 @@
 context("canvasXpress Charts - Chord")
 
 
-# -- From Isaac, web examples --
 chord.y <- readRDS(system.file("extdata", "cX-chord-dat.RData", package = "canvasXpress"))
 
 test_that("cX-chord-1", {

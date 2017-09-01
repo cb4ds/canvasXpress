@@ -1,7 +1,6 @@
 context("canvasXpress Charts - Map")
 
 
-# -- From Isaac, web examples --
 map.y <- readRDS(system.file("extdata", "cX-map-dat.RData", package = "canvasXpress"))
 map.z <- readRDS(system.file("extdata", "cX-map-var.RData", package = "canvasXpress"))
 
