@@ -1,13 +1,14 @@
 context("canvasXpress Charts - Heatmap")
 
 
-heatmapR.y <- readRDS(system.file("extdata", "cX-heatmapR-dat.RData", package = "canvasXpress"))
-heatmapR.x <- readRDS(system.file("extdata", "cX-heatmapR-smp.RData", package = "canvasXpress"))
-heatmapR.z <- readRDS(system.file("extdata", "cX-heatmapR-var.RData", package = "canvasXpress"))
+heatmapR.y   <- readRDS(system.file("extdata", "cX-heatmapR-dat.RData", package = "canvasXpress"))
+heatmapR.x   <- readRDS(system.file("extdata", "cX-heatmapR-smp.RData", package = "canvasXpress"))
+heatmapR.z   <- readRDS(system.file("extdata", "cX-heatmapR-var.RData", package = "canvasXpress"))
 oncoprint.y  <- readRDS(system.file("extdata", "cX-oncoprint-dat.RData", package = "canvasXpress"))
 oncoprint.y4 <- readRDS(system.file("extdata", "cX-oncoprint-dat4.RData", package = "canvasXpress"))
 oncoprint.x  <- readRDS(system.file("extdata", "cX-oncoprint-smp.RData", package = "canvasXpress"))
 oncoprint.z  <- readRDS(system.file("extdata", "cX-oncoprint-var.RData", package = "canvasXpress"))
+volcano.y    <- readRDS(system.file("extdata", "cX-volcano-dat.RData", package = "canvasXpress"))
 multidimensionalheatmap.y  <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-dat.RData", package = "canvasXpress"))
 multidimensionalheatmap.y2 <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-dat2.RData", package = "canvasXpress"))
 multidimensionalheatmap.y3 <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-dat3.RData", package = "canvasXpress"))
@@ -324,6 +325,22 @@ test_that("cX-oncoprint-3", {
         smpOverlays = c("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
     )
     warning('heatmap - not appearing correctly - multidimensionality missing')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-contour-1", {
+    result <- canvasXpress(
+        data = volcano.y,
+        graphType = "Heatmap",
+        heatmapCellBox = FALSE,
+        showSampleNames = FALSE,
+        showVariableNames = FALSE,
+        subtitle = "datasets - volcano",
+        title = "Topographic Information on Auckland's Maunga Whau Volcano"
+    )
+    warning('heatmap - graph incorrect - lines missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
