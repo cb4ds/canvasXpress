@@ -43,7 +43,7 @@ for (file in exdata) {
 }
    
 # files without rownames
-exdata2 <- c("cX-map-dat", "cX-map-var", "cX-oncoprint-dat")
+exdata2 <- c("cX-map-dat", "cX-map-var")
 for (file in exdata2) {
     message(file)
     data <- read.delim(paste0("https://canvasxpress.org/data/", file, ".txt"))
@@ -52,3 +52,16 @@ for (file in exdata2) {
             ascii = TRUE)
 }
 
+# files without individual issues
+exdata3 <- c("cX-oncoprint-dat")
+for (file in exdata3) {
+    message(file)
+    data <- data.frame("Variable1" = c(3.1, 3,   2.8, 2.3, 1.9, 1.9, 2.2, 1.7, 2.2, 2.1, 2.2, 1.9, 2.2, 1.7,  2.1, 2.1, 2.2, 1.1, 1.3, 0.9),
+                       "Variable2" = c(3.5, 3.4, 3.1, 2.4, 2.1, 2.1, 1.9, 2.1, 1.9, 2,   1.9, 2.1, 1.9, 2,    2,   1.8, 2.1, 1.1, 1.4, 1.1),
+                       "Variable3" = c(4,   4.1, 3.3, 2.1, 2.1, 2.1, 2.1, 1.8, 1.9, 2.1, 2.1, 2.1, 1.9, 11.8, 2.1, 2,   2.1, 1.8, 1.1, 1.1))
+    rownames(data) <- c(paste0("Sample", 1:20))
+    
+    saveRDS(data, 
+            file = paste0("inst/extdata/", file, ".RData"),
+            ascii = TRUE)
+}

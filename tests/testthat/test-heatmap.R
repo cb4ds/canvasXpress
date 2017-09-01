@@ -4,6 +4,10 @@ context("canvasXpress Charts - Heatmap")
 heatmapR.y <- readRDS(system.file("extdata", "cX-heatmapR-dat.RData", package = "canvasXpress"))
 heatmapR.x <- readRDS(system.file("extdata", "cX-heatmapR-smp.RData", package = "canvasXpress"))
 heatmapR.z <- readRDS(system.file("extdata", "cX-heatmapR-var.RData", package = "canvasXpress"))
+oncoprint.y  <- readRDS(system.file("extdata", "cX-oncoprint-dat.RData", package = "canvasXpress"))
+oncoprint.y4 <- readRDS(system.file("extdata", "cX-oncoprint-dat4.RData", package = "canvasXpress"))
+oncoprint.x  <- readRDS(system.file("extdata", "cX-oncoprint-smp.RData", package = "canvasXpress"))
+oncoprint.z  <- readRDS(system.file("extdata", "cX-oncoprint-var.RData", package = "canvasXpress"))
 multidimensionalheatmap.y  <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-dat.RData", package = "canvasXpress"))
 multidimensionalheatmap.y2 <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-dat2.RData", package = "canvasXpress"))
 multidimensionalheatmap.y3 <- readRDS(system.file("extdata", "cX-multidimensionalheatmap-dat3.RData", package = "canvasXpress"))
@@ -256,6 +260,70 @@ test_that("cX-heatmap-11", {
         sizeByData = "data",
         title = "A good old Northern Blot"
     )
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+
+test_that("cX-oncoprint-1", {
+    result <- canvasXpress(
+        data = oncoprint.y,
+        smpAnnot = oncoprint.x,
+        varAnnot = oncoprint.z,
+        graphType = "Heatmap",
+        isOncoprint = "mutation",
+        showTransition = TRUE
+    )
+    warning('heatmap - not appearing correctly - multidimensionality missing')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-oncoprint-2", {
+    result <- canvasXpress(
+        data = oncoprint.y,
+        smpAnnot = oncoprint.x,
+        varAnnot = oncoprint.z,
+        graphType = "Heatmap",
+        isOncoprint = "mutation",
+        smpOverlayProperties = list(
+            Annt2 = list(position = "right", type = "Bar"),
+            Annt3 = list(type = "Stacked"),
+            Annt4 = list(type = "Stacked"),
+            Annt5 = list(type = "Stacked")
+        ),
+        smpOverlays = c("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
+    )
+    warning('heatmap - not appearing correctly - multidimensionality missing')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
+})
+
+test_that("cX-oncoprint-3", {
+    result <- canvasXpress(
+        data = oncoprint.y,
+        smpAnnot = oncoprint.x,
+        varAnnot = oncoprint.z,
+        graphType = "Heatmap",
+        isOncoprint = "mutation",
+        outlineBy = "Color",
+        outlineByData = "expression",
+        patternBy = "Pattern",
+        patternByData = "data4",
+        shapeBy = "Shape",
+        shapeByData = "data5",
+        smpOverlayProperties = list(
+            Annt2 = list(position = "right", type = "Bar"),
+            Annt3 = list(type = "Stacked"),
+            Annt4 = list(type = "Stacked"),
+            Annt5 = list(type = "Stacked")
+        ),
+        smpOverlays = c("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
+    )
+    warning('heatmap - not appearing correctly - multidimensionality missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
