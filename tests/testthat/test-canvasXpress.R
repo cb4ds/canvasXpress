@@ -1,75 +1,53 @@
 context("canvasXpress BASE")
 
+data1     <- data.frame(a = c(1:3), b = c("A", "B", "C"),
+                        row.names = c("row1", "row2", "row3"))
+data1.var <- data.frame(row1 = c(10:12), row2 = c(20:22), row3 = c(30:32))
+data1.smp <- data.frame(a = c(30:32), b = c(40:42))
 
 
-# Temporarily Removing Tests during Rewrite
-# ------------------------------
-# test_that("Missing Data", {
-#     expect_error(canvasXpress(NULL), 
-#                  regexpr =  "Missing canvasXpress data!")
-# 
-#     expect_error(canvasXpress(graphType = "Network", 
-#                               nodeData = NULL, edgeData = NULL), 
-#                  regexpr =  "Missing nodeData for Network visualization")
-#     expect_error(canvasXpress(graphType = "Network", 
-#                               nodeData = c(1:10), edgeData = NULL), 
-#                  regexpr =  "Missing edgeData for Network visualization")
-#     expect_error(canvasXpress(graphType = "Venn",
-#                               vennData = NULL, vennLegend = NULL),
-#                  regexpr =  "Missing data for Venn visualization")
-#     expect_error(canvasXpress(graphType = "Venn",
-#                               vennData = NA, vennLegend = NULL),
-#                  regexpr =  "Missing legend for Venn visualization")
-#     expect_error(canvasXpress(graphType = "Genome",
-#                               genomeData = NULL), 
-#                  regexpr =  "Missing data for Genome visualization")
-#     expect_error(canvasXpress(graphType = "Boxplot",
-#                               data = data.frame(bad = c(1, 2)),
-#                               boxplotGroupData = "TESTING"),
-#                  regexpr =  "Incorrect Vars for Boxplot Group Data!*")
-# })
-# 
-# test_that("General Graph Input", {
-#     data.df <- data.frame(col1 = c(1:20))
-#     data.m  <- matrix(1:20, ncol = 1)
-#     data.l  <- list(col1 = c(1:20), col2 = c("fred", "barney", "wilma"))
-#     
-#     expect_error(canvasXpress(data = NA),
-#                  regexpr =  "data must be a data frame or a matrix class object")
-#     expect_error(canvasXpress(data = data.l),
-#                  regexpr =  "data must be a data frame or a matrix class object")
-#     expect_silent(canvasXpress(data = data.df))
-#     expect_silent(canvasXpress(data = data.m))
-#     
-#     A.df <- data.df
-#     A.m  <- data.m
-#     A.l  <- data.l
-#     
-#     expect_error(canvasXpress(data = data.df, smpAnnot = NA),
-#                  regexpr =  "smpAnnot must be a data frame or a matrix class object")
-#     expect_error(canvasXpress(data = data.m, smpAnnot = A.l),
-#                  regexpr =  "smpAnnot must be a data frame or a matrix class object")
-#     
-#     expect_silent(canvasXpress(data = data.df, smpAnnot = A.df))
-#     expect_silent(canvasXpress(data = data.m,  smpAnnot = A.m))
-# 
-#     
-#     expect_error(canvasXpress(data = data.df, varAnnot = NA),
-#                  regexpr =  "varAnnot must be a data frame or a matrix class object")
-#     expect_error(canvasXpress(data = data.m, varAnnot = A.l),
-#                  regexpr =  "varAnnot must be a data frame or a matrix class object")
-#     expect_silent(canvasXpress(data = data.df, varAnnot = A.df))
-#     expect_silent(canvasXpress(data = data.m, varAnnot = A.m))
-#     
-#     expect_error(canvasXpress(data = data.df, smpAnnot = A.m),
-#                  regexpr =  "Column names in smpAnnot are different from column names in data")
-#     expect_silent(canvasXpress(data = data.df, smpAnnot = A.df))
-#  
-#     expect_error(canvasXpress(data = data.df, varAnnot = A.m),
-#                  regexpr =  "Row names in varAnnot are different from row names in data")
-#     expect_silent(canvasXpress(data = data.df, varAnnot = A.df))   
-# })
-# 
+test_that("Missing Data", {
+    expect_error(canvasXpress(data = NULL),  
+                 regexpr =  "data cannot be NULL!")
+})
+
+test_that("Incorrect Data Type", {
+    expect_error(canvasXpress(data = list(data1, data1.smp, data1.var)),  
+                 regexpr =  "data must be a data.frame or matrix classed object")
+    expect_error(canvasXpress(data = "Test"),  
+                 regexpr =  "data must be a data.frame or matrix classed object")
+})
+
+test_that("Missing GraphType", {
+    expect_error(canvasXpress(data = data1,
+                              graphType = NULL),
+                 regexpr = "graphType cannot be NULL!")
+})
+
+test_that("Incorrect GraphType", {
+    expect_error(canvasXpress(data = data1,
+                              graphType = ""),
+                 regexpr = "graphType is invalid, must be one of <.*")
+    expect_error(canvasXpress(data = data1,
+                              graphType = "Scatter4d"),
+                 regexpr = "graphType is invalid, must be one of <.*")
+})
+
+test_that("Name mismatches", {
+    expect_error(canvasXpress(data = data1,
+                              smpAnnot = data1.var),
+                 regexpr = "Rownames in smpAnnot are different from column names in data")
+    expect_silent(canvasXpress(data = data1,
+                               smpAnnot = data1.smp))
+    
+    expect_error(canvasXpress(data = data1,
+                              varAnnot = data1.smp),
+                 regexpr = "Column names in varAnnot are different from row names in data")
+    expect_silent(canvasXpress(data = data1,
+                               varAnnot = data1.var))
+})
+
+
 # test_that("Network Graph Input", {
 #     ndata <- matrix(1:10, nrow = 2, dimnames = list(c("row1", "row2"), c("id", "C2", "C3", "C4", "C5")))
 #     edata <- matrix(1:10, nrow = 2, dimnames = list(c("row1", "row2"), c("id1", "id2", "C3", "C4", "C5")))
