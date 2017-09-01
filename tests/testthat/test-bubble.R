@@ -2,7 +2,7 @@ context("canvasXpress Charts - Bubble")
 
 
 tree.y <- readRDS(system.file("extdata", "cX-tree-dat.RData", package = "canvasXpress"))
-tree.x <- readRDS(system.file("extdata", "cX-tree-dat.RData", package = "canvasXpress"))
+tree.x <- readRDS(system.file("extdata", "cX-tree-smp.RData", package = "canvasXpress"))
 
 test_that("cX-bubble-1", {
     result <- canvasXpress(

@@ -24,7 +24,8 @@ assertDataCorrectness <- function(data, graphType) {
                     "Correlation",
                     "Circular",
                     "TagCloud",
-                    "Map")
+                    "Map",
+                    "Sankey")
 
       
     # To Be Programmed
@@ -32,7 +33,6 @@ assertDataCorrectness <- function(data, graphType) {
     # Candlestick
     # Venn
     # Tree
-    # Sankey
     # Network
     # Genome
     # Precalculated Boxplot
