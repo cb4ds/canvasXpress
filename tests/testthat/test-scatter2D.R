@@ -128,7 +128,29 @@ test_that("cX-nonlinear-fit-2", {
 })
 
 test_that("cX-scatter2d-1", {
-    warning('scatter2d - missing test - 1st chart on web for Scatter2D')
+    result <- canvasXpress(
+        data = alcoholtobaccot.y,
+        smpAnnot = alcoholtobaccot.x,
+        citation = "Moore, David S., and George P. McCabe (1989). Introduction to the Practice of Statistics, p. 179.",
+        decorations = list(marker = c(
+            list(
+                sample = c("Alcohol", "Tobacco"),
+                text = "Maybe an Outlier?",
+                variable = "Northern Ireland",
+                x = 0.45,
+                y = 0.18
+            )
+        )),
+        graphType = "Scatter2D",
+        showTransition = TRUE,
+        title = "Average weekly household spending, in British pounds, on tobacco products\nand alcoholic beverages for each of the 11 regions of Great Britain.",
+        xAxis = c("Alcohol"),
+        yAxis = c("Tobacco")
+    )
+   warning('scatter2d - not appearing correctly - blank')
+   if (interactive()) { print(result) }
+   expect_s3_class(result, "canvasXpress")
+   expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-scatter2d-2", {
