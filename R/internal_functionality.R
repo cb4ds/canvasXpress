@@ -40,6 +40,11 @@ assertDataCorrectness <- function(data, graphType) {
 
     if (!(graphType %in% validTypes)) stop("graphType is invalid, must be one of <",
                                            paste(validTypes, collapse = ", "), ">")
+    
+    # check that data is of the correct type
+    if (!class(data) %in% c('data.frame', 'matrix')) {
+        stop('data must be a data.frame or matrix classed object')
+    }
 }
 
 
