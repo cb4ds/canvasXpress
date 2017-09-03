@@ -75,20 +75,36 @@ test_that("cX-bar-2", {
 test_that("cX-bar-3", {
     result <- canvasXpress(
         data = basic2.y,
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
-                fontSize = 12,
-                sample = "Sample1",
+                variable = list("Variable1"),
                 text = "p < 0.01 ***",
+                fontSize = 12,
                 type = "annotation",
-                variable = "Variable1"
+                sample = list("Sample1"),
+                id = "bar3bar3-marker-0",
+                vi = list(0),
+                si = list(0),
+                b = list(38.5, 44.8, 529.3, 588.0),
+                len = 61.0,
+                width = 12,
+                tx = 126.8,
+                ty = 550.3
             ),
             list(
-                fontSize = 12,
-                sample = "Sample2",
+                variable = list("Variable1"),
                 text = "p < 0.05 **",
+                fontSize = 12,
                 type = "annotation",
-                variable = "Variable1"
+                sample = list("Sample2"),
+                id = "bar3bar3-marker-1",
+                vi = list(0),
+                si = list(1),
+                b = list(38.5, 44.8, 529.3, 588.0),
+                len = 56.4,
+                width = 12,
+                tx = 303.2,
+                ty = 291.5
             )
         )),
         graphOrientation = "vertical",
