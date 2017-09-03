@@ -21,7 +21,7 @@ test_that("cX-boxplot-1", {
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
         citationFontStyle = "italic",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = "setosa",
                 text = "Species with\nlowest petal\nwidth",
@@ -57,7 +57,7 @@ test_that("cX-boxplot-2", {
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
         citationFontStyle = "italic",
         colorScheme = "White",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = "setosa",
                 text = "Species with\nlowest petal\nwidth",
@@ -91,7 +91,7 @@ test_that("cX-boxplot-3", {
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
         citationFontStyle = "italic",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = "setosa",
                 text = "Species with\nlowest petal\nwidth",
@@ -127,7 +127,7 @@ test_that("cX-boxplot-4", {
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
         citationFontStyle = "italic",
         colorScheme = "White",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = "setosa",
                 text = "Species with\nlowest petal\nwidth",

@@ -47,7 +47,7 @@ test_that("cX-dotplot-2", {
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
         citationFontStyle = "italic",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = "setosa",
                 text = "Species with\nlowest petal\nwidth",

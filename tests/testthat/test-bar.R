@@ -20,7 +20,7 @@ test_that("cX-bar-1", {
         smpAnnot = stacked1.x,
         axisAlgorithm = "rPretty",
         colorBy = "GNI",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 align = "center",
                 baseline = "middle",
@@ -74,44 +74,27 @@ test_that("cX-bar-2", {
 
 test_that("cX-bar-3", {
     result <- canvasXpress(
-        data = basic2.y,
-        decorations = list(marker = list(
-            list(
-                variable = list("Variable1"),
-                text = "p < 0.01 ***",
-                fontSize = 12,
-                type = "annotation",
-                sample = list("Sample1"),
-                id = "bar3bar3-marker-0",
-                vi = list(0),
-                si = list(0),
-                b = list(38.5, 44.8, 529.3, 588.0),
-                len = 61.0,
-                width = 12,
-                tx = 126.8,
-                ty = 550.3
-            ),
-            list(
-                variable = list("Variable1"),
-                text = "p < 0.05 **",
-                fontSize = 12,
-                type = "annotation",
-                sample = list("Sample2"),
-                id = "bar3bar3-marker-1",
-                vi = list(0),
-                si = list(1),
-                b = list(38.5, 44.8, 529.3, 588.0),
-                len = 56.4,
-                width = 12,
-                tx = 303.2,
-                ty = 291.5
-            )
-        )),
-        graphOrientation = "vertical",
-        graphType = "Bar",
-        title = "Simple Bar graph with annotations"
+            data = basic2.y,
+            decorations = list(marker = list(
+                list(
+                    fontSize = 12,
+                    sample = "Sample1",
+                    text = "p < 0.01 ***",
+                    type = "annotation",
+                    variable = "Variable1"
+                ),
+                list(
+                    fontSize = 12,
+                    sample = "Sample2",
+                    text = "p < 0.05 **",
+                    type = "annotation",
+                    variable = "Variable1"
+                )
+            )),
+            graphOrientation = "vertical",
+            graphType = "Bar",
+            title = "Simple Bar graph with annotations"
     )
-    warning('bar - not appearing correctly - missing decoration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -122,7 +105,7 @@ test_that("cX-bar-4", {
         data = iris.y,
         smpAnnot = iris.x,
         axisTitleFontStyle = "italic",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = "setosa",
                 text = "Species with\nlowest petal\nwidth",
@@ -167,7 +150,6 @@ test_that("cX-bar-5", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
-    warning('bar - not appearing correctly - missing decoration, colors')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -181,7 +163,7 @@ test_that("cX-bar-6", {
         colorBy = "Drug Sensitivity",
         colorScheme = "basic",
         decorationScaleFontFactor = 1.3,
-        decorations = list(line = c(
+        decorations = list(line = list(
             list(
                 align = "left",
                 color = "rgb(255,0,0)",
@@ -198,7 +180,7 @@ test_that("cX-bar-6", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
-    warning('bar - not appearing correctly - missing decoration')
+    warning('bar - not appearing correctly - missing coloration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -212,7 +194,7 @@ test_that("cX-bar-7", {
         colorBy = "IC50",
         colorScheme = "basic",
         decorationScaleFontFactor = 1.3,
-        decorations = list(line = c(
+        decorations = list(line = list(
             list(
                 align = "left",
                 color = "rgb(255,0,0)",
@@ -230,7 +212,7 @@ test_that("cX-bar-7", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
-    warning('bar - not appearing correctly - missing decoration, overlays, colors')
+    warning('bar - not appearing correctly - missing overlays, colors')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

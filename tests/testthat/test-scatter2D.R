@@ -72,7 +72,7 @@ test_that("cX-histogram-3", {
         data = alcoholtobaccot.y,
         smpAnnot = alcoholtobaccot.x,
         citation = "Moore, David S., and George P. McCabe (1989). Introduction to the Practice of Statistics, p. 179.",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = c("Alcohol", "Tobacco"),
                 text = "Maybe an Outlier?",
@@ -132,7 +132,7 @@ test_that("cX-scatter2d-1", {
         data = alcoholtobaccot.y,
         smpAnnot = alcoholtobaccot.x,
         citation = "Moore, David S., and George P. McCabe (1989). Introduction to the Practice of Statistics, p. 179.",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 sample = c("Alcohol", "Tobacco"),
                 text = "Maybe an Outlier?",
@@ -254,7 +254,7 @@ test_that("cX-scatter2d-5", {
 test_that("cX-scatter2d-6", {
     result <- canvasXpress(
         data = nonlinearfit.y,
-        decorations = list(nlfit = c(
+        decorations = list(nlfit = list(
             list(
                 label = "Custom Fit",
                 param = c(164, 313, 0.031, -1.5, 1.2e-06, 1.9),
@@ -295,7 +295,7 @@ test_that("cX-scatter2d-7", {
             "rgba(205,0,0,0.5)",
             "rgba(64,64,64,0.5)"
         ),
-        decorations = list(line = c(
+        decorations = list(line = list(
             list(
                 color = "rgba(205,0,0,0.5)",
                 width = 2,
@@ -324,7 +324,7 @@ test_that("cX-scatter2d-7", {
         yAxis = c("logFC"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - missing points, lines, decorations')
+    warning('scatter2d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -343,7 +343,7 @@ test_that("cX-scatter2d-8", {
             "rgba(205,0,0,0.5)",
             "rgba(64,64,64,0.5)"
         ),
-        decorations = list(line = c(
+        decorations = list(line = list(
             list(
                 color = "rgba(205,0,0,0.5)",
                 width = 2,
@@ -369,7 +369,7 @@ test_that("cX-scatter2d-8", {
         yAxis = c("-log-pVal"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - missing points, lines, decorations')
+    warning('scatter2d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -389,7 +389,7 @@ test_that("cX-scatter2d-9", {
             "rgba(0,104,139,0.5)",
             "rgba(205,0,0,0.5)"
         ),
-        decorations = list(line = c(
+        decorations = list(line = list(
             list(
                 color = "rgba(64,64,64,0.5)",
                 width = 2,
@@ -426,7 +426,7 @@ test_that("cX-scatter2d-9", {
         yAxis = c("logFC-Y"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - missing lines, decorations')
+    warning('scatter2d - not appearing correctly - sizes of bubbles seem to be off')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -506,6 +506,7 @@ test_that("cX-layout-2", {
         scatterPlotMatrix = TRUE,
         showTransition = TRUE
     )
+    warning('scatter2d - graph incorrect - layout colors')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

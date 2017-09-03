@@ -12,7 +12,7 @@ test_that("cX-treemap-1", {
         data = stacked1.y,
         smpAnnot = stacked1.x,
         colorBy = "GNI",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 align = "center",
                 baseline = "middle",
@@ -63,7 +63,7 @@ test_that("cX-treemap-3", {
         smpAnnot = stacked1.x,
         axisAlgorithm = "rPretty",
         colorBy = "GNI",
-        decorations = list(marker = c(
+        decorations = list(marker = list(
             list(
                 align = "center",
                 baseline = "middle",
