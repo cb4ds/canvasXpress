@@ -104,6 +104,7 @@ test_that("cX-bar-4", {
     result <- canvasXpress(
         data = iris.y,
         smpAnnot = iris.x,
+        groupingFactors = list("Species"),
         axisTitleFontStyle = "italic",
         decorations = list(marker = list(
             list(
@@ -125,7 +126,6 @@ test_that("cX-bar-4", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
-    warning('bar - not appearing correctly - not grouped, etc')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -180,7 +180,6 @@ test_that("cX-bar-6", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
-    warning('bar - not appearing correctly - missing coloration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -212,7 +211,7 @@ test_that("cX-bar-7", {
         title = "Random data set",
         xAxis2Show = FALSE
     )
-    warning('bar - not appearing correctly - missing overlays, colors')
+    warning('bar - not appearing correctly - missing overlays')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

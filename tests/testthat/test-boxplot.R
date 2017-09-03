@@ -17,6 +17,7 @@ test_that("cX-boxplot-1", {
     result <- canvasXpress(
         data = iris.y,
         smpAnnot = iris.x,
+        groupingFactors = list("Species"),
         axisTickFontStyle = "bold",
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
@@ -42,7 +43,6 @@ test_that("cX-boxplot-1", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -52,6 +52,7 @@ test_that("cX-boxplot-2", {
     result <- canvasXpress(
         data = iris.y,
         smpAnnot = iris.x,
+        groupingFactors = list("Species"),
         axisTickFontStyle = "bold",
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
@@ -77,7 +78,6 @@ test_that("cX-boxplot-2", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -87,6 +87,7 @@ test_that("cX-boxplot-3", {
     result <- canvasXpress(
         data = iris.y,
         smpAnnot = iris.x,
+        groupingFactors = list("Species"),
         axisTickFontStyle = "bold",
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
@@ -112,7 +113,6 @@ test_that("cX-boxplot-3", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -122,6 +122,7 @@ test_that("cX-boxplot-4", {
     result <- canvasXpress(
         data = iris.y,
         smpAnnot = iris.x,
+        groupingFactors = list("Species"),
         axisTickFontStyle = "bold",
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
@@ -146,9 +147,9 @@ test_that("cX-boxplot-4", {
         smpLabelRotate = 90,
         smpTitle = "Species",
         title = "Iris flower data set",
+        xAxis = list("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"),
         xAxis2Show = FALSE
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -158,6 +159,7 @@ test_that("cX-boxplot-5", {
     result <- canvasXpress(
         data = boxplot.y,
         smpAnnot = boxplot.x,
+        groupingFactors = list("Factor1"),
         axisTitleFontStyle = "italic",
         graphType = "Boxplot",
         jitter = TRUE,
@@ -169,7 +171,6 @@ test_that("cX-boxplot-5", {
         title = "Random Data",
         xAxisTickFormat = "%.0f M"
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -179,6 +180,7 @@ test_that("cX-boxplot-6", {
     result <- canvasXpress(
         data = boxplot1.y,
         smpAnnot = boxplot1.x,
+        groupingFactors = list("Factor1"),
         axisTitleFontStyle = "italic",
         colorBy = "Factor1",
         connectBy = "Subject",
@@ -190,7 +192,6 @@ test_that("cX-boxplot-6", {
         subtitle = "Boxplot Graph",
         title = "Random Data"
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -200,6 +201,7 @@ test_that("cX-boxplot-7", {
     result <- canvasXpress(
         data = scents.y,
         smpAnnot = scents.x,
+        groupingFactors = list("Smoker"),
         axisTitleFontStyle = "italic",
         citation = "Hirsch, A. R., and Johnston, L. H. Odors and Learning, Smell & Taste Treatment and Research Foundation, Chicago.",
         graphOrientation = "vertical",
@@ -211,9 +213,11 @@ test_that("cX-boxplot-7", {
         smpLabelRotate = 90,
         smpTitle = "Smoking Status",
         smpTitleFontStyle = "italic",
+        xAxis = list("U-Trial 1", "U-Trial 2", "U-Trial 3", 
+                     "S-Trial 1", "S-Trial 2", "S-Trial 3"),
+        xAxisTitle = "",
         title = "Data on the time subjects required to complete a pencil and paper maze\nwhen they were smelling a floral scent and when they were not."
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -224,6 +228,7 @@ test_that("cX-boxplot-8", {
         data = cancersurvival.y,
         smpAnnot = cancersurvival.x,
         varAnnot = cancersurvival.z,
+        groupingFactors = list("Organ"),
         axisTitleFontStyle = "italic",
         citation = "Cameron, E. and Pauling, L. (1978). Proceedings of the National Academy of Science USA, 75.",
         graphType = "Boxplot",
@@ -233,7 +238,6 @@ test_that("cX-boxplot-8", {
         title = "Patients with advanced cancers of the stomach,\nbronchus, colon, ovary or breast treated with ascorbate.",
         xAxisTitle = "Survival time (days)"
     )
-    warning('boxplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
