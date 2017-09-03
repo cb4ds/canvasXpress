@@ -205,13 +205,14 @@ test_that("cX-bar-7", {
         graphOrientation = "vertical",
         graphType = "Bar",
         showShadow = TRUE,
-        smpOverlays = c("Drug Sensitivity"),
+        smpOverlays = list("Drug Sensitivity"),
         smpTitle = "Cell Lines",
         smpTitleFontStyle = "bold",
         title = "Random data set",
-        xAxis2Show = FALSE
+        xAxis2Show = FALSE,
+        xAxis = list("Variable1"),
+        xAxisTitle = ""
     )
-    warning('bar - not appearing correctly - missing overlays')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

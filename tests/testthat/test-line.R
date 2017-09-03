@@ -20,7 +20,7 @@ test_that("cX-line-1", {
         showShadow = TRUE,
         showTransition = TRUE,
         smpLabelRotate = 45,
-        smpOverlays = c("Factor1", "Factor2", "Factor3"),
+        smpOverlays = list("Factor1", "Factor2", "Factor3"),
         smpTitle = "Collection of Samples",
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
@@ -48,7 +48,7 @@ test_that("cX-line-2", {
         legendPosition = "right",
         showAnimation = TRUE,
         showShadow = TRUE,
-        smpOverlays = c("Factor1", "Factor2", "Factor3"),
+        smpOverlays = list("Factor1", "Factor2", "Factor3"),
         smpTitle = "Collection of Samples",
         smpTitleFontStyle = "italic",
         title = "Random Data"

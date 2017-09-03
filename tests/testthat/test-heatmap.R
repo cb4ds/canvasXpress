@@ -144,7 +144,7 @@ test_that("cX-heatmap-7", {
         heatmapIndicatorWidth = 60,
         heatmapSmpSeparateBy = "Treatment",
         samplesClustered = TRUE,
-        smpOverlays = c("Treatment", "Site"),
+        smpOverlays = list("Treatment", "Site"),
         title = "Overlays in Heatmap",
         variablesClustered = TRUE
     )
@@ -171,7 +171,7 @@ test_that("cX-heatmap-8", {
         highlightVar = c("Probe18", "Probe19", "Probe20"),
         samplesClustered = TRUE,
         showTransition = TRUE,
-        smpOverlays = c("Treatment", "Site"),
+        smpOverlays = list("Treatment", "Site"),
         title = "Highlight cells in Heatmap",
         variablesClustered = TRUE
     )
@@ -209,7 +209,7 @@ test_that("cX-heatmap-9", {
             Site = list(position = "left"),
             Treatment = list(position = "right")
         ),
-        smpOverlays = c("Treatment", "Site", "Dose"),
+        smpOverlays = list("Treatment", "Site", "Dose"),
         title = "Advanced Overlays in Heatmaps",
         varOverlayProperties = list(
             Sens = list(
@@ -295,7 +295,7 @@ test_that("cX-oncoprint-2", {
             Annt4 = list(type = "Stacked"),
             Annt5 = list(type = "Stacked")
         ),
-        smpOverlays = c("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
+        smpOverlays = list("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
     )
     warning('heatmap - not appearing correctly - multidimensionality missing')
     if (interactive()) { print(result) }
@@ -322,7 +322,7 @@ test_that("cX-oncoprint-3", {
             Annt4 = list(type = "Stacked"),
             Annt5 = list(type = "Stacked")
         ),
-        smpOverlays = c("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
+        smpOverlays = list("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
     )
     warning('heatmap - not appearing correctly - multidimensionality missing')
     if (interactive()) { print(result) }

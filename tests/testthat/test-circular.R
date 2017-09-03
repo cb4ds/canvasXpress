@@ -46,7 +46,7 @@ test_that("cX-circular-1", {
         segregateSamplesBy = c("Species"),
         segregateVariablesBy = c("Ring"),
         showTransition = TRUE,
-        smpOverlays = c("Species"),
+        smpOverlays = list("Species"),
         title = "Iris flower data set (1D Circular Plot)"
     )
     warning('circular - not appearing correctly - loading')
@@ -280,7 +280,7 @@ test_that("cX-radar-8", {
         graphType = "Circular",
         ringsType = c("line"),
         showTransition = TRUE,
-        smpOverlays = c("Factor3", "-", "Factor1", "Factor2"),
+        smpOverlays = list("Factor3", "-", "Factor1", "Factor2"),
         title = "Radar with Overlays"
     )
     warning('circular - not appearing correctly - loading')

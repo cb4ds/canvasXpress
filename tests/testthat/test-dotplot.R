@@ -26,14 +26,15 @@ test_that("cX-dotplot-1", {
         showShadow = TRUE,
         showTransition = TRUE,
         smpLabelRotate = 45,
-        smpOverlays = c("Factor1", "Factor2", "Factor3"),
+        smpOverlays = list("Factor1", "Factor2", "Factor3"),
         smpTitle = "Collection of Samples",
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
         title = "Dotplot Graph",
-        xAxisTickFormat = "%.0f Mil."
+        xAxisTickFormat = "%.0f Mil.",
+        xAxis = list("Variable1", "Variable2", "Variable3", "Variable4"),
+        xAxisTitle = ""
     )
-    warning('dotplot - not appearing correctly - no overlays')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -43,6 +44,7 @@ test_that("cX-dotplot-2", {
     result <- canvasXpress(
         data = iris.y,
         smpAnnot = iris.x,
+        groupingFactors = list("Species"),
         axisTickFontStyle = "bold",
         axisTitleFontStyle = "italic",
         citation = "R. A. Fisher (1936). The use of multiple measurements in taxonomic problems. Annals of Eugenics 7 (2) => 179-188.",
@@ -69,7 +71,6 @@ test_that("cX-dotplot-2", {
         title = "Iris flower data set",
         xAxis2Show = FALSE
     )
-    warning('dotplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -80,6 +81,7 @@ test_that("cX-dotplot-3", {
         data = cars.y,
         smpAnnot = cars.x,
         varAnnot = cars.z,
+        groupingFactors = "Country",
         citation = "Henderson, H. V. and Velleman, P. F. (1981), Building Regression Models Interactively. Biometrics, 37, 391-411.",
         citationFontStyle = "italic",
         graphType = "Dotplot",
@@ -87,9 +89,9 @@ test_that("cX-dotplot-3", {
         legendInside = TRUE,
         legendPosition = "rightBottom",
         showTransition = TRUE,
-        title = "Measurements on 38 1978-79 model automobiles.\nThe gas mileage in miles per gallon as measured by Consumers Union on a test track."
+        title = "Measurements on 38 1978-79 model automobiles.\nThe gas mileage in miles per gallon as measured by Consumers Union on a test track.",
+        xAxisTitle = ""
     )
-    warning('dotplot - not appearing correctly - not grouped')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -111,9 +113,9 @@ test_that("cX-dotplot-4", {
         xAxisMinorTicks = FALSE,
         xAxisShow = FALSE,
         xAxisTickFormat = "\\$%sK",
-        xAxisTitle = "Annual Salary"
+        xAxisTitle = "Annual Salary",
+        xAxis = list("Women", "Men")
     )
-    warning('dotplot - not appearing correctly - no lines')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
