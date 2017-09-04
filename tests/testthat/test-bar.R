@@ -50,11 +50,10 @@ test_that("cX-bar-1", {
         smpLabelRotate = 45,
         subtitle = "2014 Census",
         title = "Country Population colored by Gross National Income",
-        treemapBy = c("ISO3"),
+        treemapBy = list("ISO3"),
         widthFactor = 4,
         xAxisMinorTicks = FALSE
     )
-    warning('bar - not appearing correctly - missing treemaps, etc')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

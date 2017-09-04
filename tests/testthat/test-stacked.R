@@ -20,7 +20,7 @@ test_that("cX-stacked-1", {
         sampleSeparationFactor = 1,
         showTransition = TRUE,
         title = "Random Data",
-        treemapBy = c("Factor2", "Factor3")
+        treemapBy = list("Factor2", "Factor3")
     )
     warning('stacked - not appearing correctly - treemap missing')
     if (interactive()) { print(result) }

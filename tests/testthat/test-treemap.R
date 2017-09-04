@@ -11,6 +11,7 @@ test_that("cX-treemap-1", {
     result <- canvasXpress(
         data = stacked1.y,
         smpAnnot = stacked1.x,
+        groupingFactors = list("continent"),
         colorBy = "GNI",
         decorations = list(marker = list(
             list(
@@ -39,7 +40,6 @@ test_that("cX-treemap-1", {
         showTransition = TRUE,
         title = "Population colored by Gross National Income 2014"
     )
-    warning('treemap - not appearing correctly - grouping, coloring')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -61,6 +61,7 @@ test_that("cX-treemap-3", {
     result <- canvasXpress(
         data = stacked1.y,
         smpAnnot = stacked1.x,
+        groupingFactors = list("continent"),
         axisAlgorithm = "rPretty",
         colorBy = "GNI",
         decorations = list(marker = list(
@@ -93,11 +94,12 @@ test_that("cX-treemap-3", {
         smpLabelRotate = 45,
         subtitle = "2014 Census",
         title = "Country Population colored by Gross National Income",
-        treemapBy = c("ISO3"),
+        treemapBy = list("ISO3"),
         widthFactor = 4,
-        xAxisMinorTicks = FALSE
+        xAxisMinorTicks = FALSE,
+        xAxis = list("population"),
+        xAxisTitle = ""
     )
-    warning('treemap - not appearing correctly - grouping, treemaps missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
