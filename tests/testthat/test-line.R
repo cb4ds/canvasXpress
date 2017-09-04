@@ -26,7 +26,6 @@ test_that("cX-line-1", {
         subtitle = "Random Data",
         title = "Line Graphs"
     )
-    warning('line - graph incorrect - missing overlays')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -53,7 +52,6 @@ test_that("cX-line-2", {
         smpTitleFontStyle = "italic",
         title = "Random Data"
     )
-    warning('line - graph incorrect - missing overlays, incorrect direction')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -69,7 +67,7 @@ test_that("cX-line-3", {
         lineType = "spline",
         showTransition = TRUE
     )
-    warning('line - graph incorrect - missing smoothing/grouping')
+    warning('line - missing decoration info in declaration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

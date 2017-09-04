@@ -123,7 +123,6 @@ test_that("cX-heatmap-6", {
         title = "R Heatmap",
         variablesClustered = TRUE
     )
-    warning('heatmap - not appearing correctly - dendrogram not colored')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -148,7 +147,6 @@ test_that("cX-heatmap-7", {
         title = "Overlays in Heatmap",
         variablesClustered = TRUE
     )
-    warning('heatmap - not appearing correctly - dendrogram not colored, overlays missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -223,7 +221,6 @@ test_that("cX-heatmap-9", {
         varOverlays = c("Type", "Sens"),
         variablesClustered = TRUE
     )
-    warning('heatmap - not appearing correctly - dendrogram not colored, overlays missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -340,7 +337,7 @@ test_that("cX-contour-1", {
         subtitle = "datasets - volcano",
         title = "Topographic Information on Auckland's Maunga Whau Volcano"
     )
-    warning('heatmap - graph incorrect - lines missing')
+    warning('heatmap - lines missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

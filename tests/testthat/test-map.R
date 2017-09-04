@@ -18,7 +18,7 @@ test_that("cX-map-1", {
         leafletId = "world",
         topoJSON = list(world50m = "https://canvasxpress.org/json/world-50m.json")
     )
-    warning('map - graph incorrect - coloring missing')
+    warning('map - coloring missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -37,7 +37,7 @@ test_that("cX-map-2", {
         leafletId = "world",
         topoJSON = list(world50m = "https://canvasxpress.org/json/world-50m.json")
     )
-    warning('map - graph incorrect - no coloring')
+    warning('map - coloring missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

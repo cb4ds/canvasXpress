@@ -376,7 +376,7 @@ test_that("cX-bubble-1", {
         showTransition = TRUE,
         title = "Simple Bubble Graph"
     )
-    warning('circular - graph incorrect - cutoff')
+    warning('circular - cutoff')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -394,7 +394,7 @@ test_that("cX-bubble-2", {
         showTransition = TRUE,
         title = "Hierarchical Colored Bubble Graph"
     )
-    warning('circular - graph incorrect - loading')
+    warning('circular - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -411,7 +411,7 @@ test_that("cX-bubble-3", {
         showTransition = TRUE,
         title = "Hierarchical Bubble Graph"
     )
-    warning('circular - graph incorrect - loading')
+    warning('circular - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

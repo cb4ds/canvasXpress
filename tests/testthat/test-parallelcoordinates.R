@@ -16,7 +16,6 @@ test_that("cX-parallelcoordinates-1", {
         smpLabelRotate = 90,
         title = "Iris flower data set"
     )
-    warning('parallelcoordinates - graph incorrect - grouping/coloring')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -33,7 +32,7 @@ test_that("cX-parallelcoordinates-2", {
         smpLabelRotate = 90,
         title = "Iris flower data set"
     )
-    warning('parallelcoordinates - graph incorrect - grouping/coloring')
+    warning('parallelcoordinates - graph incorrect - Missing Species (far right)')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

@@ -13,7 +13,7 @@ test_that("cX-tree-1", {
         showTransition = TRUE,
         title = "Collapsible Tree"
     )
-    warning('tree - graph incorrect - loading')
+    warning('tree - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -29,7 +29,7 @@ test_that("cX-tree-2", {
         showTransition = TRUE,
         title = "Collapsible Tree"
     )
-    warning('tree - graph incorrect - loading')
+    warning('tree - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -45,7 +45,7 @@ test_that("cX-tree-3", {
         showTransition = TRUE,
         title = "Collapsible Tree"
     )
-    warning('tree - graph incorrect - loading')
+    warning('tree - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -62,7 +62,7 @@ test_that("cX-tree-4 ", {
         title = "Collapsible Tree",
         treeCircular = TRUE
     )
-    warning('tree - graph incorrect - loading')
+    warning('tree - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

@@ -41,7 +41,6 @@ test_that("cX-scatter3d-2", {
         yAxis = list("Petal.Width"),
         zAxis = list("Petal.Length")
     )
-    warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -55,7 +54,6 @@ test_that("cX-scatter3d-", {
         yAxis = list("Sample2"),
         zAxis = list("Sample3")
     )
-    warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -70,7 +68,6 @@ test_that("cX-scatter3d-4", {
         yAxis = list("Sample2"),
         zAxis = list("Sample3")
     )
-    warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -89,7 +86,6 @@ test_that("cX-scatter3d-5", {
         yAxis = list("Sample2"),
         zAxis = list("Sample3")
     )
-    warning('scatter3d - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

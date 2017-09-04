@@ -21,7 +21,7 @@ scatterR2.y       <- readRDS(system.file("extdata", "cX-scatterR2-dat.RData", pa
 scatterR2.z       <- readRDS(system.file("extdata", "cX-scatterR2-var.RData", package = "canvasXpress"))
 scatterR3.y       <- readRDS(system.file("extdata", "cX-scatterR3-dat.RData", package = "canvasXpress"))
 scatterR3.z       <- readRDS(system.file("extdata", "cX-scatterR3-var.RData", package = "canvasXpress"))
-scatterR4.y       <- readRDS(system.file("extdata", "cX-scatterR3-dat.RData", package = "canvasXpress"))
+scatterR4.y       <- readRDS(system.file("extdata", "cX-scatterR4-dat.RData", package = "canvasXpress"))
 kaplanmeier.y     <- readRDS(system.file("extdata", "cX-kaplanmeier-dat.RData", package = "canvasXpress"))
 kaplanmeier.z     <- readRDS(system.file("extdata", "cX-kaplanmeier-var.RData", package = "canvasXpress"))
 
@@ -34,13 +34,16 @@ test_that("cX-histogram-1", {
         citation = "Cameron, E. and Pauling, L. (1978). Proceedings of the National Academy of Science USA, 75.",
         graphType = "Scatter2D",
         histogramBins = 50,
+        isHistogram = TRUE,
         showShadow = TRUE,
         showTransition = TRUE,
         title = "Patients with advanced cancers of the stomach,\nbronchus, colon, ovary or breast treated with ascorbate.",
         xAxisTitle = "Survival (days)",
-        yAxisTitle = "Number of Subjects"
+        yAxisTitle = "Number of Subjects",
+        xAxis = list("Bin"),
+        yAxis = list("Survival")
     )
-    warning('scatter2d - not appearing correctly - histogram grouping')
+    warning('scatter2d - histogram - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -55,13 +58,16 @@ test_that("cX-histogram-2", {
         citation = "Cameron, E. and Pauling, L. (1978). Proceedings of the National Academy of Science USA, 75.",
         graphType = "Scatter2D",
         histogramBins = 10,
+        isHistogram = TRUE,
         showShadow = TRUE,
         showTransition = TRUE,
         title = "Patients with advanced cancers of the stomach,\nbronchus, colon, ovary or breast treated with ascorbate.",
         xAxisTitle = "Survival (days)",
-        yAxisTitle = "Number of Subjects"
+        yAxisTitle = "Number of Subjects",
+        xAxis = list("Bins"),
+        yAxis = list("Survival")
     )
-    warning('scatter2d - not appearing correctly - histogram grouping')
+    warning('scatter2d - histogram - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -83,12 +89,15 @@ test_that("cX-histogram-3", {
         )),
         graphType = "Scatter2D",
         histogramBins = 20,
+        isHistogram = TRUE,
         showTransition = TRUE,
         title = "Average weekly household spending, in British pounds, on tobacco products\nand alcoholic beverages for each of the 11 regions of Great Britain.",
         xAxisTitle = "Pounds Spent",
-        yAxisTitle = "Frequency"
+        yAxisTitle = "Frequency",
+        xAxis = list("Bins"),
+        yAxis = list("Alcohol", "Tobacco")
     )
-    warning('scatter2d - not appearing correctly - histogram grouping')
+    warning('scatter2d - histogram - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -107,6 +116,7 @@ test_that("cX-nonlinear-fit-1", {
         yAxisExact = TRUE
     )
     if (interactive()) { print(result) }
+    warning('scatter2d - nonlinearfit - missing decoration info in declaration')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
@@ -121,7 +131,7 @@ test_that("cX-nonlinear-fit-2", {
         xAxis = list("Sepal.Length", "Sepal.Width"),
         yAxis = list("Petal.Length", "Petal.Width")
     )
-    warning('scatter2d - not appearing correctly - nonlinear fit line missing')
+    warning('scatter2d - nonlinearfit - missing decoration info in declaration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -147,7 +157,6 @@ test_that("cX-scatter2d-1", {
         xAxis = list("Alcohol"),
         yAxis = list("Tobacco")
     )
-   warning('scatter2d - not appearing correctly - blank')
    if (interactive()) { print(result) }
    expect_s3_class(result, "canvasXpress")
    expect_s3_class(result, "htmlwidget")
@@ -174,7 +183,6 @@ test_that("cX-scatter2d-2", {
         yAxisExact = TRUE,
         yAxisHistogramShow = TRUE
     )
-    warning('scatter2d - not appearing correctly - histograms, shapes, colors')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -201,7 +209,6 @@ test_that("cX-scatter2d-3", {
         yAxisExact = TRUE,
         yAxisHistogramShow = TRUE
     )
-    warning('scatter2d - not appearing correctly - histograms, shapes, colors')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -217,7 +224,7 @@ test_that("cX-scatter2d-4", {
         xAxis = list("Age"),
         yAxis = list("Height")
     )
-    warning('scatter2d - not appearing correctly - missing points and area')
+    warning('scatter2d  - missing decoration info in declaration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -245,7 +252,7 @@ test_that("cX-scatter2d-5", {
         yAxis = list("Temperature"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - missing points and area')
+    warning('scatter2d - missing decoration info in declaration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -276,7 +283,6 @@ test_that("cX-scatter2d-6", {
         yAxis = list("Variable1"),
         yAxisExact = TRUE
     )
-    warning('scatter2d - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -324,7 +330,6 @@ test_that("cX-scatter2d-7", {
         yAxis = list("logFC"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -369,7 +374,6 @@ test_that("cX-scatter2d-8", {
         yAxis = list("-log-pVal"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -426,7 +430,6 @@ test_that("cX-scatter2d-9", {
         yAxis = list("logFC-Y"),
         yAxisTickColor = "rgb(255,255,255)"
     )
-    warning('scatter2d - not appearing correctly - sizes of bubbles seem to be off')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -448,17 +451,34 @@ test_that("cX-scatter2d-10", {
         title = "Waterfall plot",
         xAxis = list("Row"),
         xAxisTickColor = "rgb(255,255,255)",
+        xAxisTitle = "Row",
         yAxis = list("Sample1", "Sample2"),
-        yAxisTickColor = "rgb(255,255,255)"
+        yAxisTickColor = "rgb(255,255,255)",
+        yAxisTitle = ""
     )
-    warning('scatter2d - not appearing correctly - grouping, coloring')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-kaplan-meier-1", {
-    warning('scatter2d - missing test - 1st chart on web for KaplanMeier')
+    result <- canvasXpress(
+        data = kaplanmeier.y,
+        varAnnot = kaplanmeier.z,
+        graphType = "Scatter2D",
+        showDecorations = TRUE,
+        showLegend = FALSE,
+        showTransition = TRUE,
+        title = "Kaplan-Meier Plot",
+        xAxis = list("Time", "Time"),
+        xAxisTitle = "",
+        yAxis = list("Censored-1"),
+        yAxisTitle = "Censored-1"
+    )
+    warning('scatter2d - kaplan-meier - missing decoration info in declaration')
+    if (interactive()) { print(result) }
+    expect_s3_class(result, "canvasXpress")
+    expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cX-kaplan-meier-2", {
@@ -470,9 +490,13 @@ test_that("cX-kaplan-meier-2", {
         showDecorationsKaplanMeierConfidence = TRUE,
         showLegend = FALSE,
         showTransition = TRUE,
-        title = "Kaplan-Meier Plot"
+        title = "Kaplan-Meier Plot",
+        xAxis = list("Time", "Time"),
+        xAxisTitle = "",
+        yAxis = list("Censored-1"),
+        yAxisTitle = "Censored-1"
     )
-    warning('scatter2d - graph incorrect - kaplanmeier lines/etc')
+    warning('scatter2d - kaplan-meier - missing decoration info in declaration')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -489,7 +513,7 @@ test_that("cX-layout-1", {
         scatterPlotMatrix = TRUE,
         showTransition = TRUE
     )
-    warning('scatter2d - graph incorrect - layout missing areas')
+    warning('scatter2d - layout - missing areas')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -506,7 +530,7 @@ test_that("cX-layout-2", {
         scatterPlotMatrix = TRUE,
         showTransition = TRUE
     )
-    warning('scatter2d - graph incorrect - layout colors')
+    warning('scatter2d - layout - colors')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -523,7 +547,7 @@ test_that("cX-layout-3", {
         scatterPlotMatrix = TRUE,
         scatterPlotMatrixType = "first"
     )
-    warning('scatter2d - graph incorrect - layout colors, missing areas')
+    warning('scatter2d - layout - colors, areas')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

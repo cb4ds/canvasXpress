@@ -19,7 +19,6 @@ test_that("cX-scatterbubble2d-1", {
         yAxisTransform = "log2",
         zAxis = list("Population")
     )
-    warning('scatterbubble2d - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -52,7 +51,6 @@ test_that("cX-scatterbubble2d-3", {
         yAxisTransform = "log2",
         zAxis = list("Population")
     )
-    warning('scatterbubble2d - not appearing correctly - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
