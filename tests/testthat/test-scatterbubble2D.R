@@ -14,10 +14,10 @@ test_that("cX-scatterbubble2d-1", {
         colorBy = "Continent",
         graphType = "ScatterBubble2D",
         showTransition = TRUE,
-        xAxis = c("LifeExpectancy"),
-        yAxis = c("GDPPerCapita"),
+        xAxis = list("LifeExpectancy"),
+        yAxis = list("GDPPerCapita"),
         yAxisTransform = "log2",
-        zAxis = c("Population")
+        zAxis = list("Population")
     )
     warning('scatterbubble2d - not appearing correctly - loading')
     if (interactive()) { print(result) }
@@ -31,9 +31,9 @@ test_that("cX-scatterbubble2d-2", {
         smpAnnot = generic.x,
         varAnnot = generic.z,
         graphType = "ScatterBubble2D",
-        xAxis = c("Sample1", "Sample4"),
-        yAxis = c("Sample2", "Sample5"),
-        zAxis = c("Sample3", "Sample6")
+        xAxis = list("Sample1", "Sample4"),
+        yAxis = list("Sample2", "Sample5"),
+        zAxis = list("Sample3", "Sample6")
     )
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
@@ -47,10 +47,10 @@ test_that("cX-scatterbubble2d-3", {
         colorBy = "Continent",
         graphType = "ScatterBubble2D",
         motionBy = "Year",
-        xAxis = c("LifeExpectancy"),
-        yAxis = c("GDPPerCapita"),
+        xAxis = list("LifeExpectancy"),
+        yAxis = list("GDPPerCapita"),
         yAxisTransform = "log2",
-        zAxis = c("Population")
+        zAxis = list("Population")
     )
     warning('scatterbubble2d - not appearing correctly - loading')
     if (interactive()) { print(result) }

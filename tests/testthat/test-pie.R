@@ -18,7 +18,7 @@ test_that("cX-pie-1", {
         showPieGrid = TRUE,
         showPieSampleLabel = TRUE,
         showTransition = TRUE,
-        xAxis = c(
+        xAxis = list(
             "Sample1",
             "Sample2",
             "Sample3",

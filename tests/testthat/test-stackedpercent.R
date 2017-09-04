@@ -69,7 +69,7 @@ test_that("cX-stackedpercent-3", {
 
 test_that("cX-stackedpercent-4", {
     result <- canvasXpress(
-        data = generic.y,
+        data = diverging.y,
         axisAlgorithm = "wilkinson",
         colorScheme = "RdYlBu",
         graphOrientation = "horizontal",
@@ -78,7 +78,10 @@ test_that("cX-stackedpercent-4", {
         legendPosition = "bottom",
         marginRight = 20,
         title = "Diverging Stacked Percent Graph",
-        xAxisTickFormat = "%s%%"
+        xAxisTickFormat = "%s%%",
+        xAxis = list("Pants on Fire", "False", "Mostly False",
+                     "Half True", "Mostly True", "True"),
+        xAxisTitle = ""
     )
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")

@@ -22,7 +22,6 @@ test_that("cX-stacked-1", {
         title = "Random Data",
         treemapBy = list("Factor2", "Factor3")
     )
-    warning('stacked - not appearing correctly - treemap missing')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

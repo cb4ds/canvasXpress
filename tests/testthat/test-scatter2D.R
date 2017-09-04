@@ -118,8 +118,8 @@ test_that("cX-nonlinear-fit-2", {
         graphType = "Scatter2D",
         showDecorations = TRUE,
         showLegend = FALSE,
-        xAxis = c("Sepal.Length", "Sepal.Width"),
-        yAxis = c("Petal.Length", "Petal.Width")
+        xAxis = list("Sepal.Length", "Sepal.Width"),
+        yAxis = list("Petal.Length", "Petal.Width")
     )
     warning('scatter2d - not appearing correctly - nonlinear fit line missing')
     if (interactive()) { print(result) }
@@ -144,8 +144,8 @@ test_that("cX-scatter2d-1", {
         graphType = "Scatter2D",
         showTransition = TRUE,
         title = "Average weekly household spending, in British pounds, on tobacco products\nand alcoholic beverages for each of the 11 regions of Great Britain.",
-        xAxis = c("Alcohol"),
-        yAxis = c("Tobacco")
+        xAxis = list("Alcohol"),
+        yAxis = list("Tobacco")
     )
    warning('scatter2d - not appearing correctly - blank')
    if (interactive()) { print(result) }
@@ -167,10 +167,10 @@ test_that("cX-scatter2d-2", {
         showTransition = TRUE,
         sizeBy = "Age",
         title = "Data on the time subjects required to complete a pencil and paper maze\nwhen they were smelling a floral scent and when they were not.",
-        xAxis = c("U-Trial 1", "U-Trial 2", "U-Trial 3"),
+        xAxis = list("U-Trial 1", "U-Trial 2", "U-Trial 3"),
         xAxisExact = TRUE,
         xAxisHistogramShow = TRUE,
-        yAxis = c("S-Trial 1", "S-Trial 2", "S-Trial 3"),
+        yAxis = list("S-Trial 1", "S-Trial 2", "S-Trial 3"),
         yAxisExact = TRUE,
         yAxisHistogramShow = TRUE
     )
@@ -194,10 +194,10 @@ test_that("cX-scatter2d-3", {
         shapeBy = "Smoker",
         sizeBy = "Age",
         title = "Data on the time subjects required to complete a pencil and paper maze\nwhen they were smelling a floral scent and when they were not.",
-        xAxis = c("U-Trial 1", "U-Trial 2", "U-Trial 3"),
+        xAxis = list("U-Trial 1", "U-Trial 2", "U-Trial 3"),
         xAxisExact = TRUE,
         xAxisHistogramShow = TRUE,
-        yAxis = c("S-Trial 1", "S-Trial 2", "S-Trial 3"),
+        yAxis = list("S-Trial 1", "S-Trial 2", "S-Trial 3"),
         yAxisExact = TRUE,
         yAxisHistogramShow = TRUE
     )
@@ -214,8 +214,8 @@ test_that("cX-scatter2d-4", {
         citation = "Moore, David S., and George P. McCabe (1989)",
         graphType = "Scatter2D",
         title = "Mean heights of a group of children in Kalama",
-        xAxis = c("Age"),
-        yAxis = c("Height")
+        xAxis = list("Age"),
+        yAxis = list("Height")
     )
     warning('scatter2d - not appearing correctly - missing points and area')
     if (interactive()) { print(result) }
@@ -240,9 +240,9 @@ test_that("cX-scatter2d-5", {
         showDecorations = TRUE,
         showTransition = TRUE,
         title = "Mean annual temperature (in degrees F) and Mortality Index for neoplasms of the female breast.",
-        xAxis = c("Mortality"),
+        xAxis = list("Mortality"),
         xAxisTickColor = "rgb(255,255,255)",
-        yAxis = c("Temperature"),
+        yAxis = list("Temperature"),
         yAxisTickColor = "rgb(255,255,255)"
     )
     warning('scatter2d - not appearing correctly - missing points and area')
@@ -270,10 +270,10 @@ test_that("cX-scatter2d-6", {
         setMaxY = 350,
         setMinY = 100,
         showDecorations = TRUE,
-        xAxis = c("Concentration"),
+        xAxis = list("Concentration"),
         xAxisTransform = "log10",
         xAxisTransformTicks = FALSE,
-        yAxis = c("Variable1"),
+        yAxis = list("Variable1"),
         yAxisExact = TRUE
     )
     warning('scatter2d - not appearing correctly - loading')
@@ -319,9 +319,9 @@ test_that("cX-scatter2d-7", {
         sizeBy = "FC",
         sizes = c(4, 14, 16, 18),
         title = "Profile plot",
-        xAxis = c("AveExpr"),
+        xAxis = list("AveExpr"),
         xAxisTickColor = "rgb(255,255,255)",
-        yAxis = c("logFC"),
+        yAxis = list("logFC"),
         yAxisTickColor = "rgb(255,255,255)"
     )
     warning('scatter2d - not appearing correctly - missing points')
@@ -364,9 +364,9 @@ test_that("cX-scatter2d-8", {
         sizeBy = "FC",
         sizes = c(4, 14, 16, 18),
         title = "Volcano plot",
-        xAxis = c("logFC"),
+        xAxis = list("logFC"),
         xAxisTickColor = "rgb(255,255,255)",
-        yAxis = c("-log-pVal"),
+        yAxis = list("-log-pVal"),
         yAxisTickColor = "rgb(255,255,255)"
     )
     warning('scatter2d - not appearing correctly - missing points')
@@ -421,9 +421,9 @@ test_that("cX-scatter2d-9", {
         sizeByShowLegend = FALSE,
         sizes = c(4, 14),
         title = "Contrast plot",
-        xAxis = c("logFC-X"),
+        xAxis = list("logFC-X"),
         xAxisTickColor = "rgb(255,255,255)",
-        yAxis = c("logFC-Y"),
+        yAxis = list("logFC-Y"),
         yAxisTickColor = "rgb(255,255,255)"
     )
     warning('scatter2d - not appearing correctly - sizes of bubbles seem to be off')
@@ -446,9 +446,9 @@ test_that("cX-scatter2d-10", {
         legendPosition = "topRight",
         plotBox = FALSE,
         title = "Waterfall plot",
-        xAxis = c("Row"),
+        xAxis = list("Row"),
         xAxisTickColor = "rgb(255,255,255)",
-        yAxis = c("Sample1", "Sample2"),
+        yAxis = list("Sample1", "Sample2"),
         yAxisTickColor = "rgb(255,255,255)"
     )
     warning('scatter2d - not appearing correctly - grouping, coloring')

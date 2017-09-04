@@ -17,11 +17,11 @@ test_that("cX-scatter3d-1", {
         colorBy = "Species",
         graphType = "Scatter3D",
         title = "Iris Data Set",
-        xAxis = c("Sepal.Length"),
-        yAxis = c("Sepal.Width"),
-        zAxis = c("Petal.Length")
+        xAxis = list("Sepal.Length"),
+        yAxis = list("Sepal.Width"),
+        zAxis = list("Petal.Length"),
+        zAxisTitle = "",
     )
-    warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
@@ -37,9 +37,9 @@ test_that("cX-scatter3d-2", {
         ellipseBy = "Species",
         graphType = "Scatter3D",
         title = "Iris Data Set",
-        xAxis = c("Sepal.Length"),
-        yAxis = c("Petal.Width"),
-        zAxis = c("Petal.Length")
+        xAxis = list("Sepal.Length"),
+        yAxis = list("Petal.Width"),
+        zAxis = list("Petal.Length")
     )
     warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
@@ -51,9 +51,9 @@ test_that("cX-scatter3d-", {
     result <- canvasXpress(
         data = scatter3d.y,
         graphType = "Scatter3D",
-        xAxis = c("Sample1"),
-        yAxis = c("Sample2"),
-        zAxis = c("Sample3")
+        xAxis = list("Sample1"),
+        yAxis = list("Sample2"),
+        zAxis = list("Sample3")
     )
     warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
@@ -66,9 +66,9 @@ test_that("cX-scatter3d-4", {
         data = scatter3d.y,
         graphType = "Scatter3D",
         scatterType = "bar",
-        xAxis = c("Sample1"),
-        yAxis = c("Sample2"),
-        zAxis = c("Sample3")
+        xAxis = list("Sample1"),
+        yAxis = list("Sample2"),
+        zAxis = list("Sample3")
     )
     warning('scatter3d - not appearing correctly - missing points')
     if (interactive()) { print(result) }
@@ -85,9 +85,9 @@ test_that("cX-scatter3d-5", {
         graphType = "Scatter3D",
         shapeBy = "Annt3",
         sizeBy = "Sample4",
-        xAxis = c("Sample1"),
-        yAxis = c("Sample2"),
-        zAxis = c("Sample3")
+        xAxis = list("Sample1"),
+        yAxis = list("Sample2"),
+        zAxis = list("Sample3")
     )
     warning('scatter3d - not appearing correctly - loading')
     if (interactive()) { print(result) }

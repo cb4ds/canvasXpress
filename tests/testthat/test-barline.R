@@ -28,8 +28,8 @@ test_that("cX-barline-1", {
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
         title = "Bar-Line Graphs",
-        xAxis = c("Variable1", "Variable2"),
-        xAxis2 = c("Variable3", "Variable4"),
+        xAxis = list("Variable1", "Variable2"),
+        xAxis2 = list("Variable3", "Variable4"),
         xAxis2TickFormat = "%.0f T",
         xAxisTickColor = "rgb(0,0,0)",
         xAxisTickFormat = "%.0f M"
@@ -54,8 +54,8 @@ test_that("cX-barline-2", {
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
         title = "Bar-Line Graphs",
-        xAxis = c("Variable1", "Variable2"),
-        xAxis2 = c("Variable3", "Variable4")
+        xAxis = list("Variable1", "Variable2"),
+        xAxis2 = list("Variable3", "Variable4")
     )
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
@@ -80,8 +80,8 @@ test_that("cX-barline-3", {
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
         title = "Bar-Line Graphs",
-        xAxis = c("Variable1", "Variable2"),
-        xAxis2 = c("Variable3", "Variable4") 
+        xAxis = list("Variable1", "Variable2"),
+        xAxis2 = list("Variable3", "Variable4") 
     )
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")

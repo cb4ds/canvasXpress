@@ -20,8 +20,8 @@ test_that("cX-stackedline-1", {
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
         title = "Stacked-Line Graphs",
-        xAxis = c("Variable1", "Variable2"),
-        xAxis2 = c("Variable3", "Variable4")
+        xAxis = list("Variable1", "Variable2"),
+        xAxis2 = list("Variable3", "Variable4")
     )
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
@@ -45,8 +45,8 @@ test_that("cX-stackedline-2", {
         smpTitleFontStyle = "italic",
         subtitle = "Random Data",
         title = "Stacked-Line Graphs",
-        xAxis = c("Variable1", "Variable2"),
-        xAxis2 = c("Variable3", "Variable4")
+        xAxis = list("Variable1", "Variable2"),
+        xAxis2 = list("Variable3", "Variable4")
     )
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")

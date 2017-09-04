@@ -17,8 +17,8 @@ test_that("cX-arealine-1", {
         smpTitle = "Year",
         subtitle = "gcookbook - uspopage",
         title = "Age distribution of population in the United State",
-        xAxis = c("<5", "5-14", "15-24", "25-34"),
-        xAxis2 = c("35-44", "45-54", "55-64", ">64"),
+        xAxis = list("<5", "5-14", "15-24", "25-34"),
+        xAxis2 = list("35-44", "45-54", "55-64", ">64"),
         xAxisTitle = "Number of People (1000's)"
     )
     if (interactive()) { print(result) }
@@ -41,8 +41,8 @@ test_that("cX-arealine-2", {
         smpTitle = "Year",
         subtitle = "gcookbook - uspopage",
         title = "Age distribution of population in the United State",
-        xAxis = c("<5", "5-14", "15-24", "25-34"),
-        xAxis2 = c("35-44", "45-54", "55-64", ">64"),
+        xAxis = list("<5", "5-14", "15-24", "25-34"),
+        xAxis2 = list("35-44", "45-54", "55-64", ">64"),
         xAxisTitle = "Number of People (1000's)"
     )
     if (interactive()) { print(result) }
@@ -65,8 +65,8 @@ test_that("cX-arealine-3", {
         smpTitle = "Year",
         subtitle = "gcookbook - uspopage",
         title = "Age distribution of population in the United State",
-        xAxis = c("<5", "5-14", "15-24", "25-34"),
-        xAxis2 = c("35-44", "45-54", "55-64", ">64"),
+        xAxis = list("<5", "5-14", "15-24", "25-34"),
+        xAxis2 = list("35-44", "45-54", "55-64", ">64"),
         xAxisTitle = "Number of People (1000's)"
     )
     if (interactive()) { print(result) }

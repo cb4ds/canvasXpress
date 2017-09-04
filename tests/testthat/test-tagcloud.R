@@ -14,7 +14,6 @@ test_that("cX-tagcloud-1", {
         graphType = "TagCloud",
         showTransition = TRUE
     )
-    warning('tagcloud - not appearing correctly - color')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
