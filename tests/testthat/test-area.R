@@ -1,140 +1,52 @@
 context("canvasXpress Charts - Area")
+ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
-area1.y <- readRDS(system.file("extdata", "cX-area-dat.RData", package = "canvasXpress"))
-area2.y <- readRDS(system.file("extdata", "cX-area2-dat.RData", package = "canvasXpress"))
-area3.y <- readRDS(system.file("extdata", "cX-area3-dat.RData", package = "canvasXpress"))
-
-test_that("cX-area-1", {
-    result <- canvasXpress(
-        data = area3.y,
-        areaType = "stacked",
-        colorScheme = "ColorSpectrum",
-        colorSpectrum = c("blue", "cyan", "yellow", "red"),
-        graphOrientation = "vertical",
-        graphType = "Area",
-        lineType = "spline",
-        showLegend = FALSE,
-        showSampleNames = FALSE,
-        showTransition = TRUE,
-        subtitle = "http://menugget.blogspot.com/2013/12/data-mountains-and-streams-stacked-area.html",
-        title = "Steam Plot"
-    )
+test_that("cXarea1", {
+    result <- cXarea1()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-area-2", {
-    result <- canvasXpress(
-        data = area1.y,
-        colorScheme = "RlatticeShingle",
-        graphOrientation = "vertical",
-        graphType = "Area",
-        legendPosition = "right",
-        lineType = "spline",
-        showTransition = TRUE,
-        smpLabelInterval = 20,
-        smpLabelRotate = 45,
-        smpTitle = "Year",
-        subtitle = "gcookbook - uspopage",
-        title = "Age distribution of population in the United State",
-        transparency = 0.5,
-        xAxis2Show = FALSE,
-        xAxisTitle = "Number of People (1000's)"
-    )
+test_that("cXarea2", {
+    result <- cXarea2()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-area-3", {
-    result <- canvasXpress(
-        data = area1.y,
-        areaType = "percent",
-        colorScheme = "Basic",
-        graphOrientation = "vertical",
-        graphType = "Area",
-        legendPosition = "right",
-        lineType = "spline",
-        showTransition = TRUE,
-        smpLabelInterval = 20,
-        smpLabelRotate = 45,
-        smpTitle = "Year",
-        subtitle = "gcookbook - uspopage",
-        title = "Age distribution of population in the United State",
-        xAxis2Show = FALSE,
-        xAxisTitle = "Normalized Percentage of People"
-    )
+test_that("cXarea3", {
+    result <- cXarea3()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-area-4", {
-    result <- canvasXpress(
-        data = area1.y,
-        areaType = "stacked",
-        colorScheme = "Blues",
-        graphOrientation = "vertical",
-        graphType = "Area",
-        legendPosition = "right",
-        lineType = "spline",
-        smpLabelInterval = 20,
-        smpLabelRotate = 45,
-        smpTitle = "Year",
-        subtitle = "gcookbook - uspopage",
-        title = "Age distribution of population in the United State",
-        xAxis2Show = FALSE,
-        xAxisTitle = "Number of People (1000's)"
-    )
+test_that("cXarea4", {
+    result <- cXarea4()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-area-5", {
-    result <- canvasXpress(
-        data = area1.y,
-        colorScheme = "RlatticeShingle",
-        graphOrientation = "vertical",
-        graphType = "Area",
-        legendPosition = "right",
-        lineType = "spline",
-        smpLabelInterval = 20,
-        smpLabelRotate = 45,
-        smpTitle = "Year",
-        subtitle = "gcookbook - uspopage",
-        title = "Age distribution of population in the United State",
-        transformAxis = "samples",
-        transformType = "zscore",
-        transformedData = TRUE,
-        transparency = 0.5,
-        xAxis2Show = FALSE,
-        xAxisTitle = "Normalized Scores of Number of People"
-    )
+test_that("cXarea5", {
+    result <- cXarea5()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
 
-test_that("cX-area-6", {
-    result <- canvasXpress(
-        data = area2.y,
-        areaType = "stacked",
-        axisAlgorithm = "wilkinsonExtended",
-        colorScheme = "ColorSpectrum",
-        colorSpectrum = c("blue", "cyan", "yellow", "red"),
-        graphOrientation = "vertical",
-        graphType = "Area",
-        lineType = "spline",
-        showLegend = FALSE,
-        showSampleNames = FALSE,
-        subtitle = "http://menugget.blogspot.com/2013/12/data-mountains-and-streams-stacked-area.html",
-        title = "Data Mountain"
-    )
+test_that("cXarea6", {
+    result <- cXarea6()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

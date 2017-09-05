@@ -1,68 +1,34 @@
 context("canvasXpress Charts - Tree")
+ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
-tree.y <- readRDS(system.file("extdata", "cX-tree-dat.RData", package = "canvasXpress"))
-tree.x <- readRDS(system.file("extdata", "cX-tree-smp.RData", package = "canvasXpress"))
+test_that("cXtree1", {
+    result <- cXtree1()
 
-test_that("cX-tree-1", {
-    result <- canvasXpress(
-        data = tree.y,
-        smpAnnot = tree.x,
-        graphType = "Tree",
-        hierarchy = c("Level1", "Level2", "Level3"),
-        showTransition = TRUE,
-        title = "Collapsible Tree"
-    )
-    warning('tree - loading')
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-tree-2", {
-    result <- canvasXpress(
-        data = tree.y,
-        smpAnnot = tree.x,
-        colorBy = "Annot1",
-        graphType = "Tree",
-        hierarchy = c("Level1", "Level2", "Level3"),
-        showTransition = TRUE,
-        title = "Collapsible Tree"
-    )
-    warning('tree - loading')
+test_that("cXtree2", {
+    result <- cXtree2()
+
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-tree-3", {
-    result <- canvasXpress(
-        data = tree.y,
-        smpAnnot = tree.x,
-        colorBy = "Annot2",
-        graphType = "Tree",
-        hierarchy = c("Level1", "Level2", "Level3"),
-        showTransition = TRUE,
-        title = "Collapsible Tree"
-    )
-    warning('tree - loading')
+test_that("cXtree3", {
+    result <- cXtree3()
+
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-tree-4 ", {
-    result <- canvasXpress(
-        data = tree.y,
-        smpAnnot = tree.x,
-        colorBy = "Annot2",
-        graphType = "Tree",
-        hierarchy = c("Level1", "Level2", "Level3"),
-        showTransition = TRUE,
-        title = "Collapsible Tree",
-        treeCircular = TRUE
-    )
-    warning('tree - loading')
+test_that("cXtree4", {
+    result <- cXtree4()
+
     if (interactive()) { print(result) }
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")

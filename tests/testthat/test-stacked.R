@@ -1,106 +1,43 @@
 context("canvasXpress Charts - Stacked")
+ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
-stacked2.y  <- readRDS(system.file("extdata", "cX-stacked2-dat.RData", package = "canvasXpress"))
-stacked2.x  <- readRDS(system.file("extdata", "cX-stacked2-smp.RData", package = "canvasXpress"))
-diverging.y <- readRDS(system.file("extdata", "cX-diverging-dat.RData", package = "canvasXpress"))
-generic.y   <- readRDS(system.file("extdata", "cX-generic-dat.RData", package = "canvasXpress"))
-generic.x   <- readRDS(system.file("extdata", "cX-generic-smp.RData", package = "canvasXpress"))
-generic.z   <- readRDS(system.file("extdata", "cX-generic-var.RData", package = "canvasXpress"))
-
-test_that("cX-stacked-1", {
-    result <- canvasXpress(
-        data = stacked2.y,
-        smpAnnot = stacked2.x,
-        colorScheme = "Blues",
-        foreground = "rgb(0,0,0)",
-        graphOrientation = "vertical",
-        graphType = "Stacked",
-        groupingFactors = c("Factor1"),
-        sampleSeparationFactor = 1,
-        showTransition = TRUE,
-        title = "Random Data",
-        treemapBy = list("Factor2", "Factor3")
-    )
+test_that("cXstacked1", {
+    result <- cXstacked1()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-stacked-2", {
-    result <- canvasXpress(
-        data = generic.y,
-        smpAnnot = generic.x,
-        varAnnot = generic.z,
-        graphOrientation = "horizontal",
-        graphType = "Stacked",
-        legendBackgroundColor = FALSE,
-        sampleSeparationFactor = 1,
-        showShadow = TRUE,
-        smpLabelScaleFontFactor = 0.8,
-        smpTitle = "Collection of Samples",
-        smpTitleFontStyle = "italic",
-        title = "Random Data"
-    )
+test_that("cXstacked2", {
+    result <- cXstacked2()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-stacked-3", {
-    result <- canvasXpress(
-        data = generic.y,
-        smpAnnot = generic.x,
-        varAnnot = generic.z,
-        gradient = TRUE,
-        graphOrientation = "vertical",
-        graphType = "Stacked",
-        legendBackgroundColor = FALSE,
-        showShadow = TRUE,
-        smpLabelScaleFontFactor = 0.8,
-        smpTitle = "Collection of Samples",
-        smpTitleFontStyle = "italic",
-        title = "Random Data"
-    )
+test_that("cXstacked3", {
+    result <- cXstacked3()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-stacked-4", {
-    result <- canvasXpress(
-        data = generic.y,
-        smpAnnot = generic.x,
-        varAnnot = generic.z,
-        graphOrientation = "horizontal",
-        graphType = "Stacked",
-        legendBackgroundColor = FALSE,
-        sampleSeparationFactor = 1.5,
-        showShadow = TRUE,
-        smpLabelScaleFontFactor = 0.8,
-        smpTitle = "Collection of Samples",
-        smpTitleFontStyle = "italic",
-        title = "Random Data"
-    )
+test_that("cXstacked4", {
+    result <- cXstacked4()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-stacked-5", {
-    result <- canvasXpress(
-        data = diverging.y,
-        axisAlgorithm = "wilkinson",
-        colorScheme = "RdYlBu",
-        graphOrientation = "horizontal",
-        graphType = "Stacked",
-        legendColumns = 3,
-        legendPosition = "bottom",
-        marginRight = 20,
-        title = "Diverging Stacked Graph",
-        xAxisTickFormat = "%s%%"
-    )
+test_that("cXstacked5", {
+    result <- cXstacked5()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

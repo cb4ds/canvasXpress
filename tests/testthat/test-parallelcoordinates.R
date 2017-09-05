@@ -1,39 +1,19 @@
 context("canvasXpress Charts - ParallelCoordinates")
+ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
-irist.y <- readRDS(system.file("extdata", "cX-irist-dat.RData", package = "canvasXpress"))
-irist.z <- readRDS(system.file("extdata", "cX-irist-var.RData", package = "canvasXpress"))
-
-test_that("cX-parallelcoordinates-1", {
-    result <- canvasXpress(
-        data = irist.y,
-        varAnnot = irist.z,
-        colorBy = "Species",
-        graphOrientation = "vertical",
-        graphType = "ParallelCoordinates",
-        lineDecoration = FALSE,
-        showTransition = TRUE,
-        smpLabelRotate = 90,
-        title = "Iris flower data set"
-    )
+test_that("cXparallelcoordinates1", {
+    result <- cXparallelcoordinates1()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-parallelcoordinates-2", {
-    result <- canvasXpress(
-        data = irist.y,
-        varAnnot = irist.z,
-        colorBy = "Species",
-        graphOrientation = "vertical",
-        graphType = "ParallelCoordinates",
-        lineDecoration = FALSE,
-        smpLabelRotate = 90,
-        title = "Iris flower data set"
-    )
-    warning('parallelcoordinates - graph incorrect - Missing Species (far right)')
+test_that("cXparallelcoordinates2", {
+    result <- cXparallelcoordinates2()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

@@ -1,40 +1,19 @@
 context("canvasXpress Charts - Correlation")
+ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
-generic.y  <- readRDS(system.file("extdata", "cX-generic-dat.RData", package = "canvasXpress"))
-generic.x  <- readRDS(system.file("extdata", "cX-generic-smp.RData", package = "canvasXpress"))
-generic.z  <- readRDS(system.file("extdata", "cX-generic-var.RData", package = "canvasXpress"))
-
-test_that("cX-correlation-1", {
-    result <- canvasXpress(
-        data = generic.y,
-        smpAnnot = generic.x,
-        varAnnot = generic.z,
-        correlationAxis = "samples",
-        gradient = TRUE,
-        graphType = "Correlation",
-        showTransition = TRUE,
-        title = "Correlation Plot",
-        yAxisTitle = "Correlation Title"
-    )
+test_that("cXcorrelation1", {
+    result <- cXcorrelation1()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
-test_that("cX-correlation-2", {
-    result <- canvasXpress(
-        data = generic.y,
-        smpAnnot = generic.x,
-        varAnnot = generic.z,
-        correlationAnchorLegend = TRUE,
-        correlationAnchorLegendAlignWidth = 20,
-        correlationAxis = "variables",
-        graphType = "Correlation",
-        title = "Correlation Plot",
-        yAxisTitle = "Correlation Title"
-    )
+test_that("cXcorrelation2", {
+    result <- cXcorrelation2()
     if (interactive()) { print(result) }
+    
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
