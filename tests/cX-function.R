@@ -1634,7 +1634,6 @@ cXmap2 <- function() {
 
 cXmap3 <- function() {
   canvasXpress(
-    data=FALSE,
     colorBy="variable",
     graphType="Map",
     leafletConfig=list(attributionControl=FALSE, center=list(38, -100), zoom=3),

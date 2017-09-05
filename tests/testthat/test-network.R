@@ -3,7 +3,7 @@ ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
 test_that("cXnetwork1", {
-    stop('data issue')
+    stop('not yet implemented')
     
     result <- cXnetwork1()
     if (interactive()) { print(result) }
@@ -13,7 +13,7 @@ test_that("cXnetwork1", {
 })
 
 test_that("cXnetwork2", {
-    stop('data issue')
+    stop('not yet implemented')
     
     result <- cXnetwork2()
     if (interactive()) { print(result) }
@@ -24,7 +24,7 @@ test_that("cXnetwork2", {
 
 
 test_that("cXnetwork3", {
-    stop('data issue')
+    stop('not yet implemented')
     
     result <- cXnetwork3()
     if (interactive()) { print(result) }
@@ -35,7 +35,8 @@ test_that("cXnetwork3", {
 
 
 test_that("cXnetwork4", {
-    stop('data issue')
+    stop('not yet implemented')
+
     result <- cXnetwork4()
     if (interactive()) { print(result) }
     

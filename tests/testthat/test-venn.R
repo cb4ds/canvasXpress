@@ -3,17 +3,16 @@ ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
 test_that("cXvenn1", {
-    stop('data issue')
-    
     result <- cXvenn1()
     if (interactive()) { print(result) }
     
+    fail('disappears after showing - implementation is a tria.')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cXvenn2", {
-    stop('data issue')
+    stop('not yet implemented')
     
     result <- cXvenn2()
     if (interactive()) { print(result) }
@@ -23,11 +22,12 @@ test_that("cXvenn2", {
 })
 
 test_that("cXvenn3", {
-    stop('data issue')
+    stop('not yet implemented')
     
     result <- cXvenn1()
     if (interactive()) { print(result) }
     
+    fail('disappears after showing')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
