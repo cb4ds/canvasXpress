@@ -56,19 +56,41 @@ canvasXpress <- function(data = NULL,     # y
     
     assertDataCorrectness(data, graphType)
     
-        #build y
-    
+    if (graphType == "Venn") {
+        warning('test implementation')
+        config <- list(...)
+        
+        if (!("vennData" %in% names(config)) | !("vennLegend" %in% names(config))) {
+            stop("Venn diagrams must specify vennData and vennLegend parameters") 
+        }
+        
+        venndata   <- config$vennData
+        vennlegend <- config$vennLegend
+
+        # Config
+        config <- config[!(names(config) %in% c("vennData", "vennLegend"))]
+        config["graphType"] <- graphType
+        
+        # CanvasXpress Object
+        cx_object <- list(vennData = venndata,
+                          vennLegend = vennlegend,
+                          config = config,
+                          events = events,
+                          afterRender = afterRender)
+    }
+    # standard graph
+    else {
         vars = as.list(assignCanvasXpressRownames(data))
         smps = as.list(assignCanvasXpressColnames(data))
-      
+        
         data.y <- as.matrix(data, dimnames = list())
+        
         y <- list(vars = vars, 
                   smps = smps, 
                   data = data.y)
-        
         x <- NULL
         z <- NULL
-
+        
         if (!is.null(smpAnnot)) {
             if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), smps)) {
                 x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
@@ -80,6 +102,7 @@ canvasXpress <- function(data = NULL,     # y
                 x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
             }
         }
+        
         if (!is.null(varAnnot)) {
             if (identical(as.list(assignCanvasXpressRownames(varAnnot)), vars)) {
                 z <- lapply(convertRowsToList(t(varAnnot)), function(d) if (length(d) > 1) d else list(d))
@@ -91,23 +114,19 @@ canvasXpress <- function(data = NULL,     # y
                 z <- lapply(convertRowsToList(varAnnot), function(d) if (length(d) > 1) d else list(d))
             }
         }
-            
-    # Data
-    data <- list(y = y, 
-                 x = x, 
-                 z = z)
-    
-    
-    # Config
-    config <- list(graphType = graphType, 
-                   ...)
+        # Data
+        data <- list(y = y, x = x, z = z)
+        
+        # Config
+        config <- list(graphType = graphType, ...)
+        
+        # CanvasXpress Object
+        cx_object <- list(data        = data, 
+                          config      = config, 
+                          events      = events, 
+                          afterRender = afterRender)
+    } #standard graph
 
-    
-    # CanvasXpress Object
-    cx_object <- list(data        = data, 
-                      config      = config, 
-                      events      = events, 
-                      afterRender = afterRender)
     
     options(htmlwidgets.TOJSON_ARGS = list(dataframe = "columns", 
                                            pretty    = pretty, 

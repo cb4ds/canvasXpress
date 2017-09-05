@@ -1,38 +1,29 @@
 assertDataCorrectness <- function(data, graphType) {
-    if (is.null(data))      stop("data cannot be NULL!")
     if (is.null(graphType)) stop("graphType cannot be NULL!")
     
-    validTypes <- c("Scatter2D", 
-                    "Scatter3D",
-                    "Bar", 
-                    "Stacked", 
-                    "StackedPercent", 
-                    "Area", 
-                    "Line", 
-                    "Dotplot",
-                    "BarLine", 
-                    "StackedLine", 
-                    "AreaLine", 
-                    "DotLine", 
-                    "StackedPercentLine",
+    validTypes <- c("Area", "AreaLine",
+                    "Bar", "BarLine",
                     "Boxplot",
-                    "Heatmap", 
-                    "Treemap",
-                    "ParallelCoordinates",
-                    "ScatterBubble2D",
-                    "Pie",
-                    "Correlation",
                     "Circular",
-                    "TagCloud",
+                    "Correlation",
+                    "Dotplot", "DotLine",
+                    "Heatmap",
+                    "Line",
                     "Map",
+                    "Pie",
+                    "ParallelCoordinates",
                     "Sankey",
-                    "Tree")
+                    "Scatter2D", "Scatter3D", "ScatterBubble2D",
+                    "Stacked", "StackedPercent", "StackedLine", "StackedPercentLine",
+                    "Tree",
+                    "Treemap",
+                    "TagCloud",
+                    "Venn")
 
+    noDataNecessary <- c("Venn")
       
     # To Be Programmed
     # ----------------
-    # Candlestick
-    # Venn
     # Network
     # Genome
     # Precalculated Boxplot
@@ -41,9 +32,12 @@ assertDataCorrectness <- function(data, graphType) {
     if (!(graphType %in% validTypes)) stop("graphType is invalid, must be one of <",
                                            paste(validTypes, collapse = ", "), ">")
     
-    # check that data is of the correct type
-    if (!class(data) %in% c('data.frame', 'matrix')) {
-        stop('data must be a data.frame or matrix classed object')
+    if (!(graphType %in% noDataNecessary)) {
+        if (is.null(data)) stop("data cannot be NULL!")
+        
+        if (!class(data) %in% c('data.frame', 'matrix')) {
+            stop('data must be a data.frame or matrix classed object')
+        }
     }
 }
 
