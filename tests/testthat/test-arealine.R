@@ -19,10 +19,9 @@ test_that("cXarealine2", {
 })
 
 test_that("cXarealine3", {
-    result <- cXarealine1()
+    result <- cXarealine3()
     if (interactive()) { print(result) }
     
-    fail('colors are off')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

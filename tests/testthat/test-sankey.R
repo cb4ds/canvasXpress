@@ -22,7 +22,6 @@ test_that("cXsankey3", {
     result <- cXsankey3()
     if (interactive()) { print(result) }
     
-    fail('no coloring of flows')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
