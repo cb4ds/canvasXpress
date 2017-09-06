@@ -57,26 +57,12 @@ canvasXpress <- function(data = NULL,     # y
     assertDataCorrectness(data, graphType)
     
     if (graphType == "Venn") {
-        warning('test implementation')
-        config <- list(...)
-        
-        if (!("vennData" %in% names(config)) | !("vennLegend" %in% names(config))) {
-            stop("Venn diagrams must specify vennData and vennLegend parameters") 
-        }
-        
-        venndata   <- config$vennData
-        vennlegend <- config$vennLegend
-
-        # Config
-        config <- config[!(names(config) %in% c("vennData", "vennLegend"))]
-        config["graphType"] <- graphType
-        
-        # CanvasXpress Object
-        cx_object <- list(vennData = venndata,
-                          vennLegend = vennlegend,
-                          config = config,
-                          events = events,
-                          afterRender = afterRender)
+        stop('not implemented')
+        # config <- list(...)
+        # 
+        # if (!("vennData" %in% names(config)) | !("vennLegend" %in% names(config))) {
+        #     stop("Venn diagrams must specify vennData and vennLegend parameters") 
+        # }
     }
     # standard graph
     else {
@@ -118,7 +104,7 @@ canvasXpress <- function(data = NULL,     # y
         data <- list(y = y, x = x, z = z)
         
         # Config
-        config <- list(graphType = graphType, ...)
+        config <- list(graphType = graphType, isR = TRUE, ...)
         
         # CanvasXpress Object
         cx_object <- list(data        = data, 

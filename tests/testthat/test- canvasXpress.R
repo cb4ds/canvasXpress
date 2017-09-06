@@ -1,0 +1,86 @@
+context("canvasXpress BASE")
+
+data1     <- data.frame(a = c(1:3), b = c("A", "B", "C"),
+                        row.names = c("row1", "row2", "row3"))
+data1.var <- data.frame(row1 = c(10:12), row2 = c(20:22), row3 = c(30:32))
+data1.smp <- data.frame(a = c(30:32), b = c(40:42))
+
+
+test_that("Missing Data", {
+    expect_error(canvasXpress(data = NULL),  
+                 regexp =  "data cannot be NULL!")
+})
+
+test_that("Allowed Null Data GraphTypes", {
+    expect_silent(canvasXpress(data = NULL, graphType = "Map"))
+})
+
+test_that("Incorrect Data Type", {
+    expect_error(canvasXpress(data = "Test"),  
+                 regexp =  "data must be a data.frame, matrix, or list")
+    expect_error(canvasXpress(data = c(1, 2, 3)),
+                 regexp = "data must be a data.frame, matrix, or list")
+})
+
+test_that("Missing GraphType", {
+    expect_error(canvasXpress(data = data1, graphType = NULL),
+                 regexp = "graphType cannot be NULL!")
+})
+
+test_that("Incorrect GraphType", {
+    expect_error(canvasXpress(data = data1, graphType = ""),
+                 regexp = "graphType is invalid, must be one of <.*")
+    expect_error(canvasXpress(data = data1, graphType = "Scatter4d"),
+                 regexp = "graphType is invalid, must be one of <.*")
+})
+
+test_that("Name mismatches", {
+    expect_error(canvasXpress(data = data1,
+                              smpAnnot = data1.var),
+                 regexp = "Rownames in smpAnnot are different from column names in data")
+    expect_silent(canvasXpress(data = data1,
+                               smpAnnot = data1.smp))
+    
+    expect_error(canvasXpress(data = data1,
+                              varAnnot = data1.smp),
+                 regexp = "Column names in varAnnot are different from row names in data")
+    expect_silent(canvasXpress(data = data1,
+                               varAnnot = data1.var))
+})
+
+test_that("Object Structure Tests", {
+    testobj <- canvasXpress(data = data1)
+    
+    expect_equal(testobj$width, 600)
+    expect_equal(testobj$height, 400)
+    expect_equivalent(class(testobj), c("canvasXpress", "htmlwidget"))
+    
+    expect_true(hasName(testobj$x, "data"))
+    expect_true(hasName(testobj$x, "config"))
+    expect_true(hasName(testobj$x$config, "isR"))
+    expect_true(hasName(testobj$x$config, "graphType"))
+})
+
+
+# Shiny Functionality
+test_that("Shiny UI Object Creation", {
+    obj <- suppressWarnings(canvasXpressOutput("testID"))
+
+    expect_s3_class(obj, "shiny.tag.list")
+    expect_match(obj[[1]]$name,  "div")
+    expect_match(obj[[1]]$attribs$id,    "testID")
+    expect_match(obj[[1]]$attribs$class, "canvasXpress html-widget html-widget-output")
+    expect_match(obj[[1]]$attribs$style, "width:100%; height:400px;")
+})
+
+test_that("Shiny Render", {
+    expect_s3_class(renderCanvasXpress(NULL), "shiny.render.function")
+})
+
+test_that("Shiny Examples", {
+    expect_error(cxShinyExample("badexample"),
+                 regexp = "Valid examples are: 'example1', 'example2', 'example3'")
+    expect_message(cxShinyExample(NULL),
+                 regexp = "Valid examples are: 'example1', 'example2', 'example3'")
+})
+
