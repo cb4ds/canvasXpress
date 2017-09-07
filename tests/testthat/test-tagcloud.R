@@ -1,4 +1,4 @@
-context("canvasXpress Charts - TagCloud")
+context("canvasXpress Web Charts - TagCloud")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Histogram")
+context("canvasXpress Web Charts - Histogram")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

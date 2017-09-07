@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Oncoprint")
+context("canvasXpress Web Charts - Oncoprint")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

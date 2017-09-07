@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Genome")
+context("canvasXpress Web Charts - Genome")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

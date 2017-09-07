@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Candlestick")
+context("canvasXpress Web Charts - Candlestick")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

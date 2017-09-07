@@ -1,4 +1,4 @@
-context("canvasXpress Charts - ScatterBubble2D")
+context("canvasXpress Web Charts - ScatterBubble2D")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

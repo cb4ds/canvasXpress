@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Nonlinearfit")
+context("canvasXpress Web Charts - Nonlinearfit")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

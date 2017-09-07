@@ -1,4 +1,4 @@
-context("canvasXpress Charts - StackedPercent")
+context("canvasXpress Web Charts - StackedPercent")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

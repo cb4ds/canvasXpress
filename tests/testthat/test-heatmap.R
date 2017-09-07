@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Heatmap")
+context("canvasXpress Web Charts - Heatmap")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

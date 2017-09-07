@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Correlation")
+context("canvasXpress Web Charts - Correlation")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

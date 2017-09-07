@@ -1,4 +1,4 @@
-context("canvasXpress Charts - AreaLine")
+context("canvasXpress Web Charts - AreaLine")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

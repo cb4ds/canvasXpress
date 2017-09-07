@@ -1,4 +1,4 @@
-context("canvasXpress Charts - ParallelCoordinates")
+context("canvasXpress Web Charts - ParallelCoordinates")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

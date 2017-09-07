@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Boxplot")
+context("canvasXpress Web Charts - Boxplot")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

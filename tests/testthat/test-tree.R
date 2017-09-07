@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Tree")
+context("canvasXpress Web Charts - Tree")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 

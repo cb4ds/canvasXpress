@@ -1,4 +1,4 @@
-context("canvasXpress Charts - Radar")
+context("canvasXpress Web Charts - Radar")
 ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
