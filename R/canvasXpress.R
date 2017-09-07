@@ -64,24 +64,36 @@ canvasXpress <- function(data = NULL,     # y
         #     stop("Venn diagrams must specify vennData and vennLegend parameters") 
         # }
     }
+    else if (graphType == "Map") {
+        stop('not implemented')
+    }
+    else if (graphType == "Network") {
+        stop('not implemented')
+    }
+    else if (graphType == "Genome") {
+        stop('not implemented')
+    }
     # standard graph
     else {
-        vars = as.list(assignCanvasXpressRownames(data))
-        smps = as.list(assignCanvasXpressColnames(data))
-        
-        data.y <- as.matrix(data, dimnames = list())
-        
-        y <- list(vars = vars, 
-                  smps = smps, 
-                  data = data.y)
+        if (inherits(data, "list")) {
+            y      <- lapply(data, as.matrix, dimnames = list())
+            y$smps <- as.list(assignCanvasXpressColnames(data[[1]]))
+            y$vars <- as.list(assignCanvasXpressRownames(data[[1]]))
+        }
+        else {
+            y <- list(vars = as.list(assignCanvasXpressRownames(data)), 
+                      smps = as.list(assignCanvasXpressColnames(data)), 
+                      data = as.matrix(data, dimnames = list()))
+        }
+
         x <- NULL
         z <- NULL
         
         if (!is.null(smpAnnot)) {
-            if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), smps)) {
+            if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), y$smps)) {
                 x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
             }
-            else if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), smps)) {
+            else if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), y$smps)) {
                 stop("Rownames in smpAnnot are different from column names in data")
             }
             else {
@@ -90,10 +102,10 @@ canvasXpress <- function(data = NULL,     # y
         }
         
         if (!is.null(varAnnot)) {
-            if (identical(as.list(assignCanvasXpressRownames(varAnnot)), vars)) {
+            if (identical(as.list(assignCanvasXpressRownames(varAnnot)), y$vars)) {
                 z <- lapply(convertRowsToList(t(varAnnot)), function(d) if (length(d) > 1) d else list(d))
             }
-            else if (!identical(as.list(assignCanvasXpressColnames(varAnnot)), vars)) {
+            else if (!identical(as.list(assignCanvasXpressColnames(varAnnot)), y$vars)) {
                 stop("Column names in varAnnot are different from row names in data")
             }
             else {
