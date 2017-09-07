@@ -76,7 +76,8 @@ canvasXpress <- function(data = NULL,     # y
                           events      = events, 
                           afterRender = afterRender)
     }
-    else if (graphType == "Map") {
+    else if (graphType == "Map" && 
+             (is.null(data) || (inherits(data, "logical") && data == FALSE))) {
         stop('not implemented')
     }
     else if (graphType == "Network") {
@@ -153,8 +154,6 @@ canvasXpress <- function(data = NULL,     # y
                                            pretty    = pretty, 
                                            digits    = digits))
 
-print(cx_object)
-    
     htmlwidgets::createWidget("canvasXpress", 
                               cx_object, 
                               width  = width,

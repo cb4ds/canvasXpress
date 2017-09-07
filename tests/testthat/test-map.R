@@ -19,8 +19,6 @@ test_that("cXmap2", {
 })
 
 test_that("cXmap3", {
-    stop('data issue - no data required but not yet handled')
-    
     result <- cXmap3()
     if (interactive()) { print(result) }
     
@@ -29,8 +27,6 @@ test_that("cXmap3", {
 })
 
 test_that("cXmap4", {
-    stop('data issue - no data required but not yet handled')
-    
     result <- cXmap4()
     if (interactive()) { print(result) }
     
@@ -39,8 +35,6 @@ test_that("cXmap4", {
 })
 
 test_that("cXmap5", {
-    stop('data issue - no data required but not yet handled')
-    
     result <- cXmap5()
     if (interactive()) { print(result) }
     
