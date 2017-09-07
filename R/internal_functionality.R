@@ -1,20 +1,15 @@
-assertDataCorrectness <- function(data, graphType) {
+assertDataCorrectness <- function(data, graphType, config) {
     
     validGraphTypes <- c("Area", "AreaLine", "Bar", "BarLine", "Boxplot",
-                    "Circular", "Correlation", "Dotplot", "DotLine", "Genome", 
-                    "Heatmap", "Line", "Map", "Network", "Pie", 
-                    "ParallelCoordinates", "Sankey", "Scatter2D", "Scatter3D", 
-                    "ScatterBubble2D", "Stacked", "StackedPercent",
-                    "StackedLine", "StackedPercentLine", "Tree", "Treemap",
-                    "TagCloud", "Venn")
-    
-    noDataNecessary <- c("Map")
+                         "Circular", "Correlation", "Dotplot", "DotLine", 
+                         "Genome", "Heatmap", "Line", "Map", "Network", "Pie", 
+                         "ParallelCoordinates", "Sankey", "Scatter2D", 
+                         "Scatter3D", "ScatterBubble2D", "Stacked", 
+                         "StackedPercent", "StackedLine", "StackedPercentLine", 
+                         "Tree", "Treemap", "TagCloud", "Venn")
+    noDataNecessary  <- c("Map")
     
     if (is.null(graphType)) stop("graphType cannot be NULL!")
-    
-    if (graphType %in% c("Venn", "Network", "Genome")) { 
-        warning("not fully implemented") 
-    }
 
     if (!(graphType %in% validGraphTypes)) {
         stop("graphType is invalid, must be one of <",
@@ -35,8 +30,17 @@ assertDataCorrectness <- function(data, graphType) {
                 stop('data specified as a list must contain at least one item')
             }
             
-            if (is.null(names(data))) {
-                stop('data specified as a list must have named elements')
+            if (graphType == "Venn" & length(data) > 1) {
+                    stop("Venn diagrams do not support multiple datasets")
+            }
+            
+            if (length(data) > 1 ) {
+                if (is.null(names(data))) {
+                    stop('data specified as a list of multiple items must have named elements') 
+                }
+                else if (!("y" %in% names(data))) {
+                    stop('data specified as a list of multiple items must contain a <y> element') 
+                }
             }
             
             fail <- vector(mode = "character", length = 0)
@@ -50,6 +54,13 @@ assertDataCorrectness <- function(data, graphType) {
                 stop('data list elements <', paste(fail, collapse = ', '), 
                      '> are not data.frame or matrix elements')
             }
+        }
+    }
+    
+    if (graphType == "Venn") {
+        if (!("vennLegend" %in% names(config)) | 
+            !("vennGroups" %in% names(config))) {
+            stop("Venn diagrams must specify both the <vennLegend> and <vennGroups> parameters")
         }
     }
     

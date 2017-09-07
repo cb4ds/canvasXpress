@@ -54,15 +54,27 @@ canvasXpress <- function(data = NULL,     # y
                          height = 400,
                          ... ) {
     
-    assertDataCorrectness(data, graphType)
+    config <- list(...)
+    
+    assertDataCorrectness(data, graphType, config)
     
     if (graphType == "Venn") {
-        stop('not implemented')
-        # config <- list(...)
-        # 
-        # if (!("vennData" %in% names(config)) | !("vennLegend" %in% names(config))) {
-        #     stop("Venn diagrams must specify vennData and vennLegend parameters") 
-        # }
+        warning('currently there is an issue with the CX library')
+        
+        data <- ifelse(inherits(data, "list"), data[[1]], data)
+        legend <- config$vennLegend
+       
+        # Config
+        config <- config[!(names(config) %in% c("vennData", "vennLegend"))]
+        config[["graphType"]] <- graphType
+        config[["isR"]] <- TRUE
+        
+        # CanvasXpress Object
+        cx_object <- list(vennData    = data, 
+                          vennLegend  = legend,
+                          config      = config, 
+                          events      = events, 
+                          afterRender = afterRender)
     }
     else if (graphType == "Map") {
         stop('not implemented')
@@ -76,9 +88,20 @@ canvasXpress <- function(data = NULL,     # y
     # standard graph
     else {
         if (inherits(data, "list")) {
-            y      <- lapply(data, as.matrix, dimnames = list())
-            y$smps <- as.list(assignCanvasXpressColnames(data[[1]]))
-            y$vars <- as.list(assignCanvasXpressRownames(data[[1]]))
+            if (length(data) > 1) {
+                y      <- lapply(data, as.matrix, dimnames = list())
+                y$smps <- as.list(assignCanvasXpressColnames(data$y))
+                y$vars <- as.list(assignCanvasXpressRownames(data$y))
+                
+                #rename y to data for canvasXpress
+                y$data <- y$y  
+                y$y    <- NULL
+            }
+            else {
+                y <- list(vars = as.list(assignCanvasXpressRownames(data[[1]])), 
+                          smps = as.list(assignCanvasXpressColnames(data[[1]])), 
+                          data = as.matrix(data[[1]], dimnames = list()))
+            }
         }
         else {
             y <- list(vars = as.list(assignCanvasXpressRownames(data)), 
@@ -130,6 +153,8 @@ canvasXpress <- function(data = NULL,     # y
                                            pretty    = pretty, 
                                            digits    = digits))
 
+print(cx_object)
+    
     htmlwidgets::createWidget("canvasXpress", 
                               cx_object, 
                               width  = width,
