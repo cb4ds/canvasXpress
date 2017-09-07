@@ -26,7 +26,8 @@ pkgFile <- data.frame(orig = webFile, stringsAsFactors = F) %>%
            filename   = ifelse(isfileline, gsub('.*/', '', orig), NA),
            filename   = ifelse(is.na(filename), NA, gsub('\\.txt".*$', '', filename))) %>%
     rowwise() %>%
-    mutate(new = gsub("http://www.canvasxpress.org.*txt", paste0('inst/extdata/', filename, '.txt'), orig))
+    mutate(new = gsub('"http://www.canvasxpress.org.*txt"', 
+                      paste0('system.file("extdata", "', filename, '.txt", package = "canvasXpress")'), orig))
 
 writeLines(pkgFile$new, "tests/cX-function.R")
 
