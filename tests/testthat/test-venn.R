@@ -6,28 +6,25 @@ test_that("cXvenn1", {
     result <- cXvenn1()
     if (interactive()) { print(result) }
     
-    fail('disappears after showing - implementation is a tria.')
+    fail('disappears after showing - issue with cx library')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cXvenn2", {
-    stop('not yet implemented')
-    
     result <- cXvenn2()
     if (interactive()) { print(result) }
     
+    fail('disappears after showing - issue with cx library')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
 
 test_that("cXvenn3", {
-    stop('not yet implemented')
-    
     result <- cXvenn1()
     if (interactive()) { print(result) }
     
-    fail('disappears after showing')
+    fail('disappears after showing - issue with cx library')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

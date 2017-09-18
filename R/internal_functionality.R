@@ -16,7 +16,28 @@ assertDataCorrectness <- function(data, graphType, config) {
              paste(validGraphTypes, collapse = ", "), ">")
     }
     
-    if (!(graphType %in% noDataNecessary)) {
+    # for backwards compatibility we accept both data and vennData
+    if (graphType == "Venn") {
+        vdata <- ifelse(is.null(data), config$vennData, data)
+        
+        if (is.null(vdata)) {
+            stop("vennData cannot be NULL!")
+        }
+        
+        if (!inherits(vdata, c('data.frame', 'matrix', 'list'))) {
+            stop('vennData must be a data.frame, matrix, or named list')
+        }
+        
+        if (inherits(vdata, c('list')) & (length(vdata) > 1)) {
+            stop("Venn diagrams do not support multiple datasets")
+        }
+
+        if (!("vennLegend" %in% names(config)) | 
+            !("vennGroups" %in% names(config))) {
+            stop("Venn diagrams must specify both the <vennLegend> and <vennGroups> parameters")
+        }
+    }
+    else if (!(graphType %in% noDataNecessary)) {
         if (is.null(data)) {
             stop("data cannot be NULL!")
         }
@@ -28,10 +49,6 @@ assertDataCorrectness <- function(data, graphType, config) {
         if (inherits(data, c('list'))) {
             if (length(data) < 1) {
                 stop('data specified as a list must contain at least one item')
-            }
-            
-            if (graphType == "Venn" & length(data) > 1) {
-                    stop("Venn diagrams do not support multiple datasets")
             }
             
             if (length(data) > 1 ) {
@@ -54,13 +71,6 @@ assertDataCorrectness <- function(data, graphType, config) {
                 stop('data list elements <', paste(fail, collapse = ', '), 
                      '> are not data.frame or matrix elements')
             }
-        }
-    }
-    
-    if (graphType == "Venn") {
-        if (!("vennLegend" %in% names(config)) | 
-            !("vennGroups" %in% names(config))) {
-            stop("Venn diagrams must specify both the <vennLegend> and <vennGroups> parameters")
         }
     }
     
@@ -97,3 +107,70 @@ convertRowsToList <- function(x) {
     res = lapply(seq_row(x), function(i) stats::setNames(x[i,], NULL))
     stats::setNames(res, rownames(x))
 }
+
+
+setup_y <- function(data) {
+    
+    y <- NULL
+    
+    if (inherits(data, "list")) {
+        if (length(data) > 1) {
+            y      <- lapply(data, as.matrix, dimnames = list())
+            y$smps <- as.list(assignCanvasXpressColnames(data$y))
+            y$vars <- as.list(assignCanvasXpressRownames(data$y))
+            
+            #rename y to data for canvasXpress
+            y$data <- y$y  
+            y$y    <- NULL
+        }
+        else {
+            y <- list(vars = as.list(assignCanvasXpressRownames(data[[1]])), 
+                      smps = as.list(assignCanvasXpressColnames(data[[1]])), 
+                      data = as.matrix(data[[1]], dimnames = list()))
+        }
+    }
+    else {
+        y <- list(vars = as.list(assignCanvasXpressRownames(data)), 
+                  smps = as.list(assignCanvasXpressColnames(data)), 
+                  data = as.matrix(data, dimnames = list()))
+    }
+    
+    y
+}
+
+setup_x <- function(y_smps, smpAnnot) {
+    x <- NULL
+    
+    if (!is.null(smpAnnot)) {
+        if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), y_smps)) {
+            x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
+        }
+        else if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), y_smps)) {
+            stop("Rownames in smpAnnot are different from column names in data")
+        }
+        else {
+            x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
+        }
+    }
+    
+    x
+}
+
+setup_z <- function(y_vars, varAnnot) {
+    z <- NULL
+    
+    if (!is.null(varAnnot)) {
+        if (identical(as.list(assignCanvasXpressRownames(varAnnot)), y_vars)) {
+            z <- lapply(convertRowsToList(t(varAnnot)), function(d) if (length(d) > 1) d else list(d))
+        }
+        else if (!identical(as.list(assignCanvasXpressColnames(varAnnot)), y_vars)) {
+            stop("Column names in varAnnot are different from row names in data")
+        }
+        else {
+            z <- lapply(convertRowsToList(varAnnot), function(d) if (length(d) > 1) d else list(d))
+        }
+    }
+    
+    z
+}
+

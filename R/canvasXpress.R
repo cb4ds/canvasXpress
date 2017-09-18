@@ -54,23 +54,32 @@ canvasXpress <- function(data = NULL,     # y
                          height = 400,
                          ... ) {
     
-    config <- list(...)
-    
+    config <- list(graphType = graphType, isR = TRUE, ...)
     assertDataCorrectness(data, graphType, config)
     
+    x <- NULL
+    y <- NULL
+    z <- NULL
+    
     if (graphType == "Venn") {
-        warning('currently there is an issue with the CX library')
-        
-        data <- ifelse(inherits(data, "list"), data[[1]], data)
+        vdata <- NULL
+        if (is.null(data)) {
+            vdata <- ifelse(inherits(config$vennData, "list"), 
+                            config$vennData[[1]], 
+                            config$vennData)
+        }
+        else {
+            vdata <- ifelse(inherits(data, "list"), 
+                            data[[1]], 
+                            data)
+        }
         legend <- config$vennLegend
        
-        # Config
+        # Config - remove venn items
         config <- config[!(names(config) %in% c("vennData", "vennLegend"))]
-        config[["graphType"]] <- graphType
-        config[["isR"]] <- TRUE
         
         # CanvasXpress Object
-        cx_object <- list(vennData    = data, 
+        cx_object <- list(vennData    = vdata, 
                           vennLegend  = legend,
                           config      = config, 
                           events      = events, 
@@ -78,7 +87,12 @@ canvasXpress <- function(data = NULL,     # y
     }
     else if (graphType == "Map" && 
              (is.null(data) || (inherits(data, "logical") && data == FALSE))) {
-        stop('not implemented')
+
+        # CanvasXpress Object
+        cx_object <- list(data        = FALSE, 
+                          config      = config, 
+                          events      = events, 
+                          afterRender = afterRender)
     }
     else if (graphType == "Network") {
         stop('not implemented')
@@ -88,62 +102,12 @@ canvasXpress <- function(data = NULL,     # y
     }
     # standard graph
     else {
-        if (inherits(data, "list")) {
-            if (length(data) > 1) {
-                y      <- lapply(data, as.matrix, dimnames = list())
-                y$smps <- as.list(assignCanvasXpressColnames(data$y))
-                y$vars <- as.list(assignCanvasXpressRownames(data$y))
-                
-                #rename y to data for canvasXpress
-                y$data <- y$y  
-                y$y    <- NULL
-            }
-            else {
-                y <- list(vars = as.list(assignCanvasXpressRownames(data[[1]])), 
-                          smps = as.list(assignCanvasXpressColnames(data[[1]])), 
-                          data = as.matrix(data[[1]], dimnames = list()))
-            }
-        }
-        else {
-            y <- list(vars = as.list(assignCanvasXpressRownames(data)), 
-                      smps = as.list(assignCanvasXpressColnames(data)), 
-                      data = as.matrix(data, dimnames = list()))
-        }
+        y <- setup_y(data)
+        x <- setup_x(y$smps, smpAnnot)
+        z <- setup_z(y$vars, varAnnot)
 
-        x <- NULL
-        z <- NULL
-        
-        if (!is.null(smpAnnot)) {
-            if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), y$smps)) {
-                x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
-            }
-            else if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), y$smps)) {
-                stop("Rownames in smpAnnot are different from column names in data")
-            }
-            else {
-                x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
-            }
-        }
-        
-        if (!is.null(varAnnot)) {
-            if (identical(as.list(assignCanvasXpressRownames(varAnnot)), y$vars)) {
-                z <- lapply(convertRowsToList(t(varAnnot)), function(d) if (length(d) > 1) d else list(d))
-            }
-            else if (!identical(as.list(assignCanvasXpressColnames(varAnnot)), y$vars)) {
-                stop("Column names in varAnnot are different from row names in data")
-            }
-            else {
-                z <- lapply(convertRowsToList(varAnnot), function(d) if (length(d) > 1) d else list(d))
-            }
-        }
-        # Data
-        data <- list(y = y, x = x, z = z)
-        
-        # Config
-        config <- list(graphType = graphType, isR = TRUE, ...)
-        
         # CanvasXpress Object
-        cx_object <- list(data        = data, 
+        cx_object <- list(data        = list(y = y, x = x, z = z), 
                           config      = config, 
                           events      = events, 
                           afterRender = afterRender)
