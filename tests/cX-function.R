@@ -1279,7 +1279,7 @@ cXheatmap10 <- function() {
   x=read.table(system.file("extdata", "cX-multidimensionalheatmap-smp.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table(system.file("extdata", "cX-multidimensionalheatmap-var.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
-    data=y,
+    data=list(y=y, data2 = y2, data3 = y3, data4 = y4),
     smpAnnot=x,
     varAnnot=z,
     graphType="Heatmap",
