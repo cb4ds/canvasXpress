@@ -116,7 +116,7 @@ canvasXpress <- function(data = NULL,     # y
                           afterRender = afterRender)
     }
     else if (graphType == "Genome") {
-        stop('not implemented')
+        stop('The Genome graphType is not yet implemented')
     }
     # standard graph
     else {
