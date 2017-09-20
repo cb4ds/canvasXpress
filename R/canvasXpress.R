@@ -57,9 +57,10 @@ canvasXpress <- function(data = NULL,     # y
     config <- list(graphType = graphType, isR = TRUE, ...)
     assertDataCorrectness(data, graphType, config)
     
-    x <- NULL
-    y <- NULL
-    z <- NULL
+    x         <- NULL
+    y         <- NULL
+    z         <- NULL
+    dataframe <- "columns"
     
     if (graphType == "Venn") {
         vdata <- NULL
@@ -79,8 +80,7 @@ canvasXpress <- function(data = NULL,     # y
         config <- config[!(names(config) %in% c("vennData", "vennLegend"))]
         
         # CanvasXpress Object
-        cx_object <- list(vennData    = vdata, 
-                          vennLegend  = legend,
+        cx_object <- list(venn        = list(data = vdata, legend = legend),
                           config      = config, 
                           events      = events, 
                           afterRender = afterRender)
@@ -95,8 +95,9 @@ canvasXpress <- function(data = NULL,     # y
                           afterRender = afterRender)
     }
     else if (graphType == "Network") {
-        ndata <- NULL
-        edata <- NULL
+        ndata     <- NULL
+        edata     <- NULL
+        dataframe <- "rows"
 
         if (is.null(data)) {
             ndata <- config$nodeData
@@ -109,8 +110,7 @@ canvasXpress <- function(data = NULL,     # y
         }
         
         # CanvasXpress Object
-        cx_object <- list(nodeData    = ndata, 
-                          edgeData    = edata,
+        cx_object <- list(data        = list(nodes = ndata, edges = edata),
                           config      = config, 
                           events      = events, 
                           afterRender = afterRender)
@@ -132,7 +132,7 @@ canvasXpress <- function(data = NULL,     # y
     } #standard graph
 
     
-    options(htmlwidgets.TOJSON_ARGS = list(dataframe = "columns", 
+    options(htmlwidgets.TOJSON_ARGS = list(dataframe = dataframe, 
                                            pretty    = pretty, 
                                            digits    = digits))
 
