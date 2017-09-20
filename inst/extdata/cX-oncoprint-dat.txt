@@ -6,13 +6,13 @@ Sample4	2.3	2.4	2.1
 Sample5	1.9	2.1	2.1
 Sample6	1.9	2.1	2.1
 Sample7	2.2	1.9	2.1
-Sample8	1.7	2	1	1.8
+Sample8	1.7	2.1	1.8
 Sample9	2.2	1.9	1.9
 Sample10	2.1	2	2.1
 Sample11	2.2	1.9	2.1
 Sample12	1.9	2.1	2.1
 Sample13	2.2	1.9	1.9
-Sample14	1.7	2	1	1.8
+Sample14	1.7	2.1	1.8
 Sample15	2.1	2	2.1
 Sample16	2.1	1.8	2
 Sample17	2.2	2.1	2.1
