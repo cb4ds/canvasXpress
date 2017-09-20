@@ -37,6 +37,41 @@ assertDataCorrectness <- function(data, graphType, config) {
             stop("Venn diagrams must specify both the <vennLegend> and <vennGroups> parameters")
         }
     }
+    else if (graphType == "Network") {
+        ndata <- NULL
+        edata <- NULL
+        if (!is.null(data)) {
+            if (!("nodeData" %in% names(data)) & !("edgeData" %in% names(data))) {
+                stop("Network diagrams must specify both <nodeData> and <edgeData> as parameters or named data list items")
+            }
+            ndata <- data$nodeData
+            edata <- data$edgeData
+        }
+        else {
+            if (!("nodeData" %in% names(config)) | 
+                !("edgeData" %in% names(config))) {
+                stop("Network diagrams must specify both <nodeData> and <edgeData> as parameters or named data list items")
+            }
+            ndata <- config$nodeData
+            edata <- config$edgeData
+        }
+        
+        if (is.null(ndata)) {
+            stop("nodeData cannot be NULL!")
+        }
+        
+        if (is.null(edata)) {
+            stop("edgeData cannot be NULL!")
+        }
+        
+        if (!inherits(ndata, c('data.frame', 'matrix'))) {
+            stop('nodeData must be a data.frame or matrix')
+        }
+        
+        if (!inherits(ndata, c('data.frame', 'matrix'))) {
+            stop('edgeData must be a data.frame or matrix')
+        }
+    }
     else if (!(graphType %in% noDataNecessary)) {
         if (is.null(data)) {
             stop("data cannot be NULL!")

@@ -95,7 +95,25 @@ canvasXpress <- function(data = NULL,     # y
                           afterRender = afterRender)
     }
     else if (graphType == "Network") {
-        stop('not implemented')
+        ndata <- NULL
+        edata <- NULL
+
+        if (is.null(data)) {
+            ndata <- config$nodeData
+            edata <- config$edgeData
+            config <- config[!(names(config) %in% c("nodeData", "edgeData"))]
+        }
+        else {
+            ndata <- data$nodeData
+            edata <- data$edgeData
+        }
+        
+        # CanvasXpress Object
+        cx_object <- list(nodeData    = ndata, 
+                          edgeData    = edata,
+                          config      = config, 
+                          events      = events, 
+                          afterRender = afterRender)
     }
     else if (graphType == "Genome") {
         stop('not implemented')
