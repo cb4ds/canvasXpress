@@ -78,7 +78,6 @@ test_that("cXheatmap10", {
     result <- cXheatmap10()
     if (interactive()) { print(result) }
     
-    warning('cX-functions.R needs to be updated for the new multidata structures')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
