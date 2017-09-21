@@ -22,6 +22,7 @@ Suggests:
     shiny (>= 0.13.2),
     knitr,
     rmarkdown,
+    dplyr,
     testthat,
     limma,
     grDevices,
