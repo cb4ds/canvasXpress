@@ -1279,7 +1279,7 @@ cXheatmap10 <- function() {
   x=read.table(system.file("extdata", "cX-multidimensionalheatmap-smp.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table(system.file("extdata", "cX-multidimensionalheatmap-var.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
-    data=list(y=y, data2 = y2, data3 = y3, data4 = y4),
+    data=list(y=y, data2=y2, data3=y3, data4=y4),
     smpAnnot=x,
     varAnnot=z,
     graphType="Heatmap",
@@ -1789,15 +1789,18 @@ cXnonlinearfit2 <- function() {
 cXoncoprint1 <- function() {
   library(canvasXpress)
   y=read.table(system.file("extdata", "cX-oncoprint-dat.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y2=read.table(system.file("extdata", "cX-oncoprint-dat2.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y3=read.table(system.file("extdata", "cX-oncoprint-dat3.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   y4=read.table(system.file("extdata", "cX-oncoprint-dat4.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y5=read.table(system.file("extdata", "cX-oncoprint-dat5.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   x=read.table(system.file("extdata", "cX-oncoprint-smp.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table(system.file("extdata", "cX-oncoprint-var.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
-    data=y,
+    data=list(y=y, data2=y2, data3=y3, data4=y4, data5=y5),
     smpAnnot=x,
     varAnnot=z,
     graphType="Heatmap",
-    isOncoprint="mutation",
+    isOncoprint="data2",
     showTransition=TRUE
   )
 }
@@ -1805,15 +1808,18 @@ cXoncoprint1 <- function() {
 cXoncoprint2 <- function() {
   library(canvasXpress)
   y=read.table(system.file("extdata", "cX-oncoprint-dat.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y2=read.table(system.file("extdata", "cX-oncoprint-dat2.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y3=read.table(system.file("extdata", "cX-oncoprint-dat3.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   y4=read.table(system.file("extdata", "cX-oncoprint-dat4.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y5=read.table(system.file("extdata", "cX-oncoprint-dat5.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   x=read.table(system.file("extdata", "cX-oncoprint-smp.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table(system.file("extdata", "cX-oncoprint-var.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
-    data=y,
+    data=list(y=y, data2=y2, data3=y3, data4=y4, data5=y5),
     smpAnnot=x,
     varAnnot=z,
     graphType="Heatmap",
-    isOncoprint="mutation",
+    isOncoprint="data2",
     smpOverlayProperties=list(Annt2=list(position="right", type="Bar"), Annt3=list(type="Stacked"), Annt4=list(type="Stacked"), Annt5=list(type="Stacked")),
     smpOverlays=list("Annt1", "-", "Annt2", "Annt3", "Annt4", "Annt5")
   )
@@ -1822,17 +1828,20 @@ cXoncoprint2 <- function() {
 cXoncoprint3 <- function() {
   library(canvasXpress)
   y=read.table(system.file("extdata", "cX-oncoprint-dat.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y2=read.table(system.file("extdata", "cX-oncoprint-dat2.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y3=read.table(system.file("extdata", "cX-oncoprint-dat3.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   y4=read.table(system.file("extdata", "cX-oncoprint-dat4.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y5=read.table(system.file("extdata", "cX-oncoprint-dat5.txt", package = "canvasXpress"), header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   x=read.table(system.file("extdata", "cX-oncoprint-smp.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table(system.file("extdata", "cX-oncoprint-var.txt", package = "canvasXpress"), header=TRUE, sep= "\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
-    data=y,
+    data=list(y=y, data2=y2, data3=y3, data4=y4, data5=y5),
     smpAnnot=x,
     varAnnot=z,
     graphType="Heatmap",
-    isOncoprint="mutation",
+    isOncoprint="data2",
     outlineBy="Color",
-    outlineByData="expression",
+    outlineByData="data3",
     patternBy="Pattern",
     patternByData="data4",
     shapeBy="Shape",

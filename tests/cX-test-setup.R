@@ -12,7 +12,7 @@ if (interactive()) {
         distinct()
     
     # save all the datasets to the test data directory
-    for (url in dataUrls$url[1:5]) {
+    for (url in dataUrls$url) {
         loc <- file(url, method = 'libcurl')
         data <- readLines(loc)
         close(loc)
