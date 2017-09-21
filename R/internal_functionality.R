@@ -18,10 +18,15 @@ assertDataCorrectness <- function(data, graphType, config) {
     
     # for backwards compatibility we accept both data and vennData
     if (graphType == "Venn") {
-        vdata <- ifelse(is.null(data), config$vennData, data)
+        vdata <- data
         
         if (is.null(vdata)) {
-            stop("vennData cannot be NULL!")
+            if (!("vennData" %in% names(config))) {
+                stop("vennData cannot be NULL!")
+            }
+            else {
+                vdata <- config$vennData
+            }
         }
         
         if (!inherits(vdata, c('data.frame', 'matrix', 'list'))) {
@@ -30,6 +35,9 @@ assertDataCorrectness <- function(data, graphType, config) {
         
         if (inherits(vdata, c('list')) & (length(vdata) > 1)) {
             stop("Venn diagrams do not support multiple datasets")
+        }
+        else if (is.null(vdata[[1]])) {
+            stop('vennData cannot be NULL!')
         }
 
         if (!("vennLegend" %in% names(config)) | 
