@@ -9,8 +9,7 @@ canvasXpress(data = NULL, smpAnnot = NULL, varAnnot = NULL,
   pretty = FALSE, digits = 4, width = 600, height = 400, ...)
 }
 \arguments{
-\item{data}{data.frame or matrix classed object
-\emph{(rows are referred to as variables; columns are referred to as samples)}}
+\item{data}{data.frame-, matrix=, or list- classed object}
 
 \item{smpAnnot}{additional data that applies to samples (columns)}
 

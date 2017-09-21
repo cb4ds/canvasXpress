@@ -47,8 +47,9 @@ shinyServer(function(input, output, session) {
       
       output$plot4 <- renderCanvasXpress({
             genes = rownames(GSE9750$y)
-            data = as.matrix(GSE9750$y[genes[genes==input$genes],,drop=F])
-            canvasXpress(data, smpAnnot=GSE9750$x, graphType='Boxplot', afterRender=list(groupSamples=c(input$factor)))
+            data = as.matrix(GSE9750$y[genes[genes %in% input$genes],,drop=F])
+            canvasXpress(data, smpAnnot=GSE9750$x, graphType='Boxplot',
+                         groupingFactors = list(input$factor))
           })
       
     })

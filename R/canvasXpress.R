@@ -4,7 +4,7 @@
 #' 
 #' CanvasXpress is a standalone JavaScript library for reproducible research
 #' with complete tracking of data and end-user modifications stored in a single 
-#' PNG image that can be played back.
+#' PNG image that can be played back for an extensive set of visualizations.
 #'
 #'
 #' @section More Information:
@@ -23,8 +23,7 @@
 #' use in any html-compatible context
 #'  
 #' 
-#' @param data data.frame or matrix classed object
-#' \emph{(rows are referred to as variables; columns are referred to as samples)}
+#' @param data data.frame-, matrix=, or list- classed object
 #' @param smpAnnot additional data that applies to samples (columns)
 #' @param varAnnot additional data that applies to variables (rows)
 #' @param graphType type of graph to be plotted - default = 'Scatter2D'
@@ -39,9 +38,9 @@
 #' @return htmlwidgets object
 #'
 #' @export
-canvasXpress <- function(data = NULL,     # y
-                         smpAnnot = NULL, # x
-                         varAnnot = NULL, # z
+canvasXpress <- function(data = NULL,
+                         smpAnnot = NULL,
+                         varAnnot = NULL,
                          #config items
                          graphType = 'Scatter2D', 
                          # straight-through
