@@ -27,3 +27,20 @@ test_that("network data requires both nodes and edges", {
                               graphType   = "Network"),
                  regexp = "Network diagrams must specify both <nodeData> and <edgeData> as parameters or named data list items")
 })
+
+test_that("network data types", {
+    expect_error(canvasXpress(nodeData    = 2, 
+                              edgeData    = e,
+                              graphType   = "Network"),
+                 regexp = "nodeData must be a data.frame or matrix")
+    expect_error(canvasXpress(nodeData    = n, 
+                              edgeData    = 2,
+                              graphType   = "Network"),
+                 regexp = "edgeData must be a data.frame or matrix")
+    expect_error(canvasXpress(data        = list(nodeData = 2, edgeData = e),
+                              graphType   = "Network"),
+                 regexp = "nodeData must be a data.frame or matrix")
+    expect_error(canvasXpress(data        = list(nodeData = n, edgeData = 2),
+                              graphType   = "Network"),
+                 regexp = "edgeData must be a data.frame or matrix")
+})

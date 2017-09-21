@@ -59,3 +59,14 @@ test_that("vennData required", {
                               vennGroups = 4),
                  regexp =  "vennData cannot be NULL!")
 })
+
+test_that("vennLegend required", {
+    expect_error(canvasXpress(vennData = vdata,
+                              graphType  = "Venn",
+                              vennGroups = 4),
+                 regexp = "Venn diagrams must specify both the <vennLegend> and <vennGroups> parameters")
+    expect_error(canvasXpress(vennData = vdata,
+                              vennLegend = vlegend,
+                              graphType  = "Venn"),
+                 regexp = "Venn diagrams must specify both the <vennLegend> and <vennGroups> parameters")
+})

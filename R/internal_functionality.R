@@ -76,7 +76,7 @@ assertDataCorrectness <- function(data, graphType, config) {
             stop('nodeData must be a data.frame or matrix')
         }
         
-        if (!inherits(ndata, c('data.frame', 'matrix'))) {
+        if (!inherits(edata, c('data.frame', 'matrix'))) {
             stop('edgeData must be a data.frame or matrix')
         }
     }
