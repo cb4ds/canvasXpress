@@ -65,14 +65,20 @@ canvasXpress <- function(data = NULL,     # y
     if (graphType == "Venn") {
         vdata <- NULL
         if (is.null(data)) {
-            vdata <- ifelse(inherits(config$vennData, "list"), 
-                            config$vennData[[1]], 
-                            config$vennData)
+            if (inherits(config$vennData, "list")) {
+                vdata <- config$vennData[[1]]
+            }
+            else {
+                vdata <- config$vennData
+            }
         }
         else {
-            vdata <- ifelse(inherits(data, "list"), 
-                            data[[1]], 
-                            data)
+            if (inherits(data, "list")) {
+                vdata <- data[[1]]
+            }
+            else {
+                vdata <- data
+            }
         }
         legend <- config$vennLegend
        
@@ -80,7 +86,7 @@ canvasXpress <- function(data = NULL,     # y
         config <- config[!(names(config) %in% c("vennData", "vennLegend"))]
         
         # CanvasXpress Object
-        cx_object <- list(venn        = list(data = vdata, legend = legend),
+        cx_object <- list(data        = list(venn = list(data = vdata, legend = legend)),
                           config      = config, 
                           events      = events, 
                           afterRender = afterRender)
@@ -131,7 +137,6 @@ canvasXpress <- function(data = NULL,     # y
                           afterRender = afterRender)
     } #standard graph
 
-    
     options(htmlwidgets.TOJSON_ARGS = list(dataframe = dataframe, 
                                            pretty    = pretty, 
                                            digits    = digits))
