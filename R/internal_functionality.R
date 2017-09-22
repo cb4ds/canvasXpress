@@ -189,7 +189,7 @@ setup_x <- function(y_smps, smpAnnot) {
             x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
         }
         else if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), y_smps)) {
-            stop("Rownames in smpAnnot are different from column names in data")
+            stop("Row names in smpAnnot are different from column names in data")
         }
         else {
             x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
