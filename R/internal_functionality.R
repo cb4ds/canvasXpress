@@ -183,55 +183,41 @@ setup_y <- function(data) {
 
 setup_x <- function(y_smps, smpAnnot) {
     x <- NULL
-
-print(y_smps[1:5])
-print('--colnames smpAnnot')
-print(as.list(assignCanvasXpressColnames(smpAnnot)[1:5]))
     
     if (!is.null(smpAnnot)) {
-        if (identical(as.list(assignCanvasXpressColnames(smpAnnot)), y_smps)) {
-print('normal')
-            x <- lapply(convertRowsToList(smpAnnot), function(d) if (length(d) > 1) d else list(d))
+        test <- as.list(assignCanvasXpressRownames(smpAnnot))
+        
+        if (!identical(test, y_smps)) {
+            smpAnnot <- t(smpAnnot)
+            test <- as.list(assignCanvasXpressRownames(smpAnnot))
         }
-        else if (!identical(as.list(assignCanvasXpressRownames(smpAnnot)), y_smps)) {
+
+        if (!identical(test, y_smps)) {
             stop("Row names in smpAnnot are different from column names in data")
         }
-        else {
-print('transpose')
-            x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
-        }
+
+        x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
     }
     
     x
 }
-# 
-# if (!is.null(smpAnnot)) {
-#     vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
-#     smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
-#     if (!identical(vars2, smps)) {
-#         smpAnnot <- t(smpAnnot)
-#         vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
-#         smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
-#     }
-#     if (!identical(vars2, smps)) {
-#         stop("Column names in smpAnnot are different from column names in data")
-#     }
-#     x <- lapply(convertRowsToList(t(smpAnnot)), function (d) if (length(d) > 1) d else list(d))
-# }
 
 setup_z <- function(y_vars, varAnnot) {
     z <- NULL
     
     if (!is.null(varAnnot)) {
-        if (identical(as.list(assignCanvasXpressRownames(varAnnot)), y_vars)) {
-            z <- lapply(convertRowsToList(t(varAnnot)), function(d) if (length(d) > 1) d else list(d))
+        test <- as.list(assignCanvasXpressRownames(varAnnot))
+        
+        if (!identical(test, y_vars)) {
+            varAnnot <- t(varAnnot)
+            test <- as.list(assignCanvasXpressRownames(varAnnot))
         }
-        else if (!identical(as.list(assignCanvasXpressColnames(varAnnot)), y_vars)) {
-            stop("Column names in varAnnot are different from row names in data")
+        
+        if (!identical(test, y_vars)) {
+            stop("Row names in varAnnot are different from row names in data")
         }
-        else {
-            z <- lapply(convertRowsToList(varAnnot), function(d) if (length(d) > 1) d else list(d))
-        }
+
+        z <- lapply(convertRowsToList(t(varAnnot)), function(d) if (length(d) > 1) d else list(d))
     }
     
     z

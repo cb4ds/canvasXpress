@@ -62,13 +62,13 @@ test_that("Incorrect GraphType", {
 test_that("Name mismatches", {
     expect_error(canvasXpress(data = data1.df,
                               smpAnnot = data1.var),
-                 regexp = "Rownames in smpAnnot are different from column names in data")
+                 regexp = "Row names in smpAnnot are different from column names in data")
     expect_silent(canvasXpress(data = data1.df,
                                smpAnnot = data1.smp))
     
     expect_error(canvasXpress(data = data1.df,
                               varAnnot = data1.smp),
-                 regexp = "Column names in varAnnot are different from row names in data")
+                 regexp = "Row names in varAnnot are different from row names in data")
     expect_silent(canvasXpress(data = data1.df,
                                varAnnot = data1.var))
 })
