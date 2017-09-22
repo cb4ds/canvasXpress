@@ -15,7 +15,7 @@ canvasXpress(data = NULL, smpAnnot = NULL, varAnnot = NULL,
 
 \item{varAnnot}{additional data that applies to variables (rows)}
 
-\item{graphType}{type of graph to be plotted - default = 'Scatter2D'}
+\item{graphType}{type of graph to be plotted - default = "Scatter2D"}
 
 \item{events}{user-defined events (e.g. mousemove, mouseout, click and dblclick)}
 

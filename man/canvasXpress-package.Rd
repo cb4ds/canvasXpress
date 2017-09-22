@@ -17,6 +17,6 @@ PNG image that can be played back for an extensive set of visualizations.
 
 \url{http://canvasxpress.org}  
 
-\code{browseVignettes(package = 'canvasXpress')}
+\code{browseVignettes(package = "canvasXpress")}
 }
 

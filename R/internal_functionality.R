@@ -29,15 +29,15 @@ assertDataCorrectness <- function(data, graphType, config) {
             }
         }
         
-        if (!inherits(vdata, c('data.frame', 'matrix', 'list'))) {
-            stop('vennData must be a data.frame, matrix, or named list')
+        if (!inherits(vdata, c("data.frame", "matrix", "list"))) {
+            stop("vennData must be a data.frame, matrix, or named list")
         }
         
-        if (inherits(vdata, c('list')) & (length(vdata) > 1)) {
+        if (inherits(vdata, c("list")) & (length(vdata) > 1)) {
             stop("Venn diagrams do not support multiple datasets")
         }
         else if (is.null(vdata[[1]])) {
-            stop('vennData cannot be NULL!')
+            stop("vennData cannot be NULL!")
         }
 
         if (!("vennLegend" %in% names(config)) | 
@@ -72,12 +72,12 @@ assertDataCorrectness <- function(data, graphType, config) {
             stop("edgeData cannot be NULL!")
         }
         
-        if (!inherits(ndata, c('data.frame', 'matrix'))) {
-            stop('nodeData must be a data.frame or matrix')
+        if (!inherits(ndata, c("data.frame", "matrix"))) {
+            stop("nodeData must be a data.frame or matrix")
         }
         
-        if (!inherits(edata, c('data.frame', 'matrix'))) {
-            stop('edgeData must be a data.frame or matrix')
+        if (!inherits(edata, c("data.frame", "matrix"))) {
+            stop("edgeData must be a data.frame or matrix")
         }
     }
     else if (!(graphType %in% noDataNecessary)) {
@@ -85,34 +85,34 @@ assertDataCorrectness <- function(data, graphType, config) {
             stop("data cannot be NULL!")
         }
 
-        if (!inherits(data, c('data.frame', 'matrix', 'list'))) {
-            stop('data must be a data.frame, matrix, or named list')
+        if (!inherits(data, c("data.frame", "matrix", "list"))) {
+            stop("data must be a data.frame, matrix, or named list")
         }
         
-        if (inherits(data, c('list'))) {
+        if (inherits(data, c("list"))) {
             if (length(data) < 1) {
-                stop('data specified as a list must contain at least one item')
+                stop("data specified as a list must contain at least one item")
             }
             
             if (length(data) > 1 ) {
                 if (is.null(names(data))) {
-                    stop('data specified as a list of multiple items must have named elements') 
+                    stop("data specified as a list of multiple items must have named elements") 
                 }
                 else if (!("y" %in% names(data))) {
-                    stop('data specified as a list of multiple items must contain a <y> element') 
+                    stop("data specified as a list of multiple items must contain a <y> element") 
                 }
             }
             
             fail <- vector(mode = "character", length = 0)
             
             for (name in names(data)) {
-                if (!inherits(data[[name]], c('data.frame', 'matrix'))) {
+                if (!inherits(data[[name]], c("data.frame", "matrix"))) {
                     fail <- c(fail, name)
                 }
             }
             if (length(fail) > 0) {
-                stop('data list elements <', paste(fail, collapse = ', '), 
-                     '> are not data.frame or matrix elements')
+                stop("data list elements <", paste(fail, collapse = ", "), 
+                     "> are not data.frame or matrix elements")
             }
         }
     }

@@ -10,7 +10,7 @@
 #' @section More Information:
 #' \url{http://canvasxpress.org}  
 #' 
-#' \code{browseVignettes(package = 'canvasXpress')}
+#' \code{browseVignettes(package = "canvasXpress")}
 #'
 #' @docType package
 #' @aliases canvasXpress-package
@@ -26,7 +26,7 @@
 #' @param data data.frame-, matrix=, or list- classed object
 #' @param smpAnnot additional data that applies to samples (columns)
 #' @param varAnnot additional data that applies to variables (rows)
-#' @param graphType type of graph to be plotted - default = 'Scatter2D'
+#' @param graphType type of graph to be plotted - default = "Scatter2D"
 #' @param events user-defined events (e.g. mousemove, mouseout, click and dblclick)
 #' @param afterRender event triggered after rendering
 #' @param pretty print tagged code (json/html) nicely - default = FALSE
@@ -42,7 +42,7 @@ canvasXpress <- function(data = NULL,
                          smpAnnot = NULL,
                          varAnnot = NULL,
                          #config items
-                         graphType = 'Scatter2D', 
+                         graphType = "Scatter2D", 
                          # straight-through
                          events = NULL, 
                          afterRender=NULL,
@@ -121,7 +121,7 @@ canvasXpress <- function(data = NULL,
                           afterRender = afterRender)
     }
     else if (graphType == "Genome") {
-        stop('The Genome graphType is not yet implemented')
+        stop("The Genome graphType is not yet implemented")
     }
     # standard graph
     else {

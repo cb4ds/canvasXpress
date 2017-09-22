@@ -3,5 +3,5 @@ ifelse(interactive(), source("tests/cX-function.R"), source("../cX-function.R"))
 
 
 test_that("cXcandlestick1", {
-    warning('candlestick - plot function missing')
+    warning("candlestick - plot function missing")
 })

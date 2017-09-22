@@ -13,7 +13,7 @@ if (interactive()) {
     
     # save all the datasets to the test data directory
     for (url in dataUrls$url) {
-        loc <- file(url, method = 'libcurl')
+        loc <- file(url, method = "libcurl")
         data <- readLines(loc)
         close(loc)
         
@@ -34,5 +34,5 @@ if (interactive()) {
     
     message("Package must be rebuilt and reloaded in order to realize any new data files for testing")
 } else {
-    message('Setup not run - only can be run interactively')
+    message("Setup not run - only can be run interactively")
 }

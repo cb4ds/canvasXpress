@@ -65,7 +65,7 @@ test_that("cXlayout8", {
     result <- cXlayout8()
     if (interactive()) { print(result) }
     
-    warning('grouping results in different layout order')
+    warning("grouping results in different layout order")
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })
