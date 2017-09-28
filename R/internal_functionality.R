@@ -93,14 +93,17 @@ assertDataCorrectness <- function(data, graphType, config) {
             if (length(data) < 1) {
                 stop("data specified as a list must contain at least one item")
             }
-            
+
             if (length(data) > 1 ) {
                 if (is.null(names(data))) {
                     stop("data specified as a list of multiple items must have named elements") 
                 }
                 else if (graphType == "Boxplot") {
                     req <- c("iqr1", "qtl1", "median", "qtl3", "iqr3")
-                    if (length(intersect(names(data), req)) != 5 & !("y" %in% names(data))) {
+                    precalcBoxplot <- (length(intersect(names(data), req)) == 5 ||
+                                       length(intersect(rownames(data), req)) == 5)
+                    
+                    if (!precalcBoxplot && !("y" %in% names(data))) {
                         stop("data specified as a list of multiple items must contain a <y> element")
                     }
                 }
@@ -110,13 +113,13 @@ assertDataCorrectness <- function(data, graphType, config) {
             }
             
             fail <- vector(mode = "character", length = 0)
-            
+
             for (name in names(data)) {
                 if (!inherits(data[[name]], c("data.frame", "matrix"))) {
                     fail <- c(fail, name)
                 }
             }
-            if (length(fail) > 0) {
+            if (!precalcBoxplot && length(fail) > 0) {
                 stop("data list elements <", paste(fail, collapse = ", "), 
                      "> are not data.frame or matrix elements")
             }
@@ -138,7 +141,7 @@ assignCanvasXpressColnames <- function(x) {
 
 assignCanvasXpressRownames <- function(x) {
     if (is.null(rownames(x))) {
-        names <- paste("V", seq(length = nrow(x)), sep = "")
+        names <- paste("V", seq(length = nrow(x), sep = ""))
     } else {
         names <- rownames(x)
     }

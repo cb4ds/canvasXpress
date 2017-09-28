@@ -129,19 +129,32 @@ canvasXpress <- function(data = NULL,
              ((length(intersect(names(data), precalc.names[1:5])) == 5) || 
               (length(intersect(rownames(data), precalc.names[1:5])) == 5))) {
         
-        
-        warning('boxplot precalculated')
-        
         if (inherits(data, "list")) {
             data.names <- names(data)
+            iqr1       <- as.matrix(t(data[["iqr1"]]));   dimnames(iqr1)   <- NULL
+            iqr3       <- as.matrix(t(data[["iqr3"]]));   dimnames(iqr3)   <- NULL
+            median     <- as.matrix(t(data[["median"]])); dimnames(median) <- NULL
+            qtl1       <- as.matrix(t(data[["qtl1"]]));   dimnames(qtl1)   <- NULL
+            qtl3       <- as.matrix(t(data[["qtl3"]]));   dimnames(qtl3)   <- NULL
             
-            y <- list(smps = as.list(assignCanvasXpressColnames(data[setdiff(data.names, precalc.names)])),
-                      # vars = as.list(assignCanvasXpressRownames(),
-                      iqr1   = as.matrix(data[["iqr1"]],   dimnames = NULL),
-                      iqr3   = as.matrix(data[["iqr1"]],   dimnames = NULL),
-                      median = as.matrix(data[["median"]], dimnames = NULL),
-                      qtl1   = as.matrix(data[["qtl1"]],   dimnames = NULL),
-                      qtl3   = as.matrix(data[["qtl3"]],   dimnames = NULL))
+            if (!is.null(smpAnnot)) {
+                if (inherits(smpAnnot, "character")) {
+                    smps <- smpAnnot
+                }
+                else {
+                    smps <- names(smpAnnot)
+                }
+            } else {
+                smps <- make.names(1:length(data[["iqr1"]]))
+            }
+            
+            y <- list(smps   = as.list(smps),
+                      vars   = as.list("precalculated BoxPlot"),
+                      iqr1   = iqr1,
+                      iqr3   = iqr3,
+                      median = median,
+                      qtl1   = qtl1,
+                      qtl3   = qtl3)
             if ("outliers" %in% data.names) {
                 out <- t(as.matrix(data[["outliers"]]))
                 out.new <- sapply(out, strsplit, ",")
@@ -155,16 +168,14 @@ canvasXpress <- function(data = NULL,
         }
         else {
             data.names <- rownames(data)
-            message('here')
-            
             iqr1   <- as.matrix(data["iqr1",]);   dimnames(iqr1)   <- NULL
-            iqr3   <- as.matrix(data["iqr1",]);   dimnames(iqr3)   <- NULL
+            iqr3   <- as.matrix(data["iqr3",]);   dimnames(iqr3)   <- NULL
             median <- as.matrix(data["median",]); dimnames(median) <- NULL
             qtl1   <- as.matrix(data["qtl1",]);   dimnames(qtl1)   <- NULL
             qtl3   <- as.matrix(data["qtl3",]);   dimnames(qtl3)   <- NULL
             
-            y <- list(smps = as.list(assignCanvasXpressColnames(data[setdiff(data.names, precalc.names),])),
-                      # vars = as.list(assignCanvasXpressRownames(
+            y <- list(smps   = as.list(assignCanvasXpressColnames(data)),
+                      vars   = as.list("precalculated BoxPlot"),
                       iqr1   = iqr1,
                       iqr3   = iqr3,
                       median = median,
@@ -183,16 +194,32 @@ canvasXpress <- function(data = NULL,
                 y[[other]] <- data[other,]
             }
         }
+
+        if (!is.null(smpAnnot)) {
+            if (!inherits(data, "list")) {
+                test <- as.list(assignCanvasXpressRownames(smpAnnot))
+                
+                if (!identical(test, y$smps)) {
+                    smpAnnot <- t(smpAnnot)
+                    test <- as.list(assignCanvasXpressRownames(smpAnnot))
+                }
+                
+                if (!identical(test, y$smps)) {
+                    stop("Row names in smpAnnot are different from column names in data")
+                }
+            }
+            if (!inherits(smpAnnot, "character")) {
+                x <- lapply(convertRowsToList(t(smpAnnot)), function(d) if (length(d) > 1) d else list(d))
+            }
+        }
         
-        x <- setup_x(y$smps, smpAnnot)
-        z <- setup_z(y$vars, varAnnot)
-        
+        # NOTE: z should always be null with a boxplot chart
+
         # CanvasXpress Object
         cx_object <- list(data        = list(y = y, x = x, z = z), 
                           config      = config, 
                           events      = events, 
                           afterRender = afterRender)
-        print(str(cx_object))
     }
     # standard graph
     else {
