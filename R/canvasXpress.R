@@ -56,10 +56,12 @@ canvasXpress <- function(data = NULL,
     config <- list(graphType = graphType, isR = TRUE, ...)
     assertDataCorrectness(data, graphType, config)
     
-    x         <- NULL
-    y         <- NULL
-    z         <- NULL
-    dataframe <- "columns"
+    x             <- NULL
+    y             <- NULL
+    z             <- NULL
+    dataframe     <- "columns"
+    precalc.names <- c("iqr1", "qtl1", "median", "qtl3", "iqr3", "outliers")
+    
     
     if (graphType == "Venn") {
         vdata <- NULL
@@ -122,6 +124,75 @@ canvasXpress <- function(data = NULL,
     }
     else if (graphType == "Genome") {
         stop("The Genome graphType is not yet implemented")
+    }
+    else if (graphType == "Boxplot" &&
+             ((length(intersect(names(data), precalc.names[1:5])) == 5) || 
+              (length(intersect(rownames(data), precalc.names[1:5])) == 5))) {
+        
+        
+        warning('boxplot precalculated')
+        
+        if (inherits(data, "list")) {
+            data.names <- names(data)
+            
+            y <- list(smps = as.list(assignCanvasXpressColnames(data[setdiff(data.names, precalc.names)])),
+                      # vars = as.list(assignCanvasXpressRownames(),
+                      iqr1   = as.matrix(data[["iqr1"]],   dimnames = NULL),
+                      iqr3   = as.matrix(data[["iqr1"]],   dimnames = NULL),
+                      median = as.matrix(data[["median"]], dimnames = NULL),
+                      qtl1   = as.matrix(data[["qtl1"]],   dimnames = NULL),
+                      qtl3   = as.matrix(data[["qtl3"]],   dimnames = NULL))
+            if ("outliers" %in% data.names) {
+                out <- t(as.matrix(data[["outliers"]]))
+                out.new <- sapply(out, strsplit, ",")
+                out.new <- unname(sapply(out.new, as.numeric))
+                out.new <- sapply(out.new, as.list)
+                y$out <- list(out.new)
+            }
+            for (other in setdiff(data.names, precalc.names)) {
+                y[[other]] <- data[other]
+            }
+        }
+        else {
+            data.names <- rownames(data)
+            message('here')
+            
+            iqr1   <- as.matrix(data["iqr1",]);   dimnames(iqr1)   <- NULL
+            iqr3   <- as.matrix(data["iqr1",]);   dimnames(iqr3)   <- NULL
+            median <- as.matrix(data["median",]); dimnames(median) <- NULL
+            qtl1   <- as.matrix(data["qtl1",]);   dimnames(qtl1)   <- NULL
+            qtl3   <- as.matrix(data["qtl3",]);   dimnames(qtl3)   <- NULL
+            
+            y <- list(smps = as.list(assignCanvasXpressColnames(data[setdiff(data.names, precalc.names),])),
+                      # vars = as.list(assignCanvasXpressRownames(
+                      iqr1   = iqr1,
+                      iqr3   = iqr3,
+                      median = median,
+                      qtl1   = qtl1,
+                      qtl3   = qtl3)
+            if ("outliers" %in% data.names) {
+                if ("outliers" %in% data.names) {
+                    out <- t(as.matrix(data["outliers",]))
+                    out.new <- sapply(out, strsplit, ",")
+                    out.new <- unname(sapply(out.new, as.numeric))
+                    out.new <- sapply(out.new, as.list)
+                    y$out <- list(out.new)
+                }
+            }
+            for (other in setdiff(data.names, precalc.names)) {
+                y[[other]] <- data[other,]
+            }
+        }
+        
+        x <- setup_x(y$smps, smpAnnot)
+        z <- setup_z(y$vars, varAnnot)
+        
+        # CanvasXpress Object
+        cx_object <- list(data        = list(y = y, x = x, z = z), 
+                          config      = config, 
+                          events      = events, 
+                          afterRender = afterRender)
+        print(str(cx_object))
     }
     # standard graph
     else {

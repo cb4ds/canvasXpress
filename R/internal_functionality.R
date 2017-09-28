@@ -98,6 +98,12 @@ assertDataCorrectness <- function(data, graphType, config) {
                 if (is.null(names(data))) {
                     stop("data specified as a list of multiple items must have named elements") 
                 }
+                else if (graphType == "Boxplot") {
+                    req <- c("iqr1", "qtl1", "median", "qtl3", "iqr3")
+                    if (length(intersect(names(data), req)) != 5 & !("y" %in% names(data))) {
+                        stop("data specified as a list of multiple items must contain a <y> element")
+                    }
+                }
                 else if (!("y" %in% names(data))) {
                     stop("data specified as a list of multiple items must contain a <y> element") 
                 }
