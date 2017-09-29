@@ -94,6 +94,8 @@ assertDataCorrectness <- function(data, graphType, config) {
                 stop("data specified as a list must contain at least one item")
             }
 
+            precalcBoxplot <- FALSE
+            
             if (length(data) > 1 ) {
                 if (is.null(names(data))) {
                     stop("data specified as a list of multiple items must have named elements") 
@@ -141,7 +143,7 @@ assignCanvasXpressColnames <- function(x) {
 
 assignCanvasXpressRownames <- function(x) {
     if (is.null(rownames(x))) {
-        names <- paste("V", seq(length = nrow(x), sep = ""))
+        names <- paste("V", seq(length = nrow(x)), sep = "")
     } else {
         names <- rownames(x)
     }
