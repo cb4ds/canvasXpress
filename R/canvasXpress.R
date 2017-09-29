@@ -23,7 +23,7 @@
 #' use in any html-compatible context
 #'  
 #' 
-#' @param data data.frame-, matrix=, or list- classed object
+#' @param data data.frame-, matrix-, or list- classed data object
 #' @param smpAnnot additional data that applies to samples (columns)
 #' @param varAnnot additional data that applies to variables (rows)
 #' @param graphType type of graph to be plotted - default = "Scatter2D"

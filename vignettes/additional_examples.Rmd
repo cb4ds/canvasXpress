@@ -148,7 +148,6 @@ canvasXpress(data                    = cxdata,
 
 
 ### BoxPlot
-#### CanvasXpress statistics
 
 ```r
 reshape <- data %>% gather(key = "Type", value = "Rate", 
@@ -169,7 +168,7 @@ canvasXpress(data                  = cxdata,
              smpLabelRotate        = 90,
              showLegend            = FALSE,
              title                 = "US Arrests by Type",
-             titleScaleFontFactor  = 0.5,)
+             titleScaleFontFactor  = 0.5)
 ```
 ![BoxPlot1](images/R-BoxPlot1.png)
 
