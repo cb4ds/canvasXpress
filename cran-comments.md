@@ -1,6 +1,6 @@
 ## Comments from Maintainer
 
-Major version update - now supports the full canvasXpress functionality.  Includes a testthat test suite of ~100 charts.  Backwards-compatible with v.0.17.2.
+Major version update - now supports the full canvasXpress functionality.  Includes a testthat test suite of ~100 charts.  Backwards-compatible with v.0.17.2.  Note that the version was updated to 1 from 0 - the second and third parts of the version number still follow the canvasXpress JS library version so that it is clear to users which version of the JS library is being used.
 
 ---  
 
