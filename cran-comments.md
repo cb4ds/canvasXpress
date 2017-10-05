@@ -1,14 +1,14 @@
 ## Comments from Maintainer
 
-Updated internal libraries and also fixed pandoc failure in vignettes for CRAN check results.
+Major version update - now supports the full canvasXpress functionality.  Includes a testthat test suite of ~100 charts.  Backwards-compatible with v.0.17.2.
 
 ---  
 
 ## Test environments
 
-* ubuntu 16.04, R 3.2.5
 * ubuntu 16.04, R 3.3.3
 * ubuntu 16.04, R 3.4.1
+* ubuntu 16.04, R 3.4.2
 
 * ubuntu 12.04.5 (on travis-ci), R 3.3.3
 * ubuntu 12.04.5 (on travis-ci), R 3.4.0
