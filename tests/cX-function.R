@@ -1385,7 +1385,7 @@ cXkaplanmeier1 <- function() {
     showLegend=FALSE,
     showTransition=TRUE,
     title="Kaplan-Meier Plot",
-    afterRender=list(list("addKaplanMeierCurve", list("Time","Censored-1","Data 1 Population","rgb(0,0,255)")), list("addKaplanMeierCurve", list("Time","Censored-2","Data 2 Population","rgb(255,0,0)")))
+    afterRender=list(list("addKaplanMeierCurve", list('Time','Censored-1','Data 1 Population','rgb(0,0,255)')), list("addKaplanMeierCurve", list('Time','Censored-2','Data 2 Population','rgb(255,0,0)')))
   )
 }
 
@@ -1402,7 +1402,7 @@ cXkaplanmeier2 <- function() {
     showLegend=FALSE,
     showTransition=TRUE,
     title="Kaplan-Meier Plot",
-    afterRender=list(list("addKaplanMeierCurve", list("Time","Censored-1","Data 1 Population","rgb(0,0,255)")), list("addKaplanMeierCurve", list("Time","Censored-2","Data 2 Population","rgb(255,0,0)")))
+    afterRender=list(list("addKaplanMeierCurve", list('Time','Censored-1','Data 1 Population','rgb(0,0,255)')), list("addKaplanMeierCurve", list('Time','Censored-2','Data 2 Population','rgb(255,0,0)')))
   )
 }
 
@@ -2277,7 +2277,7 @@ cXscatter2d5 <- function() {
     xAxisTickColor="rgb(255,255,255)",
     yAxis=list("Temperature"),
     yAxisTickColor="rgb(255,255,255)",
-    afterRender=list(list("addRegressionLine", list("red")))
+    afterRender=list(list("addRegressionLine", list('red')))
   )
 }
 

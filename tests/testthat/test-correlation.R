@@ -14,6 +14,7 @@ test_that("cXcorrelation2", {
     result <- cXcorrelation2()
     if (interactive()) { print(result) }
     
+    warning('no legend showing')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

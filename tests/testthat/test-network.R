@@ -32,6 +32,7 @@ test_that("cXnetwork4", {
     result <- cXnetwork4()
     if (interactive()) { print(result) }
 
+    warning('not laid out exactly the same, almost a mirror')
     expect_s3_class(result, "canvasXpress")
     expect_s3_class(result, "htmlwidget")
 })

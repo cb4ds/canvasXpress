@@ -19,7 +19,7 @@ test_that("cXvenn2", {
 })
 
 test_that("cXvenn3", {
-    result <- cXvenn1()
+    result <- cXvenn3()
     if (interactive()) { print(result) }
     
     expect_s3_class(result, "canvasXpress")
