@@ -36,3 +36,4 @@ Suggests:
     covr,
     magrittr
 VignetteBuilder: knitr
+
