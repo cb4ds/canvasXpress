@@ -51,10 +51,13 @@ test_that("cXlayout11", {
 
 test_that("cXlayout12", {
     check_ui_test(cXlayout12())
+    fail("Plot is completely different from online version, is actually plot13")
 })
 
 test_that("cXlayout13", {
     check_ui_test(cXlayout13())
 
     warning('middle section too small at default height - working as designed')
+    fail("Plot is completely different from online version, is actually plot14")
+
 })

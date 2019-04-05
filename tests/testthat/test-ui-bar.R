@@ -47,4 +47,5 @@ test_that("cXbar11", {
     check_ui_test(cXbar11())
 
     warning("Durable overlay looks different in R than on the CX website, missing the following parm: smpOverlayProperties=list('Durable' = list('type'='Boolean'))")
+    fail("When high cap is null in online version, it's blank here")
 })
