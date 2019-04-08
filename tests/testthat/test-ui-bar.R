@@ -15,8 +15,6 @@ test_that("cXbar3", {
 
 test_that("cXbar4", {
     check_ui_test(cXbar4())
-
-    warning("Inconsistent Tooltip: for Setosa/Sepal.Length dots, it's showing the second number in scientific format")
 })
 
 test_that("cXbar5", {
@@ -49,5 +47,4 @@ test_that("cXbar11", {
     check_ui_test(cXbar11())
 
     warning("Durable overlay looks different in R than on the CX website, missing the following parm: smpOverlayProperties=list('Durable' = list('type'='Boolean'))")
-    fail("When high cap is null in online version, it's blank here")
 })

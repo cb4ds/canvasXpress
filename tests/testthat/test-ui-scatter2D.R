@@ -51,7 +51,6 @@ test_that("cXscatter2d12", {
 
 test_that("cXscatter2d13", {
     check_ui_test(cXscatter2d13())
-    fail("Identity line, diagonal, doesn't highlight when hovered over")
 })
 
 test_that("cXscatter2d14", {

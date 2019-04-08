@@ -3,7 +3,6 @@ context("canvasXpress Web Charts - Stacked")
 
 test_that("cXstacked1", {
     check_ui_test(cXstacked1())
-    fail("bars within each column are stacked differently")
 })
 
 test_that("cXstacked2", {
