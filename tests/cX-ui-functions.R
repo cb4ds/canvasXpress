@@ -4423,7 +4423,7 @@ cXtreemap3 <- function() {
 cXvenn1 <- function() {
   library(canvasXpress)
   canvasXpress(
-    vennData=data.frame(AD=257, ABCD=148, AC=456, ACD=298, ABC=552, A=340, BD=354, B=562, AB=639, BC=915, D=592, C=620, CD=143, ABD=578, BCD=613),
+    vennData=data.frame(ABC=552, B=562, ABD=578, BD=354, ABCD=148, AD=257, ACD=298, AC=456, BC=915, AB=639, C=620, CD=143, BCD=613, A=340, D=592),
     vennLegend=list(A="List 1", B="List 2", C="List 3", D="List 4"),
     graphType="Venn",
     showTransition=TRUE,
@@ -4434,7 +4434,7 @@ cXvenn1 <- function() {
 cXvenn2 <- function() {
   library(canvasXpress)
   canvasXpress(
-    vennData=data.frame(AC=456, ABCD=148, AD=257, A=340, ACD=298, ABC=552, B=562, BD=354, ABD=578, BCD=613, CD=143, BC=915, C=620, AB=639, D=592),
+    vennData=data.frame(AC=456, ACD=298, AD=257, ABCD=148, BD=354, ABD=578, B=562, ABC=552, D=592, BCD=613, A=340, CD=143, C=620, BC=915, AB=639),
     vennLegend=list(A="List 1", B="List 2", C="List 3", D="List 4"),
     graphType="Venn",
     showTransition=TRUE,
@@ -4445,7 +4445,7 @@ cXvenn2 <- function() {
 cXvenn3 <- function() {
   library(canvasXpress)
   canvasXpress(
-    vennData=data.frame(ABC=552, ACD=298, A=340, ABCD=148, AD=257, AC=456, BC=915, C=620, AB=639, D=592, BCD=613, ABD=578, CD=143, BD=354, B=562),
+    vennData=data.frame(CD=143, D=592, A=340, BCD=613, C=620, AB=639, BC=915, ACD=298, AC=456, ABC=552, ABCD=148, AD=257, ABD=578, BD=354, B=562),
     vennLegend=list(A="List 1", B="List 2", C="List 3", D="List 4"),
     graphType="Venn",
     vennGroups=2

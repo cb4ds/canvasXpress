@@ -44,13 +44,14 @@ test_that("cXlayout10", {
 test_that("cXlayout11", {
     check_ui_test(cXlayout11())
 
-    warning("grouping results in different layout order")
+    warning("The subcharts are in a different layout order compared to web example")
 })
 
 test_that("cXlayout12", {
     check_ui_test(cXlayout12())
 
-    warning("grouping results in different layout order")
+    warning("Colors for drug are different, two pieces are green, but one should be orange")
+    warning("The subcharts are in a different layout order compared to web example")
 })
 
 test_that("cXlayout13", {
