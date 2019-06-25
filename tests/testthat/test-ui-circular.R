@@ -7,6 +7,7 @@ test_that("cXcircular1", {
 
 test_that("cXcircular2", {
     check_ui_test(cXcircular2())
+    warning("colors in legend don't match graph - same in web example")
 })
 
 test_that("cXcircular3", {

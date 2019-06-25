@@ -7,6 +7,7 @@ test_that("cXbubble1", {
 
 test_that("cXbubble2", {
     check_ui_test(cXbubble2())
+    warning("missing order legend box as in web example")
 })
 
 test_that("cXbubble3", {
