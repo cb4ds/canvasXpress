@@ -49,6 +49,6 @@ test_that("cXheatmap12", {
     check_ui_test(cXheatmap12())
 
     message('middle section too small at default height - working as designed')
-    warning("Boolean overlay looks different on our version than web version, similar to warning for cXbar10")
+    warning("Boolean overlay looks different in R than on the CX website")
 })
 
