@@ -67,6 +67,7 @@ test_that("cXboxplot16", {
 
 test_that("cXboxplot17", {
     check_ui_test(cXboxplot17())
+    warning("x axis labels are within the boxplot borders")
 })
 
 test_that("cXboxplot18", {

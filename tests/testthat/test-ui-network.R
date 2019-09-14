@@ -14,6 +14,7 @@ test_that("cXnetwork2", {
 
 test_that("cXnetwork3", {
     check_ui_test(cXnetwork3())
+    fail("Error: Test failed: Error in read.table")
 })
 
 
