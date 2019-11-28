@@ -9,11 +9,9 @@ test_that("cXnetwork2", {
     check_ui_test(cXnetwork2())
 })
 
-
 test_that("cXnetwork3", {
     check_ui_test(cXnetwork3())
 })
-
 
 test_that("cXnetwork4", {
     check_ui_test(cXnetwork4())
@@ -45,6 +43,8 @@ test_that("cXnetwork10", {
 
 test_that("cXnetwork11", {
     check_ui_test(cXnetwork11())
+
+    warning("plot is not readable")
 })
 
 test_that("cXnetwork12", {
