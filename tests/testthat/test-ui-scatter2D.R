@@ -3,7 +3,6 @@ context("canvasXpress Web Charts - Scatter2D")
 
 test_that("cXscatter2d1", {
     check_ui_test(cXscatter2d1())
-    warning("Hovering over a circle doesn't select the circle like in the web example until plot is resized")
 })
 
 test_that("cXscatter2d2", {

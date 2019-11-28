@@ -11,7 +11,6 @@ test_that("cXtree2", {
     check_ui_test(cXtree2())
 
     warning('Hover effect may not be visible if plot is not resized')
-
 })
 
 test_that("cXtree3", {
