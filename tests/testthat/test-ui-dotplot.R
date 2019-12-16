@@ -3,12 +3,12 @@ context("canvasXpress Web Charts - Dotplot")
 
 test_that("cXdotplot1", {
     check_ui_test(cXdotplot1())
+
+    warning("Hover effect may not be visible if the plot is not resized.")
 })
 
 test_that("cXdotplot2", {
     check_ui_test(cXdotplot2())
-
-    warning("Inconsistent Tooltip: for Setosa/Sepal.Length dots, sometimes the second number is in scientific format")
 })
 
 test_that("cXdotplot3", {
