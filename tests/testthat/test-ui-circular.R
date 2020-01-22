@@ -9,8 +9,6 @@ test_that("cXcircular1", {
 
 test_that("cXcircular2", {
     check_ui_test(cXcircular2())
-
-    warning("Hover effect may not be visible until the plot is resized.")
 })
 
 test_that("cXcircular3", {
