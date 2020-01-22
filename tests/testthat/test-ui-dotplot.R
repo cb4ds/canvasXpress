@@ -3,8 +3,6 @@ context("canvasXpress Web Charts - Dotplot")
 
 test_that("cXdotplot1", {
     check_ui_test(cXdotplot1())
-
-    warning('Hover effect may not be visible if plot is not resized')
 })
 
 test_that("cXdotplot2", {
@@ -43,3 +41,6 @@ test_that("cXdotplot10", {
     check_ui_test(cXdotplot10())
 })
 
+test_that("cXdotplot11", {
+    check_ui_test(cXdotplot11())
+})

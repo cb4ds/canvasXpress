@@ -1,6 +1,6 @@
 # helper functions for tests
+library(canvasXpress.data)
 library(htmlwidgets)
-
 
 if (interactive()) {
     library(testthat)
