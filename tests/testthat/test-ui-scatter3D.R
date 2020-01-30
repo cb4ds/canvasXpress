@@ -10,7 +10,7 @@ test_that("cXscatter3d1", {
 test_that("cXscatter3d2", {
     check_ui_test(cXscatter3d2())
 
-    warning("Plots could look different in different browsers")
+    warning("Plot could look different in different browsers")
 })
 
 test_that("cXscatter3d3", {
@@ -28,7 +28,7 @@ test_that("cXscatter3d5", {
 test_that("cXscatter3d6", {
     check_ui_test(cXscatter3d6())
 
-    warning("Plots could look different in different browsers")
+    warning("Plot could look different in different browsers")
 })
 
 test_that("cXscatter3d7", {
