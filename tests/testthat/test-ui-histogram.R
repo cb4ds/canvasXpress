@@ -13,5 +13,4 @@ test_that("cXhistogram3", {
     check_ui_test(cXhistogram3())
 
     warning("Clicking on legend doesn't fade clicked item")
-
 })
