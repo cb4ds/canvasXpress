@@ -32,13 +32,13 @@ shinyUI(fluidPage(
                               width    = "100%",
                               choices  = NULL,
                               multiple = FALSE),
-                              htmlOutput("volcano_plot")),
+                htmlOutput("volcano_plot")),
         column(width = 6,
                selectizeInput(inputId  = "genesSel",
                               label    = HTML("Gene(s):&nbsp;"),
                               width    = "100%",
                               choices  = NULL,
                               multiple = TRUE),
-                              htmlOutput("genes_plot"))
+               htmlOutput("genes_plot"))
     )
 ))
