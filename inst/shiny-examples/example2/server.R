@@ -84,7 +84,7 @@ shinyServer(function(input, output, session) {
             tags$div(width = "100%",
                      align = "center",
                      style = "height: 400px;",
-                     cxplot)
+                     renderCanvasXpress(cxplot))
         } else {
             tags$div(width = "100%",
                      align = "center",
@@ -113,7 +113,7 @@ shinyServer(function(input, output, session) {
             tags$div(width = "100%",
                      align = "center",
                      style = "height: 400px;",
-                     cxplot)
+                     renderCanvasXpress(cxplot))
         } else {
             tags$div(width = "100%",
                      align = "center",
@@ -171,15 +171,12 @@ shinyServer(function(input, output, session) {
     })
 
     observeEvent(input$factorSel,{
-
         updateSelectizeInput(session, "levelSel",
                              choices  = levels_choices(),
                              selected = levels_choices()[1],
                              server   = TRUE)
 
-
         selected_gene <- NULL
-
         if ((!is.null(input$factorSel) && (input$factorSel != ""))){
             selected_gene <- as.list(g_geneChoices[1:2])
         }
