@@ -16,8 +16,7 @@ test_that("Barplot URL data", {
         xAxis2Show       = FALSE
     )
 
-    warning("The sub-menu items that is displayed on a right-click within the canvas do not disappear even after the mouse pointer is moved away.
+     check_ui_test(result)
+     warning("The sub-menu items that is displayed on a right-click within the canvas do not disappear even after the mouse pointer is moved away.
             This makes it difficult to select any item. This issue is specifc to R studio and cannot be reproduced on the web")
-
-    check_ui_test(result)
 })
