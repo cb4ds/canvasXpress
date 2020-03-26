@@ -21,9 +21,9 @@ shinyUI(fluidPage(
     ),
     fluidRow(
         column(width = 6,
-               htmlOutput("distribution_plot")),
+               canvasXpressOutput("distribution_plot")),
         column(width = 6,
-               htmlOutput("pca_plot"))
+               canvasXpressOutput("pca_plot"))
     ),
     fluidRow(
         column(width = 6,

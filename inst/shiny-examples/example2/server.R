@@ -67,7 +67,7 @@ shinyServer(function(input, output, session) {
         cxplot
     })
 
-    output$distribution_plot <- renderUI({
+    output$distribution_plot <- renderCanvasXpress({
         cxplot <- NULL
 
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
@@ -80,22 +80,10 @@ shinyServer(function(input, output, session) {
                 title     = glue("Distribution: {input$factorSel}"))
         }
 
-        if (!is.null(cxplot)) {
-            tags$div(width = "100%",
-                     align = "center",
-                     style = "height: 400px;",
-                     renderCanvasXpress(cxplot))
-        } else {
-            tags$div(width = "100%",
-                     align = "center",
-                     style = "height: 400px;",
-                     HTML(rep("<br/>", 5)),
-                     tags$p(style = "color:grey;",
-                            "Select a factor to create this plot"))
-        }
+       cxplot
     })
 
-    output$pca_plot <- renderUI({
+    output$pca_plot <- renderCanvasXpress({
         cxplot <- NULL
 
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
@@ -109,19 +97,7 @@ shinyServer(function(input, output, session) {
                                    transparency             = 0.8)
         }
 
-        if (!is.null(cxplot)) {
-            tags$div(width = "100%",
-                     align = "center",
-                     style = "height: 400px;",
-                     renderCanvasXpress(cxplot))
-        } else {
-            tags$div(width = "100%",
-                     align = "center",
-                     style = "height: 400px;",
-                     HTML(rep("<br/>", 5)),
-                     tags$p(style = "color:grey;",
-                            "Select a factor to create this plot"))
-        }
+        cxplot
     })
 
     output$volcano_plot <- renderUI({
@@ -170,20 +146,10 @@ shinyServer(function(input, output, session) {
         }
     })
 
-    observeEvent(input$factorSel,{
+    observeEvent(levels_choices(),{
         updateSelectizeInput(session, "levelSel",
                              choices  = levels_choices(),
                              selected = levels_choices()[1],
-                             server   = TRUE)
-
-        selected_gene <- NULL
-        if ((!is.null(input$factorSel) && (input$factorSel != ""))){
-            selected_gene <- as.list(g_geneChoices[1:2])
-        }
-
-        updateSelectizeInput(session, "genesSel",
-                             choices  = g_geneChoices,
-                             selected = selected_gene,
                              server   = TRUE)
     })
 })
