@@ -80,7 +80,7 @@ shinyServer(function(input, output, session) {
                 title     = glue("Distribution: {input$factorSel}"))
         }
 
-       cxplot
+        cxplot
     })
 
     output$pca_plot <- renderCanvasXpress({
@@ -146,7 +146,7 @@ shinyServer(function(input, output, session) {
         }
     })
 
-    observeEvent(levels_choices(),{
+    observeEvent(levels_choices(), {
         updateSelectizeInput(session, "levelSel",
                              choices  = levels_choices(),
                              selected = levels_choices()[1],
