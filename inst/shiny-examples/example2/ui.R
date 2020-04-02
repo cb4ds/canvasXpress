@@ -21,9 +21,9 @@ shinyUI(fluidPage(
     ),
     fluidRow(
         column(width = 6,
-               canvasXpressOutput("distribution_plot")),
+               htmlOutput("distribution_plot")),
         column(width = 6,
-               canvasXpressOutput("pca_plot"))
+               htmlOutput("pca_plot"))
     ),
     fluidRow(
         column(width = 6,
@@ -37,8 +37,7 @@ shinyUI(fluidPage(
                selectizeInput(inputId  = "genesSel",
                               label    = HTML("Gene(s):&nbsp;"),
                               width    = "100%",
-                              choices  = g_geneChoices,
-                              selected = g_geneChoices[1:2],
+                              choices  = NULL,
                               multiple = TRUE),
                htmlOutput("genes_plot"))
     )

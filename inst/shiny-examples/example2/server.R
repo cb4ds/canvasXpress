@@ -3,8 +3,12 @@ shinyServer(function(input, output, session) {
     levels_choices <- reactive({
         levels <- NULL
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
-            levels <- unique(g_GSE9750$x[, colnames(g_GSE9750$x) == input$factorSel])
-            levels <- levels[!is.na(levels)]
+            levels     <- unique(g_GSE9750$x[, colnames(g_GSE9750$x) == input$factorSel])
+            levels     <- sort(levels[!is.na(levels)])
+            levels_na  <- levels[which(levels %in% c("<NA>","Unknown"))]
+            if (length(levels_na) != 0) {
+                levels <- append(levels[levels != levels_na],levels_na)
+            }
         }
         levels
     })
@@ -48,12 +52,14 @@ shinyServer(function(input, output, session) {
 
         if (!is.null(input$factorSel) && (input$factorSel != "") &&
             !is.null(input$genesSel)  && (input$genesSel != "")) {
-            data  <- as.matrix(g_GSE9750$y[input$genesSel, , drop = F])
+            data           <- as.matrix(g_GSE9750$y[input$genesSel, , drop = F])
             rownames(data) <- names(g_geneChoices[g_geneChoices %in% input$genesSel])
+            smpannot       <- g_GSE9750$x[order(match(g_GSE9750$x[[input$factorSel]],levels_choices())),]
+            data.sort      <- data[,rownames(smpannot), drop = F]
 
             cxplot <- canvasXpress(
-                data            = data,
-                smpAnnot        = g_GSE9750$x,
+                data            = data.sort,
+                smpAnnot        = smpannot,
                 graphType       = "Boxplot",
                 groupingFactors = list(input$factorSel),
                 title           = glue("{input$factorSel}: {glue_collapse(names(g_geneChoices[g_geneChoices %in% input$genesSel]), sep = ', ')}"),
@@ -67,37 +73,68 @@ shinyServer(function(input, output, session) {
         cxplot
     })
 
-    output$distribution_plot <- renderCanvasXpress({
+    output$distribution_plot <- renderUI({
         cxplot <- NULL
 
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
             freq_table <- as.data.frame(table(Factor = g_GSE9750$x[, input$factorSel], exclude = NULL), stringsAsFactors = FALSE)
-            data <- data.frame(Freq = as.vector(freq_table[, "Freq"]), row.names = as.vector(freq_table[, "Factor"]))
+            data       <- data.frame(Freq = as.vector(freq_table[, "Freq"]), row.names = as.vector(freq_table[, "Factor"]))
+            data.sort  <- data.frame(Freq = data[order((match(rownames(data),levels_choices()))),], row.names = levels_choices())
 
             cxplot <- canvasXpress(
-                data      = data,
+                data      = data.sort,
                 graphType = "Pie",
+                width     = "100%",
                 title     = glue("Distribution: {input$factorSel}"))
         }
 
-        cxplot
+        if (!is.null(cxplot)) {
+            tags$div(width = "100%",
+                     align = "center",
+                     style = "height: 400px;",
+                     cxplot)
+        } else {
+            tags$div(width = "100%",
+                     align = "center",
+                     style = "height: 400px;",
+                     HTML(rep("<br/>", 5)),
+                     tags$p(style = "color:grey;",
+                            "Select a factor to create this plot"))
+        }
     })
 
-    output$pca_plot <- renderCanvasXpress({
+    output$pca_plot <- renderUI({
         cxplot <- NULL
 
+        levels        <- list(as.list(levels_choices()))
+        names(levels) <-  glue("{input$factorSel}")
+
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
-            cxplot <- canvasXpress(data      = prcomp(g_GSE9750$y)$rotation,
-                                   varAnnot  = g_GSE9750$x,
-                                   graphType = "Scatter3D",
-                                   colorBy   = input$factorSel,
-                                   title     = glue("PCA for {input$factorSel}"),
+            cxplot <- canvasXpress(data        = prcomp(g_GSE9750$y)$rotation,
+                                   varAnnot    = g_GSE9750$x,
+                                   graphType   = "Scatter3D",
+                                   colorBy     = input$factorSel,
+                                   legendOrder = levels,
+                                   width       = "100%",
+                                   title       = glue("PCA for {input$factorSel}"),
                                    axisTickScaleFontFactor  = 0.5,
                                    axisTitleScaleFontFactor = 0.7,
                                    transparency             = 0.8)
         }
 
-        cxplot
+        if (!is.null(cxplot)) {
+            tags$div(width = "100%",
+                     align = "center",
+                     style = "height: 400px;",
+                     cxplot)
+        } else {
+            tags$div(width = "100%",
+                     align = "center",
+                     style = "height: 400px;",
+                     HTML(rep("<br/>", 5)),
+                     tags$p(style = "color:grey;",
+                            "Select a factor to create this plot"))
+        }
     })
 
     output$volcano_plot <- renderUI({
@@ -146,10 +183,18 @@ shinyServer(function(input, output, session) {
         }
     })
 
-    observeEvent(levels_choices(), {
+    observeEvent(input$factorSel, {
         updateSelectizeInput(session, "levelSel",
                              choices  = levels_choices(),
                              selected = levels_choices()[1],
                              server   = TRUE)
+
+        if ((!is.null(input$factorSel) || (input$factorSel != "")) &&
+            (is.null(input$genesSel)   || (input$genesSel == ""))) {
+            updateSelectizeInput(session, "genesSel",
+                                 choices  = g_geneChoices,
+                                 selected = as.list(g_geneChoices[1:2]),
+                                 server   = TRUE)
+        }
     })
 })
