@@ -3,11 +3,10 @@ shinyServer(function(input, output, session) {
     levels_choices <- reactive({
         levels <- NULL
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
-            levels     <- unique(g_GSE9750$x[, colnames(g_GSE9750$x) == input$factorSel])
-            levels     <- sort(levels[!is.na(levels)])
+            levels     <- sort(unique(g_GSE9750$x[, colnames(g_GSE9750$x) == input$factorSel]))
             levels_na  <- levels[which(levels %in% c("<NA>","Unknown"))]
             if (length(levels_na) != 0) {
-                levels <- append(levels[levels != levels_na],levels_na)
+                levels <- append(levels[!(levels %in% levels_na)],levels_na)
             }
         }
         levels
@@ -55,10 +54,10 @@ shinyServer(function(input, output, session) {
             data           <- as.matrix(g_GSE9750$y[input$genesSel, , drop = F])
             rownames(data) <- names(g_geneChoices[g_geneChoices %in% input$genesSel])
             smpannot       <- g_GSE9750$x[order(match(g_GSE9750$x[[input$factorSel]],levels_choices())),]
-            data.sort      <- data[,rownames(smpannot), drop = F]
+            data           <- data[,rownames(smpannot), drop = F]
 
             cxplot <- canvasXpress(
-                data            = data.sort,
+                data            = data,
                 smpAnnot        = smpannot,
                 graphType       = "Boxplot",
                 groupingFactors = list(input$factorSel),
@@ -78,11 +77,11 @@ shinyServer(function(input, output, session) {
 
         if (!is.null(input$factorSel) && (input$factorSel != "")) {
             freq_table <- as.data.frame(table(Factor = g_GSE9750$x[, input$factorSel], exclude = NULL), stringsAsFactors = FALSE)
-            data       <- data.frame(Freq = as.vector(freq_table[, "Freq"]), row.names = as.vector(freq_table[, "Factor"]))
-            data.sort  <- data.frame(Freq = data[order((match(rownames(data),levels_choices()))),], row.names = levels_choices())
+            data       <- data.frame(Freq = freq_table$Freq[order(match(freq_table$Factor,levels_choices()))],
+                                     row.names = levels_choices())
 
             cxplot <- canvasXpress(
-                data      = data.sort,
+                data      = data,
                 graphType = "Pie",
                 width     = "100%",
                 title     = glue("Distribution: {input$factorSel}"))
@@ -183,18 +182,10 @@ shinyServer(function(input, output, session) {
         }
     })
 
-    observeEvent(input$factorSel, {
+    observeEvent(levels_choices(), {
         updateSelectizeInput(session, "levelSel",
                              choices  = levels_choices(),
                              selected = levels_choices()[1],
                              server   = TRUE)
-
-        if ((!is.null(input$factorSel) || (input$factorSel != "")) &&
-            (is.null(input$genesSel)   || (input$genesSel == ""))) {
-            updateSelectizeInput(session, "genesSel",
-                                 choices  = g_geneChoices,
-                                 selected = as.list(g_geneChoices[1:2]),
-                                 server   = TRUE)
-        }
     })
 })
