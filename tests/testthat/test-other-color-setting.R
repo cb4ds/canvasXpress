@@ -77,4 +77,3 @@ test_that("stackedbar custom colors", {
     )
     check_ui_test(result)
 })
-# so i can commit again
