@@ -1,10 +1,14 @@
 context("canvasXpress decorations")
 
 
-data_y <- read.table("https://www.canvasxpress.org/data/cX-scatterR2-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
-data_z <- read.table("https://www.canvasxpress.org/data/cX-scatterR2-var.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
-
 test_that("scatterplot referenceLines", {
+    tryCatch({
+        data_y <- read.table("https://www.canvasxpress.org/data/cX-scatterR2-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+        data_z <- read.table("https://www.canvasxpress.org/data/cX-scatterR2-var.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
 
     result <-  canvasXpress(data                    = data_y,
                             varAnnot                = data_z,
@@ -25,7 +29,40 @@ test_that("scatterplot referenceLines", {
     check_ui_test(result)
 })
 
+test_that("segregated scatterplot referenceLines", {
+    tryCatch({
+        y <- read.table("https://www.canvasxpress.org/data/cX-spider-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+        z <- read.table("https://www.canvasxpress.org/data/cX-spider-var.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
+
+    result <- canvasXpress(data                 = y,
+                           varAnnot             = z,
+                           colorBy              = "Response",
+                           graphType            = "Scatter2D",
+                           segregateVariablesBy = "Response",
+                           spiderBy             = "Subject",
+                           title                = "Segregated Scatterplot - lines and labels",
+                           xAxis                = list("Weeks"),
+                           yAxis                = list("Change From Baseline %"),
+                           decorations          = list(line = list(list(color = "red",   width = 2, x = 0, y = 0.8, x2 = 50, y2 = -0.8, scope = "Complete Response", label = "line1"),
+                                                                   list(color = "blue",  width = 1, y = 0, scope = "Progressive Disease", label = "line2a"),
+                                                                   list(color = "blue",  width = 1, x = 0, scope = "Progressive Disease", label = "line2b"),
+                                                                   list(color = "green", width = 3, x = 0, y = -0.8, x2 = 50, y2 = 0.8, scope = "Partial Response", label = "line3"))))
+    check_ui_test(result)
+})
+
+
 test_that("scatterplot notePoint", {
+    tryCatch({
+        data_y <- read.table("https://www.canvasxpress.org/data/cX-scatterR2-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+        data_z <- read.table("https://www.canvasxpress.org/data/cX-scatterR2-var.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
 
     result <-  canvasXpress(data                    = data_y,
                             varAnnot                = data_z,
@@ -46,9 +83,14 @@ test_that("scatterplot notePoint", {
 })
 
 test_that("barplot annotations", {
+    tryCatch({
+        y <- read.table("https://www.canvasxpress.org/data/cX-basic2-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
 
-    y <- read.table("https://www.canvasxpress.org/data/cX-basic2-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
-    result <- canvasXpress(data                    = y,
+        result <- canvasXpress(data                    = y,
                            graphType               = "Bar",
                            graphOrientation        = "vertical",
                            title                   = "Barplot - annotations",
@@ -59,9 +101,14 @@ test_that("barplot annotations", {
 })
 
 test_that("segregated Boxplot decorations with different values", {
+    tryCatch({
+        y <- read.table("https://www.canvasxpress.org/data/cX-iris-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+        x <- read.table("https://www.canvasxpress.org/data/cX-iris-smp.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
 
-    y <- read.table("https://www.canvasxpress.org/data/cX-iris-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
-    x <- read.table("https://www.canvasxpress.org/data/cX-iris-smp.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
     result <- canvasXpress(data               = y,
                            smpAnnot           = x,
                            graphOrientation   = "vertical",
@@ -81,10 +128,14 @@ test_that("segregated Boxplot decorations with different values", {
 })
 
 test_that("segregated Boxplot decorations with same values", {
-
-    y <- read.table("https://www.canvasxpress.org/data/cX-iris-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)[, 1:100]
-    x <- read.table("https://www.canvasxpress.org/data/cX-iris-smp.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)[1:100, , drop = FALSE]
-    y[, 1:50] <- y[, 1:50] - 2
+    tryCatch({
+        y <- read.table("https://www.canvasxpress.org/data/cX-iris-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)[, 1:100]
+        x <- read.table("https://www.canvasxpress.org/data/cX-iris-smp.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)[1:100, , drop = FALSE]
+        y[, 1:50] <- y[, 1:50] - 2
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
 
     result <- canvasXpress(data               = y,
                            smpAnnot           = x,
@@ -103,11 +154,15 @@ test_that("segregated Boxplot decorations with same values", {
 })
 
 test_that("segregated Boxplot decoration label position", {
-
-    y <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
-    x <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-smp.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
-    z <- data.frame(Gene = c("Gene1"), stringsAsFactors = FALSE)
-    rownames(z) <- rownames(y)
+    tryCatch({
+        y <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-dat.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+        x <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-smp.txt", header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+        z <- data.frame(Gene = c("Gene1"), stringsAsFactors = FALSE)
+        rownames(z) <- rownames(y)
+    },
+    error = function(e) {
+        skip('Unable to read data files')
+    })
 
     position_list <- list(left = "top", right = "bottom")
     for (name in names(position_list)) {
