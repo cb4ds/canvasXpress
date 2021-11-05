@@ -1632,6 +1632,19 @@ cXcontour5 <- function() {
   )
 }
 
+cXcontour6 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-contourdensity-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    contourLevelStep=2,
+    contourType="overlay",
+    graphType="Scatter2D",
+    showContourLevel=FALSE,
+    afterRender=list(list("createContour"))
+  )
+}
+
 cXcorrelation1 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-generic-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
@@ -2950,7 +2963,7 @@ cXgantt6 <- function() {
 cXgenome1 <- function() {
   library(canvasXpress)
   library(jsonlite)
-  genome <- fromJSON("https://www.canvasxpress.org/data/cX-genomesimple.json")
+  genome <- fromJSON("https://www.canvasxpress.org/data/cX-genomesimple.json", simplifyVector = F)
   canvasXpress(
     data=genome,
     background="rgb(245,245,245)",
@@ -2963,7 +2976,7 @@ cXgenome1 <- function() {
 cXgenome2 <- function() {
   library(canvasXpress)
   library(jsonlite)
-  genome <- fromJSON("https://www.canvasxpress.org/data/cX-genomeintermediate.json")
+  genome <- fromJSON("https://www.canvasxpress.org/data/cX-genomeintermediate.json", simplifyVector = F)
   canvasXpress(
     data=genome,
     background="rgb(245,245,245)",
@@ -2976,7 +2989,7 @@ cXgenome2 <- function() {
 cXgenome3 <- function() {
   library(canvasXpress)
   library(jsonlite)
-  genome <- fromJSON("https://www.canvasxpress.org/data/cX-genomeadvanced.json")
+  genome <- fromJSON("https://www.canvasxpress.org/data/cX-genomeadvanced.json", simplifyVector = F)
   canvasXpress(
     data=genome,
     background="rgb(245,245,245)",
@@ -5530,6 +5543,24 @@ cXscatter2d16 <- function() {
     scatterOutlineThreshold=5000,
     scatterType="manhattan",
     title="Manhattan Plot"
+  )
+}
+
+cXscatter2d17 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-fcyt-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    dataPointSize=5,
+    graphType="Scatter2D",
+    scatterOutlineThreshold=1,
+    showScatterDensity=TRUE,
+    xAxis=list("FL1-A"),
+    xAxisTitle="FL1-A",
+    xAxisTransform="log10",
+    yAxis=list("FL2-A"),
+    yAxisTitle="FL2-A",
+    yAxisTransform="log10"
   )
 }
 
