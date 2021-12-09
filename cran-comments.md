@@ -1,7 +1,10 @@
 ## Comments from Maintainer
 
-* Update to underlying JavaScript Libraries
-* Robustified tests dependent on external resources
+* Submitting a fix for platforms where pandoc is not installed causing errors and test failures on certain CRAN platforms that did not show up on testing in RHub/WinBuilder.  Have added rhub checks here for Solaris and Mac-OS to our standard tests now to avoid this in the future.
+
+* There is a note because the days since last release is low due to the need to fix these errors to keep the package on CRAN.  If possible we'd like to get this fix in place now vs. waiting.
+
+* We are adding -1 to the version number instead of incrementing it because the version number reflects the JS library underneath this htmlwidget and we don't want to get off track for that.  
 
 ---  
 
@@ -12,13 +15,7 @@ RStudio Server Pro (ubuntu 18.04.2)
 
 * R 3.6.3
 * R 4.0.5
-* R 4.1.0
-
-Travis-CI (ubuntu 16.04.6)
-
-* R 3.6.3
-* R 4.0.2
-* R devel (2021-06-20 r80534)
+* R 4.1.2
 
 WinBuilder
 
@@ -28,8 +25,12 @@ WinBuilder
 RHub
 
 * devtools::check_rhub(interactive = F, 
-                       env_vars    = c(`_R_CHECK_FORCE_SUGGESTS_` = "false",
-                                       `_R_CHECK_CRAN_INCOMING_USE_ASPELL_` = "true"))
+                       env_vars    = c(`_R_CHECK_FORCE_SUGGESTS_` = "false"))
+                                     
+* devtools::check_rhub(interactive = F, 
+                       env_vars    = c(`_R_CHECK_FORCE_SUGGESTS_` = "false"),
+                       platforms = c("solaris-x86-patched", 
+                                     "macos-highsierra-release-cran"))
 
 ---  
 
