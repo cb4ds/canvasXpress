@@ -39,5 +39,6 @@ Suggests:
     testthat,
     tibble,
     tidyr,
-    limma
+    limma,
+    shinytest
 VignetteBuilder: knitr
