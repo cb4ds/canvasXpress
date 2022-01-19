@@ -1,0 +1,11 @@
+app <- ShinyDriver$new("../../")
+app$snapshotInit("select_and_shaping_only")
+
+app$setInputs(shapeBySel = "Sepal.Length")
+app$snapshot()
+app$setInputs(shapeBySel = "Sepal.Width")
+app$snapshot()
+app$setInputs(shapeBySel = "Petal.Length")
+app$snapshot()
+app$setInputs(shapeBySel = "Petal.Width")
+app$snapshot()
