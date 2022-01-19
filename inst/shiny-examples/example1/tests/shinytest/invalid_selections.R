@@ -1,0 +1,10 @@
+app <- ShinyDriver$new("../../")
+app$snapshotInit("invalid_selections")
+
+app$setInputs(axisXSel = "")
+app$snapshot()
+app$setInputs(axisXSel = "Sepal.Length")
+app$setInputs(axisYSel = "")
+app$snapshot()
+app$setInputs(axisXSel = "")
+app$snapshot()
