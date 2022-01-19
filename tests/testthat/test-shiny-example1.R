@@ -26,8 +26,8 @@ test_that("shiny example 1 - select_and_shaping_only", {
     expect_pass(testApp(appdir, "select_and_shaping_only", compareImages = FALSE))
 })
 
-test_that("shiny example 1 - coloring_and_shaping", {
+test_that("shiny example 1 - select_and_coloring_and_shaping", {
     skip_on_cran()
     appdir <- system.file(package = "canvasXpress", "shiny-examples/example1")
-    expect_pass(testApp(appdir, "coloring_and_shaping", compareImages = FALSE))
+    expect_pass(testApp(appdir, "select_and_coloring_and_shaping", compareImages = FALSE))
 })

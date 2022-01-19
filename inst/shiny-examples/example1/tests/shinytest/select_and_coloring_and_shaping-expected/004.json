@@ -3,7 +3,7 @@
     "axisXSel": "Sepal.Length",
     "axisYSel": "Sepal.Width",
     "colorBySel": "Petal.Width",
-    "shapeBySel": "Sepal.Width"
+    "shapeBySel": "Sepal.Length"
   },
   "output": {
     "plot": {
@@ -1543,7 +1543,7 @@
           "transparency": 0.8,
           "selectedDataPoints": null,
           "colorBy": "Petal.Width",
-          "shapeBy": "Sepal.Width"
+          "shapeBy": "Sepal.Length"
         },
         "events": null,
         "afterRender": null
