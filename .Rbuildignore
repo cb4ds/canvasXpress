@@ -11,3 +11,4 @@
 ^revdep$
 ^misc$
 ^inst/shiny-examples/example1/tests$
+^\.circleci$
