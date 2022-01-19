@@ -1,0 +1,11 @@
+app <- ShinyDriver$new("../../")
+app$snapshotInit("select_and_coloring_only")
+
+app$setInputs(colorBySel = "Sepal.Length")
+app$snapshot()
+app$setInputs(colorBySel = "Sepal.Width")
+app$snapshot()
+app$setInputs(colorBySel = "Petal.Length")
+app$snapshot()
+app$setInputs(colorBySel = "Petal.Width")
+app$snapshot()
