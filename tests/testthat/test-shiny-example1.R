@@ -37,3 +37,9 @@ test_that("shiny example 1 - cx_plot_customization", {
     appdir <- system.file(package = "canvasXpress", "shiny-examples/example1")
     expect_pass(testApp(appdir, "cx_plot_customization", compareImages = FALSE))
 })
+
+test_that("shiny example 1 - cx_plot_customization", {
+    skip_on_cran()
+    appdir <- system.file(package = "canvasXpress", "shiny-examples/example1")
+    expect_pass(testApp(appdir, "cx_plot_customization", compareImages = FALSE))
+})
