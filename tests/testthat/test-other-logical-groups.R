@@ -61,8 +61,7 @@ test_that("histogram values are logical", {
         title          = "Histogram uses logical True and False",
         xAxisTitle     = "Some Metric",
         yAxisTitle     = "Frequency",
-        afterRender    = list(list("createHistogram"))
-    )
+        afterRender    = list(list("createHistogram")))
 
     check_ui_test(result)
 })
