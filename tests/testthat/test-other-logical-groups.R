@@ -51,3 +51,20 @@ test_that("pre-calculated bar plot values are logical", {
 
     check_ui_test(result)
 })
+
+test_that("histogram values are logical", {
+    hist.data <- data.frame("TRUE" = vals, "FALSE" = vals)
+
+    result <- canvasXpress(
+        data           = hist.data,
+        graphType      = "Scatter2D",
+        title          = "Histogram uses logical True and False",
+        xAxisTitle     = "Some Metric",
+        yAxisTitle     = "Frequency",
+        afterRender    = list(list("createHistogram"))
+    )
+
+    check_ui_test(result)
+})
+
+
