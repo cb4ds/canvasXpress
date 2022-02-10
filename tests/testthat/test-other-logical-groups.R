@@ -1,4 +1,4 @@
-context("canvasXpress Charts - boxplots logical groups")
+context("canvasXpress Charts - logical groups")
 
 vals <- c(0.41,0.39,0.49,0.34,0.34,0.38)
 vars <- c("QC_PercentDuplication")
