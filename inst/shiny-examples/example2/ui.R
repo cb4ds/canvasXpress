@@ -10,6 +10,7 @@ shinyUI(fluidPage(
                tags$br())),
     fluidRow(
         style = "background-color:#f2f2f2;",
+        tags$style(type="text/css", ".selectize-input{ z-index: 1; }"),
         column(width = 4,
                offset = 4,
                selectizeInput(
