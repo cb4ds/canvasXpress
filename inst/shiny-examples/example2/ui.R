@@ -10,7 +10,6 @@ shinyUI(fluidPage(
                tags$br())),
     fluidRow(
         style = "background-color:#f2f2f2;",
-        tags$style(type="text/css", ".selectize-input{ z-index: 1; }"),
         column(width = 4,
                offset = 4,
                selectizeInput(
@@ -18,11 +17,13 @@ shinyUI(fluidPage(
                    label    = "Primary Plot Factor:",
                    choices  = colnames(g_GSE9750$x),
                    selected = colnames(g_GSE9750$x)[3],
-                   multiple = FALSE))
+                   multiple = FALSE),
+                style = "z-index:2;")
     ),
     fluidRow(
         column(width = 6,
-               htmlOutput("distribution_plot")),
+               htmlOutput("distribution_plot"),
+               style = "z-index:1;"),
         column(width = 6,
                htmlOutput("pca_plot"))
     ),
