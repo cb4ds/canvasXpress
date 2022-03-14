@@ -12,18 +12,17 @@ shinyUI(fluidPage(
         style = "background-color:#f2f2f2;",
         column(width = 4,
                offset = 4,
+               style = "z-index:11000",
                selectizeInput(
                    inputId  = "factorSel",
                    label    = "Primary Plot Factor:",
                    choices  = colnames(g_GSE9750$x),
                    selected = colnames(g_GSE9750$x)[3],
-                   multiple = FALSE),
-                style = "z-index:2;")
+                   multiple = FALSE))
     ),
     fluidRow(
         column(width = 6,
-               htmlOutput("distribution_plot"),
-               style = "z-index:1;"),
+               htmlOutput("distribution_plot")),
         column(width = 6,
                htmlOutput("pca_plot"))
     ),
