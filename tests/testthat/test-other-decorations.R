@@ -115,9 +115,9 @@ test_that("segregated Boxplot marker decorations", {
                     list(text     = var_name,
                          fontSize = 12,
                          type     = "annotation",
-                         variable = var_name,
-                         sample   = species,
-                         scope    = facet,
+                         variable = list(var_name),
+                         sample   = list(species),
+                         scope    = list(facet),
                          position = "top")
                 })
                 markers_list <- c(markers_list, marker)
