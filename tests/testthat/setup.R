@@ -6,6 +6,7 @@ require(readr)
 require(ggplot2)
 require(dplyr)
 
+
 try({
     testFile <- read_lines(system.file("ui-examples/cX-function.R.gz", package = "canvasXpress", mustWork = TRUE))
 
@@ -61,5 +62,22 @@ check_ui_test <- function(result){
     },
     error = function(e) {
         warning('check_ui_test() errored with: ', e)
+    })
+}
+
+compare_ggplot_to_cx_conversion <- function(gg){
+    skip_on_cran()
+    skip_on_ci()
+
+    if (interactive()) {
+        print(gg)
+        print(canvasXpress(gg))
+    }
+
+    tryCatch({
+        expect_s3_class(gg, "ggplot")
+    },
+    error = function(e) {
+        warning('compare_ggplot_to_cx_conversion() errored with: ', e)
     })
 }
