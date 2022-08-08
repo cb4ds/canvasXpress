@@ -1,12 +1,16 @@
 context("canvasXpress Charts - logical groups")
 
-vals <- c(0.41,0.39,0.49,0.34,0.34,0.38)
-vars <- c("QC_PercentDuplication")
-smps <- c("1","2","3","4","5","6")
-data <- as.data.frame(matrix(vals, nrow = 1, ncol = 6, byrow = TRUE, dimnames = list(vars, smps)))
-varx <- c("PlatformType")
-valx <- c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
-datx <- as.data.frame(matrix(valx, nrow = 1, ncol = 6, byrow = TRUE, dimnames = list(varx, smps)))
+vals  <- c(0.41,0.39,0.49,0.34,0.34,0.38)
+vars  <- c("QC_PercentDuplication")
+smps  <- c("1","2","3","4","5","6")
+data  <- as.data.frame(matrix(vals, nrow = 1, ncol = 6, byrow = TRUE, dimnames = list(vars, smps)))
+varx  <- c("PlatformType")
+valx  <- c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE)
+datx  <- as.data.frame(matrix(valx, nrow = 1, ncol = 6, byrow = TRUE, dimnames = list(varx, smps)))
+datx2 <- datx %>%
+    t() %>%
+    as.data.frame() %>%
+    mutate(NumericVar = seq(NCOL(datx)) + 0.5)
 
 
 test_that("boxplot values are logical", {
@@ -21,22 +25,32 @@ test_that("boxplot values are logical", {
 
     check_ui_test(result)
 
-    # check that logical values display correctly when box plot points are colored by numeric variable
-    datx2 <- datx %>%
-        t() %>%
-        as.data.frame() %>%
-        mutate(NumericVar = runif(NCOL(datx)))
+        result <- canvasXpress(
+        data                     = data,
+        smpAnnot                 = datx2,
+        graphType                = "Boxplot",
+        graphOrientation         = "vertical",
+        groupingFactors          = list("PlatformType"),
+        colorBy                  = "NumericVar",
+        showBoxplotOriginalData  = TRUE,
+        dataPointSizeScaleFactor = 1.5,
+        jitter                   = TRUE,
+        title                    = "BoxPlot uses logical True and False",
+        subtitle                 = "and points are colored by numeric variable")
 
+    check_ui_test(result)
+})
+
+test_that("dotplot values are logical", {
     result <- canvasXpress(
-        data                    = data,
-        smpAnnot                = datx2,
-        graphType               = "Boxplot",
-        graphOrientation        = "vertical",
-        groupingFactors         = list("PlatformType"),
-        colorBy                 = "NumericVar",
-        showBoxplotOriginalData = TRUE,
-        title                   = "BoxPlot uses logical True and False",
-        subtitle                = "and points are colored by numeric variable")
+        data                     = data,
+        smpAnnot                 = datx2,
+        graphType                = "Dotplot",
+        graphOrientation         = "vertical",
+        groupingFactors          = list("PlatformType"),
+        colorBy                  = "NumericVar",
+        title                    = "DotPlot uses logical True and False",
+        subtitle                 = "and points are colored by numeric variable")
 
     check_ui_test(result)
 })
