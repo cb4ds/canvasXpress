@@ -20,6 +20,25 @@ test_that("boxplot values are logical", {
         title            = "BoxPlot uses logical True and False")
 
     check_ui_test(result)
+
+    # check that logical values display correctly when box plot points are colored by numeric variable
+    datx2 <- datx %>%
+        t() %>%
+        as.data.frame() %>%
+        mutate(NumericVar = runif(NCOL(datx)))
+
+    result <- canvasXpress(
+        data                    = data,
+        smpAnnot                = datx2,
+        graphType               = "Boxplot",
+        graphOrientation        = "vertical",
+        groupingFactors         = list("PlatformType"),
+        colorBy                 = "NumericVar",
+        showBoxplotOriginalData = TRUE,
+        title                   = "BoxPlot uses logical True and False",
+        subtitle                = "and points are colored by numeric variable")
+
+    check_ui_test(result)
 })
 
 test_that("bar plot values are logical", {
