@@ -1,8 +1,14 @@
 ## Comments from Maintainer
 
-* Updated tests to accommodate the upcoming htmlWidgets 1.6 release per Carson's PR
 
-There may be a NOTE on some builds as the version contains 4 components - this is necessary to maintain sync with the underlying version of the JS library which is 40.6, so is preferred over incrementing to the next number as users are used to us following the JS library version that is embedded in the htmlwidget.
+Resubmission:
+
+* markdown for the news failed due to missing line return on windows  
+
+Original:
+
+* Updated JS underlying library  
+* Added ggplot functionality for conversions and additional parameters  
 
 ---  
 
@@ -12,8 +18,9 @@ There may be a NOTE on some builds as the version contains 4 components - this i
 RStudio Server Pro (ubuntu 18.04.2)  
 
 * R 4.0.5
-* R 4.1.2
-* R 4.2.2
+* R 4.1.3
+* R 4.2.3
+* R 4.3.0
 
 CircleCI
 

@@ -970,6 +970,7 @@ svg {
     display: flex;
     align-items: center;
     padding-left: 10px;
+    overflow: auto;
 }
 
 .customizerRightItemHeaderMain {
@@ -2223,6 +2224,10 @@ div.CanvasXpressTableCell {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: left;
+}
+
+div.CanvasXpressTableCell:hover {
+    background-color: rgba(83, 105, 255, 0.1);
 }
 
 div.CanvasXpressTableCellSortAsc {

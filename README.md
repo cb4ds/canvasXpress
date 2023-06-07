@@ -11,8 +11,7 @@ output:
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/canvasXpress?color=9bc2cf)](https://cran.r-project.org/package=canvasXpress)
 [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/canvasXpress?color=9bc2cf)](https://cran.r-project.org/package=canvasXpress)
 [![CDNJ version](https://img.shields.io/cdnjs/v/canvasXpress.svg)](https://cdnjs.com/libraries/canvasXpress)
-[![CircleCI](https://circleci.com/gh/cb4ds/canvasXpress/tree/master.svg?style=shield)](https://app.circleci.com/pipelines/github/cb4ds/canvasXpress?branch=master)
-[![Coverage Status](https://img.shields.io/codecov/c/github/cb4ds/canvasXpress/master.svg)](https://codecov.io/github/cb4ds/canvasXpress?branch=master)
+[![Coverage Status](https://img.shields.io/codecov/c/gh/cb4ds/canvasXpress/master.svg)](https://app.codecov.io/gh/cb4ds/canvasXpress?branch=master)
 <!-- End Badges -->
 
 ***canvasXpress*** was developed as the core visualization component for bioinformatics and systems biology analysis
@@ -24,7 +23,7 @@ as well as the zooming, panning and drag-and-drop capabilities are features that
 class.
 
 ***canvasXpress*** can be now simply used within R at the console to generate conventional plots, in R-Studio
-or seamlessly embedded in [Shiny](https://shiny.rstudio.com) web applications. Full-fledged examples of the ***canvasXpress*** library including the mouse events, zooming, and broadcasting capabilities are included in this package in several examples that can be accessed using the cxShinyExample function.  This ***canvasXpress*** R library was created with the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) package.
+or seamlessly embedded in [Shiny](https://shiny.posit.co) web applications. Full-fledged examples of the ***canvasXpress*** library including the mouse events, zooming, and broadcasting capabilities are included in this package in several examples that can be accessed using the cxShinyExample function.  This ***canvasXpress*** R library was created with the [htmlwidgets](https://github.com/ramnathv/htmlwidgets) package.
 
 ### Installation
 

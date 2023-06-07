@@ -1,4 +1,4 @@
-ggplot.as.list <- function(o) {
+ggplot.as.list <- function(o, ...) {
 
     if (!(requireNamespace("ggplot2", quietly = TRUE))) {
         stop("The ggplot2 package is required to use this functionality.")
@@ -17,9 +17,11 @@ ggplot.as.list <- function(o) {
         theme    = gg_theme(o),
         labels   = gg_labels(o),
         facet    = gg_facet(o),
+        order    = gg_order(o),
         layers   = as.vector(NULL),
         geoms    = as.vector(NULL),
         isGGPlot = TRUE,
+        config   = list(...),
         isR      = TRUE)
 
     layers <- sapply(o$layers, function(x) class(x$geom)[1])
@@ -52,6 +54,13 @@ ggplot.as.list <- function(o) {
 
 # -- internal helper functions -- #
 
+gg_order <- function(o) {
+  if (missing(o)) {
+    o = ggplot2::last_plot()
+  }
+  Filter(Negate(is.null), sapply(o$data, levels))
+}
+
 gg_facet <- function (o) {
   if (missing(o)) {
     o = ggplot2::last_plot()
@@ -60,7 +69,10 @@ gg_facet <- function (o) {
   if(!is.null(f)) {
     f = list(
       facet = ls(f),
-      facetLevels = sort(unique(o$data[[ls(f)]]))
+      facetLevels = sort(unique(o$data[[ls(f)]])),
+      facetType = "wrap",
+      facetXFree = o$facet$params$free$x,
+      facetYFree = o$facet$params$free$y
     )
     if (!is.null(o$facet$params$ncol) && !is.null(o$facet$params$nrow)) {
       f$facetCols = o$facet$params$ncol
@@ -79,6 +91,30 @@ gg_facet <- function (o) {
         f$facetCols = ceiling(sqrt(length(f$facetLevels)))
         f$facetRows = ceiling(length(f$facetLevels) / f$facetCols)
       }
+    }
+    f$facetTopology = paste(f$facetRows, 'X', f$facetCols, sep = '')
+  } else if (!is.null(o$facet$params$rows) || !is.null(o$facet$params$cols)) {
+    f = list(
+      facetType = "grid",
+      facetXFree = o$facet$params$free$x,
+      facetYFree = o$facet$params$free$y
+    )
+    if (length(o$facet$params$rows) > 0 && length(o$facet$params$cols) > 0) {
+      f$facet = c(ls(o$facet$params$rows)[1], ls(o$facet$params$cols)[1])
+      f$facetLevelsRows = sort(unique(o$data[[ls(o$facet$params$rows)]]))
+      f$facetLevelsCols = sort(unique(o$data[[ls(o$facet$params$cols)]]))
+      f$facetRows = length(f$facetLevelsRows)
+      f$facetCols = length(f$facetLevelsCols)
+    } else if (length(o$facet$params$rows) > 0) {
+      f$facet = ls(o$facet$params$rows)
+      f$facetLevelsRows = sort(unique(o$data[[ls(o$facet$params$rows)]]))
+      f$facetRows = length(f$facetLevels)
+      f$facetCols = 1
+    } else if (length(o$facet$params$cols) > 0) {
+      f$facet = ls(o$facet$params$cols)
+      f$facetLevelsCols = sort(unique(o$data[[ls(o$facet$params$cols)]]))
+      f$facetRows = 1
+      f$facetCols = length(f$facetLevels)
     }
     f$facetTopology = paste(f$facetRows, 'X', f$facetCols, sep = '')
   }
@@ -148,7 +184,7 @@ gg_scales <- function (o) {
           r$setMinX = s$limits[1]
           r$setMaxX = s$limits[2]
         }
-        if (s$trans$name != "identity") {
+        if (!is.null(s$trans$name) && s$trans$name != "identity") {
           r$xAxisTransform = stringr::str_replace(s$trans$name, "-", "")
         }
         if (is.character(s$name)) {
@@ -159,7 +195,7 @@ gg_scales <- function (o) {
           r$setMinY = s$limits[1]
           r$setMaxY = s$limits[2]
         }
-        if (s$trans$name != "identity") {
+        if (!is.null(s$trans$name) && s$trans$name != "identity") {
           r$yAxisTransform = stringr::str_replace(s$trans$name, "-", "")
         }
         if (is.character(s$name)) {
@@ -316,15 +352,17 @@ gg_proc_layer <- function (l) {
             next
           }
           b = l[[p]][[a]]
-          f = regexpr("factor", b)[1]
-          if (is.character(f) && f > 0) {
-            b = stringr::str_replace(stringr::str_replace(b, "factor\\(", ""), "\\)", "")
-          }
-          if (is.null(r[[a]])) {
-            if (a == 'colour') {
-              r[["color"]] = b
-            } else {
-              r[[a]] = b
+          if (is.vector(b)) {
+            f = regexpr("factor", b)[1]
+            if (is.character(f) && f > 0) {
+              b = stringr::str_replace(stringr::str_replace(b, "factor\\(", ""), "\\)", "")
+            }
+            if (is.null(r[[a]])) {
+              if (a == 'colour') {
+                r[["color"]] = b
+              } else {
+                r[[a]] = b
+              }
             }
           }
         }
@@ -341,7 +379,7 @@ gg_proc_layer <- function (l) {
     r$asSampleFactors = unique(q)
   }
   pos = class(l$position)[1]
-  pos = ifelse(pos == 'PositionJitter', 'jitter', ifelse(pos == 'PositionFill', "fill", ifelse(pos == "PositionStack", 'stack', 'normal')))
+  pos = ifelse(pos == 'PositionJitter', 'jitter', ifelse(pos == 'PositionFill', "fill", ifelse(pos == "PositionStack", 'stack', ifelse(pos == "PositionDodge", 'dodge', 'normal'))))
   if (pos != 'normal') {
     r$position = pos
   }
