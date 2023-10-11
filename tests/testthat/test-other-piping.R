@@ -29,7 +29,25 @@ test_that("piping - change graphType", {
 
 
 test_that("piping - change events", {
-    # TODO
+    obj1 <- cXscatter2d13()
+    check_ui_test(obj1)
+
+    events <- JS("{ 'mousemove' : function(o, e, t) {
+                                    if (o) {
+                                        if (o.objectType == null) {
+                                            t.showInfoSpan(e, '<b>' + o.y.vars[0] + '</b><br/>' +
+                                            'Some example event here' + '<br/>' +
+                                            '<i>Value:</i>' +  o.y.data[0][0]);
+                                        }
+                                        else {
+                                            t.showInfoSpan(e, o.display);
+                                        };
+                                    };}}")
+    result <- obj1 %>%
+        canvasXpress(title = "Piped custom events",
+                     events = events)
+
+    check_ui_test(result)
 })
 
 
@@ -60,48 +78,66 @@ test_that("piping - change afterRender", {
 
 
 test_that("piping - change width/height", {
-    # TODO - see if we can change this
     obj1 <- cXstacked1()
 
     check_ui_test(obj1)
 
     obj2 <- obj1 %>% canvasXpress(
-        subtitle  = "changed width and height to 50%",
-        width = "50px") %>%
-        canvasXpress(height = "50px")
+        title  = "changed width and height",
+        width  = 100,
+        height = 300)
 
     check_ui_test(obj2)
+    warning("you will need to view this in full screen to see the difference")
 })
 
 
 test_that("piping - change attributes for tojson", {
+    # Change the attributes that affect json
+    # skipping pretty because there won't be a visible change
+    obj1 <- cXscatterbubble2d1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>%
+        canvasXpress(title = "one digit",
+                     digits = 1)
+
+    check_ui_test(result)
 })
 
 
 test_that("piping - invalid object", {
+    obj1 <- cXboxplot14()
+    obj1$x$data$y <- NULL
+
+    result <- obj1 %>%
+        canvasXpress(title = "test")
+
+    warning("The plot should be unavailable")
+    check_ui_test(result)
 
 })
 
 
 test_that("piping - attempted data changes", {
-    # TODO need to check the error message works
-    error_msg <- "Primary object data changes are not supported when modifying a canvasXpress object (ie piping) - ie changes to the data, varAnnot or smpAnnot parameters."
-    y         <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
-    x         <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-smp.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+    # Piping to a different position
+    error_msg <- "data cannot be NULL!"
+    obj1      <- cXscatterbubble2d1()
+    check_ui_test(obj1)
 
-    histogram <- cXboxplot1() %>%
-        canvasXpress(data = test)
+    expect_error(obj1 %>% canvasXpress(smpAnnot = .), regexp = error_msg)
+    expect_error(obj1 %>% canvasXpress(varAnnot = .), regexp = error_msg)
 
-    check_ui_test(histogram)
+    # Attempt to replace the data variables
+    # Get two dataframes to use
+    error_msg <- "Primary object data changes are not supported when modifying a canvasXpress object"
+    y <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-dat.txt",
+                    header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+    x <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-smp.txt",
+                    header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
 
-    expect_error(cXdotplot4() %>%
-        canvasXpress(smpAnnot = y), regexp = error_msg)
-
-    histogram <- cXbarline3() %>%
-        canvasXpress(varAnnot = x)
-
-    check_ui_test(histogram)
+    expect_error(cXdotplot4() %>% canvasXpress(smpAnnot = y), regexp = error_msg)
+    expect_error(cXbarline3() %>% canvasXpress(varAnnot = x), regexp = error_msg)
 })
 
 test_that("piping - area chart", {
@@ -144,7 +180,7 @@ test_that("piping - bar chart", {
 })
 
 test_that("piping - barline chart", {
-    result <- cXbarLine3()
+    obj1 <- cXbarline3()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
@@ -161,7 +197,7 @@ test_that("piping - boxplot chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "vertical and smpLabelRotate",
+        title       = "remove boxplotMean and smpTitle",
         boxplotMean = FALSE,
         smpTitle    = NULL
     )
@@ -170,14 +206,18 @@ test_that("piping - boxplot chart", {
 })
 
 test_that("piping - bubble chart", {
-    #TODO - change cx arguments starting here
-    obj1 <- cXbubble4()
+    # TODO Question - the modifyLabelCoordinates don't seem to be working.
+    #add comment that after render is not included in bubble chart
+    obj1 <- cXbubble3()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "vertical and smpLabelRotate",
-        boxplotMean = FALSE,
-        smpTitle    = NULL
+        title       = "bubbleLabelLineType to line and bubbleOutlineColor",
+        bubbleLabelLineType = "line",
+        bubbleOutlineColor  = "blue"
+        # afterRender = list(list("modifyLabelCoordinates", list(list("Central America", -100, 100, TRUE))),
+        #                    list("modifyLabelCoordinates", list(list("Oceania", 10, -50, TRUE))),
+        #                    list("modifyLabelCoordinates", list(list("Europe", 10, -50))))
     )
 
     check_ui_test(result)
@@ -188,9 +228,9 @@ test_that("piping - chord chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "vertical and smpLabelRotate",
-        boxplotMean = FALSE,
-        smpTitle    = NULL
+        title       = "legendPosition and theme",
+        legendPosition = "bottom",
+        theme          = "ggplot",
     )
 
     check_ui_test(result)
@@ -215,71 +255,73 @@ test_that("piping - contour chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>%
-        canvasXpress(title                    = "colorScheme, legendKey",
-                     colorScheme              = "canvasXpress",
-                     legendKeyBackgroundColor = "rgba(255,255,255,0)")
+        canvasXpress(title                 = "contourLevel, heatmapIndicator",
+                     showContourLevel      = TRUE,
+                     showHeatmapIndicator  = FALSE)
 
     check_ui_test(result)
 })
 
 test_that("piping - correlation chart", {
-    obj1 <- cXbubble4()
+    obj1 <- cXcorrelation3()
     check_ui_test(obj1)
 
     result <- obj1 %>%
-        canvasXpress(title           = "showLegend",
-                     showLegend      = FALSE)
+        canvasXpress(title                   = "correlationType to circle and remove correlationAnchorLegend",
+                     correlationAnchorLegend = NULL,
+                     correlationType         = "circle")
 
     check_ui_test(result)
 })
 
 test_that("piping - dashboard chart", {
-    obj1 <- cXbubble4()
+    obj1 <- cXdashboard5()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title            = "vertical and smpLabelRotate",
-        graphOrientation = "vertical",
-        smpLabelRotate   = 90
+        title        = "layout 2x1",
+        layoutConfig = list(list(size = "2X1"))
     )
 
     check_ui_test(result)
 })
 
 test_that("piping - density chart", {
-    obj1 <- cXbubble4()
+    obj1 <- cXdensity10()
     check_ui_test(obj1)
-
+    warning("remove segregateVariablesBy results in different color scheme than if you do it manually on the plot")
     result <- obj1 %>% canvasXpress(
-        title      = "subtitle and hide legend",
-        subtitle   = "horizontal to vertical",
-        showLegend = FALSE
+        title      = "remove segregation",
+        segregateVariablesBy = list()
     )
 
     check_ui_test(result)
 })
 
 test_that("piping - donut chart", {
-    obj1 <- cXbubble4()
+    obj1 <- cXdonnut2()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title         = "smpTitle and legendColumns 1",
-        smpTitle      = "Changed",
-        legendColumns = 1
+        title         = "half circle and legendColumns 3",
+        circularArc   = 180,
+        legendColumns = 3
     )
 
     check_ui_test(result)
 })
 
 test_that("piping - dotline chart", {
-    obj1 <- cXbubble4()
+    obj1 <- cXdotline2()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "vertical and smpLabelRotate",
-        boxplotMean = FALSE,
-        smpTitle    = NULL
+        title       = "add annotation to one point",
+        decorations             = list(marker = list(list(sample   = "S3",
+                                                          variable = "V1",
+                                                          text     = "Maybe an Outlier?",
+                                                          x        = 0.39,
+                                                          y        = 0.71)))
     )
 
     check_ui_test(result)
