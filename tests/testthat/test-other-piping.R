@@ -2,6 +2,7 @@ context("canvasXpress pipe support")
 skip_if_offline(host = "www.canvasxpress.org")
 
 test_that("piping - change graphType", {
+    # TODO add more interesting data
     data <- as.data.frame(matrix(c(33,44,55),
                                  nrow = 1,
                                  ncol = 3,
@@ -24,21 +25,16 @@ test_that("piping - change graphType", {
         graphType  = "Boxplot")
 
     check_ui_test(obj3)
-
-    obj4 <- obj3 %>% canvasXpress(
-        title      = "Boxplot to Area2D",
-        graphType  = "Area2D")
-
-    check_ui_test(obj4)
 })
 
 
 test_that("piping - change events", {
-
+    # TODO
 })
 
 
 test_that("piping - change afterRender", {
+    # TODO add more interesting data
     data <- as.data.frame(matrix(c(33,44,55),
                                  nrow = 1,
                                  ncol = 3,
@@ -50,8 +46,9 @@ test_that("piping - change afterRender", {
                              graphType = "Scatter2D")
     check_ui_test(boxplot)
 
-    histogram1 <- boxplot1 %>%
-        canvasXpress(afterRender = list(list("createHistogram")))
+    histogram1 <- boxplot %>%
+        canvasXpress(title       = "Scatter to histogram",
+                     afterRender = list(list("createHistogram")))
 
     check_ui_test(histogram1)
 
@@ -63,18 +60,17 @@ test_that("piping - change afterRender", {
 
 
 test_that("piping - change width/height", {
+    # TODO - see if we can change this
     obj1 <- cXstacked1()
 
     check_ui_test(obj1)
 
     obj2 <- obj1 %>% canvasXpress(
-        subtitle  = "changed height",
-        width = NULL
-    ) %>%
-        canvasXpress(width = "50px")
+        subtitle  = "changed width and height to 50%",
+        width = "50px") %>%
+        canvasXpress(height = "50px")
 
     check_ui_test(obj2)
-
 })
 
 
@@ -109,113 +105,184 @@ test_that("piping - attempted data changes", {
 })
 
 test_that("piping - area chart", {
-    area3 <- cXarea3() %>%
-        canvasXpress(title = "smpLabelInterval 40",
-                     xAxisTitle = "changed",
-                     smpLabelInterval = 40)
+    obj1 <- cXarea8()
+    check_ui_test(obj1)
 
-    check_ui_test(area3)
+    result <- obj1 %>%
+        canvasXpress(title           = "decoration lines, xAxisTickSize, shapeby",
+                     decorations     = list(line = list(list(color = "rgba(205,0,0,0.5)", width = 2, x = 2000),
+                                                        list(color = "rgba(0,104,139,0.5)", width = 2, x = 2005))),
+                     xAxisTickSize   = 2,
+                     shapeBy         = "country")
 
-    area4 <- cXarea4() %>%
-        canvasXpress(title = "colorScheme, legendKey",
-                     colorScheme = "canvasXpress",
-                     legendKeyBackgroundColor="rgba(255,255,255,0)")
-
-    check_ui_test(area4)
-
-    area8 <- cXarea8() %>%
-        canvasXpress(title = "change graph type",
-                     graphType = "Bar")
-
-    check_ui_test(area8)
+    check_ui_test(result)
 })
 
 test_that("piping - arealine chart", {
-    arealine1 <- cXarealine1() %>%
-        canvasXpress(title      = "showLegend = F",
-                     showLegend = FALSE)
+    obj1 <- cXarealine3()
+    check_ui_test(obj1)
 
-    check_ui_test(arealine1)
-
-    arealine3 <- cXarealine3() %>%
+    result <- obj1 %>%
         canvasXpress(title          = "subtitle text, smpLabelRotate = 90",
                      subtitle       = "changed",
                      smpLabelRotate = 90)
 
-    check_ui_test(arealine3)
+    check_ui_test(result)
 })
 
 test_that("piping - bar chart", {
+    obj1 <- cXbar13()
+    check_ui_test(obj1)
 
-    bar3 <- cXbar3() %>% canvasXpress(
-        # change a parameter
-        graphOrientation = "vertical",
-        # add a parameter
-        subtitle         = "horizontal to vertical",
-        # remove a parameter
-        title            = "test",
-        smpLabelRotate = 90
+    result <- obj1 %>% canvasXpress(
+        title         = "Smp label color, legendOrder",
+        smpLabelColor = "red",
+        legendOrder   = list("Stage" = list("Stage4", "Stage2", "Stage1", "Stage3"))
     )
 
-    check_ui_test(bar3)
-
-    cXbar8() %>% canvasXpress(
-        showLegend = FALSE
-    )
-
-    check_ui_test(bar8)
-
-    cXbar13() %>% canvasXpress(
-        showLegend = FALSE
-    )
-
-    check_ui_test(bar13)
-
+    check_ui_test(result)
 })
 
 test_that("piping - barline chart", {
+    result <- cXbarLine3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "groupSamples and only plot V2",
+        groupSamples  = list("Factor1"),
+        xAxis         = list("V2")
+    )
 
+    check_ui_test(result)
 })
 
 test_that("piping - boxplot chart", {
+    obj1 <- cXboxplot5()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "vertical and smpLabelRotate",
+        boxplotMean = FALSE,
+        smpTitle    = NULL
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - bubble chart", {
+    #TODO - change cx arguments starting here
+    obj1 <- cXbubble4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "vertical and smpLabelRotate",
+        boxplotMean = FALSE,
+        smpTitle    = NULL
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - chord chart", {
+    obj1 <- cXchord2()
+    check_ui_test(obj1)
+
+    result <- obj1 %>% canvasXpress(
+        title       = "vertical and smpLabelRotate",
+        boxplotMean = FALSE,
+        smpTitle    = NULL
+    )
+
+    check_ui_test(result)
 
 })
 
 test_that("piping - circular chart", {
+    obj1 <- cXcircular1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>%
+        canvasXpress(title            = "subtitle NULL, xAxisTitle, smpLabelInterval 40",
+                     subtitle         = NULL,
+                     xAxisTitle       = "changed",
+                     smpLabelInterval = 40)
+
+    check_ui_test(result)
 })
 
 test_that("piping - contour chart", {
+    obj1 <- cXcontour2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>%
+        canvasXpress(title                    = "colorScheme, legendKey",
+                     colorScheme              = "canvasXpress",
+                     legendKeyBackgroundColor = "rgba(255,255,255,0)")
+
+    check_ui_test(result)
 })
 
 test_that("piping - correlation chart", {
+    obj1 <- cXbubble4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>%
+        canvasXpress(title           = "showLegend",
+                     showLegend      = FALSE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - dashboard chart", {
+    obj1 <- cXbubble4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title            = "vertical and smpLabelRotate",
+        graphOrientation = "vertical",
+        smpLabelRotate   = 90
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - density chart", {
+    obj1 <- cXbubble4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title      = "subtitle and hide legend",
+        subtitle   = "horizontal to vertical",
+        showLegend = FALSE
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - donut chart", {
+    obj1 <- cXbubble4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "smpTitle and legendColumns 1",
+        smpTitle      = "Changed",
+        legendColumns = 1
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - dotline chart", {
+    obj1 <- cXbubble4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "vertical and smpLabelRotate",
+        boxplotMean = FALSE,
+        smpTitle    = NULL
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - dotplot chart", {
