@@ -416,69 +416,242 @@ test_that("piping - ridgeline chart", {
 })
 
 test_that("piping - sankey chart", {
-# TODO melissa add tests up to here
+    # TODO melissa add tests up to here
+    obj1 <- cXsankey4()
+    check_ui_test(obj1)
+
+    result <- obj1 %>% canvasXpress(
+        title       = "Sankey with changed theme",
+        theme       = "stata"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - scatter2D chart", {
+    obj1 <- cXscatter2d4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title                = "Histogram removed, legend side changed",
+        "xAxisHistogramShow" = FALSE,
+        legendPosition       = "left"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - scatter3D chart", {
+    obj1 <- cXscatter3d3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "change colour scheme and font",
+        colorScheme = "Behance",
+        fontName    = "Courier"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - scatterbubbl2D chart", {
+    obj1 <- cXscatterbubble2d3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title          = "change theme and background",
+        theme          = "SpongeBob",
+        backgroundType = "solid"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - splom chart", {
+    obj1 <- cXsplom7()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title          = "change theme, legend position, and legend columns",
+        theme          = "KimPossible",
+        legendPosition = "bottom",
+        legendColumns  = 3
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - stacked chart", {
+    obj1 <- cXstacked5()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title            = "change graph orientation and axis label rotation",
+        graphOrientation = "vertical",
+        smpLabelRotate   = 90
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - stackedline chart", {
+    obj1 <- cXstackedline1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title             = "change colour scheme and italicize title/subtitle",
+        colorScheme       = "Blues",
+        titleFontStyle    = "italic",
+        subtitleFontStyle = "italic"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - stackedpercent chart", {
+    obj1 <- cXstackedpercent5()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title          = "change colour scheme and background",
+        colorScheme    = "Magma",
+        backgroundType = "gradient"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - stackedpercentline chart", {
+    obj1 <- cXstackedpercentline1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title             = "change grid line type, rotate x-axis labels, change theme",
+        xAxisTickLineType = "dashed",
+        smpLabelRotate    = 90,
+        theme             = "solarized"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - sunburst chart", {
+    obj1 <- cXsunburst2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "change to different graph type",
+        afterRender = list(
+            list(
+                "changeAttribute",
+                list("circularType","bubble",NULL,NULL,NULL,NULL),
+                list(
+                    "layoutCurrent" = 0
+                ),
+                1697069487174
+            )
+        )
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - tagcloud chart", {
+    obj1 <- cXtagcloud1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title          = "change colour scheme and legend position",
+        colorScheme    = "SpongeBob",
+        legendPosition = "bottom",
+        legendColumns  = 6
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - tcga chart", {
+    obj1 <- cXtcga8()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title          = "changed y-axis and legend position",
+        yAxisTitle     = "changed",
+        legendPosition = "bottom"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - tree chart", {
+    obj1 <- cXtree5()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "change label colour and colour spectrum",
+        smpLabelColor = "#60418c",
+        afterRender   = list(
+            list(
+                "modifyColorSpectrumByScheme",
+                list("PuOr"),
+                1697141782953
+            )
+        )
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - treemap chart", {
+    obj1 <- cXtreemap3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title                = "change graph orientation, bold title, italic legend title",
+        titleFontStyle       = "bold",
+        graphOrientation     = "horizontal",
+        legendTitleFontStyle = "italic"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - upset chart", {
+    obj1 <- cXupset2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title    = "change font and theme",
+        theme    = "solarized",
+        fontName = "Luminari"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - venn chart", {
+    obj1 <- cXvenn1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title    = "change font and theme",
+        fontName = "Bradley Hand",
+        theme    = "solarized"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - waterfall chart", {
+    obj1 <- cXwaterfall3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title              = "changed grid line colour, bold font, colour scheme",
+        axisTitleFontStyle = "bold",
+        xAxisTickColor     = "#471a1a",
+        colorScheme        = "PuBu"
+    )
+
+    check_ui_test(result)
 })
