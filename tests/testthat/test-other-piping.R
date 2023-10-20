@@ -2,27 +2,24 @@ context("canvasXpress pipe support")
 skip_if_offline(host = "www.canvasxpress.org")
 
 test_that("piping - change graphType", {
-    # TODO add more interesting data
-    data <- as.data.frame(matrix(c(33,44,55),
-                                 nrow = 1,
-                                 ncol = 3,
-                                 byrow = TRUE,
-                                 dimnames = list(c("V1"),
-                                                 c("S1", "S2", "S3"))))
+    data <- data.frame(S1 = c(1,1,2,2,5,5),
+                       S2 = c(1,4,4,2,5,5),
+                       S3 = c(5,3,2,3,5,6),
+                       S4 = c(5,3,2,3,5,5))
 
-    obj1 <- canvasXpress(data           = data,
-                         graphType      = "Bar")
+    obj1 <- canvasXpress(data      = data,
+                         graphType = "Bar")
     check_ui_test(obj1)
 
     obj2 <- obj1 %>% canvasXpress(
-        title      = "Bar to Scatter2D",
-        graphType  = "Scatter2D")
+        title     = "Bar to Scatter2D",
+        graphType = "Scatter2D")
 
     check_ui_test(obj2)
 
     obj3 <- obj2 %>% canvasXpress(
-        title      = "Scatter2D to Boxplot",
-        graphType  = "Boxplot")
+        title     = "Scatter2D to Boxplot",
+        graphType = "Boxplot")
 
     check_ui_test(obj3)
 })
@@ -44,7 +41,7 @@ test_that("piping - change events", {
                                         };
                                     };}}")
     result <- obj1 %>%
-        canvasXpress(title = "Piped custom events",
+        canvasXpress(title  = "Piped custom events",
                      events = events)
 
     check_ui_test(result)
@@ -52,16 +49,12 @@ test_that("piping - change events", {
 
 
 test_that("piping - change afterRender", {
-    # TODO add more interesting data
-    data <- as.data.frame(matrix(c(33,44,55),
-                                 nrow = 1,
-                                 ncol = 3,
-                                 byrow = TRUE,
-                                 dimnames = list(c("V1"),
-                                                 c("S1", "S2", "S3"))))
+    data <- data.frame(S1 = c(1,1,2,3),
+                       S2 = c(1,4,4,3),
+                       S3 = c(5,3,2,3))
 
-    boxplot <- canvasXpress(data       = data,
-                             graphType = "Scatter2D")
+    boxplot <- canvasXpress(data      = data,
+                            graphType = "Scatter2D")
     check_ui_test(boxplot)
 
     histogram1 <- boxplot %>%
@@ -71,7 +64,8 @@ test_that("piping - change afterRender", {
     check_ui_test(histogram1)
 
     histogram2 <- histogram1 %>%
-        canvasXpress(afterRender = NULL)
+        canvasXpress(title       = "Remove histogram",
+                     afterRender = NULL)
 
     check_ui_test(histogram2)
 })
@@ -83,8 +77,7 @@ test_that("piping - change width/height", {
     check_ui_test(obj1)
 
     obj2 <- obj1 %>% canvasXpress(
-        title  = "changed width and height",
-        width  = 100,
+        title  = "changed height",
         height = 300)
 
     check_ui_test(obj2)
@@ -99,7 +92,7 @@ test_that("piping - change attributes for tojson", {
     check_ui_test(obj1)
 
     result <- obj1 %>%
-        canvasXpress(title = "one digit",
+        canvasXpress(title  = "one digit",
                      digits = 1)
 
     check_ui_test(result)
@@ -107,7 +100,7 @@ test_that("piping - change attributes for tojson", {
 
 
 test_that("piping - invalid object", {
-    obj1 <- cXboxplot14()
+    obj1          <- cXboxplot14()
     obj1$x$data$y <- NULL
 
     result <- obj1 %>%
@@ -132,9 +125,9 @@ test_that("piping - attempted data changes", {
     # Get two dataframes to use
     error_msg <- "Primary object data changes are not supported when modifying a canvasXpress object"
     y <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-dat.txt",
-                    header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+                    header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
     x <- read.table("https://www.canvasxpress.org/data/cX-toothgrowth-smp.txt",
-                    header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+                    header = TRUE, sep = "\t", quote = "", row.names = 1, fill = TRUE, check.names = FALSE, stringsAsFactors = FALSE)
 
     expect_error(cXdotplot4() %>% canvasXpress(smpAnnot = y), regexp = error_msg)
     expect_error(cXbarline3() %>% canvasXpress(varAnnot = x), regexp = error_msg)
@@ -145,11 +138,11 @@ test_that("piping - area chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>%
-        canvasXpress(title           = "decoration lines, xAxisTickSize, shapeby",
-                     decorations     = list(line = list(list(color = "rgba(205,0,0,0.5)", width = 2, x = 2000),
-                                                        list(color = "rgba(0,104,139,0.5)", width = 2, x = 2005))),
-                     xAxisTickSize   = 2,
-                     shapeBy         = "country")
+        canvasXpress(title         = "decoration lines, xAxisTickSize, shapeby",
+                     decorations   = list(line = list(list(color = "rgba(205,0,0,0.5)", width = 2, x = 2000),
+                                                      list(color = "rgba(0,104,139,0.5)", width = 2, x = 2005))),
+                     xAxisTickSize = 2,
+                     shapeBy       = "country")
 
     check_ui_test(result)
 })
@@ -184,9 +177,9 @@ test_that("piping - barline chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title         = "groupSamples and only plot V2",
-        groupSamples  = list("Factor1"),
-        xAxis         = list("V2")
+        title        = "groupSamples and only plot V2",
+        groupSamples = list("Factor1"),
+        xAxis        = list("V2")
     )
 
     check_ui_test(result)
@@ -206,19 +199,13 @@ test_that("piping - boxplot chart", {
 })
 
 test_that("piping - bubble chart", {
-    # TODO Question - the modifyLabelCoordinates don't seem to be working.
-    #add comment that after render is not included in bubble chart
     obj1 <- cXbubble3()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "bubbleLabelLineType to line and bubbleOutlineColor",
+        title               = "bubbleLabelLineType to line and bubbleOutlineColor",
         bubbleLabelLineType = "line",
-        bubbleOutlineColor  = "blue"
-        # afterRender = list(list("modifyLabelCoordinates", list(list("Central America", -100, 100, TRUE))),
-        #                    list("modifyLabelCoordinates", list(list("Oceania", 10, -50, TRUE))),
-        #                    list("modifyLabelCoordinates", list(list("Europe", 10, -50))))
-    )
+        bubbleOutlineColor  = "blue")
 
     check_ui_test(result)
 })
@@ -228,7 +215,7 @@ test_that("piping - chord chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "legendPosition and theme",
+        title          = "legendPosition and theme",
         legendPosition = "bottom",
         theme          = "ggplot",
     )
@@ -255,9 +242,9 @@ test_that("piping - contour chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>%
-        canvasXpress(title                 = "contourLevel, heatmapIndicator",
-                     showContourLevel      = TRUE,
-                     showHeatmapIndicator  = FALSE)
+        canvasXpress(title                = "contourLevel, heatmapIndicator",
+                     showContourLevel     = TRUE,
+                     showHeatmapIndicator = FALSE)
 
     check_ui_test(result)
 })
@@ -291,7 +278,7 @@ test_that("piping - density chart", {
     check_ui_test(obj1)
     warning("remove segregateVariablesBy results in different color scheme than if you do it manually on the plot")
     result <- obj1 %>% canvasXpress(
-        title      = "remove segregation",
+        title                = "remove segregation",
         segregateVariablesBy = list()
     )
 
@@ -412,8 +399,8 @@ test_that("piping - histogram chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title         = "change histogram bins and show path line",
-        histogramBins = 10,
+        title             = "change histogram bins and show path line",
+        histogramBins     = 10,
         showHistogramPath = TRUE)
 
     check_ui_test(result)
@@ -424,9 +411,9 @@ test_that("piping - kaplanmeier chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title         = "change X axis label and legend inside plot",
-        legendInside  = TRUE,
-        xAxisTitle    = "CHANGED")
+        title        = "change X axis label and legend inside plot",
+        legendInside = TRUE,
+        xAxisTitle   = "CHANGED")
 
     check_ui_test(result)
 })
@@ -436,9 +423,9 @@ test_that("piping - layout chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title         = "fixed toolbar and resizable FALSE",
-        toolbarType   = "fixed",
-        resizable     = FALSE)
+        title       = "fixed toolbar and resizable FALSE",
+        toolbarType = "fixed",
+        resizable   = FALSE)
 
     check_ui_test(result)
 })
@@ -448,8 +435,8 @@ test_that("piping - line chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title         = "zoomDisabled",
-        zoomDisable   = TRUE)
+        title       = "zoomDisabled",
+        zoomDisable = TRUE)
 
     check_ui_test(result)
 })
@@ -485,7 +472,7 @@ test_that("piping - map chart", {
         title           = "remove legend title and zoom in map",
         showLegendTitle = FALSE,
         mapConfig       = list(zoom = 3)
-        )
+    )
 
     check_ui_test(result)
 })
@@ -520,7 +507,7 @@ test_that("piping - nonlinearfit chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title      = "change line color to blue",
+        title       = "change line color to blue",
         decorations = list(power = list(list(color = "blue")))
     )
 
@@ -528,13 +515,12 @@ test_that("piping - nonlinearfit chart", {
 })
 
 test_that("piping - oncoprint chart", {
-    obj1 <- cXnonlinearfit5()
+    obj1 <- cXoncoprint2()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title      = "change line color to blue",
-        decorations = list(power = list(list(color = "blue")))
-    )
+        title       = "remove overlays",
+        smpOverlays = NULL)
 
     check_ui_test(result)
 })
@@ -587,14 +573,12 @@ test_that("piping - ridgeline chart", {
 })
 
 test_that("piping - sankey chart", {
-    # TODO melissa add tests up to here
     obj1 <- cXsankey4()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
         title       = "Sankey with changed theme",
-        theme       = "stata"
-    )
+        theme       = "stata")
 
     check_ui_test(result)
 })
@@ -604,10 +588,9 @@ test_that("piping - scatter2D chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title                = "Histogram removed, legend side changed",
-        "xAxisHistogramShow" = FALSE,
-        legendPosition       = "left"
-    )
+        title              = "Histogram removed, legend side changed",
+        xAxisHistogramShow = FALSE,
+        legendPosition     = "left")
 
     check_ui_test(result)
 })
@@ -620,8 +603,7 @@ test_that("piping - scatter3D chart", {
         title              = "change colour scheme, select point and font",
         colorScheme        = "Behance",
         fontName           = "Courier",
-        selectedDataPoints = list("V62")
-    )
+        selectedDataPoints = list("V62"))
 
     check_ui_test(result)
 })
@@ -633,8 +615,7 @@ test_that("piping - scatterbubbl2D chart", {
     result <- obj1 %>% canvasXpress(
         title          = "change theme and background",
         theme          = "SpongeBob",
-        backgroundType = "solid"
-    )
+        backgroundType = "solid")
 
     check_ui_test(result)
 })
@@ -647,8 +628,7 @@ test_that("piping - splom chart", {
         title          = "change theme, legend position, and legend columns",
         theme          = "KimPossible",
         legendPosition = "bottom",
-        legendColumns  = 3
-    )
+        legendColumns  = 3)
 
     check_ui_test(result)
 })
@@ -660,8 +640,7 @@ test_that("piping - stacked chart", {
     result <- obj1 %>% canvasXpress(
         title            = "change graph orientation and axis label rotation",
         graphOrientation = "vertical",
-        smpLabelRotate   = 90
-    )
+        smpLabelRotate   = 90)
 
     check_ui_test(result)
 })
@@ -674,8 +653,7 @@ test_that("piping - stackedline chart", {
         title             = "change colour scheme and italicize title/subtitle",
         colorScheme       = "Blues",
         titleFontStyle    = "italic",
-        subtitleFontStyle = "italic"
-    )
+        subtitleFontStyle = "italic")
 
     check_ui_test(result)
 })
@@ -687,8 +665,7 @@ test_that("piping - stackedpercent chart", {
     result <- obj1 %>% canvasXpress(
         title          = "change colour scheme and background",
         colorScheme    = "Magma",
-        backgroundType = "gradient"
-    )
+        backgroundType = "gradient")
 
     check_ui_test(result)
 })
@@ -701,8 +678,7 @@ test_that("piping - stackedpercentline chart", {
         title             = "change grid line type, rotate x-axis labels, change theme",
         xAxisTickLineType = "dashed",
         smpLabelRotate    = 90,
-        theme             = "solarized"
-    )
+        theme             = "solarized")
 
     check_ui_test(result)
 })
@@ -713,17 +689,7 @@ test_that("piping - sunburst chart", {
 
     result <- obj1 %>% canvasXpress(
         title       = "change to different graph type",
-        afterRender = list(
-            list(
-                "changeAttribute",
-                list("circularType","bubble",NULL,NULL,NULL,NULL),
-                list(
-                    "layoutCurrent" = 0
-                ),
-                1697069487174
-            )
-        )
-    )
+        circularType = "bubble")
 
     check_ui_test(result)
 })
@@ -808,8 +774,7 @@ test_that("piping - venn chart", {
     result <- obj1 %>% canvasXpress(
         title    = "change font and theme",
         fontName = "Bradley Hand",
-        theme    = "solarized"
-    )
+        theme    = "solarized")
 
     check_ui_test(result)
 })
@@ -822,8 +787,7 @@ test_that("piping - waterfall chart", {
         title              = "changed grid line colour, bold font, colour scheme",
         axisTitleFontStyle = "bold",
         xAxisTickColor     = "#471a1a",
-        colorScheme        = "PuBu"
-    )
+        colorScheme        = "PuBu")
 
     check_ui_test(result)
 })
