@@ -478,14 +478,14 @@ test_that("piping - map chart", {
 })
 
 test_that("piping - meter chart", {
-    obj1 <- cXmap2()
+    obj1 <- cXmeter2()
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title           = "remove legend title and zoom in map",
-        showLegendTitle = FALSE,
-        mapConfig       = list(zoom = 3)
-    )
+        title         = "add subtitle, change meter max and meter segments",
+        meterMax      = 100,
+        subtitle      = "subtitle added",
+        meterSegments = list(25, 50, 75, 200))
 
     check_ui_test(result)
 })
