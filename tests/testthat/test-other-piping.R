@@ -317,102 +317,273 @@ test_that("piping - dotline chart", {
 
     result <- obj1 %>% canvasXpress(
         title       = "add annotation to one point",
-        decorations             = list(marker = list(list(sample   = "S3",
-                                                          variable = "V1",
-                                                          text     = "Maybe an Outlier?",
-                                                          x        = 0.39,
-                                                          y        = 0.71)))
+        decorations = list(marker = list(list(sample   = "S3",
+                                              variable = "V1",
+                                              text     = "Maybe an Outlier?",
+                                              x        = 0.39,
+                                              y        = 0.71)))
     )
 
     check_ui_test(result)
 })
 
 test_that("piping - dotplot chart", {
+    obj1 <- cXdotplot14()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title  = "add jitter to points",
+        jitter = TRUE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - facet chart", {
+    obj1 <- cXfacet3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "remove segregation",
+        afterRender = NULL)
+
+    check_ui_test(result)
 })
 
 test_that("piping - fish chart", {
+    obj1 <- cXfish1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title     = "modify fish shape and axis",
+        fishShape = "polygon",
+        fishAxis  = list(0, 120))
+
+    check_ui_test(result)
 })
 
 test_that("piping - gantt chart", {
+    obj1 <- cXgantt3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title     = "modify fish shape and axis",
+        patternBy = "Indication")
+
+    check_ui_test(result)
 })
 
 test_that("piping - genome chart", {
+    obj1 <- cXgenome4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title        = "remove ideogram (chromosome, first row)",
+        showIdeogram = FALSE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - heatmap chart", {
+    obj1 <- cXheatmap4()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title        = "highlight cells",
+        highlightSmp = list("S3", "S5", "S10", "S11"),
+        highlightVar = list("V22", "V30", "V4"))
+
+    check_ui_test(result)
 })
 
 test_that("piping - hexplotbinplot chart", {
+    obj1 <- cXhexplotbinplot2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title        = "change bins and shape to rectangle)",
+        binplotBins  = 20,
+        binplotShape = "rectangle")
+
+    check_ui_test(result)
 })
 
 test_that("piping - histogram chart", {
+    obj1 <- cXhistogram6()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "change histogram bins and show path line",
+        histogramBins = 10,
+        showHistogramPath = TRUE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - kaplanmeier chart", {
+    obj1 <- cXkaplanmeier3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "change X axis label and legend inside plot",
+        legendInside  = TRUE,
+        xAxisTitle    = "CHANGED")
+
+    check_ui_test(result)
 })
 
 test_that("piping - layout chart", {
+    obj1 <- cXlayout3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "fixed toolbar and resizable FALSE",
+        toolbarType   = "fixed",
+        resizable     = FALSE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - line chart", {
+    obj1 <- cXline2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title         = "zoomDisabled",
+        zoomDisable   = TRUE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - linearfit chart", {
+    obj1 <- cXlinearfit2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title                 = "remove stringVariableFactors",
+        stringVariableFactors = NULL)
+
+    check_ui_test(result)
 })
 
 test_that("piping - lollipop chart", {
+    obj1 <- cXlollipop2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title             = "lollipop circle filled and size of circle increased",
+        barLollipopFactor = 2.5,
+        barLollipopOpen   = FALSE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - map chart", {
+    obj1 <- cXmap2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title           = "remove legend title and zoom in map",
+        showLegendTitle = FALSE,
+        mapConfig       = list(zoom = 3)
+        )
+
+    check_ui_test(result)
 })
 
 test_that("piping - meter chart", {
+    obj1 <- cXmap2()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title           = "remove legend title and zoom in map",
+        showLegendTitle = FALSE,
+        mapConfig       = list(zoom = 3)
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - network chart", {
+    obj1 <- cXnetwork9()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title                     = "change networkColaFlowLayoutAxis from y to x",
+        networkColaFlowLayoutAxis = "x"
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - nonlinearfit chart", {
+    obj1 <- cXnonlinearfit5()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title      = "change line color to blue",
+        decorations = list(power = list(list(color = "blue")))
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - oncoprint chart", {
+    obj1 <- cXnonlinearfit5()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title      = "change line color to blue",
+        decorations = list(power = list(list(color = "blue")))
+    )
+
+    check_ui_test(result)
 })
 
 test_that("piping - parallelcoordinates chart", {
+    obj1 <- cXparallelcoordinates1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title       = "change legend title to bold",
+        legendTitle = "bold")
+
+    check_ui_test(result)
 })
 
 test_that("piping - pie chart", {
+    obj1 <- cXpie1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title              = "remove sample label and put segment labels outside chart",
+        pieSegmentLabels   = "outside",
+        showPieSampleLabel = FALSE)
+
+    check_ui_test(result)
 })
 
 test_that("piping - radar chart", {
+    obj1 <- cXradar1()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title                          = "show 270 of the chart and add blue legend border color",
+        circularArc                    = 270,
+        legendKeyBackgroundBorderColor = "blue")
+
+    check_ui_test(result)
 })
 
 test_that("piping - ridgeline chart", {
+    obj1 <- cXridgeline3()
+    check_ui_test(obj1)
 
+    result <- obj1 %>% canvasXpress(
+        title             = "show histogram and change xAxis grid to dashed",
+        hideHistogram     = FALSE,
+        xAxisTickLineType = "dashed")
+
+    check_ui_test(result)
 })
 
 test_that("piping - sankey chart", {
@@ -446,9 +617,10 @@ test_that("piping - scatter3D chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "change colour scheme and font",
-        colorScheme = "Behance",
-        fontName    = "Courier"
+        title              = "change colour scheme, select point and font",
+        colorScheme        = "Behance",
+        fontName           = "Courier",
+        selectedDataPoints = list("V62")
     )
 
     check_ui_test(result)
