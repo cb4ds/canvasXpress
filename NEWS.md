@@ -11,6 +11,14 @@ For detailed information on changes to the stand-alone JavaScript CanvasXpress l
 
 ---
 
+## v1.46.9-1
+* Updated tests per input by Carson for the htmlwidgets release 1.6.3
+
+
+## v1.46.9
+* Updated CanvasXpress JS and CSS libraries to v46.9
+* Added piping support and tests
+
 ## v1.45.4
 * Updated CanvasXpress JS and CSS libraries to v45.4
 * Updated ggplot conversion functionality to expand functionality and fix bugs
