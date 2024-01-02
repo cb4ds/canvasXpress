@@ -528,7 +528,7 @@ test_that("piping - parallelcoordinates chart", {
     check_ui_test(obj1)
 
     result <- obj1 %>% canvasXpress(
-        title       = "change legend title to bold",
+        title                = "change legend title to bold",
         legendTitleFontStyle = "bold")
 
     check_ui_test(result)
