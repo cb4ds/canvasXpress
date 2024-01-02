@@ -275,8 +275,8 @@ test_that("piping - density chart", {
     check_ui_test(obj1)
     warning("remove segregateVariablesBy results in different color scheme than if you do it manually on the plot")
     result <- obj1 %>% canvasXpress(
-        title         = "hideHistogram and segregate by sex",
-        hideHistogram = TRUE,
+        title                = "hideHistogram and segregate by sex",
+        hideHistogram        = TRUE,
         segregateVariablesBy = list("sex")
     )
 
