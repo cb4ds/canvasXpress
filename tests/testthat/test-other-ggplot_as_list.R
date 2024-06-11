@@ -27,7 +27,7 @@ test_that("ggplot.as.list - ggplot2 GeomPoint", {
     expect_equal(class(cxplot), "json")
     expect_equal(length(cxplot_list), 14)
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list$data), 33)
+    expect_true(length(cxplot_list$data) == 33)
     expect_equal(cxplot_list$data[[2]][[1]], "Mazda RX4")
 
     gplot <- gplot_orig +
