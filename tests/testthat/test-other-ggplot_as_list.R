@@ -45,7 +45,7 @@ test_that("ggplot.as.list - ggplot2 GeomBin2d", {
 
     gplot <- ggplot(diamonds, aes(x, y)) + xlim(4, 10) + ylim(4, 10) +
         geom_tile() +
-        geom_bin_2d()
+        stat_bin2d()
 
     cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
