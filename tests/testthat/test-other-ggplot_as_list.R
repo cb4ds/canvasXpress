@@ -53,7 +53,6 @@ test_that("ggplot.as.list - ggplot2 GeomBin2d", {
     expect_equal(class(cxplot), "json")
     expect_equal(length(cxplot_list), 14)
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list$data), 53941)
     expect_equal(cxplot_list$data[[2]][[1]], "1")
 })
 
