@@ -34,9 +34,9 @@ test_that("ggplot.as.list - ggplot2 GeomPoint", {
         scale_colour_gradientn(colours = terrain.colors(10))
     expect_equal(class(ggplot.as.list(gplot)), "json")
 
-    # gplot <- gplot_orig +
-    #     facet_wrap(vars(drat = cut_number(drat, 3)), labeller = label_both)
-    # expect_equal(class(ggplot.as.list(gplot)), "json")
+    gplot <- gplot_orig +
+        facet_wrap(vars(drat = cut_number(drat, 3)), labeller = label_both)
+    expect_equal(class(ggplot.as.list(gplot)), "json")
 })
 
 
