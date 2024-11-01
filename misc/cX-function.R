@@ -1,45 +1,155 @@
 cXarea1 <- function() {
   library(canvasXpress)
-  y=read.table("https://www.canvasxpress.org/data/cX-area4-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y=read.table("https://www.canvasxpress.org/data/cX-area5-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
-    colorScheme="CanvasXpress",
     graphOrientation="vertical",
     graphType="Area",
-    lineType="rect",
-    objectBorderColor=FALSE,
     showLegend=FALSE,
-    showSampleNames=TRUE,
-    showTransition=FALSE,
     smpTextRotate=90,
-    smpTitle="time"
+    title="Area graph with one series",
+    xAxis=list("Value")
   )
 }
 
 cXarea2 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area5-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    graphOrientation="vertical",
+    graphType="Area",
+    lineType="spline",
+    showLegend=FALSE,
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxis=list("Value"),
+    xAxisTitle="Value"
+  )
+}
+
+cXarea3 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area6-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    graphOrientation="vertical",
+    graphType="Area",
+    lineType="spline",
+    smpTextRotate=90,
+    smpTitle="Month",
+    subtitle="random data",
+    title="Area graph with three overlapping data series",
+    xAxisTitle="Value"
+  )
+}
+
+cXarea4 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area6-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    areaType="stacked",
+    graphOrientation="vertical",
+    graphType="Area",
+    lineType="spline",
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxisTitle="Value"
+  )
+}
+
+cXarea5 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area6-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    areaType="percent",
+    graphOrientation="vertical",
+    graphType="Area",
+    lineType="spline",
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxisTitle="Value"
+  )
+}
+
+cXarea6 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area6-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    filterData=list(list("guess", "false", "different", "ARRAY(0x12e269d58)")),
+    graphOrientation="vertical",
+    graphType="Area",
+    lineType="spline",
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxisTitle="Value"
+  )
+}
+
+cXarea7 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area6-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    filterData=list(list("guess", "false", "exact", "ARRAY(0x12e26a1c0)")),
+    graphOrientation="vertical",
+    graphType="Area",
+    lineType="spline",
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxisTitle="Value"
+  )
+}
+
+cXarea8 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area7-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-area7-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    varAnnot=z,
+    colorBy="Series",
+    graphType="Area",
+    lineType="spline"
+  )
+}
+
+cXarea9 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area7-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-area7-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    varAnnot=z,
+    colorBy="Series",
+    filterData=list(list("guess", "Series", "not like", "ARRAY(0x12e2d2060)")),
+    graphType="Area",
+    lineType="spline"
+  )
+}
+
+cXarea10 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-area-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
     graphOrientation="vertical",
     graphType="Area",
-    legendPosition="right",
-    lineType="spline",
-    objectBorderColor=FALSE,
     objectColorTransparency=0.7,
-    showTransition=FALSE,
     smpLabelInterval=20,
     smpTextRotate=45,
     smpTitle="Year",
     subtitle="gcookbook - uspopage",
     theme="CanvasXpress",
     title="Age distribution of population in the United States",
-    xAxis2Show=FALSE,
     xAxisTitle="Number of People (1000's)"
   )
 }
 
-cXarea3 <- function() {
+cXarea11 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-area-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
@@ -48,43 +158,34 @@ cXarea3 <- function() {
     colorScheme="Blues",
     graphOrientation="vertical",
     graphType="Area",
-    legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
-    legendKeyBackgroundColor="rgba(255,255,255,0)",
-    legendPosition="right",
-    lineType="spline",
     smpLabelInterval=20,
     smpTextRotate=45,
     smpTitle="Year",
     subtitle="gcookbook - uspopage",
     title="Age distribution of population in the United States",
-    xAxis2Show=FALSE,
     xAxisTitle="Number of People (1000's)"
   )
 }
 
-cXarea4 <- function() {
+cXarea12 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-area-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
     areaType="percent",
-    colorScheme="CanvasXpress",
+    colorScheme="GGPlot",
     graphOrientation="vertical",
     graphType="Area",
-    legendPosition="right",
-    lineType="spline",
-    showTransition=FALSE,
     smpLabelInterval=20,
     smpTextRotate=45,
     smpTitle="Year",
     subtitle="gcookbook - uspopage",
     title="Age distribution of population in the United States",
-    xAxis2Show=FALSE,
-    xAxisTitle="Normalized Percentage of People"
+    xAxisTitle="Number of People (1000's)"
   )
 }
 
-cXarea5 <- function() {
+cXarea13 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-area3-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
@@ -99,18 +200,19 @@ cXarea5 <- function() {
     objectColorTransparency=0.3,
     showLegend=FALSE,
     showSampleNames=FALSE,
-    showTransition=FALSE,
-    title="Steam Plot"
+    title="Steam Plot",
+    xAxisGridMajorShow=FALSE,
+    xAxisGridMinorShow=FALSE,
+    xAxisShow=FALSE
   )
 }
 
-cXarea6 <- function() {
+cXarea14 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-area2-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
     areaType="stacked",
-    axisAlgorithm="wilkinsonExtended",
     colorScheme="ColorSpectrum",
     colorSpectrum=list("blue", "cyan", "yellow", "red"),
     graphOrientation="vertical",
@@ -120,11 +222,14 @@ cXarea6 <- function() {
     objectColorTransparency=0.6,
     showLegend=FALSE,
     showSampleNames=FALSE,
-    title="Data Mountain"
+    title="Data Mountain",
+    xAxisGridMajorShow=FALSE,
+    xAxisGridMinorShow=FALSE,
+    xAxisShow=FALSE
   )
 }
 
-cXarea7 <- function() {
+cXarea15 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-scatterArea-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table("https://www.canvasxpress.org/data/cX-scatterArea-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
@@ -133,13 +238,12 @@ cXarea7 <- function() {
     varAnnot=z,
     colorBy="g",
     colorScheme="GGPlot",
-    graphType="Scatter2D",
-    scatterType="area",
+    graphType="Area",
     theme="GGPlot"
   )
 }
 
-cXarea8 <- function() {
+cXarea16 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-fontana-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table("https://www.canvasxpress.org/data/cX-fontana-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
@@ -150,11 +254,10 @@ cXarea8 <- function() {
     colorBy="country",
     colors=list("rgb(0,63,92)", "rgb(47,75,124)", "rgb(102,81,145)", "rgb(160,81,149)", "rgb(212,80,135)", "rgb(249,93,106)", "rgb(255,124,67)", "rgb(255,166,0)"),
     dataPointSizeScaleFactor=0,
-    graphType="Scatter2D",
-    legendColumns=4,
+    graphType="Area",
+    legendColumns=3,
     legendPosition="bottom",
     panelBackgroundColor="rgb(222,222,222)",
-    scatterType="area",
     xAxisGridMinorShow=FALSE,
     yAxisGridMinorShow=FALSE
   )
@@ -162,31 +265,73 @@ cXarea8 <- function() {
 
 cXarealine1 <- function() {
   library(canvasXpress)
-  y=read.table("https://www.canvasxpress.org/data/cX-arealine-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y=read.table("https://www.canvasxpress.org/data/cX-area8-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
-    colorScheme="CanvasXpress",
     graphOrientation="vertical",
     graphType="AreaLine",
-    legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
-    legendKeyBackgroundColor="rgba(255,255,255,0)",
-    legendPosition="right",
     lineThickness=3,
     lineType="spline",
-    smpLabelInterval=20,
-    smpTextRotate=45,
-    smpTitle="Year",
-    subtitle="gcookbook - uspopage",
-    title="Age distribution of population in the United States",
-    xAxis=list("<5", "5-14", "15-24", "25-34"),
-    xAxis2=list("35-44", "45-54", "55-64", ">64"),
-    xAxisTitle="Number of People (1000's)"
+    objectColorTransparency=0.5,
+    setMaxX=50,
+    setMaxX2=50,
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxis=list("Series A", "Series B", "Series C"),
+    xAxis2=list("Series D", "Series E"),
+    xAxis2Show=TRUE,
+    xAxisShow=TRUE
   )
 }
 
 cXarealine2 <- function() {
   library(canvasXpress)
-  y=read.table("https://www.canvasxpress.org/data/cX-arealine-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y=read.table("https://www.canvasxpress.org/data/cX-area8-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    areaType="stacked",
+    graphOrientation="vertical",
+    graphType="AreaLine",
+    lineThickness=3,
+    lineType="spline",
+    setMaxX=60,
+    setMaxX2=60,
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxis=list("Series A", "Series B", "Series C"),
+    xAxis2=list("Series D", "Series E"),
+    xAxis2Show=TRUE,
+    xAxisShow=TRUE
+  )
+}
+
+cXarealine3 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area8-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    colors=list("rgb(160,81,149)", "rgb(47,75,124)", "rgb(102,81,145)", "rgb(255,166,0)", "rgb(0,63,92)", "rgb(160,81,149)"),
+    graphOrientation="vertical",
+    graphType="AreaLine",
+    legendPosition="topRight",
+    lineThickness=3,
+    lineType="spline",
+    setMinX=0,
+    setMinX2=0,
+    smpTextRotate=90,
+    smpTitle="Month",
+    xAxis=list("Series A"),
+    xAxis2=list("Series D"),
+    xAxis2Show=TRUE,
+    xAxis2Title="Value2",
+    xAxisShow=TRUE,
+    xAxisTitle="Value"
+  )
+}
+
+cXarealine4 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-area-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
     areaType="stacked",
@@ -194,34 +339,7 @@ cXarealine2 <- function() {
     colorSpectrum=list("blue", "cyan", "yellow", "red"),
     graphOrientation="vertical",
     graphType="AreaLine",
-    legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
-    legendKeyBackgroundColor="rgba(255,255,255,0)",
-    legendPosition="right",
-    lineThickness=3,
-    lineType="spline",
-    smpLabelInterval=20,
-    smpTextRotate=45,
-    smpTitle="Year",
-    subtitle="gcookbook - uspopage",
-    title="Age distribution of population in the United States",
-    xAxis=list("<5", "5-14", "15-24", "25-34"),
-    xAxis2=list("35-44", "45-54", "55-64", ">64"),
-    xAxisTitle="Number of People (1000's)"
-  )
-}
-
-cXarealine3 <- function() {
-  library(canvasXpress)
-  y=read.table("https://www.canvasxpress.org/data/cX-arealine-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
-  canvasXpress(
-    data=y,
-    colorScheme="Paired",
-    coordinateLineColor=TRUE,
-    graphOrientation="vertical",
-    graphType="AreaLine",
-    legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
-    legendKeyBackgroundColor="rgba(255,255,255,0)",
-    legendPosition="right",
+    legendPosition="topRight",
     lineThickness=3,
     lineType="spline",
     smpLabelInterval=20,
@@ -996,8 +1114,9 @@ cXboxplot10 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=TRUE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
@@ -1069,8 +1188,9 @@ cXboxplot12 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
@@ -1108,8 +1228,9 @@ cXboxplot13 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
@@ -1146,8 +1267,9 @@ cXboxplot14 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
@@ -1195,7 +1317,7 @@ cXboxplot15 <- function() {
     xAxis2Show=FALSE,
     xAxisGridMinorShow=FALSE,
     xAxisTitle="len",
-    afterRender=list(list("pivotX", list("dose")))
+    afterRender=list(list("pivotX", list('dose')))
   )
 }
 
@@ -1218,8 +1340,9 @@ cXboxplot16 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
@@ -1258,8 +1381,9 @@ cXboxplot17 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
@@ -1301,8 +1425,9 @@ cXboxplot18 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
@@ -2219,7 +2344,7 @@ cXdonnut1 <- function() {
     circularArc=360,
     circularRotate=0,
     circularType="sunburst",
-    colorBy="Mont",
+    colorBy="Month",
     colorScheme="Bootstrap",
     graphType="Circular",
     hierarchy=list("Month"),
@@ -2515,8 +2640,9 @@ cXdotplot7 <- function() {
     graphOrientation="vertical",
     graphType="Dotplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
@@ -2557,8 +2683,9 @@ cXdotplot8 <- function() {
     graphOrientation="vertical",
     graphType="Dotplot",
     groupingFactors=list("supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
@@ -2600,8 +2727,9 @@ cXdotplot9 <- function() {
     graphOrientation="vertical",
     graphType="Dotplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
@@ -2642,8 +2770,9 @@ cXdotplot10 <- function() {
     graphOrientation="vertical",
     graphType="Dotplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     legendTextScaleFontFactor=1.8,
     legendTitleScaleFontFactor=1.8,
@@ -3483,7 +3612,7 @@ cXheatmap10 <- function() {
     smpAnnot=x,
     varAnnot=z,
     graphType="Heatmap",
-    guides=TRUE,
+    guidesShow=TRUE,
     legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
     legendKeyBackgroundColor="rgba(255,255,255,0)",
     outlineBy="Outline",
@@ -3576,7 +3705,7 @@ cXheatmap14 <- function() {
     varAnnot=z,
     dendrogramHeight=50,
     graphType="Heatmap",
-    guides=TRUE,
+    guidesShow=TRUE,
     heatmapIndicatorPosition="top",
     legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
     legendKeyBackgroundColor="rgba(255,255,255,0)",
@@ -3868,37 +3997,117 @@ cXhistogram10 <- function() {
 
 cXkaplanmeier1 <- function() {
   library(canvasXpress)
-  y=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y=read.table("https://www.canvasxpress.org/data/cX-lung-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-lung-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
+    varAnnot=z,
+    colorBy="Gender",
+    colors=list("#2E9FDF", "#E7B800"),
     graphType="Scatter2D",
-    showDecorations=TRUE,
-    showKMConfidenceIntervals=FALSE,
-    showLegend=FALSE,
-    showTransition=FALSE,
-    title="Kaplan-Meier Plot",
-    xAxisTitle="Weeks",
-    yAxisTitle="Probability of Survival",
+    kmRiskTable=TRUE,
+    legendColumns=2,
+    legendPosition="top",
+    showKMConfidenceIntervals=TRUE,
+    title="Lung Cancer Data with Confidence Level and Risk Number Table",
+    xAxis=list("time"),
+    xAxisTitle="Time",
+    yAxis=list("status"),
+    yAxisTitle="Survival Probability",
     afterRender=list(list("addKMPlot"))
   )
 }
 
 cXkaplanmeier2 <- function() {
   library(canvasXpress)
-  y=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  y=read.table("https://www.canvasxpress.org/data/cX-lung-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-lung-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   canvasXpress(
     data=y,
+    varAnnot=z,
+    colorBy="Gender",
+    colors=list("#2E9FDF", "#E7B800"),
     graphType="Scatter2D",
+    kmRiskTable=FALSE,
     showKMConfidenceIntervals=TRUE,
-    showTransition=FALSE,
-    title="Kaplan-Meier Plot",
-    xAxisTitle="Weeks",
-    yAxisTitle="Probability of Survival",
+    title="Lung Cancer Data with Confidence Level",
+    xAxis=list("time"),
+    xAxisTitle="Time",
+    yAxis=list("status"),
+    yAxisTitle="Survival Probability",
     afterRender=list(list("addKMPlot"))
   )
 }
 
 cXkaplanmeier3 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-lung-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-lung-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    varAnnot=z,
+    colorBy="Gender",
+    colors=list("#2E9FDF", "#E7B800"),
+    graphType="Scatter2D",
+    kmRiskTable=FALSE,
+    legendColumns=2,
+    legendPosition="top",
+    showKMConfidenceIntervals=FALSE,
+    title="Lung Cancer Data - Minimal",
+    xAxis=list("time"),
+    xAxisTitle="Time",
+    yAxis=list("status"),
+    yAxisTitle="Survival Probability",
+    afterRender=list(list("addKMPlot"))
+  )
+}
+
+cXkaplanmeier4 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-km-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-km-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    varAnnot=z,
+    colorBy="Strata",
+    graphType="Scatter2D",
+    kmRiskTable=TRUE,
+    legendColumns=2,
+    legendPosition="top",
+    showKMConfidenceIntervals=FALSE,
+    title="KM Plot with right censoring method",
+    xAxis=list("Time"),
+    xAxisTitle="Time",
+    yAxis=list("Event"),
+    yAxisTitle="Survival Probability",
+    afterRender=list(list("addKMPlot"))
+  )
+}
+
+cXkaplanmeier5 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/cX-km-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  z=read.table("https://www.canvasxpress.org/data/cX-km-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    varAnnot=z,
+    colorBy="Strata",
+    graphType="Scatter2D",
+    kmRiskTable=TRUE,
+    kmTime="Time2",
+    legendColumns=2,
+    legendPosition="top",
+    showKMConfidenceIntervals=FALSE,
+    title="KM Plot with counting method",
+    xAxis=list("Time"),
+    xAxisTitle="Time",
+    yAxis=list("Event"),
+    yAxisTitle="Survival Probability",
+    afterRender=list(list("addKMPlot"))
+  )
+}
+
+cXkaplanmeier6 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier2-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier2-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
@@ -3907,6 +4116,7 @@ cXkaplanmeier3 <- function() {
     varAnnot=z,
     colorBy="Drug",
     graphType="Scatter2D",
+    kmRiskTable=TRUE,
     legendKeyBackgroundBorderColor="rgba(255,255,255,0)",
     legendKeyBackgroundColor="rgba(255,255,255,0)",
     showKMConfidenceIntervals=FALSE,
@@ -3916,7 +4126,7 @@ cXkaplanmeier3 <- function() {
   )
 }
 
-cXkaplanmeier4 <- function() {
+cXkaplanmeier7 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier3-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier3-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
@@ -3938,7 +4148,7 @@ cXkaplanmeier4 <- function() {
   )
 }
 
-cXkaplanmeier5 <- function() {
+cXkaplanmeier8 <- function() {
   library(canvasXpress)
   y=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier3-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
   z=read.table("https://www.canvasxpress.org/data/cX-kaplanmeier3-var.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
@@ -7974,8 +8184,9 @@ cXviolin1 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=FALSE,
     showLegend=FALSE,
@@ -8011,8 +8222,9 @@ cXviolin2 <- function() {
     graphOrientation="horizontal",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=FALSE,
     showLegend=FALSE,
@@ -8047,8 +8259,9 @@ cXviolin3 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=FALSE,
     showLegend=FALSE,
@@ -8084,8 +8297,9 @@ cXviolin4 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=FALSE,
     showLegend=FALSE,
@@ -8123,8 +8337,9 @@ cXviolin5 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=FALSE,
     showLegend=FALSE,
@@ -8162,8 +8377,9 @@ cXviolin6 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
     showLegend=FALSE,
@@ -8203,8 +8419,9 @@ cXviolin7 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
     showLegend=FALSE,
@@ -8243,8 +8460,9 @@ cXviolin8 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
     showLegend=FALSE,
@@ -8279,8 +8497,9 @@ cXviolin9 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=TRUE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
@@ -8319,8 +8538,9 @@ cXviolin10 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
@@ -8360,8 +8580,9 @@ cXviolin11 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=TRUE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
@@ -8401,8 +8622,9 @@ cXviolin12 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
@@ -8441,8 +8663,9 @@ cXviolin13 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
@@ -8480,8 +8703,9 @@ cXviolin14 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
@@ -8520,8 +8744,9 @@ cXviolin15 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
     showBoxplotIfViolin=TRUE,
@@ -8562,8 +8787,9 @@ cXviolin16 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
     segregateSamplesBy=list("supp"),
@@ -8606,8 +8832,9 @@ cXviolin17 <- function() {
     graphOrientation="vertical",
     graphType="Boxplot",
     groupingFactors=list("dose", "supp"),
-    guides="solid",
     guidesColor="white",
+    guidesLineType="solid",
+    guidesShow=TRUE,
     jitter=FALSE,
     legendTextScaleFontFactor=1.8,
     panelBackgroundColor="#E5E5E5",
