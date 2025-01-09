@@ -1,6 +1,6 @@
 # Known Issues in CanvasXpress from R/Shiny
 
-- Map charts (17 and 18) - CX site - R reproducible code is not executable
+- Map charts 17 - CX site - R reproducible code is not executable
 
 ---
 
