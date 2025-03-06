@@ -99,7 +99,7 @@ cXarea6 <- function() {
   canvasXpress(
     data=y,
     colorScheme="Behance",
-    filterData=list(list("guess", 0, "different", "ARRAY(0x112d23e50)")),
+    filterData=list(list("guess", 0, "different", "ARRAY(0x11867b360)")),
     graphOrientation="vertical",
     graphType="Area",
     lineType="spline",
@@ -121,7 +121,7 @@ cXarea7 <- function() {
     data=y,
     areaType="stacked",
     colorScheme="LastAirBenderWater",
-    filterData=list(list("guess", 0, "exact", "ARRAY(0x112ddd3a0)")),
+    filterData=list(list("guess", 0, "exact", "ARRAY(0x118682be0)")),
     graphOrientation="vertical",
     graphType="Area",
     lineType="spline",
@@ -167,7 +167,7 @@ cXarea9 <- function() {
     varAnnot=z,
     colorBy="Series",
     colorScheme="GameOfThronesStannis",
-    filterData=list(list("guess", "Series", "not like", "ARRAY(0x112ddd3a0)")),
+    filterData=list(list("guess", "Series", "not like", "ARRAY(0x138df9c20)")),
     graphType="Area",
     legendColumns=3,
     legendPosition="top",
@@ -6493,7 +6493,7 @@ cXsankey6 <- function() {
     colorBy="Department",
     graphType="Sankey",
     sankeyAxes=list("Department", "Division", "Requester", "Program", "Operator", "Tool"),
-    title="Complex Sankey Diagram"
+    title="Alluvial Plot"
   )
 }
 
