@@ -2,6 +2,7 @@
 
 - Map charts 17 - CX site - R reproducible code is not executable
 - Network plot custom tooltips cut off at right edge of plot
+- In charts that uses LLM prompt, we need to put all needed configurations in the prompt text.
 
 ---
 
