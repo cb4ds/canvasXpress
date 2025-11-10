@@ -44,7 +44,7 @@ ggplot.as.list <- function(o, ...) {
     cx$isGGMatrix <- TRUE
     cx$isR <- TRUE
     ## Find the longest in the data frame which will be used to calculate the margins
-    v <- na.omit(unlist(lapply(d, as.character)))
+    v <- stats::na.omit(unlist(lapply(d, as.character)))
     z <- if (length(v) > 0) v[which.max(nchar(v))] else ""
     cx$longestString <- as.character(unlist(z))
     if (!is.null(c)) {
@@ -83,6 +83,7 @@ ggplot.as.list <- function(o, ...) {
 #    return("")
 #  }
 #})
+
 
 gg_cxplot <- function(o, target, ...) {
 
@@ -228,6 +229,7 @@ gg_cxplot <- function(o, target, ...) {
 
   cx
 }
+
 
 # -- internal helper functions -- #
 
@@ -402,11 +404,11 @@ gg_theme <- function(o) {
                 t[[a]] <- gsub("points", "", v)
             }
         }
+      }
     }
   }
   t
 }
-
 
 gg_scales <- function(o, b) {
   if (missing(o)) {
