@@ -2,7 +2,7 @@ context("ggplot as list")
 
 test_that("ggplot.as.list - pass non ggplot2 object", {
     skip_if_not_installed("ggplot2")
-    expect_error(ggplot.as.list("test"), regexp = "Not a ggplot object")
+    expect_error(ggplot.as.list("test"), regexp = "Not a ggplot or ggmatrix object")
 })
 
 
