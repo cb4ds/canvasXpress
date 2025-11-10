@@ -8,17 +8,27 @@ assertDataCorrectness <- function(data, graphType, config) {
         if ("ggsurvplot" %in% class(data)) {
             return()
         }
+        if ("ggmatrix" %in% class(data)) {
+            return()
+        }
     }
 
     # proceed with validation
 
-    validGraphTypes <- c("Area", "AreaLine", "Bar", "BarLine", "Boxplot",
-                         "Bullet", "Bump", "Circular", "Correlation", "Dotplot", "DotLine",
-                         "Dumbbell","Fish", "Genome", "Heatmap", "Line", "Map", "Meter",
-                         "Network", "Pie", "ParallelCoordinates", "Sankey", "Scatter2D",
-                         "Scatter3D", "ScatterBubble2D", "Stacked",
-                         "StackedPercent", "StackedLine", "StackedPercentLine",
-                         "Tree", "Treemap", "TagCloud", "Venn", "Gantt", "Waterfall")
+    validGraphTypes <- c("Alluvial", "Area", "AreaLine", "Bar", "BarLine", "Boxplot",
+                         "Bin", "Binplot", "Bubble", "Bullet", "Bump", "CDF", "Chord",
+                         "Circular", "Cleveland", "Contour", "Correlation", "Density",
+                         "Density", "Distribution", "Dumbbell", "Donut", "DotLine",
+                         "Dotplot", "Fish", "Gantt", "Genome", "Heatmap", "Hex",
+                         "Hexplot", "Histogram", "KaplanMeier", "Line", "Lollipop",
+                         "Map", "Meter", "Network", "ParallelCoordinates", "Pareto",
+                         "Pie", "QQ", "Quantile", "Radar", "Ribbon", "Ridgeline",
+                         "Sankey", "Scatter2D", "Scatter3D", "ScatterBubble2D",
+                         "Spaghetti", "SPLOM", "Stacked", "StackedLine",
+                         "StackedPercent", "StackedPercentLine", "Streamgraph",
+                         "Sunburst", "TagCloud", "TimeSeries", "Tornado", "Tree",
+                         "TreeBracket", "Treemap", "Venn", "Violin", "Volcano",
+                         "Waterfall")
     noDataNecessary  <- c("Map")
 
     if (is.null(graphType)) stop("graphType cannot be NULL!")
