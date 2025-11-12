@@ -45,7 +45,10 @@ ggplot.as.list <- function(o, ...) {
     cx$isR <- TRUE
     ## Find the longest in the data frame which will be used to calculate the margins
     v <- stats::na.omit(unlist(lapply(d, as.character)))
-    z <- if (length(v) > 0) v[which.max(nchar(v))] else ""
+    z <- ""
+    if (length(v) > 0) {
+        z <- v[which.max(nchar(v))]
+    }
     cx$longestString <- as.character(unlist(z))
     if (!is.null(c)) {
       cx$cols <- c
