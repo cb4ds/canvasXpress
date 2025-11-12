@@ -172,6 +172,31 @@ test_that("ggplot.as.list - patchwork", {
 })
 
 
+test_that("ggplot.as.list - GGally", {
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("GGally")
+
+    gplot <- ggmatrix(list(
+        ggplot(mtcars, aes(x = mpg, y = wt)) + geom_point(),
+        ggplot(mtcars, aes(x = cyl)) + geom_bar(),
+        ggplot(mtcars, aes(x = hp, y = qsec)) + geom_smooth(method = "lm"),
+        ggplot(mtcars, aes(x = disp)) + geom_density()),
+        nrow = 2,
+        ncol = 2,
+        xAxisLabels = c("X1", "X2"),
+        yAxisLabels = c("Y1", "Y2"))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 8)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 4)
+    expect_equal(cxplot_list$data[[2]][[1]], "canvas-2")
+})
+
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
