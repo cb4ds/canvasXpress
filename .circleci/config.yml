@@ -85,6 +85,7 @@ jobs:
             R -e 'install.packages("DT")'
             R -e 'install.packages("S7")'
             R -e 'install.packages("patchwork")'
+            R -e 'install.packages("GGally")'
 
       - run:
           name: Session information and installed package versions
@@ -137,6 +138,7 @@ jobs:
             R -e 'install.packages("DT")'
             R -e 'install.packages("S7")'
             R -e 'install.packages("patchwork")'
+            R -e 'install.packages("GGally")'
 
       - run:
           name: Session information and installed package versions
@@ -189,6 +191,7 @@ jobs:
             R -e 'install.packages("DT")'
             R -e 'install.packages("S7")'
             R -e 'install.packages("patchwork")'
+            R -e 'install.packages("GGally")'
 
       - run:
           name: Session information and installed package versions

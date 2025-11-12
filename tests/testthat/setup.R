@@ -8,6 +8,7 @@ try({
     require(readr)
     require(ggplot2)
     require(patchwork)
+    require(GGally)
     require(dplyr)
 }, silent = T)
 

@@ -46,5 +46,6 @@ Suggests:
     ggplot2,
     survminer,
     S7,
-    patchwork
+    patchwork,
+    GGally
 VignetteBuilder: knitr
