@@ -7,6 +7,7 @@ try({
     require(canvasXpress.data)
     require(readr)
     require(ggplot2)
+    require(patchwork)
     require(dplyr)
 }, silent = T)
 

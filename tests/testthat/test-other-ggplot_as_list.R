@@ -139,6 +139,39 @@ test_that("ggplot.as.list - ggplot2 point range", {
 })
 
 
+test_that("ggplot.as.list - patchwork", {
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("patchwork")
+
+    dmod <- lm(price ~ cut, data = diamonds)
+    # Create individual ggplot2 plots
+    p1 <- ggplot(mtcars, aes(x = mpg, y = disp)) +
+        geom_point() +
+        labs(title = "Scatterplot: MPG vs Displacement")
+
+    p2 <- ggplot(mtcars, aes(x = factor(cyl), y = hp)) +
+        geom_boxplot() +
+        labs(title = "Boxplot: Horsepower by Cylinders")
+
+    p3 <- ggplot(mtcars, aes(x = wt, fill = factor(am))) +
+        geom_density(alpha = 0.6) +
+        labs(title = "Density Plot: Weight by Transmission")
+
+    # Combine plots using patchwork operators
+    combined_plots <- (p1 + p2) / p3
+
+    cxplot      <- suppressWarnings(ggplot.as.list(combined_plots))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 6)
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(cxplot_list$isPatchwork)
+    expect_equal(length(cxplot_list$data), 2)
+    expect_equal(cxplot_list$data[[2]][[1]], "canvas-2")
+})
+
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
