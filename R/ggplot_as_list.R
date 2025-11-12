@@ -58,8 +58,9 @@ ggplot.as.list <- function(o, ...) {
     }
     p <- list()
     for (i in 1:l) {
-      t <- paste("canvas", i, sep = "-")
-      p[[i]] <- gg_cxplot(o$plots[[i]]$fn(d, o$plots[[i]]$mapping), t)
+      t      <- paste("canvas", i, sep = "-")
+      p[[i]] <- gg_cxplot(o$plots[[i]], t)
+
       p[[i]]$isGGMatrix <- cx$longestString
     }
     cx$datasets <- p
