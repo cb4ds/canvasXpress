@@ -783,42 +783,44 @@ gg_proc_layer <- function(o, idx, bld) {
             next
           }
           b <- l[[p]][[a]]
-          if (!(missing(b)) && is.vector(b)) {
-            f <- regexpr("factor", b)[1]
-            if (is.character(f) && f > 0) {
-              b <- stringr::str_replace(stringr::str_replace(stringr::str_replace(b, "factor\\(", ""), "\\)", ""), "as\\.", "")
-            }
-            if (is.null(r[[a]])) {
-              if (a == "colour") {
-                r[["color"]] <- b
-              } else {
-                r[[a]] <- b
+          if (!missing(b)) {
+              if (is.vector(b)) {
+                  f <- regexpr("factor", b)[1]
+                  if (is.character(f) && f > 0) {
+                      b <- stringr::str_replace(stringr::str_replace(stringr::str_replace(b, "factor\\(", ""), "\\)", ""), "as\\.", "")
+                  }
+                  if (is.null(r[[a]])) {
+                      if (a == "colour") {
+                          r[["color"]] <- b
+                      } else {
+                          r[[a]] <- b
+                      }
+                  }
+              } else if ("formula" %in% class(b)) {
+                  dl <- bld$data[[idx]]
+                  r$formula <- list()
+                  r$formula$def <- deparse(b)
+                  if ("x" %in% colnames(dl) && "y" %in% colnames(dl)) {
+                      r$formula$x <- as.numeric(dl[["x"]])
+                      r$formula$y <- as.numeric(dl[["y"]])
+                  }
+                  if ("ymin" %in% colnames(dl) && "ymax" %in% colnames(dl)) {
+                      r$formula$ymin <- as.numeric(dl[["ymin"]])
+                      r$formula$ymax <- as.numeric(dl[["ymax"]])
+                      max <- bld$layout$panel_scales_y[[1]]$range$range[2]
+                      min <- bld$layout$panel_scales_y[[1]]$range$range[1]
+                      ext <- (max - min) * 0.05
+                      r$formula$minY <- min - ext
+                      r$formula$maxY <- max + ext
+                  }
               }
-            }
-          } else if (class(b)[1] == "formula") {
-            dl <- bld$data[[idx]]
-            r$formula <- list()
-            r$formula$def <- deparse(b)
-            if ("x" %in% colnames(dl) && "y" %in% colnames(dl)) {
-              r$formula$x <- as.numeric(dl[["x"]])
-              r$formula$y <- as.numeric(dl[["y"]])
-            }
-            if ("ymin" %in% colnames(dl) && "ymax" %in% colnames(dl)) {
-              r$formula$ymin <- as.numeric(dl[["ymin"]])
-              r$formula$ymax <- as.numeric(dl[["ymax"]])
-              max <- bld$layout$panel_scales_y[[1]]$range$range[2]
-              min <- bld$layout$panel_scales_y[[1]]$range$range[1]
-              ext <- (max - min) * 0.05
-              r$formula$minY <- min - ext
-              r$formula$maxY <- max + ext
-            }
           }
         }
       }
     }
   }
   if (!is.na(l$show.legend) && l$show.legend == FALSE) {
-    r$showLegend <- FALSE
+      r$showLegend <- FALSE
   }
   if (length(q) > 0) {
     r$stringVariableFactors <- unique(q)
