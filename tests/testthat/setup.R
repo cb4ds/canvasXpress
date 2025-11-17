@@ -9,6 +9,7 @@ try({
     require(ggplot2)
     require(patchwork)
     require(GGally)
+    library(ggpubr)
     require(dplyr)
     require(tibble)
 }, silent = T)

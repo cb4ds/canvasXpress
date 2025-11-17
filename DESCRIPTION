@@ -47,5 +47,6 @@ Suggests:
     survminer,
     S7,
     patchwork,
-    GGally
+    GGally,
+    ggpubr
 VignetteBuilder: knitr
