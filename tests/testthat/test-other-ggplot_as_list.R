@@ -235,6 +235,7 @@ test_that("ggplot.as.list - test segments", {
 
 test_that("ggplot.as.list - GeomBracket", {
     skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggpubr")
 
     plot_data <- mtcars %>%
         rownames_to_column("car") %>%
@@ -274,6 +275,35 @@ test_that("ggplot.as.list - GeomBracket", {
 
 })
 
+
+test_that("ggplot.as.list - ggpattern", {
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggpattern")
+
+    gplot <- ggplot(mtcars, aes(x = cyl, y = mpg, fill = cyl, pattern = factor(cyl))) +
+        geom_violin_pattern(
+            pattern_fill    = "white",
+            pattern_colour  = "black",
+            fill            = "white",
+            colour          = "black",
+            pattern_density = 0.005,
+            pattern_spacing = 0.015) +
+        labs(title = "Violin Plot of MPG by Cylinder with Patterns",
+             x     = "Cylinders",
+             y     = "Miles Per Gallon (MPG)") +
+        theme_bw(base_size = 14) +
+        theme(legend.position = "none")
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 33)
+    expect_equal(cxplot_list$data[[2]][[1]], "Mazda RX4")
+
+})
 
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
