@@ -114,8 +114,8 @@ test_that("histogram values are logical", {
 
     hist_data       <- data.frame("TRUE" = vals, "FALSE" = vals, check.names = FALSE)
     hist_annot_list <- list(NULL,
-                            select(annot_data, NumericVar),
-                            select(annot_data, CategoryVar))
+                            dplyr::select(annot_data, NumericVar),
+                            dplyr::select(annot_data, CategoryVar))
 
     for (i in seq_along(annot_data_list)) {
         result <- canvasXpress(
