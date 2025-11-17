@@ -140,6 +140,7 @@ test_that("ggplot.as.list - ggplot2 point range", {
 
 
 test_that("ggplot.as.list - patchwork", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("patchwork")
 
