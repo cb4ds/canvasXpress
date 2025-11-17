@@ -233,6 +233,48 @@ test_that("ggplot.as.list - test segments", {
 })
 
 
+test_that("ggplot.as.list - GeomBracket", {
+    skip_if_not_installed("ggplot2")
+
+    plot_data <- mtcars %>%
+        rownames_to_column("car") %>%
+        mutate(index = 1:n())
+
+    # Define the bracket data as a separate, one-row data frame
+    bracket_data <- data.frame(
+        xmin = c(1, 5),
+        xmax = c(4, 8),
+        y.position = c(35, 35),
+        label = c("Group 1", "Group 2")
+    )
+
+    gplot <- ggplot(plot_data, aes(x = index, y = mpg, fill = factor(cyl))) +
+        geom_col(alpha = 0.7) +
+        geom_bracket(
+            data = bracket_data,
+            aes(xmin = xmin, xmax = xmax, y.position = y.position, label = label),
+            tip.length = 0.02,
+            inherit.aes = FALSE) +
+        scale_fill_manual(values = c("4" = "#2ecc71", "6" = "#f39c12", "8" = "#e74c3c"),
+                          name = "Cylinders") +
+        labs(title = "MPG Comparison with Brackets",
+             x = "Car Index",
+             y = "Miles Per Gallon") +
+        theme_minimal() +
+        theme(legend.position = "right")
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 33)
+    expect_equal(cxplot_list$data[[2]][[1]], "1")
+
+})
+
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
