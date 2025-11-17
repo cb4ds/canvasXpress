@@ -198,6 +198,7 @@ test_that("ggplot.as.list - GGally", {
 
 
 test_that("ggplot.as.list - test segments", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
     segment_data <- mtcars %>%
