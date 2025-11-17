@@ -92,8 +92,8 @@ test_that("pre-calculated bar plot values are logical", {
     rownames(precalc_annot) <- c(FALSE, TRUE)
 
     precalc_annot_list <- list(NULL,
-                               select(precalc_annot, NumericVar),
-                               select(precalc_annot, CategoryVar))
+                               dplyr::select(precalc_annot, NumericVar),
+                               dplyr::select(precalc_annot, CategoryVar))
 
     for (i in seq_along(precalc_annot_list)) {
         result <- canvasXpress(
