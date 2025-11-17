@@ -722,6 +722,8 @@ gg_proc_layer <- function(o, idx, bld) {
   l <- o$layers[[idx]]
   r <- list()
   q <- as.vector(NULL)
+  print(class(l$geom))
+  message(class(l$geom))
   d <- as.list(gg_default_aes(class(l$geom)[1]))
   if (!is.null(l$mapping)) {
     atts <- ls(l$mapping)

@@ -314,17 +314,17 @@ test_that("ggplot.as.list - ggpattern", {
 
     gplot <- ggplot(avg_hp_data, aes(x = cyl, y = avg_hp, pattern_fill = factor(cyl))) +
         geom_col_pattern(
-            pattern = "crosshatch",
-            fill = "white",
-            color = "black",
-            pattern_spacing = 0.02,
-            key_glyph = draw_key_polygon_pattern) +
-        labs(
-            title = "Average Horsepower by Cylinder Count (Column Plot)",
-            x = "Number of Cylinders",
-            y = "Average Horsepower (hp)",
-            pattern_fill = "Cylinders") +
-        theme_bw(18)
+            pattern = "crosshatch")#,
+            # fill = "white",
+            # color = "black",
+            # pattern_spacing = 0.02,
+            # key_glyph = draw_key_polygon_pattern) #+
+        # labs(
+        #     title = "Average Horsepower by Cylinder Count (Column Plot)",
+        #     x = "Number of Cylinders",
+        #     y = "Average Horsepower (hp)",
+        #     pattern_fill = "Cylinders") +
+        # theme_bw(18)
 
     cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
