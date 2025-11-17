@@ -10,6 +10,7 @@ try({
     require(patchwork)
     require(GGally)
     require(dplyr)
+    require(tibble)
 }, silent = T)
 
 try({
