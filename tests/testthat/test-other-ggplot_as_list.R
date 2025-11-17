@@ -280,6 +280,7 @@ test_that("ggplot.as.list - GeomBracket", {
 
 
 test_that("ggplot.as.list - ggpattern", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggpattern")
 
