@@ -34,6 +34,8 @@ jobs:
             R -e 'install.packages("GGally")'
             R -e 'install.packages("ggpubr")'
             R -e 'install.packages("ggpattern")'
+            R -e 'install.packages("dplyr")'
+            R -e 'install.packages("tibble")'
 
       - run:
           name: Session information and installed package versions
