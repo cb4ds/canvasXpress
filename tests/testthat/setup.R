@@ -10,6 +10,7 @@ try({
     require(patchwork)
     require(GGally)
     library(ggpubr)
+    library(ggpattern)
     require(dplyr)
     require(tibble)
 }, silent = T)

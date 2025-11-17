@@ -48,5 +48,6 @@ Suggests:
     S7,
     patchwork,
     GGally,
-    ggpubr
+    ggpubr,
+    ggpattern
 VignetteBuilder: knitr
