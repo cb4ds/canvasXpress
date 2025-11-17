@@ -234,6 +234,7 @@ test_that("ggplot.as.list - test segments", {
 
 
 test_that("ggplot.as.list - GeomBracket", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggpubr")
 
