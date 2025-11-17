@@ -197,6 +197,42 @@ test_that("ggplot.as.list - GGally", {
 })
 
 
+test_that("ggplot.as.list - test segments", {
+    skip_if_not_installed("ggplot2")
+
+    segment_data <- mtcars %>%
+        rownames_to_column("car") %>%
+        mutate(x = 1:n(),
+               y = mpg,
+               xend = 1:n(),
+               yend = hp / 10)
+    gplot <- ggplot(segment_data) +
+        geom_segment(aes(x = x, y = y, xend = xend, yend = yend,
+                         colour = factor(cyl), linetype = factor(am)),
+                     linewidth = 1.2,
+                     arrow = arrow(length = unit(0.2, "cm"))) +
+        geom_point(aes(x = x, y = y), size = 3, colour = "red") +
+        geom_point(aes(x = xend, y = yend), size = 3, colour = "blue") +
+        scale_colour_manual(values = c("4" = "green", "6" = "orange", "8" = "red"),
+                            name = "Cylinders") +
+        labs(title = "MPG vs HP/10 for mtcars",
+             x = "Car Index",
+             y = "Value",
+             linetype = "Transmission") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 33)
+    expect_equal(cxplot_list$data[[2]][[1]], "1")
+
+})
+
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
