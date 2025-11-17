@@ -332,8 +332,8 @@ test_that("ggplot.as.list - ggpattern", {
     expect_equal(class(cxplot), "json")
     expect_equal(length(cxplot_list), 15)
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list$data), 33)
-    expect_equal(cxplot_list$data[[2]][[1]], "Mazda RX4")
+    expect_equal(length(cxplot_list$data), 4)
+    expect_equal(cxplot_list$data[[2]][[1]], "1")
 
 })
 
