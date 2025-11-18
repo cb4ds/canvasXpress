@@ -618,6 +618,35 @@ test_that("ggplot.as.list - cut functions layer", {
     expect_equal(cxplot_list[["layers"]][["GeomPoint"]][["colour"]][["cut_number"]][["disp"]], "NA")
 })
 
+
+test_that("ggplot.as.list - layer with formula", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point() +
+        # Use geom_smooth and pass a formula explicitly
+        geom_smooth(
+            method = "lm",                  # Linear Model
+            formula = y ~ x + I(x^2),       # A non-linear formula: y ~ x + x^2
+            se = TRUE                       # Display standard error ribbon
+        ) +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["def"]], "y ~ x + I(x^2)")
+    expect_equal(length(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["x"]]), 80)
+    expect_equal(length(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["y"]]), 80)
+    expect_equal(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["minY"]], 7.223)
+    expect_equal(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["maxY"]], 36.481)
+})
+
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
