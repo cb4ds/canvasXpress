@@ -537,6 +537,62 @@ test_that("ggplot.as.list - x and y axis properties", {
 })
 
 
+test_that("ggplot.as.list - pattern scale properties", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    mtcars$cyl_f <- as.factor(mtcars$cyl)
+    gplot <- ggplot(mtcars, aes(x = cyl_f, fill = cyl_f, pattern = cyl_f)) +
+        geom_bar_pattern(
+            stat = "count",
+            pattern_alpha = 0.5,
+            color = "black" ) +
+        labs(
+            title = "Car Count by Cylinder (using ggpattern)",
+            x = "Cylinders",
+            y = "Count",
+            fill = "Cylinders",
+            pattern = "Cylinders") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list[["scales"]][["colors"]][[1]], "#F8766D")
+})
+
+
+test_that("ggplot.as.list - coordinates", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
+        geom_point(size = 3) +
+        # This line sets the specific properties you want to cover:
+        coord_flip(
+            xlim = c(100, 350),
+            ylim = c(10, 35),
+            expand = TRUE # Default is TRUE, included for clarity
+        ) +
+        labs(title = "MPG vs HP (Flipped Coords)") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list[["coords"]][["setMinX"]], 100)
+    expect_equal(cxplot_list[["coords"]][["setMaxX"]], 350)
+    expect_equal(cxplot_list[["coords"]][["setMinY"]], 10)
+    expect_equal(cxplot_list[["coords"]][["setMaxY"]], 35)
+    expect_true(cxplot_list[["coords"]][["flip"]])
+})
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
