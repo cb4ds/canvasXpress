@@ -329,6 +329,7 @@ test_that("ggplot.as.list - ggpattern", {
 
 
 test_that("ggplot.as.list - fill scaling", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
     # continuous fill scale
@@ -412,6 +413,7 @@ test_that("ggplot.as.list - fill scaling", {
 })
 
 test_that("ggplot.as.list - color scaling", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
     # continuous scale
