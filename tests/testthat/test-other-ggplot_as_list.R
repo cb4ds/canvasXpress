@@ -492,6 +492,50 @@ test_that("ggplot.as.list - color scaling", {
     expect_equal(cxplot_list$scales$colorScale, "ScaleBinned")
 })
 
+test_that("ggplot.as.list - x and y axis properties", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
+        geom_point(size = 3) +
+        scale_x_continuous(name = "Engine Horsepower") +
+        scale_y_continuous(name = "Miles Per Gallon") +
+        labs(title = "MPG vs Horsepower") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list[["scales"]][["xAxisSetValues"]][[2]], 100)
+    expect_equal(cxplot_list[["scales"]][["xAxisSetMinorValues"]][[2]], 100)
+    expect_equal(cxplot_list[["scales"]][["yAxisSetValues"]][[2]], 15)
+    expect_equal(cxplot_list[["scales"]][["yAxisSetValues"]][[2]], 15)
+    expect_equal(cxplot_list[["scales"]][["yAxisSetMinorValues"]][[2]], 12.5)
+    expect_equal(cxplot_list[["scales"]][["yAxisSetValues"]][[2]], 15)
+
+    # non identity scale
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
+        geom_point(size = 3) +
+        scale_x_log10(name = "Engine Horsepower") +
+        scale_y_log10(name = "Miles Per Gallon") +
+        labs(title = "MPG vs Horsepower") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list[["scales"]][["xAxisTransform"]], "log10")
+    expect_equal(cxplot_list[["scales"]][["xAxisTitle"]], "Engine Horsepower")
+    expect_equal(cxplot_list[["scales"]][["yAxisTransform"]], "log10")
+    expect_equal(cxplot_list[["scales"]][["yAxisTitle"]], "Miles Per Gallon")
+})
+
 
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
