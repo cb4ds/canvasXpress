@@ -327,6 +327,36 @@ test_that("ggplot.as.list - ggpattern", {
 
 })
 
+
+test_that("ggplot.as.list - scaling", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = mpg, fill = mpg, color = I("black"))) +
+        # Use geom_density, which accepts the 'fill' aesthetic
+        geom_density(alpha = 0.7) +
+        # Use a specific, pre-defined palette function for the fill aesthetic
+        scale_fill_viridis_c(
+            option = "cividis",
+            name = "Miles Per Gallon Value",
+            limits = c(10, 35)
+        ) +
+        labs(
+            title = "Continuous Fill Scale Example (Density Plot)",
+            x = "Miles Per Gallon (MPG)"
+        ) +
+        theme_bw()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 33)
+    expect_equal(cxplot_list$scales$colorSpectrum[[1]], "#00204D")
+})
+
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
