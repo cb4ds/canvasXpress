@@ -414,12 +414,12 @@ test_that("ggplot.as.list - fill scaling", {
 test_that("ggplot.as.list - color scaling", {
     skip_if_not_installed("ggplot2")
 
-    # continuous fill scale
+    # continuous scale
     gplot <- ggplot(mtcars, aes(x = mpg, fill = mpg, color = I("black"))) +
         # Use geom_density, which accepts the 'fill' aesthetic
         geom_density(alpha = 0.7) +
         # Use a specific, pre-defined palette function for the fill aesthetic
-        scale_fill_viridis_c(
+        scale_color_viridis_c(
             option = "cividis",
             name = "Miles Per Gallon Value",
             limits = c(10, 35)
@@ -439,7 +439,7 @@ test_that("ggplot.as.list - color scaling", {
     expect_equal(length(cxplot_list$data), 33)
     expect_equal(cxplot_list$scales$colorSpectrum[[1]], "#00204D")
 
-    # discrete fill scale
+    # discrete scale
     # 2. Define a simple vector of colors manually (base R colors)
     manual_colors <- c("4" = "blue", "6" = "orange", "8" = "red")
 
@@ -447,7 +447,7 @@ test_that("ggplot.as.list - color scaling", {
     gplot <- ggplot(mtcars, aes(x = cyl, fill = as.factor(mtcars$cyl))) +
         geom_bar(color = "black") +
         # 4. Use scale_fill_manual to apply specific colors and breaks
-        scale_fill_manual(
+        scale_color_manual(
             values = manual_colors,        # Provide the explicit colors
             name = "Cylinders",
             breaks = c("4", "6", "8")      # Explicitly specify which breaks to show
@@ -473,16 +473,11 @@ test_that("ggplot.as.list - color scaling", {
 
     # Create the plot
     gplot <- ggplot(mtcars, aes(x = reorder(car, hp), y = mpg, fill = hp)) +
-        geom_bar(stat = "identity") +
-        scale_fill_binned(type = "viridis") + # Use a binned viridis color scale
-        labs(
-            title = "MPG by Car, Fill Color Binned by HP",
-            x = "Car Model (ordered by HP)",
-            y = "Miles Per Gallon (MPG)",
-            fill = "Horsepower (HP) Bins"
-        ) +
-        theme_minimal() +
-        theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+        geom_point(size = 4) +
+        scale_color_binned(
+            type   = "viridis",
+            breaks = c(100, 150, 200, 250, 300),
+            limits = c(50, 350))
 
     cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
@@ -492,6 +487,7 @@ test_that("ggplot.as.list - color scaling", {
     expect_true(cxplot_list$isGGPlot)
     expect_equal(cxplot_list$scales$colorBreaks[[1]], 100)
     expect_equal(cxplot_list$scales$colorLimits[[1]], 50)
+    expect_equal(cxplot_list$scales$colorScale, "ScaleBinned")
 })
 
 
