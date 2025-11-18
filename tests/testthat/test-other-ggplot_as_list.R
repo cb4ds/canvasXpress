@@ -331,6 +331,7 @@ test_that("ggplot.as.list - ggpattern", {
 test_that("ggplot.as.list - scaling", {
     skip_if_not_installed("ggplot2")
 
+    # continuous fill scale
     gplot <- ggplot(mtcars, aes(x = mpg, fill = mpg, color = I("black"))) +
         # Use geom_density, which accepts the 'fill' aesthetic
         geom_density(alpha = 0.7) +
@@ -354,6 +355,34 @@ test_that("ggplot.as.list - scaling", {
     expect_true(cxplot_list$isGGPlot)
     expect_equal(length(cxplot_list$data), 33)
     expect_equal(cxplot_list$scales$colorSpectrum[[1]], "#00204D")
+
+    # discrete fill scale
+    # 2. Define a simple vector of colors manually (base R colors)
+    manual_colors <- c("4" = "blue", "6" = "orange", "8" = "red")
+
+    # 3. Create the plot using geom_bar
+    gplot <- ggplot(mtcars, aes(x = cyl, fill = as.factor(mtcars$cyl))) +
+        geom_bar(color = "black") +
+        # 4. Use scale_fill_manual to apply specific colors and breaks
+        scale_fill_manual(
+            values = manual_colors,        # Provide the explicit colors
+            name = "Cylinders",
+            breaks = c("4", "6", "8")      # Explicitly specify which breaks to show
+        ) +
+        labs(
+            title = "Discrete Fill Scale (Base ggplot2)",
+            x = "Number of Cylinders",
+            y = "Count of Cars"
+        ) +
+        theme_bw()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list$scales$colorBreaks[[1]], "4")
 })
 
 
