@@ -593,6 +593,31 @@ test_that("ggplot.as.list - coordinates", {
     expect_true(cxplot_list[["coords"]][["flip"]])
 })
 
+
+test_that("ggplot.as.list - cut functions layer", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
+        # Use cut_number within the aesthetic mapping of this layer
+        geom_point(aes(color = cut_number(disp, n = 4)), size = 3) +
+        labs(
+            title = "MPG vs HP, Colored by Displacement Quartiles",
+            x = "Horsepower (HP)",
+            y = "Miles Per Gallon (MPG)",
+            color = "Displacement Bins (4 groups)"
+        ) +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 15)
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list[["layers"]][["GeomPoint"]][["colour"]][["cut_number"]][["disp"]], "NA")
+})
+
 test_that("ggplot.as.list - ggplot2 GeomErrorbar", {
     skip_if_not_installed("ggplot2")
 
