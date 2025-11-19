@@ -47,7 +47,7 @@ ggplot.as.list <- function(o, ...) {
     v <- stats::na.omit(unlist(lapply(d, as.character)))
     z <- ""
     if (length(v) > 0) {
-     z <- v[which.max(nchar(v))]
+        z <- v[which.max(nchar(v))]
     }
     cx$longestString <- as.character(unlist(z))
     if (!is.null(c)) {
@@ -58,7 +58,7 @@ ggplot.as.list <- function(o, ...) {
     }
     p <- list()
     for (i in 1:l) {
-      t <- paste("canvas", i, sep = "-")
+      t      <- paste("canvas", i, sep = "-")
       p[[i]] <- gg_cxplot(o$plots[[i]], t)
       p[[i]]$isGGMatrix <- cx$longestString
     }
@@ -814,7 +814,7 @@ gg_proc_layer <- function(o, idx, bld) {
     }
   }
   if (!is.na(l$show.legend) && l$show.legend == FALSE) {
-    r$showLegend <- FALSE
+      r$showLegend <- FALSE
   }
   if (length(q) > 0) {
     r$stringVariableFactors <- unique(q)
