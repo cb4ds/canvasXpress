@@ -47,7 +47,7 @@ ggplot.as.list <- function(o, ...) {
     v <- stats::na.omit(unlist(lapply(d, as.character)))
     z <- ""
     if (length(v) > 0) {
-        z <- v[which.max(nchar(v))]
+     z <- v[which.max(nchar(v))]
     }
     cx$longestString <- as.character(unlist(z))
     if (!is.null(c)) {
@@ -58,9 +58,8 @@ ggplot.as.list <- function(o, ...) {
     }
     p <- list()
     for (i in 1:l) {
-      t      <- paste("canvas", i, sep = "-")
+      t <- paste("canvas", i, sep = "-")
       p[[i]] <- gg_cxplot(o$plots[[i]], t)
-
       p[[i]]$isGGMatrix <- cx$longestString
     }
     cx$datasets <- p
@@ -87,7 +86,6 @@ ggplot.as.list <- function(o, ...) {
 #    return("")
 #  }
 #})
-
 
 gg_cxplot <- function(o, target, ...) {
 
@@ -189,10 +187,12 @@ gg_cxplot <- function(o, target, ...) {
         p$showKMConfidenceIntervals <- config$showKMConfidenceIntervals
         p$kmRiskTable <- config$kmRiskTable
         p$kmColors <- unique(p$data$color)
-        within(cx$config, rm("kmCxplot"))
-        within(cx$config, rm("showKMConfidenceIntervals"))
-        within(cx$config, rm("kmRiskTable"))
-        within(p, rm(data))
+        cx$config <- within(cx$config, {
+          rm(kmCxplot)
+          rm(showKMConfidenceIntervals)
+          rm(kmRiskTable)
+        })
+        p <- within(p, rm(data))
       }
     } else if (l == "GeomDensityRidges") {
       p$bandwidthAdjust <- bld$data[[i]]$x[2] - bld$data[[i]]$x[1]
@@ -233,7 +233,6 @@ gg_cxplot <- function(o, target, ...) {
 
   cx
 }
-
 
 # -- internal helper functions -- #
 
@@ -357,14 +356,6 @@ gg_theme <- function(o) {
     if (is.list(e[[a]]) || ("S7_object" %in% class(e[[a]]))) {
       attrs_values  <- e[[a]]
       if (("S7_object" %in% class(e[[a]])) && requireNamespace("S7", quietly = TRUE)) {
-          attrs_values <- S7::props(e[[a]])
-      }
-
-      atts2 <- ls(attrs_values)
-
-    if (is.list(e[[a]]) || ("S7_object" %in% class(e[[a]]))) {
-      attrs_values  <- e[[a]]
-      if (("S7_object" %in% class(e[[a]])) && requireNamespace("S7", quietly = TRUE)) {
           if ("element_blank" %in% class(attrs_values)) {
             t[[a]] <- "element_blank"
             next
@@ -408,7 +399,6 @@ gg_theme <- function(o) {
                 t[[a]] <- gsub("points", "", v)
             }
         }
-      }
     }
   }
   t
@@ -824,7 +814,7 @@ gg_proc_layer <- function(o, idx, bld) {
     }
   }
   if (!is.na(l$show.legend) && l$show.legend == FALSE) {
-      r$showLegend <- FALSE
+    r$showLegend <- FALSE
   }
   if (length(q) > 0) {
     r$stringVariableFactors <- unique(q)
