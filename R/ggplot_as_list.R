@@ -45,7 +45,10 @@ ggplot.as.list <- function(o, ...) {
     cx$isR <- TRUE
     ## Find the longest in the data frame which will be used to calculate the margins
     v <- stats::na.omit(unlist(lapply(d, as.character)))
-    z <- if (length(v) > 0) v[which.max(nchar(v))] else ""
+    z <- ""
+    if (length(v) > 0) {
+        z <- v[which.max(nchar(v))]
+    }
     cx$longestString <- as.character(unlist(z))
     if (!is.null(c)) {
       cx$cols <- c
@@ -55,8 +58,8 @@ ggplot.as.list <- function(o, ...) {
     }
     p <- list()
     for (i in 1:l) {
-      t <- paste("canvas", i, sep = "-")
-      p[[i]] <- gg_cxplot(o$plots[[i]]$fn(d, o$plots[[i]]$mapping), t)
+      t      <- paste("canvas", i, sep = "-")
+      p[[i]] <- gg_cxplot(o$plots[[i]], t)
       p[[i]]$isGGMatrix <- cx$longestString
     }
     cx$datasets <- p
@@ -83,7 +86,6 @@ ggplot.as.list <- function(o, ...) {
 #    return("")
 #  }
 #})
-
 
 gg_cxplot <- function(o, target, ...) {
 
@@ -185,10 +187,12 @@ gg_cxplot <- function(o, target, ...) {
         p$showKMConfidenceIntervals <- config$showKMConfidenceIntervals
         p$kmRiskTable <- config$kmRiskTable
         p$kmColors <- unique(p$data$color)
-        within(cx$config, rm("kmCxplot"))
-        within(cx$config, rm("showKMConfidenceIntervals"))
-        within(cx$config, rm("kmRiskTable"))
-        within(p, rm(data))
+        cx$config <- within(cx$config, {
+          rm(kmCxplot)
+          rm(showKMConfidenceIntervals)
+          rm(kmRiskTable)
+        })
+        p <- within(p, rm(data))
       }
     } else if (l == "GeomDensityRidges") {
       p$bandwidthAdjust <- bld$data[[i]]$x[2] - bld$data[[i]]$x[1]
@@ -229,7 +233,6 @@ gg_cxplot <- function(o, target, ...) {
 
   cx
 }
-
 
 # -- internal helper functions -- #
 
@@ -353,14 +356,6 @@ gg_theme <- function(o) {
     if (is.list(e[[a]]) || ("S7_object" %in% class(e[[a]]))) {
       attrs_values  <- e[[a]]
       if (("S7_object" %in% class(e[[a]])) && requireNamespace("S7", quietly = TRUE)) {
-          attrs_values <- S7::props(e[[a]])
-      }
-
-      atts2 <- ls(attrs_values)
-
-    if (is.list(e[[a]]) || ("S7_object" %in% class(e[[a]]))) {
-      attrs_values  <- e[[a]]
-      if (("S7_object" %in% class(e[[a]])) && requireNamespace("S7", quietly = TRUE)) {
           if ("element_blank" %in% class(attrs_values)) {
             t[[a]] <- "element_blank"
             next
@@ -404,7 +399,6 @@ gg_theme <- function(o) {
                 t[[a]] <- gsub("points", "", v)
             }
         }
-      }
     }
   }
   t
@@ -783,42 +777,44 @@ gg_proc_layer <- function(o, idx, bld) {
             next
           }
           b <- l[[p]][[a]]
-          if (!(missing(b)) && is.vector(b)) {
-            f <- regexpr("factor", b)[1]
-            if (is.character(f) && f > 0) {
-              b <- stringr::str_replace(stringr::str_replace(stringr::str_replace(b, "factor\\(", ""), "\\)", ""), "as\\.", "")
-            }
-            if (is.null(r[[a]])) {
-              if (a == "colour") {
-                r[["color"]] <- b
-              } else {
-                r[[a]] <- b
+          if (!missing(b)) {
+              if (is.vector(b)) {
+                  f <- regexpr("factor", b)[1]
+                  if (is.character(f) && f > 0) {
+                      b <- stringr::str_replace(stringr::str_replace(stringr::str_replace(b, "factor\\(", ""), "\\)", ""), "as\\.", "")
+                  }
+                  if (is.null(r[[a]])) {
+                      if (a == "colour") {
+                          r[["color"]] <- b
+                      } else {
+                          r[[a]] <- b
+                      }
+                  }
+              } else if ("formula" %in% class(b)) {
+                  dl <- bld$data[[idx]]
+                  r$formula <- list()
+                  r$formula$def <- deparse(b)
+                  if ("x" %in% colnames(dl) && "y" %in% colnames(dl)) {
+                      r$formula$x <- as.numeric(dl[["x"]])
+                      r$formula$y <- as.numeric(dl[["y"]])
+                  }
+                  if ("ymin" %in% colnames(dl) && "ymax" %in% colnames(dl)) {
+                      r$formula$ymin <- as.numeric(dl[["ymin"]])
+                      r$formula$ymax <- as.numeric(dl[["ymax"]])
+                      max <- bld$layout$panel_scales_y[[1]]$range$range[2]
+                      min <- bld$layout$panel_scales_y[[1]]$range$range[1]
+                      ext <- (max - min) * 0.05
+                      r$formula$minY <- min - ext
+                      r$formula$maxY <- max + ext
+                  }
               }
-            }
-          } else if (class(b)[1] == "formula") {
-            dl <- bld$data[[idx]]
-            r$formula <- list()
-            r$formula$def <- deparse(b)
-            if ("x" %in% colnames(dl) && "y" %in% colnames(dl)) {
-              r$formula$x <- as.numeric(dl[["x"]])
-              r$formula$y <- as.numeric(dl[["y"]])
-            }
-            if ("ymin" %in% colnames(dl) && "ymax" %in% colnames(dl)) {
-              r$formula$ymin <- as.numeric(dl[["ymin"]])
-              r$formula$ymax <- as.numeric(dl[["ymax"]])
-              max <- bld$layout$panel_scales_y[[1]]$range$range[2]
-              min <- bld$layout$panel_scales_y[[1]]$range$range[1]
-              ext <- (max - min) * 0.05
-              r$formula$minY <- min - ext
-              r$formula$maxY <- max + ext
-            }
           }
         }
       }
     }
   }
   if (!is.na(l$show.legend) && l$show.legend == FALSE) {
-    r$showLegend <- FALSE
+      r$showLegend <- FALSE
   }
   if (length(q) > 0) {
     r$stringVariableFactors <- unique(q)
