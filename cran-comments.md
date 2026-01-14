@@ -28,7 +28,7 @@ RHub (v2)
 
 rhub::rhub_check(branch    = "cran", 
                  platforms = c("ubuntu-next", "ubuntu-release", "nosuggests",  # linux platforms
-                               "linux", "macos", "windows"))             # other platforms
+                               "linux", "macos-arm64", "windows"))             # other platforms
 
 
 ---  
