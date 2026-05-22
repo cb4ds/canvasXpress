@@ -44,7 +44,7 @@ ggplot.as.list <- function(o, ...) {
     cx$isGGMatrix <- TRUE
     cx$isR <- TRUE
     ## Find the longest in the data frame which will be used to calculate the margins
-    v <- na.omit(unlist(lapply(d, as.character)))
+    v <- stats::na.omit(unlist(lapply(d, as.character)))
     z <- if (length(v) > 0) v[which.max(nchar(v))] else ""
     cx$longestString <- as.character(unlist(z))
     if (!is.null(c)) {
@@ -56,7 +56,7 @@ ggplot.as.list <- function(o, ...) {
     p <- list()
     for (i in 1:l) {
       t <- paste("canvas", i, sep = "-")
-      p[[i]] <- gg_cxplot(o$plots[[i]]$fn(d, o$plots[[i]]$mapping), t)
+      p[[i]] <- gg_cxplot(o$plots[[i]], t)
       p[[i]]$isGGMatrix <- cx$longestString
     }
     cx$datasets <- p
@@ -821,45 +821,47 @@ gg_proc_layer <- function(o, idx, bld) {
   for (a in names(all_params)) {
     b <- all_params[[a]]
     k <- aes_key(a)
-    if (is.vector(b)) {
-      f <- regexpr("factor", b)[1]
-      if (is.character(f) && f > 0) {
-        b <- clean_factor(b)
+    if (!missing(b)) {
+        if (is.vector(b)) {
+          f <- regexpr("factor", b)[1]
+          if (is.character(f) && f > 0) {
+            b <- clean_factor(b)
+          }
+          if (is.null(r[[k]])) {
+            r[[k]] <- b
+          }
+        } else if ("formula" %in% class(b)) {
+          dl <- bld$data[[idx]]
+          r$formula <- list()
+          r$formula$def <- deparse(b)
+          if ("x" %in% colnames(dl) && "y" %in% colnames(dl)) {
+            r$formula$x <- as.numeric(dl[["x"]])
+            r$formula$y <- as.numeric(dl[["y"]])
+          }
+          if ("ymin" %in% colnames(dl) && "ymax" %in% colnames(dl)) {
+            r$formula$ymin <- as.numeric(dl[["ymin"]])
+            r$formula$ymax <- as.numeric(dl[["ymax"]])
+            max <- bld$layout$panel_scales_y[[1]]$range$range[2]
+            min <- bld$layout$panel_scales_y[[1]]$range$range[1]
+            ext <- (max - min) * 0.05
+            r$formula$minY <- min - ext
+            r$formula$maxY <- max + ext
+          }
+        } else if (is.function(b) || is.primitive(b)) {
+          if (is.null(r[[k]])) {
+            fn_name <- tryCatch({
+              pkg <- environmentName(environment(b))
+              ns  <- if (nchar(pkg) > 0) asNamespace(pkg) else baseenv()
+              nms <- ls(ns)
+              found <- nms[vapply(nms, function(nm) {
+                identical(get(nm, envir = ns, inherits = FALSE), b)
+              }, logical(1))]
+              if (length(found) > 0) found[1] else NULL
+            }, error = function(e) NULL)
+            if (!is.null(fn_name)) r[[k]] <- fn_name
+          }
+        }
       }
-      if (is.null(r[[k]])) {
-        r[[k]] <- b
-      }
-    } else if (class(b)[1] == "formula") {
-      dl <- bld$data[[idx]]
-      r$formula <- list()
-      r$formula$def <- deparse(b)
-      if ("x" %in% colnames(dl) && "y" %in% colnames(dl)) {
-        r$formula$x <- as.numeric(dl[["x"]])
-        r$formula$y <- as.numeric(dl[["y"]])
-      }
-      if ("ymin" %in% colnames(dl) && "ymax" %in% colnames(dl)) {
-        r$formula$ymin <- as.numeric(dl[["ymin"]])
-        r$formula$ymax <- as.numeric(dl[["ymax"]])
-        max <- bld$layout$panel_scales_y[[1]]$range$range[2]
-        min <- bld$layout$panel_scales_y[[1]]$range$range[1]
-        ext <- (max - min) * 0.05
-        r$formula$minY <- min - ext
-        r$formula$maxY <- max + ext
-      }
-    } else if (is.function(b) || is.primitive(b)) {
-      if (is.null(r[[k]])) {
-        fn_name <- tryCatch({
-          pkg <- environmentName(environment(b))
-          ns  <- if (nchar(pkg) > 0) asNamespace(pkg) else baseenv()
-          nms <- ls(ns)
-          found <- nms[vapply(nms, function(nm) {
-            identical(get(nm, envir = ns, inherits = FALSE), b)
-          }, logical(1))]
-          if (length(found) > 0) found[1] else NULL
-        }, error = function(e) NULL)
-        if (!is.null(fn_name)) r[[k]] <- fn_name
-      }
-    }
   }
   if (!is.na(l$show.legend) && l$show.legend == FALSE) {
     r$showLegend <- FALSE
