@@ -806,18 +806,17 @@ test_that("ggplot.as.list - shape with NA values in factor", {
     expect_true(cxplot_list$isGGPlot)
 })
 
-#####################################
 test_that("ggplot.as.list - parameter skipping with na.rm TRUE", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 814-819: skip2 parameter filtering
+    # skip2 parameter filtering
     gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
         geom_point(na.rm = TRUE, size = 3) +  # na.rm = TRUE (not default FALSE)
         labs(title = "Point with na.rm") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -829,7 +828,7 @@ test_that("ggplot.as.list - parameter skipping with reverse TRUE", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 814-819: skip2 parameter filtering for reverse
+    # skip2 parameter filtering for reverse
     gplot <- ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
         geom_point(size = 3) +
         scale_color_manual(
@@ -838,7 +837,7 @@ test_that("ggplot.as.list - parameter skipping with reverse TRUE", {
         ) +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -850,7 +849,7 @@ test_that("ggplot.as.list - function parameter in geom_text vjust", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 814-819: vjust parameter handling
+    # vjust parameter handling
     test_data <- data.frame(
         x = 1:5,
         y = 1:5,
@@ -863,7 +862,7 @@ test_that("ggplot.as.list - function parameter in geom_text vjust", {
         labs(title = "Text with vjust") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -875,7 +874,7 @@ test_that("ggplot.as.list - custom function in layer parameters", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 850-861: Function name resolution with environment lookup
+    # Function name resolution with environment lookup
     custom_breaks <- function(x) {
         seq(min(x), max(x), length.out = 5)
     }
@@ -886,7 +885,7 @@ test_that("ggplot.as.list - custom function in layer parameters", {
         labs(title = "Custom Breaks Function") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -898,13 +897,13 @@ test_that("ggplot.as.list - show.legend FALSE explicit", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests line 867: l$show.legend == FALSE
+    # l$show.legend == FALSE
     gplot <- ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
         geom_point(size = 3, show.legend = FALSE) +  # Explicit FALSE
         labs(title = "No Legend on Geom") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -926,10 +925,10 @@ test_that("ggplot.as.list - stringVariableFactors with factor color", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 869-870: stringVariableFactors assignment
-    test_data <- mtcars
+    # stringVariableFactors assignment
+    test_data       <- mtcars
     test_data$cyl_f <- factor(mtcars$cyl, labels = c("4cyl", "6cyl", "8cyl"))
-    test_data$am_f <- factor(mtcars$am, labels = c("Auto", "Manual"))
+    test_data$am_f  <- factor(mtcars$am, labels = c("Auto", "Manual"))
 
     gplot <- ggplot(test_data, aes(x = wt, y = mpg, color = cyl_f)) +
         geom_point(aes(shape = am_f), size = 3) +
@@ -944,7 +943,7 @@ test_that("ggplot.as.list - stringVariableFactors with factor color", {
         labs(title = "Multiple Factor Variables") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -956,7 +955,7 @@ test_that("ggplot.as.list - shape names mapping", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 875-877: gg_shape_name function with shape values
+    # gg_shape_name function with shape values
     # Testing shapes 0-9 to ensure proper mapping
     test_data <- data.frame(
         x = 1:10,
@@ -970,12 +969,12 @@ test_that("ggplot.as.list - shape names mapping", {
         labs(title = "Various Shape Values", x = "Index", y = "Value") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list$data), 11)  # 10 points + header
+    expect_equal(length(cxplot_list$data), 11)
 })
 
 
@@ -983,13 +982,13 @@ test_that("ggplot.as.list - point with layer-specific data", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests line 185: dim check for GeomPoint
+    # dim check for GeomPoint
     gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
         geom_point(data = mtcars[1:15, ], aes(color = factor(cyl)), size = 4) +
         labs(title = "Point with Layer-Specific Data") +
         theme_minimal()
 
-    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
