@@ -669,6 +669,17 @@ test_that("ggplot.as.list - GeomPoint with transformation", {
     expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["shape"]]), 11)
         expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["x"]]), 11)
     expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["y"]]), 11)
+
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
+        geom_point(data = . %>% filter(cyl == 4),
+                   aes(color = factor(cyl), size = wt) , shape = factor(21),
+                   fill = "white") +
+        theme_minimal()
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+    expect_equal(class(cxplot), "json")
+    expect_equal(length(cxplot_list), 16)
+    expect_true(cxplot_list$isGGPlot)
 })
 
 

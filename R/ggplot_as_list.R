@@ -903,7 +903,7 @@ gg_proc_layer <- function(o, idx, bld) {
       r$data <- as.matrix(nd)
     }
   }
-  prps <- c("colour", "color", "fill", "alpha")
+  prps <- c("colour", "color", "fill", "alpha", "shape")
   for (p in prps) {
     aes_col <- if (p == "colour") "colour" else p
     if ((!(p %in% names(r))) && rlang::as_label(o$mapping[[p]]) == "NULL") {
