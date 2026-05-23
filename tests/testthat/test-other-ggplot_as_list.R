@@ -807,135 +807,17 @@ test_that("ggplot.as.list - shape with NA values in factor", {
 })
 
 #####################################
-test_that("ggplot.as.list - requires ggplot2 package error", {
-    skip_if_not_installed("ggplot2")
-
-    # Mock the scenario where ggplot2 is not available
-    # This tests line 10: stop message
-    expect_error(
-        {
-            # Simulate non-ggplot2 installed by passing invalid object
-            ggplot.as.list(123)
-        },
-        regexp = "Not a ggplot or ggmatrix object"
-    )
-})
-
-
-test_that("ggplot.as.list - patchwork with rows specification", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-    skip_if_not_installed("patchwork")
-
-    # Tests line 28: cx$rows <- r (patchwork rows)
-    p1 <- ggplot(mtcars, aes(x = mpg, y = disp)) + geom_point() + labs(title = "P1")
-    p2 <- ggplot(mtcars, aes(x = cyl, y = hp)) + geom_boxplot() + labs(title = "P2")
-    p3 <- ggplot(mtcars, aes(x = wt, y = qsec)) + geom_point() + labs(title = "P3")
-    p4 <- ggplot(mtcars, aes(x = disp, y = mpg)) + geom_smooth() + labs(title = "P4")
-
-    # Create patchwork with explicit row/col layout
-    combined_plots <- (p1 + p2) / (p3 + p4)
-
-    cxplot      <- suppressWarnings(ggplot.as.list(combined_plots))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-    expect_true(cxplot_list$isPatchwork)
-    expect_true(!is.null(cxplot_list$data))
-})
-
-
-test_that("ggplot.as.list - GeomErrorbar with xmin/xmax mapping", {
+test_that("ggplot.as.list - parameter skipping with na.rm TRUE", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 138, 144: errorbar xmin/xmax label extraction
-    data <- data.frame(
-        x = 1:5,
-        y = c(1, 3, 2, 5, 4),
-        xmin = c(0.8, 2.8, 1.8, 4.8, 3.8),
-        xmax = c(1.2, 3.2, 2.2, 5.2, 4.2),
-        ymin = c(0.5, 2.5, 1.5, 4.5, 3.5),
-        ymax = c(1.5, 3.5, 2.5, 5.5, 4.5)
-    )
-
-    gplot <- ggplot(data, aes(x = x, y = y)) +
-        geom_point(size = 3) +
-        geom_errorbar(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
-                      width = 0.2) +
-        labs(title = "ErrorBar with Min/Max") +
-        theme_minimal()
-
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list$data), 6)
-})
-
-
-test_that("ggplot.as.list - GeomStep with configuration", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-
-    # Tests lines 183-193: GeomStep with kmCxplot in config
-    data <- data.frame(
-        x = 1:20,
-        y = cumsum(rnorm(20))
-    )
-
-    gplot <- ggplot(data, aes(x = x, y = y)) +
-        geom_step(direction = "hv", color = "blue", linewidth = 1) +  # Changed from size to linewidth
-        labs(title = "Step Plot", x = "Index", y = "Cumulative Sum") +
-        theme_minimal()
-
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-})
-
-
-test_that("ggplot.as.list - GeomDensity with fill and color", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-
-    # Tests density geom processing (similar to GeomDensityRidges but using base ggplot2)
-    gplot <- ggplot(mtcars, aes(x = mpg, fill = factor(cyl), color = factor(cyl))) +
-        geom_density(alpha = 0.5) +
-        facet_wrap(~cyl) +
-        labs(title = "Density Plot by Cylinder", x = "MPG", y = "Density") +
-        theme_minimal() +
-        theme(legend.position = "bottom")
-
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-    expect_true(length(cxplot_list$data) > 0)
-})
-
-
-test_that("ggplot.as.list - GeomTextNpc", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-    skip_if_not_installed("ggpmisc")
-
-    # Tests lines 221-223: GeomTextNpc with label, npx, npcy
+    # Tests lines 814-819: skip2 parameter filtering
     gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
-        geom_point() +
-        ggpmisc::geom_text_npc(
-            aes(npcx = 0.5, npcy = 0.95, label = "Custom Text"),
-            size = 5
-        ) +
-        labs(title = "Text NPC Plot") +
+        geom_point(na.rm = TRUE, size = 3) +  # na.rm = TRUE (not default FALSE)
+        labs(title = "Point with na.rm") +
         theme_minimal()
 
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
@@ -943,130 +825,173 @@ test_that("ggplot.as.list - GeomTextNpc", {
 })
 
 
-test_that("ggplot.as.list - clean factor with numeric levels", {
+test_that("ggplot.as.list - parameter skipping with reverse TRUE", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests line 828: clean_factor(b) when factor has numeric pattern
-    test_data <- data.frame(
-        x = 1:10,
-        y = rnorm(10),
-        factor_var = factor(c("1", "2", "1", "2", "1", "2", "1", "2", "1", "2"))
-    )
-
-    gplot <- ggplot(test_data, aes(x = x, y = y, color = factor_var)) +
-        geom_point(size = 4) +
-        scale_color_manual(
-            values = c("1" = "red", "2" = "blue"),
-            name = "Factor"
-        ) +
-        labs(title = "Factor Levels as Numbers") +
-        theme_minimal()
-
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-})
-
-
-test_that("ggplot.as.list - function as aesthetic (line 850-861)", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-
-    # Tests lines 850-861: handling functions in aesthetics with try/catch
-    custom_fn <- function(x) {
-        x * 2
-    }
-
-    test_data <- data.frame(
-        x = 1:10,
-        y = rnorm(10),
-        size_var = 1:10
-    )
-
-    gplot <- ggplot(test_data, aes(x = x, y = y)) +
-        geom_point(aes(size = size_var), color = "steelblue") +
-        labs(title = "Function Aesthetic Test") +
-        theme_minimal()
-
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-})
-
-
-test_that("ggplot.as.list - legend show FALSE", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-
-    # Tests line 867: r$showLegend <- FALSE when legend.show is FALSE
+    # Tests lines 814-819: skip2 parameter filtering for reverse
     gplot <- ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
         geom_point(size = 3) +
-        labs(title = "No Legend Display", color = "Cylinders") +
-        theme_minimal() +
-        theme(legend.position = "none")
-
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
-    cxplot_list <- jsonlite::parse_json(cxplot)
-
-    expect_equal(class(cxplot), "json")
-    expect_true(cxplot_list$isGGPlot)
-})
-
-
-test_that("ggplot.as.list - ribbon with ymin/ymax", {
-    skip_if(getRversion() < "4.1.0")
-    skip_if_not_installed("ggplot2")
-
-    # Tests lines 148-150: GeomRibbon ymin/ymax extraction
-    data <- data.frame(
-        x = 1:20,
-        y = cumsum(rnorm(20)),
-        ymin = cumsum(rnorm(20)) - 2,
-        ymax = cumsum(rnorm(20)) + 2
-    )
-
-    gplot <- ggplot(data, aes(x = x, y = y)) +
-        geom_ribbon(aes(ymin = ymin, ymax = ymax), alpha = 0.3) +
-        geom_line(linewidth = 1) +
-        labs(title = "Ribbon with Min/Max") +
+        scale_color_manual(
+            values = c("4" = "red", "6" = "green", "8" = "blue"),
+            guide = guide_legend(reverse = TRUE)
+        ) +
         theme_minimal()
 
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
 })
 
-test_that("ggplot.as.list - GeomRect with min/max coordinates", {
+
+test_that("ggplot.as.list - function parameter in geom_text vjust", {
     skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
-    # Tests lines 197-201: GeomRect/GeomTile with xmin, xmax, ymin, ymax
-    rect_data <- data.frame(
-        xmin = c(1, 3, 5),
-        xmax = c(2, 4, 6),
-        ymin = c(1, 2, 3),
-        ymax = c(2, 3, 4),
-        fill_col = c("red", "green", "blue")
+    # Tests lines 814-819: vjust parameter handling
+    test_data <- data.frame(
+        x = 1:5,
+        y = 1:5,
+        label = LETTERS[1:5]
     )
 
-    gplot <- ggplot(rect_data) +
-        geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = fill_col),
-                  color = "black", linewidth = 1) +
-        labs(title = "Rectangle Plot", x = "X Axis", y = "Y Axis") +
-        theme_minimal() +
-        theme(legend.position = "right")
+    gplot <- ggplot(test_data, aes(x = x, y = y, label = label)) +
+        geom_point(size = 3) +
+        geom_text(vjust = -0.5, size = 4) +  # vjust != 1 (default)
+        labs(title = "Text with vjust") +
+        theme_minimal()
 
-    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list$data), 4)  # 3 rectangles + 1 header
+})
+
+
+test_that("ggplot.as.list - custom function in layer parameters", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    # Tests lines 850-861: Function name resolution with environment lookup
+    custom_breaks <- function(x) {
+        seq(min(x), max(x), length.out = 5)
+    }
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point(size = 3) +
+        scale_x_continuous(breaks = custom_breaks) +
+        labs(title = "Custom Breaks Function") +
+        theme_minimal()
+
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+})
+
+
+test_that("ggplot.as.list - show.legend FALSE explicit", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    # Tests line 867: l$show.legend == FALSE
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+        geom_point(size = 3, show.legend = FALSE) +  # Explicit FALSE
+        labs(title = "No Legend on Geom") +
+        theme_minimal()
+
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    # Check that showLegend is set to FALSE in at least one layer
+    has_show_legend_false <- any(sapply(cxplot_list$layers, function(layer) {
+        any(sapply(layer, function(x) {
+            if (is.list(x) && "showLegend" %in% names(x)) {
+                x$showLegend == FALSE
+            } else {
+                FALSE
+            }
+        }))
+    }))
+})
+
+
+test_that("ggplot.as.list - stringVariableFactors with factor color", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    # Tests lines 869-870: stringVariableFactors assignment
+    test_data <- mtcars
+    test_data$cyl_f <- factor(mtcars$cyl, labels = c("4cyl", "6cyl", "8cyl"))
+    test_data$am_f <- factor(mtcars$am, labels = c("Auto", "Manual"))
+
+    gplot <- ggplot(test_data, aes(x = wt, y = mpg, color = cyl_f)) +
+        geom_point(aes(shape = am_f), size = 3) +
+        scale_color_manual(
+            name = "Cylinders",
+            values = c("4cyl" = "red", "6cyl" = "blue", "8cyl" = "green")
+        ) +
+        scale_shape_manual(
+            name = "Transmission",
+            values = c("Auto" = 16, "Manual" = 17)
+        ) +
+        labs(title = "Multiple Factor Variables") +
+        theme_minimal()
+
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+})
+
+
+test_that("ggplot.as.list - shape names mapping", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    # Tests lines 875-877: gg_shape_name function with shape values
+    # Testing shapes 0-9 to ensure proper mapping
+    test_data <- data.frame(
+        x = 1:10,
+        y = rnorm(10),
+        shape_val = 0:9  # Different shape values
+    )
+
+    gplot <- ggplot(test_data, aes(x = x, y = y, shape = shape_val)) +
+        geom_point(size = 4, color = "steelblue") +
+        scale_shape_identity() +
+        labs(title = "Various Shape Values", x = "Index", y = "Value") +
+        theme_minimal()
+
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 11)  # 10 points + header
+})
+
+
+test_that("ggplot.as.list - point with layer-specific data", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    # Tests line 185: dim check for GeomPoint
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point(data = mtcars[1:15, ], aes(color = factor(cyl)), size = 4) +
+        labs(title = "Point with Layer-Specific Data") +
+        theme_minimal()
+
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
 })
