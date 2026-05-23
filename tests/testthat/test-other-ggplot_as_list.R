@@ -731,3 +731,77 @@ test_that("ggplot.as.list - ggplot2 facets", {
         facet_grid(cols = vars(cyl))
     expect_equal(class(suppressWarnings(ggplot.as.list(gplot))), "json")
 })
+
+
+test_that("ggplot.as.list - shape mapping with named shapes", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg, shape = factor(cyl))) +
+        geom_point(size = 4) +
+        scale_shape_manual(
+            values = c("4" = 1, "6" = 2, "8" = 3),  # square, circle, triangle
+            name = "Cylinders"
+        ) +
+        labs(title = "Shape Mapping Test") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 33)
+})
+
+
+test_that("ggplot.as.list - edge case shapes and categorical values", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    test_data <- mtcars[1:10, ]
+    # Create a categorical shape variable instead of continuous
+    test_data$shape_var <- factor(c("A", "B", "C", "D", "E", "A", "B", "C", "D", "E"))
+
+    gplot <- ggplot(test_data, aes(x = hp, y = mpg, shape = shape_var)) +
+        geom_point(size = 4) +
+        scale_shape_manual(
+            values = c("A" = 1, "B" = 2, "C" = 3, "D" = 4, "E" = 5)
+        ) +
+        labs(title = "Edge Case Shapes") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$data), 11)
+})
+
+
+test_that("ggplot.as.list - shape with NA values in factor", {
+    skip_if(getRversion() < "4.1.0")
+    skip_if_not_installed("ggplot2")
+
+    test_data <- mtcars[1:10, ]
+    # Create factor with explicit NA
+    test_data$shape_var <- factor(
+        c("A", "B", "C", NA, "E", "A", "B", "C", "D", "E"),
+        levels = c("A", "B", "C", "D", "E")
+    )
+
+    gplot <- ggplot(test_data, aes(x = hp, y = mpg, shape = shape_var)) +
+        geom_point(size = 4, na.rm = TRUE) +
+        scale_shape_manual(
+            values = c("A" = 1, "B" = 2, "C" = 3, "D" = 4, "E" = 5)
+        ) +
+        labs(title = "Shapes with NA Values") +
+        theme_minimal()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+})
