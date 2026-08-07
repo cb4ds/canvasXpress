@@ -615,7 +615,7 @@ test_that("ggplot.as.list - cut functions layer", {
     expect_equal(class(cxplot), "json")
     expect_equal(length(cxplot_list), 16)
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(cxplot_list[["layers"]][["GeomPoint"]][["colour"]][["cut_number"]][["disp"]], "NA")
+    expect_equal(cxplot_list[["layers"]][[1]][["colour"]][["cut_number"]][["disp"]], "NA")
 })
 
 
@@ -639,11 +639,11 @@ test_that("ggplot.as.list - layer with formula", {
     expect_equal(class(cxplot), "json")
     expect_equal(length(cxplot_list), 16)
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["def"]], "y ~ x + I(x^2)")
-    expect_equal(length(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["x"]]), 80)
-    expect_equal(length(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["y"]]), 80)
-    expect_equal(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["minY"]], 7.223)
-    expect_equal(cxplot_list[["layers"]][["GeomSmooth"]][["formula"]][["maxY"]], 36.481)
+    expect_equal(cxplot_list[["layers"]][[2]][["formula"]][["def"]], "y ~ x + I(x^2)")
+    expect_equal(length(cxplot_list[["layers"]][[2]][["formula"]][["x"]]), 80)
+    expect_equal(length(cxplot_list[["layers"]][[2]][["formula"]][["y"]]), 80)
+    expect_equal(cxplot_list[["layers"]][[2]][["formula"]][["minY"]], 7.223)
+    expect_equal(cxplot_list[["layers"]][[2]][["formula"]][["maxY"]], 36.481)
 })
 
 
@@ -663,12 +663,12 @@ test_that("ggplot.as.list - GeomPoint with transformation", {
     expect_equal(class(cxplot), "json")
     expect_equal(length(cxplot_list), 16)
     expect_true(cxplot_list$isGGPlot)
-    expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["color"]]), 11)
-    expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["fill"]]), 11)
-        expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["size"]]), 11)
-    expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["shape"]]), 11)
-        expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["x"]]), 11)
-    expect_equal(length(cxplot_list[["layers"]][["GeomPoint"]][["y"]]), 11)
+    expect_equal(length(cxplot_list[["layers"]][[1]][["color"]]), 11)
+    expect_equal(length(cxplot_list[["layers"]][[1]][["fill"]]), 11)
+        expect_equal(length(cxplot_list[["layers"]][[1]][["size"]]), 11)
+    expect_equal(length(cxplot_list[["layers"]][[1]][["shape"]]), 11)
+        expect_equal(length(cxplot_list[["layers"]][[1]][["x"]]), 11)
+    expect_equal(length(cxplot_list[["layers"]][[1]][["y"]]), 11)
 
     gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
         geom_point(data = . %>% filter(cyl == 4),
