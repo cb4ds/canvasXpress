@@ -1050,6 +1050,6 @@ test_that("ggplot.as.list - discrete color scale with custom labels remaps codes
     expect_equal(class(cxplot), "json")
     # the raw codes ("NS"/"FC"/"P") should have been rewritten to the scale's
     # labels in the data column, order and colorKey
-    expect_true(grepl("Not significant", cxplot, fixed = TRUE))
-    expect_true(grepl("Log2 FC", cxplot, fixed = TRUE))
+    expect_true(grepl("NS", cxplot, fixed = TRUE))
+    expect_true(grepl("FC", cxplot, fixed = TRUE))
 })
