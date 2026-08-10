@@ -1144,3 +1144,32 @@ test_that("ggplot.as.list - GeomRibbon layer", {
     expect_true(cxplot_list$isGGPlot)
     expect_true("GeomRibbon" %in% unlist(cxplot_list$geoms))
 })
+
+
+test_that("ggplot.as.list - GeomStep with kmCxplot config option", {
+    skip_if_not_installed("ggplot2")
+
+    df <- data.frame(time  = c(1, 2, 3, 4, 5),
+                      surv  = c(1, 0.9, 0.8, 0.8, 0.6),
+                      color = "All")
+
+    gplot <- ggplot(df, aes(x = time, y = surv, color = color)) +
+        geom_step(data = df)
+
+    cxplot <- suppressWarnings(ggplot.as.list(
+        gplot,
+        kmCxplot                  = TRUE,
+        showKMConfidenceIntervals = FALSE,
+        kmRiskTable                = FALSE
+    ))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(cxplot_list$layers[[1]]$kmCxplot)
+    # the three km-specific keys are consumed by the GeomStep branch and
+    # removed from the generic config list
+    expect_false("kmCxplot" %in% names(cxplot_list$config))
+    expect_false("showKMConfidenceIntervals" %in% names(cxplot_list$config))
+    expect_false("kmRiskTable" %in% names(cxplot_list$config))
+})
