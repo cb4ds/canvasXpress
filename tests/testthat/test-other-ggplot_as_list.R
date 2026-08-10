@@ -1333,3 +1333,18 @@ test_that("ggplot.as.list - continuous x scale with both limits and a transform"
     expect_equal(cxplot_list$scales$setMaxX, 2.6021)
     expect_equal(cxplot_list$scales$xAxisTransform, "log10")
 })
+
+
+test_that("ggplot.as.list - plain uncoloured geom_point falls back to NoScale", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list$scales$colorScale, "NoScale")
+})
