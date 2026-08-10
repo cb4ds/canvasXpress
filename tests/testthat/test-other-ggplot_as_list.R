@@ -1030,3 +1030,26 @@ test_that("ggplot.as.list - plotmath axis titles flow through labs()", {
     expect_true(grepl("<sub>10</sub>", cxplot_list$labels$xAxisTitle, fixed = TRUE))
     expect_true(grepl("<i>P</i>", cxplot_list$labels$xAxisTitle, fixed = TRUE))
 })
+
+
+test_that("ggplot.as.list - discrete color scale with custom labels remaps codes", {
+    skip_if_not_installed("ggplot2")
+
+    df <- data.frame(x = 1:6, y = c(1, 2, 3, 2, 1, 3),
+                     grp = c("NS", "FC", "P", "NS", "FC", "P"))
+
+    gplot <- ggplot(df, aes(x = x, y = y, color = grp)) +
+        geom_point(size = 3) +
+        scale_color_manual(
+            values = c(NS = "grey", FC = "blue", P = "red"),
+            labels = c(NS = "Not significant", FC = "Log2 FC", P = "p-value")
+        )
+
+    cxplot <- suppressWarnings(ggplot.as.list(gplot))
+
+    expect_equal(class(cxplot), "json")
+    # the raw codes ("NS"/"FC"/"P") should have been rewritten to the scale's
+    # labels in the data column, order and colorKey
+    expect_true(grepl("Not significant", cxplot, fixed = TRUE))
+    expect_true(grepl("Log2 FC", cxplot, fixed = TRUE))
+})
