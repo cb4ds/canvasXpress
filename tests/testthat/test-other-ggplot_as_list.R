@@ -994,3 +994,39 @@ test_that("ggplot.as.list - point with layer-specific data", {
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
 })
+
+
+test_that("gg_plotmath_to_text converts plotmath expressions to CanvasXpress HTML", {
+    expect_null(gg_plotmath_to_text(NULL))
+    expect_equal(gg_plotmath_to_text("Plain text"), "Plain text")
+    expect_equal(gg_plotmath_to_text(quote(Log[10])), "Log<sub>10</sub>")
+    expect_equal(gg_plotmath_to_text(quote(x^2)), "x<sup>2</sup>")
+    expect_equal(gg_plotmath_to_text(quote(italic(P))), "<i>P</i>")
+    expect_equal(gg_plotmath_to_text(quote(bold(P))), "<b>P</b>")
+    expect_equal(gg_plotmath_to_text(quote(bolditalic(P))), "<b><i>P</i></b>")
+    expect_equal(gg_plotmath_to_text(quote(plain(P))), "P")
+
+    mu_result <- gg_plotmath_to_text(quote(mu ~ "g/mL"))
+    expect_true(grepl("\u03bc", mu_result, fixed = TRUE))
+
+    expr_result <- gg_plotmath_to_text(expression(-Log[10] ~ italic(P)))
+    expect_true(grepl("<sub>10</sub>", expr_result, fixed = TRUE))
+    expect_true(grepl("<i>P</i>", expr_result, fixed = TRUE))
+})
+
+
+test_that("ggplot.as.list - plotmath axis titles flow through labs()", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point() +
+        labs(x = expression(-Log[10] ~ italic(P)), y = "mpg")
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(grepl("<sub>10</sub>", cxplot_list$labels$xAxisTitle, fixed = TRUE))
+    expect_true(grepl("<i>P</i>", cxplot_list$labels$xAxisTitle, fixed = TRUE))
+})
