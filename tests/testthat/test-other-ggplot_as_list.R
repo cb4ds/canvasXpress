@@ -1173,3 +1173,57 @@ test_that("ggplot.as.list - GeomStep with kmCxplot config option", {
     expect_false("showKMConfidenceIntervals" %in% names(cxplot_list$config))
     expect_false("kmRiskTable" %in% names(cxplot_list$config))
 })
+
+
+test_that("ggplot.as.list - facet_wrap with multiple variables", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point() +
+        facet_wrap(vars(cyl, am))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(length(cxplot_list$facet$facet), 2)
+})
+
+
+test_that("ggplot.as.list - facet_wrap with explicit ncol and with explicit nrow", {
+    skip_if_not_installed("ggplot2")
+
+    gplot_col <- ggplot(mpg, aes(x = displ, y = hwy)) +
+        geom_point() +
+        facet_wrap(vars(class), ncol = 2)
+
+    cxplot_list_col <- jsonlite::parse_json(suppressWarnings(ggplot.as.list(gplot_col)))
+    expect_equal(cxplot_list_col$facet$facetCols, 2)
+
+    gplot_row <- ggplot(mpg, aes(x = displ, y = hwy)) +
+        geom_point() +
+        facet_wrap(vars(class), nrow = 3)
+
+    cxplot_list_row <- jsonlite::parse_json(suppressWarnings(ggplot.as.list(gplot_row)))
+    expect_equal(cxplot_list_row$facet$facetRows, 3)
+})
+
+
+test_that("ggplot.as.list - facet_wrap auto sqrt() layout with 4+ panels", {
+    skip_if_not_installed("ggplot2")
+
+    # mpg$class has 7 levels, no ncol/nrow specified -> hits the
+    # ceiling(sqrt(.)) branch instead of the <4-levels branch
+    gplot <- ggplot(mpg, aes(x = displ, y = hwy)) +
+        geom_point() +
+        facet_wrap(vars(class))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list$facet$facetCols, 3)
+    expect_equal(cxplot_list$facet$facetRows, 3)
+})
