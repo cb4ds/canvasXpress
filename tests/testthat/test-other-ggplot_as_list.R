@@ -1420,3 +1420,34 @@ test_that("ggplot.as.list - a layer conversion failure raises a canvasXpress-pre
         regexp = "canvasXpress: failed to convert ggplot layer 1 \\(GeomPoint\\): simulated layer failure"
     )
 })
+
+
+test_that("ggplot.as.list - unscaled shape mapping falls back to the geom's default shape name", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg, shape = factor(am))) +
+        geom_point(size = 3)
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list$scales$shapes[[1]], "circle")
+})
+
+
+test_that("ggplot.as.list - unmapped colour on a zero-row layer falls back to the geom's default", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point() +
+        geom_line(data = mtcars[0, ])
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list$layers[[1]]$color, "black")
+})
