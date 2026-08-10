@@ -1451,3 +1451,130 @@ test_that("ggplot.as.list - unmapped colour on a zero-row layer falls back to th
     expect_true(cxplot_list$isGGPlot)
     expect_equal(cxplot_list$layers[[1]]$color, "black")
 })
+
+
+test_that("gg_apply_scale_labels remaps data, order, colorKey, and colorKey2", {
+  # 1. Create a mock scale where palette(1) returns all named codes
+  mock_scale <- list(
+    aesthetics = "colour",
+    palette = function(n) c(NS = "#111111", FC = "#222222", P = "#333333"),
+    labels = c("Not Significant", "Log2 FC", "p-value")
+  )
+  class(mock_scale) <- "ScaleDiscrete"
+
+  o <- list(scales = list(scales = list(mock_scale)))
+
+  # 2. Build mock cx object
+  cx <- list(
+    layers = list(list(colour = "grp")),
+    meta = list(grp = TRUE),
+    data = matrix(
+      c("x", "grp",
+        "1", "NS",
+        "2", "FC",
+        "3", "P",
+        "4", "UNMAPPED_CODE"), # Tests fallback for values not in label_map
+      ncol = 2,
+      byrow = TRUE
+    ),
+    order = list(grp = c("NS", "FC", "P", "UNMAPPED_CODE")),
+    scales = list(
+      colorKey = list(NS = "#111111", FC = "#222222", P = "#333333"),
+      colorKey2 = list(NS = "#444444", FC = "#555555")
+    )
+  )
+
+  res <- canvasXpress:::gg_apply_scale_labels(o, cx)
+
+  # --- Assertions ---
+  # Data column remapping (rows 2:nrow)
+  expect_equal(res$data[2, 2], "Not Significant")
+  expect_equal(res$data[3, 2], "Log2 FC")
+  expect_equal(res$data[4, 2], "p-value")
+  expect_equal(res$data[5, 2], "UNMAPPED_CODE") # Unmapped values remain unchanged
+
+  # Factor level/legend order remapping
+  expect_equal(unname(res$order$grp), c("Not Significant", "Log2 FC", "p-value", "UNMAPPED_CODE"))
+
+  # colorKey remapping
+  expect_equal(
+    names(res$scales$colorKey),
+    c("Not Significant", "Log2 FC", "p-value")
+  )
+  expect_equal(res$scales$colorKey[["Not Significant"]], "#111111")
+
+  # colorKey2 remapping
+  expect_equal(names(res$scales$colorKey2), c("Not Significant", "Log2 FC"))
+  expect_equal(res$scales$colorKey2[["Not Significant"]], "#444444")
+})
+
+test_that("gg_apply_scale_labels skips when codes and labels lengths mismatch", {
+  mock_scale <- list(
+    aesthetics = "color",
+    palette = function(n) c(NS = "#111111", FC = "#222222"),
+    labels = c("Not Significant") # Length 1 vs Length 2
+  )
+  class(mock_scale) <- "ScaleDiscrete"
+
+  o <- list(scales = list(scales = list(mock_scale)))
+  cx <- list(
+    layers = list(list(color = "grp")),
+    meta = list(grp = TRUE),
+    data = matrix(c("x", "grp", "1", "NS"), ncol = 2, byrow = TRUE),
+    order = list(grp = c("NS")),
+    scales = list(colorKey = list(NS = "#111111"))
+  )
+
+  res <- gg_apply_scale_labels(o, cx)
+
+  # Should hit `if (length(codes) != length(labels)) next` and leave cx unchanged
+  expect_equal(res$data[2, 2], "NS")
+})
+
+test_that("gg_apply_scale_labels skips when labels are identical to codes", {
+  mock_scale <- list(
+    aesthetics = "fill",
+    palette = function(n) c(NS = "#111111", FC = "#222222"),
+    labels = c("NS", "FC") # Identical to codes
+  )
+  class(mock_scale) <- "ScaleDiscrete"
+
+  o <- list(scales = list(scales = list(mock_scale)))
+  cx <- list(
+    layers = list(list(fill = "grp")),
+    meta = list(grp = TRUE),
+    data = matrix(c("x", "grp", "1", "NS"), ncol = 2, byrow = TRUE),
+    order = list(grp = c("NS")),
+    scales = list(colorKey = list(NS = "#111111"))
+  )
+
+  res <- gg_apply_scale_labels(o, cx)
+
+  # Should hit `if (!any(valid)) next` and leave cx unchanged
+  expect_equal(res$data[2, 2], "NS")
+})
+
+test_that("gg_apply_scale_labels handles edge cases (data matrix row 1 only, missing order/colorKeys)", {
+  mock_scale <- list(
+    aesthetics = "colour",
+    palette = function(n) c(NS = "#111111"),
+    labels = c("Not Significant")
+  )
+  class(mock_scale) <- "ScaleDiscrete"
+
+  o <- list(scales = list(scales = list(mock_scale)))
+
+  # Data matrix with 1 row (header only), no order entry for color_var, no colorKey/colorKey2
+  cx <- list(
+    layers = list(list(colour = "grp")),
+    meta = list(grp = TRUE),
+    data = matrix(c("x", "grp"), ncol = 2, byrow = TRUE),
+    order = list(),
+    scales = list()
+  )
+
+  res <- gg_apply_scale_labels(o, cx)
+
+  expect_equal(NROW(res$data), 1)
+  expect_equal(res$order, list())
+})
