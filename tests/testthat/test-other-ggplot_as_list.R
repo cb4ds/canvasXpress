@@ -1283,3 +1283,17 @@ test_that("ggplot.as.list - bar position dodge, fill and stack", {
     )
     expect_equal(cxplot_stack$layers[[1]]$position, "stack")
 })
+
+
+test_that("ggplot.as.list - after_stat() layer mapping does not error the conversion", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = mpg)) +
+        geom_histogram(aes(y = after_stat(density)), bins = 10)
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+})
