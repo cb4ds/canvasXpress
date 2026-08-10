@@ -1088,3 +1088,59 @@ test_that("ggplot.as.list - factor()-wrapped aes skips coercion when the same co
     # coerce the underlying column to a factor
     expect_false(cxplot_list$meta$cyl)
 })
+
+
+test_that("ggplot.as.list - GeomVline, GeomHline and GeomAbline reference lines", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point() +
+        geom_vline(xintercept = 3, color = "red", linewidth = 1, linetype = "dashed") +
+        geom_hline(yintercept = 20, color = "blue", linewidth = 0.8, linetype = "dotted") +
+        geom_abline(slope = 1, intercept = 0, color = "green")
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true("GeomVline" %in% unlist(cxplot_list$geoms))
+    expect_true("GeomHline" %in% unlist(cxplot_list$geoms))
+    expect_true("GeomAbline" %in% unlist(cxplot_list$geoms))
+})
+
+
+test_that("ggplot.as.list - GeomCrossbar from stat_summary (also covers a function-valued stat param)", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+        geom_point() +
+        stat_summary(fun = mean, geom = "crossbar", width = 0.5, color = "red")
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true("GeomCrossbar" %in% unlist(cxplot_list$geoms))
+})
+
+
+test_that("ggplot.as.list - GeomRibbon layer", {
+    skip_if_not_installed("ggplot2")
+
+    df <- data.frame(x = 1:10, y = (1:10)^1.2)
+    df$ymin <- df$y - 1
+    df$ymax <- df$y + 1
+
+    gplot <- ggplot(df, aes(x = x, y = y)) +
+        geom_ribbon(aes(ymin = ymin, ymax = ymax), fill = "grey70") +
+        geom_line()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true("GeomRibbon" %in% unlist(cxplot_list$geoms))
+})
