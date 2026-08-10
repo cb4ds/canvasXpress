@@ -1369,3 +1369,21 @@ test_that("ggplot.as.list - ggh4x per-strip fill colors (gg_strip_colors)", {
     expect_true(cxplot_list$isGGPlot)
     expect_false(is.null(cxplot_list$theme$strip.background.fill))
 })
+
+
+test_that("ggplot.as.list - explicit pattern scale", {
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggpattern")
+
+    gplot <- ggplot(mtcars, aes(x = factor(cyl), pattern = factor(cyl))) +
+        ggpattern::geom_bar_pattern() +
+        ggpattern::scale_pattern_manual(
+            values = c("4" = "stripe", "6" = "crosshatch", "8" = "circle")
+        )
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+})
