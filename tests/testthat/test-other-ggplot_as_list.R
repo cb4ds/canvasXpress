@@ -1387,3 +1387,36 @@ test_that("ggplot.as.list - explicit pattern scale", {
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
 })
+
+
+test_that("ggplot.as.list - errors when the ggplot2 namespace is unavailable", {
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("testthat", "3.1.4")
+
+    # Fix: Direct testthat to mock requireNamespace inside the base package
+    local_mocked_bindings(
+        requireNamespace = function(...) FALSE,
+        .package = "base"
+    )
+
+    expect_error(ggplot.as.list(mtcars),
+                 regexp = "The ggplot2 package is required")
+})
+
+
+
+test_that("ggplot.as.list - a layer conversion failure raises a canvasXpress-prefixed error", {
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("testthat", "3.1.4")
+
+    local_mocked_bindings(
+        gg_default_aes = function(...) stop("simulated layer failure")
+    )
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+
+    expect_error(
+        ggplot.as.list(gplot),
+        regexp = "canvasXpress: failed to convert ggplot layer 1 \\(GeomPoint\\): simulated layer failure"
+    )
+})
