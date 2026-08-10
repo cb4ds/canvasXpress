@@ -1315,3 +1315,21 @@ test_that("ggplot.as.list - geom_text with a computed y nudge does not error the
     expect_true(cxplot_list$isGGPlot)
     expect_true(length(cxplot_list$data) > 0)
 })
+
+
+test_that("ggplot.as.list - continuous x scale with both limits and a transform", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) +
+        geom_point() +
+        scale_x_log10(limits = c(50, 400))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_equal(cxplot_list$scales$setMinX, 1.699)
+    expect_equal(cxplot_list$scales$setMaxX, 2.6021)
+    expect_equal(cxplot_list$scales$xAxisTransform, "log10")
+})
