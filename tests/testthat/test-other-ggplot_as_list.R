@@ -1053,3 +1053,38 @@ test_that("ggplot.as.list - discrete color scale with custom labels remaps codes
     expect_true(grepl("NS", cxplot, fixed = TRUE))
     expect_true(grepl("FC", cxplot, fixed = TRUE))
 })
+
+
+test_that("ggplot.as.list - constant aesthetic aes(x = 1) materializes a factor column", {
+    skip_if_not_installed("ggplot2")
+
+    df <- data.frame(y = c(3, 5, 4, 6))
+
+    gplot <- ggplot(df, aes(x = 1, y = y)) +
+        geom_boxplot()
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(cxplot_list$meta$x)
+})
+
+
+test_that("ggplot.as.list - factor()-wrapped aes skips coercion when the same column is also used bare", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+        geom_boxplot() +
+        geom_violin(aes(fill = cyl), alpha = 0.3)
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    # cyl is used bare (continuous fill) elsewhere, so x = factor(cyl) must NOT
+    # coerce the underlying column to a factor
+    expect_false(cxplot_list$meta$cyl)
+})
