@@ -1297,3 +1297,21 @@ test_that("ggplot.as.list - after_stat() layer mapping does not error the conver
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
 })
+
+
+test_that("ggplot.as.list - geom_text with a computed y nudge does not error the conversion", {
+    skip_if_not_installed("ggplot2")
+
+    df <- data.frame(x = 1:5, y = c(2, 4, 6, 8, 10), lbl = letters[1:5])
+
+    gplot <- ggplot(df, aes(x = x, y = y)) +
+        geom_col() +
+        geom_text(aes(x = x, y = y + 0.5, label = lbl))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(length(cxplot_list$data) > 0)
+})
