@@ -1227,3 +1227,37 @@ test_that("ggplot.as.list - facet_wrap auto sqrt() layout with 4+ panels", {
     expect_equal(cxplot_list$facet$facetCols, 3)
     expect_equal(cxplot_list$facet$facetRows, 3)
 })
+
+
+test_that("ggplot.as.list - explicit linetype scale maps named and hex-dash-code values", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg, linetype = factor(am))) +
+        geom_line() +
+        scale_linetype_manual(values = c("0" = "solid", "1" = "22"))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(all(unlist(cxplot_list$scales$lineType) %in%
+                         c("solid", "dashed", "dotted", "dotdash",
+                           "longdash", "twodash")))
+})
+
+
+test_that("ggplot.as.list - shape scale with named (non-numeric) shape values", {
+    skip_if_not_installed("ggplot2")
+
+    gplot <- ggplot(mtcars, aes(x = wt, y = mpg, shape = factor(am))) +
+        geom_point(size = 3) +
+        scale_shape_manual(values = c("0" = "square", "1" = "circle"))
+
+    cxplot      <- suppressWarnings(ggplot.as.list(gplot))
+    cxplot_list <- jsonlite::parse_json(cxplot)
+
+    expect_equal(class(cxplot), "json")
+    expect_true(cxplot_list$isGGPlot)
+    expect_true(all(c("square", "circle") %in% unlist(cxplot_list$scales$shapes)))
+})
