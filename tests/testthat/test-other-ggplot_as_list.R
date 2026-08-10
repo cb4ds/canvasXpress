@@ -1261,3 +1261,25 @@ test_that("ggplot.as.list - shape scale with named (non-numeric) shape values", 
     expect_true(cxplot_list$isGGPlot)
     expect_true(all(c("square", "circle") %in% unlist(cxplot_list$scales$shapes)))
 })
+
+
+test_that("ggplot.as.list - bar position dodge, fill and stack", {
+    skip_if_not_installed("ggplot2")
+
+    base <- ggplot(mtcars, aes(x = factor(cyl), fill = factor(am)))
+
+    cxplot_dodge <- jsonlite::parse_json(
+        suppressWarnings(ggplot.as.list(base + geom_bar(position = "dodge")))
+    )
+    expect_equal(cxplot_dodge$layers[[1]]$position, "dodge")
+
+    cxplot_fill <- jsonlite::parse_json(
+        suppressWarnings(ggplot.as.list(base + geom_bar(position = "fill")))
+    )
+    expect_equal(cxplot_fill$layers[[1]]$position, "fill")
+
+    cxplot_stack <- jsonlite::parse_json(
+        suppressWarnings(ggplot.as.list(base + geom_bar(position = "stack")))
+    )
+    expect_equal(cxplot_stack$layers[[1]]$position, "stack")
+})
