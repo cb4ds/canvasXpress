@@ -121,11 +121,11 @@ gg_plotmath_to_text <- function(x) {
   s <- gsub("[~*]", " ", s)       # spacing / juxtaposition operators -> space
   # plotmath greek names render as their glyphs (e.g. mu -> the micro sign in a
   # unit like "mu g"); map the common ones once the juxtaposition tokens are gone.
-  greek <- c(mu = "μ", alpha = "α", beta = "β", gamma = "γ",
-             delta = "δ", sigma = "σ", lambda = "λ", tau = "τ",
-             theta = "θ", phi = "φ", omega = "ω", pi = "π",
-             rho = "ρ", chi = "χ", eta = "η", kappa = "κ",
-             epsilon = "ε")
+  greek <- c(mu = "\u03bc", alpha = "\u03b1", beta = "\u03b2", gamma = "\u03b3",
+           delta = "\u03b4", sigma = "\u03c3", lambda = "\u03bb", tau = "\u03c4",
+           theta = "\u03b8", phi = "\u03c6", omega = "\u03c9", pi = "\u03c0",
+           rho = "\u03c1", chi = "\u03c7", eta = "\u03b7", kappa = "\u03ba",
+           epsilon = "\u03b5")
   for (nm in names(greek)) {
     s <- gsub(paste0("\\b", nm, "\\b"), greek[[nm]], s)
   }
@@ -293,7 +293,7 @@ gg_resolve_factor_aes <- function(o) {
   # An aesthetic wrapped in factor()/as.factor()/ordered() makes a numeric column
   # discrete for the plot (e.g. fill = factor(am)). ggplot.as.list strips the
   # wrapper to the bare column name so the aes matches the data column, but the
-  # raw column stays numeric — so CanvasXpress would treat it as continuous (a
+  # raw column stays numeric - so CanvasXpress would treat it as continuous (a
   # numeric colour legend) and mis-sort its values (am 0 rendered as null).
   # Coerce those columns to real factors up front so meta marks them discrete and
   # their levels/order carry through as they do in ggplot.
@@ -305,8 +305,8 @@ gg_resolve_factor_aes <- function(o) {
     }
   }
   # Columns used BARE (an unwrapped plain symbol) versus WRAPPED in a coercion.
-  # A column used both ways — e.g. aes(factor(cyl), mpg) for the discrete axis and
-  # geom_violin(aes(fill = cyl)) for a continuous fill — must stay numeric: coercing
+  # A column used both ways - e.g. aes(factor(cyl), mpg) for the discrete axis and
+  # geom_violin(aes(fill = cyl)) for a continuous fill - must stay numeric: coercing
   # it would wrongly turn the continuous fill into a discrete one. So only coerce a
   # wrapped column that is never used bare.
   bare <- character(0)
@@ -343,7 +343,7 @@ gg_resolve_const_aes <- function(o) {
   # has no matching data column, so downstream it is dropped and CanvasXpress
   # ends up treating each row as its own sample instead of the single group the
   # constant denotes (one bar). Adding a one-level factor column and pointing the
-  # mapping at it makes the data/aes/order machinery — and the renderer — treat
+  # mapping at it makes the data/aes/order machinery - and the renderer - treat
   # the aesthetic as a single category. The aes name is used for the column when
   # it is free; otherwise a collision-safe unique name is chosen so an existing
   # data column (diamonds already has x/y/z) is never overwritten.
@@ -849,8 +849,8 @@ gg_facet <- function(o) {
     }
     f <- list(
       # Emit the facet variable(s). For >1 wrap variable this is an ARRAY, which
-      # CanvasXpress renders as one stacked strip label per variable — matching
-      # ggplot's facet_wrap(vars(g, h)) — instead of a single composite "g_h"
+      # CanvasXpress renders as one stacked strip label per variable - matching
+      # ggplot's facet_wrap(vars(g, h)) - instead of a single composite "g_h"
       # strip. A single facet variable stays a scalar (auto-unboxed).
       facet = fvars,
       facetType = "wrap",
