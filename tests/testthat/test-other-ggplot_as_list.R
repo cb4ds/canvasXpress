@@ -1578,3 +1578,157 @@ test_that("gg_apply_scale_labels handles edge cases (data matrix row 1 only, mis
   expect_equal(NROW(res$data), 1)
   expect_equal(res$order, list())
 })
+
+
+test_that("gg_apply_x_scale_labels successfully remaps continuous breaks to category labels", {
+  cx <- list(
+    geoms = c("GeomBoxplot"),
+    aes = list(x = "grp"),
+    data = matrix(
+      c("grp", "y",
+        "1", "10",
+        "2", "20",
+        "1", "15"),
+      ncol = 2,
+      byrow = TRUE
+    ),
+    order = list(xLabels = c("Control", "Treatment")),
+    scales = list(
+      xAxisSetValues = c(1, 2),
+      xAxisSetMinorValues = c(1.5),
+      xAxisTicks = list("tick_spec")
+    )
+  )
+
+  res <- gg_apply_x_scale_labels(NULL, cx)
+
+  # Check that data column values were remapped
+  expect_equal(res$data[2:4, 1], c("Control", "Treatment", "Control"))
+  # Check that order[[xvar]] was updated
+  expect_equal(res$order[["grp"]], c("Control", "Treatment"))
+  # Check that continuous axis tick properties were nulled out
+  expect_null(res$scales$xAxisSetValues)
+  expect_null(res$scales$xAxisSetMinorValues)
+  expect_null(res$scales$xAxisTicks)
+})
+
+test_that("gg_apply_x_scale_labels finds xvar in layers when aes$x is NULL", {
+  cx <- list(
+    geoms = c("GeomViolin"),
+    aes = list(),
+    layers = list(list(x = "grp")),
+    data = matrix(c("grp", "y", "1", "10"), ncol = 2, byrow = TRUE),
+    order = list(xLabels = c("Control")),
+    scales = list(xAxisSetValues = c(1))
+  )
+
+  res <- gg_apply_x_scale_labels(NULL, cx)
+
+  expect_equal(res$data[2, 1], "Control")
+  expect_equal(res$order[["grp"]], "Control")
+})
+
+# test_that("gg_apply_x_scale_labels exits early on invalid or missing breaks/labels", {
+#   # Null breaks
+#   cx1 <- list(scales = list(xAxisSetValues = NULL), order = list(xLabels = c("A")))
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx1), cx1)
+#
+#   # Null labels
+#   cx2 <- list(scales = list(xAxisSetValues = c(1)), order = list(xLabels = NULL))
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx2), cx2)
+#
+#   # Empty breaks (length < 1)
+#   cx3 <- list(scales = list(xAxisSetValues = numeric(0)), order = list(xLabels = character(0)))
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx3), cx3)
+#
+#   # Mismatched length between breaks and labels
+#   cx4 <- list(scales = list(xAxisSetValues = c(1, 2)), order = list(xLabels = c("A")))
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx4), cx4)
+# })
+#
+# test_that("gg_apply_x_scale_labels exits early when no 1D geoms are present", {
+#   cx <- list(
+#     geoms = c("GeomPoint", "GeomLine"),
+#     scales = list(xAxisSetValues = c(1, 2)),
+#     order = list(xLabels = c("A", "B"))
+#   )
+#
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx), cx)
+# })
+#
+# test_that("gg_apply_x_scale_labels exits early when xvar is missing or invalid", {
+#   # xvar cannot be determined (null in aes and layers)
+#   cx1 <- list(
+#     geoms = c("GeomBar"),
+#     scales = list(xAxisSetValues = c(1)),
+#     order = list(xLabels = c("A")),
+#     aes = list(),
+#     layers = list(list())
+#   )
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx1), cx1)
+#
+#   # xvar length != 1
+#   cx2 <- list(
+#     geoms = c("GeomCol"),
+#     scales = list(xAxisSetValues = c(1)),
+#     order = list(xLabels = c("A")),
+#     aes = list(x = c("a", "b"))
+#   )
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx2), cx2)
+# })
+#
+# test_that("gg_apply_x_scale_labels exits early when column is missing or data has <= 1 row", {
+#   # xvar is not found in the matrix header
+#   cx1 <- list(
+#     geoms = c("GeomDotplot"),
+#     scales = list(xAxisSetValues = c(1)),
+#     order = list(xLabels = c("A")),
+#     aes = list(x = "non_existent_var"),
+#     data = matrix(c("x", "y", "1", "2"), ncol = 2, byrow = TRUE)
+#   )
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx1), cx1)
+#
+#   # Header exists, but nrow(data) <= 1
+#   cx2 <- list(
+#     geoms = c("GeomDotplot"),
+#     scales = list(xAxisSetValues = c(1)),
+#     order = list(xLabels = c("A")),
+#     aes = list(x = "x"),
+#     data = matrix(c("x", "y"), ncol = 2, byrow = TRUE)
+#   )
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx2), cx2)
+# })
+#
+# test_that("gg_apply_x_scale_labels exits early when break codes match labels identical", {
+#   cx <- list(
+#     geoms = c("GeomBoxplot"),
+#     scales = list(xAxisSetValues = c(1, 2)),
+#     order = list(xLabels = c("1", "2")),
+#     aes = list(x = "x"),
+#     data = matrix(c("x", "y", "1", "10", "2", "20"), ncol = 2, byrow = TRUE)
+#   )
+#
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx), cx)
+# })
+#
+# test_that("gg_apply_x_scale_labels exits early when values are empty or contain non-break values", {
+#   # All values are NA or empty string
+#   cx1 <- list(
+#     geoms = c("GeomBoxplot"),
+#     scales = list(xAxisSetValues = c(1, 2)),
+#     order = list(xLabels = c("A", "B")),
+#     aes = list(x = "x"),
+#     data = matrix(c("x", "y", NA, "10", "", "20"), ncol = 2, byrow = TRUE)
+#   )
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx1), cx1)
+#
+#   # Data contains continuous values not matching break codes (e.g., 1.5)
+#   cx2 <- list(
+#     geoms = c("GeomBoxplot"),
+#     scales = list(xAxisSetValues = c(1, 2)),
+#     order = list(xLabels = c("A", "B")),
+#     aes = list(x = "x"),
+#     data = matrix(c("x", "y", "1", "10", "1.5", "20"), ncol = 2, byrow = TRUE)
+#   )
+#   expect_equal(gg_apply_x_scale_labels(NULL, cx2), cx2)
+# })
