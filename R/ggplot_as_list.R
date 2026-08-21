@@ -737,6 +737,28 @@ gg_order <- function(o, b) {
   if (!is.null(b$layout$panel_params[[1]]$y)) {
     r$yLabels <- as.character(b$layout$panel_params[[1]]$y$get_labels())
   }
+  # Carry the x position scale's side ("top"/"bottom") so the JS side can place the
+  # alluvial/sankey axis (column) titles accordingly (scale_x_*(position = "top")).
+  sx <- tryCatch(o$scales$get_scales("x"), error = function(e) NULL)
+  if (!is.null(sx) && !is.null(sx$position)) {
+    r$xAxisPosition <- sx$position
+  }
+  # ggsankey marker + per-node colour map, threaded through so the JS Sankey path
+  # can colour each node by its own value and each ribbon by its source node.
+  sankey_style <- attr(o, "cx_sankey_style")
+  if (!is.null(sankey_style)) {
+    r$sankeyStyle <- sankey_style
+    node_levels <- attr(o, "cx_sankey_node_levels")
+    node_colors <- attr(o, "cx_sankey_node_colors")
+    if (!is.null(node_levels) && !is.null(node_colors)) {
+      r$sankeyNodeLevels <- as.character(node_levels)
+      r$sankeyNodeColors <- as.character(node_colors)
+    }
+    legend_title <- attr(o, "cx_sankey_legend_title")
+    if (!is.null(legend_title)) {
+      r$sankeyNodeLegendTitle <- as.character(legend_title)
+    }
+  }
   r
 }
 
