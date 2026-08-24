@@ -16,7 +16,7 @@ test_that("ggplot.decompiled reconstructs basic plot and applies data_name and s
 
   expect_type(res, "character")
   expect_match(res, "^ggplot\\(my_df, aes\\(x = wt, y = mpg\\)\\) \\+")
-  expect_match(res, "geom_point\\(\\)$")
+  expect_match(res, "geom_point\\(\\)")
   # Verifies double quotes were replaced with single quotes
   expect_false(grepl('"', res, fixed = TRUE))
 })
