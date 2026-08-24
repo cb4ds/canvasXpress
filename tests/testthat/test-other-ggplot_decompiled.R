@@ -6,19 +6,26 @@ test_that("ggplot.decompiled returns NA_character_ for non-ggplot objects", {
   expect_equal(ggplot.decompiled(1:10), NA_character_)
 })
 
-test_that("ggplot.decompiled reconstructs basic plot and applies data_name and single quotes", {
+test_that("ggplot.decompiled handles scales with and without call attributes", {
   skip_if_not_installed("ggplot2")
 
   p <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg)) +
     ggplot2::geom_point()
 
-  res <- ggplot.decompiled(p, data_name = "my_df")
+  # 1. Scale WITH a call attribute
+  mock_scale_with_call <- list(aesthetics = "x", call = quote(scale_x_log10()))
+  class(mock_scale_with_call) <- c("ScaleContinuousPosition", "ScaleContinuous", "Scale", "ggproto")
+  p$scales$scales[[length(p$scales$scales) + 1]] <- mock_scale_with_call
 
-  expect_type(res, "character")
-  expect_match(res, "^ggplot\\(my_df, aes\\(x = wt, y = mpg\\)\\) \\+")
-  expect_match(res, "geom_point\\(\\)")
-  # Verifies double quotes were replaced with single quotes
-  expect_false(grepl('"', res, fixed = TRUE))
+  # 2. Scale WITHOUT a call attribute (fallback path)
+  mock_scale_no_call <- list(aesthetics = "fill", call = NULL)
+  class(mock_scale_no_call) <- "ScaleDiscrete"
+  p$scales$scales[[length(p$scales$scales) + 1]] <- mock_scale_no_call
+
+  res <- ggplot.decompiled(p)
+
+  expect_match(res, "scale_x_log10\\(\\)")
+  expect_match(res, "scale_fill_\\*\\(\\.\\.\\.\\) \\+   # ScaleDiscrete")
 })
 
 test_that("ggplot.decompiled handles reference line geoms and literal value extraction", {
