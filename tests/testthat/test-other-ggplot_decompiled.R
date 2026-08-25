@@ -7,7 +7,6 @@ test_that("ggplot.decompiled returns NA_character_ for non-ggplot objects", {
 })
 
 test_that("ggplot.decompiled reconstructs basic plot and applies data_name and single quotes", {
-    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
     p <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg)) +
