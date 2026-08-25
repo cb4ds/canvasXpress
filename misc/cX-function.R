@@ -5924,6 +5924,74 @@ cXmeter20 <- function() {
   )
 }
 
+cXmeter21 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/r/cX-meter21-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    graphType="Meter",
+    meterCard=TRUE,
+    meterType="ring",
+    rangeColors=list("rgb(124,77,255)"),
+    summaryType="sum",
+    xAxis=list("Full-Stack Developer")
+  )
+}
+
+cXmeter22 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/r/cX-meter22-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  x=read.table("https://www.canvasxpress.org/data/r/cX-meter22-smp.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    smpAnnot=x,
+    graphType="Meter",
+    groupingFactors=list("cyl"),
+    meterCard=TRUE,
+    meterType="ring",
+    meterVar="mpg",
+    rangeColors=list("rgb(239,83,80)", "rgb(255,167,38)", "rgb(102,187,106)"),
+    summaryType="average",
+    xAxis=list("mpg")
+  )
+}
+
+cXmeter23 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/r/cX-meter23-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  x=read.table("https://www.canvasxpress.org/data/r/cX-meter23-smp.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    smpAnnot=x,
+    graphType="Meter",
+    groupingFactors=list("Department"),
+    meterCard=TRUE,
+    meterRingTitlePosition="topLeft",
+    meterType="ring",
+    meterVar="Satisfaction",
+    rangeColors=list("rgb(38,166,154)"),
+    summaryType="average",
+    xAxis=list("Satisfaction")
+  )
+}
+
+cXmeter24 <- function() {
+  library(canvasXpress)
+  y=read.table("https://www.canvasxpress.org/data/r/cX-meter24-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    bulletTargetVar="rgb(20,20,20)",
+    bulletTargetVarName="Goal",
+    graphType="Meter",
+    meterType="gauge",
+    rangeSegments=list(0, 25, 50, 75, 100),
+    setMax=100,
+    setMin=0,
+    summaryType="sum",
+    xAxis=list("Revenue")
+  )
+}
+
 cXnetwork1 <- function() {
   library(canvasXpress)
   nodes=read.table("https://www.canvasxpress.org/data/r/cX-lesmiserable-nodes.txt", header=TRUE, sep="\t", quote="", fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
