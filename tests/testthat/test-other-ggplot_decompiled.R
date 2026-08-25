@@ -82,17 +82,22 @@ test_that("ggplot.decompiled handles scales with and without call attributes", {
     skip_if_not_installed("ggplot2")
 
     p <- ggplot2::ggplot(mtcars, ggplot2::aes(x = wt, y = mpg)) +
-        ggplot2::geom_point() +
-        ggplot2::scale_x_log10()
+        ggplot2::geom_point()
 
-    expect_match(ggplot.decompiled(p), "scale_x_log10\\(\\)")
+    # 1. Scale WITH a call attribute
+    mock_scale_with_call <- list(aesthetics = "x", call = quote(scale_x_log10()))
+    class(mock_scale_with_call) <- c("ScaleContinuousPosition", "ScaleContinuous", "Scale", "ggproto")
+    p$scales$scales[[length(p$scales$scales) + 1]] <- mock_scale_with_call
 
-    # Fallback for scale object without $call
-    mock_scale <- list(aesthetics = "fill")
-    class(mock_scale) <- "ScaleDiscrete"
-    p$scales$scales[[length(p$scales$scales) + 1]] <- mock_scale
+    # 2. Scale WITHOUT a call attribute (fallback path)
+    mock_scale_no_call <- list(aesthetics = "fill", call = NULL)
+    class(mock_scale_no_call) <- "ScaleDiscrete"
+    p$scales$scales[[length(p$scales$scales) + 1]] <- mock_scale_no_call
 
-    expect_match(ggplot.decompiled(p), "scale_fill_\\*\\(\\.\\.\\.\\) \\+   # ScaleDiscrete")
+    res <- ggplot.decompiled(p)
+
+    expect_match(res, "scale_x_log10\\(\\)")
+    expect_match(res, "scale_fill_\\*\\(\\.\\.\\.\\) \\+   # ScaleDiscrete")
 })
 
 test_that("ggplot.decompiled handles non-default facets, coords, and labels", {
