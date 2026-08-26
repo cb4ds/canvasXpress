@@ -225,6 +225,7 @@
       "color": "red",
       "size": 6,
       "na.rm": false,
+      "shape": 19,
       "stat": "StatIdentity",
       "geom": "GeomPoint"
     },
@@ -232,6 +233,7 @@
       "color": "blue",
       "size": 2,
       "na.rm": false,
+      "shape": 19,
       "stat": "StatIdentity",
       "geom": "GeomPoint"
     }

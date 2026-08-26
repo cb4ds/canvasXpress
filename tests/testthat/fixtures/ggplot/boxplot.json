@@ -263,6 +263,7 @@
       "na.rm": false,
       "color": "#333333FF",
       "fill": "white",
+      "shape": 19,
       "stat": "StatBoxplot",
       "geom": "GeomBoxplot"
     }

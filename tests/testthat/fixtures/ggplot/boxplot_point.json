@@ -263,12 +263,14 @@
       "na.rm": false,
       "color": "#333333FF",
       "fill": "white",
+      "shape": 19,
       "stat": "StatBoxplot",
       "geom": "GeomBoxplot"
     },
     {
       "na.rm": false,
       "color": "black",
+      "shape": 19,
       "stat": "StatIdentity",
       "geom": "GeomPoint"
     }

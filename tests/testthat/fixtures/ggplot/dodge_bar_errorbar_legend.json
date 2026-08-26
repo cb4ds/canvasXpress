@@ -252,6 +252,5 @@
   },
   "isGGPlot": true,
   "config": [],
-  "isR": true,
-  "decompiled": "ggplot(dat, aes(x = g, y = y, fill = h)) +\n  geom_col(width = 0.7, just = 0.5, lineend = 'butt', linejoin = 'mitre', position = 'dodge') +\n  geom_errorbar(aes(ymin = y - 0.5, ymax = y + 0.5), width = 0.2, lineend = 'butt', position = 'dodge')"
+  "isR": true
 }
