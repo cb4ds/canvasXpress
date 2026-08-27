@@ -1,6 +1,7 @@
 context("ggplot as list - ggh4x")
 
 test_that("ggplot.as.list - ggh4x per-strip fill colors (gg_strip_colors)", {
+    skip_if(getRversion() < "4.1.0")
     skip_if_not_installed("ggplot2")
 
     strip_cols <- ggh4x::strip_themed(
