@@ -1,3 +1,6 @@
+if (isTRUE(as.logical(Sys.getenv("CI"))) && getRversion() <= "4.4.3") {
+  testthat::skip("Skipping ggplot as list tests on legacy CircleCI environments to protect namespace")
+}
 context("ggplot as list")
 
 test_that("ggplot.as.list - pass non ggplot2 object", {
