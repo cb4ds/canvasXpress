@@ -13,8 +13,6 @@ context("ggplot fixtures golden")
 # Corpus: helper-ggplot-corpus.R   Pipeline: docs/plans/ggplot/perlayer-ggplot-plan.md
 
 test_that("ggplot.as.list output matches committed golden fixtures", {
-    # TODO: enable it after fixing the difference between golden and generated values
-    skip("Skipping until fixing golden rules")
     skip_if_not_installed("ggplot2")
 
     corpus      <- cx_ggplot_corpus()
