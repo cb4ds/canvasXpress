@@ -1,17 +1,5 @@
 context("ggplot as list - ggh4x")
 
-# 1. requireNamespace checks for installation WITHOUT loading ggh4x into memory
-if (!requireNamespace("ggh4x", quietly = TRUE)) {
-  testthat::skip("ggh4x is not installed")
-}
-
-# 2. Completely bypass this file on older R environments on CircleCI
-# where ggh4x causes irreversible namespace pollution
-if (isTRUE(as.logical(Sys.getenv("CI"))) && getRversion() <= "4.4.3") {
-  testthat::skip("Skipping ggh4x tests on legacy CircleCI environments to protect namespace")
-}
-
-
 test_that("ggplot.as.list - ggh4x per-strip fill colors (gg_strip_colors)", {
     skip_if_not_installed("ggplot2")
 
