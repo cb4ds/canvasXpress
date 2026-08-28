@@ -13,6 +13,7 @@ context("ggplot fixtures golden")
 # Corpus: helper-ggplot-corpus.R   Pipeline: docs/plans/ggplot/perlayer-ggplot-plan.md
 
 test_that("ggplot.as.list output matches committed golden fixtures", {
+    skip_if(getRversion() < "4.5.2")
     skip_if_not_installed("ggplot2")
 
     corpus      <- cx_ggplot_corpus()

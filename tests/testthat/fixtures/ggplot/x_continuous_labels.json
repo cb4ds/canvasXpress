@@ -20,7 +20,6 @@
     "xAxisSetValues": [50000000, 150000000, 250000000],
     "xAxisSetMinorValues": [50000000, 100000000, 150000000, 200000000, 250000000],
     "xAxisTicks": 3,
-    "xAxisSetLabels": ["1", "2", "3"],
     "colors": ["#D6604D", "#4A6FA5"],
     "colorScale": "ScaleDiscrete",
     "sizes": 6
@@ -226,6 +225,7 @@
       "color": "band",
       "na.rm": false,
       "showLegend": false,
+      "shape": 19,
       "stat": "StatIdentity",
       "geom": "GeomPoint"
     }
@@ -237,9 +237,6 @@
     "band": true
   },
   "isGGPlot": true,
-  "config": {
-    "showLegend": false
-  },
-  "isR": true,
-  "decompiled": "ggplot(dat, aes(x = pos, y = y)) +\n  geom_point(aes(colour = band)) +\n  ggplot2::scale_colour_manual(values = c('#D6604D', '#4A6FA5')) +\n  ggplot2::scale_x_continuous(breaks = c(5e+07, 1.5e+08, 2.5e+08),     labels = c(1, 2, 3))"
+  "config": [],
+  "isR": true
 }

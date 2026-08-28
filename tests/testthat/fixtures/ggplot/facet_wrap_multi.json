@@ -234,6 +234,7 @@
     {
       "na.rm": false,
       "color": "black",
+      "shape": 19,
       "stat": "StatIdentity",
       "geom": "GeomPoint"
     }

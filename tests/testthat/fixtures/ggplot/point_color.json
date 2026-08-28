@@ -222,6 +222,7 @@
   "layers": [
     {
       "na.rm": false,
+      "shape": 19,
       "stat": "StatIdentity",
       "geom": "GeomPoint"
     }
