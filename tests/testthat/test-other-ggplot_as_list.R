@@ -1606,3 +1606,18 @@ test_that("gg_apply_x_scale_labels finds xvar in layers when aes$x is NULL", {
   expect_equal(res$data[2, 1], "Control")
   expect_equal(res$order[["grp"]], "Control")
 })
+
+test_that("ggplot.as.list - ggmatrix with byrow = FALSE", {
+  skip_if_not_installed("ggplot2")
+  skip_if_not_installed("GGally")
+
+  # Create a ggmatrix with column-major ordering (byrow = FALSE)
+  pm <- GGally::ggpairs(mtcars, columns = 1:2, byrow = FALSE)
+
+  cxplot      <- suppressWarnings(ggplot.as.list(pm))
+  cxplot_list <- jsonlite::parse_json(cxplot)
+
+  expect_equal(class(cxplot), "json")
+  expect_true(cxplot_list$isGGMatrix)
+  expect_equal(length(cxplot_list$datasets), 4)
+})
