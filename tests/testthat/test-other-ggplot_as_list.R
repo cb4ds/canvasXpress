@@ -191,7 +191,7 @@ test_that("ggplot.as.list - GGally", {
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
-    expect_equal(length(cxplot_list), 8)
+    expect_equal(length(cxplot_list), 7)
     expect_true(cxplot_list$isGGPlot)
     expect_equal(length(cxplot_list$data), 4)
     expect_equal(cxplot_list$data[[2]][[1]], "canvas-2")
