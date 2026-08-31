@@ -35,7 +35,6 @@ ggplot.as.list <- function(o, ...) { # nolint: object_name_linter.
     }
     cx$datasets <- p
   } else if (("ggmatrix") %in% class(o)) {
-    d <- o$data
     l <- length(o$plots)
     c <- o$ncol
     r <- o$nrow
@@ -44,22 +43,47 @@ ggplot.as.list <- function(o, ...) { # nolint: object_name_linter.
     cx$isGGPlot <- TRUE
     cx$isGGMatrix <- TRUE
     cx$isR <- TRUE
-    ## Find the longest in the data frame which will be used to calculate
-    ## the margins
-    v <- stats::na.omit(unlist(lapply(d, as.character)))
-    z <- if (length(v) > 0) v[which.max(nchar(v))] else ""
-    cx$longestString <- as.character(unlist(z))
+    ## NOTE: the former cx$longestString (the single longest data string, used as a
+    ## crude per-cell left-margin proxy) has been retired -- the core engine now
+    ## measures each cell's real reserves at render time (getDesiredMargins) and
+    ## aligns the panels via setPlot* (see matrix-panel-alignment-plan). Each cell's
+    ## isGGMatrix is a plain boolean flag below.
     if (!is.null(c)) {
       cx$cols <- c
     }
     if (!is.null(r)) {
       cx$rows <- r
     }
+    ## In current GGally each o$plots[[i]] is a lazy "ggmatrix_plot_obj", not a
+    ## built ggplot, so feeding it straight to ggplot_build() errors ("no
+    ## applicable method for 'ggplot_build'"). Build every cell into a real
+    ## ggplot first. Prefer GGally::getPlot(o, row, col) (applies the cell
+    ## mapping, the shared gg theme, and turns empty cells into blanks); fall
+    ## back to invoking the cell fn directly if GGally is unavailable.
+    nc <- if (!is.null(o$ncol)) o$ncol else 1
+    nr <- if (!is.null(o$nrow)) o$nrow else 1
+    byrow <- is.null(o$byrow) || isTRUE(o$byrow)
+    haveGGally <- requireNamespace("GGally", quietly = TRUE)
     p <- list()
     for (i in seq_len(l)) {
+      plotObj <- o$plots[[i]]
+      if (haveGGally) {
+        if (byrow) {
+          row <- ((i - 1) %/% nc) + 1
+          col <- ((i - 1) %% nc) + 1
+        } else {
+          col <- ((i - 1) %/% nr) + 1
+          row <- ((i - 1) %% nr) + 1
+        }
+        built <- GGally::getPlot(o, row, col)
+      } else if (inherits(plotObj, "ggmatrix_plot_obj")) {
+        built <- plotObj$fn(o$data, plotObj$mapping)
+      } else {
+        built <- plotObj
+      }
       t <- paste("canvas", i, sep = "-")
-      p[[i]] <- gg_cxplot(o$plots[[i]], t)
-      p[[i]]$isGGMatrix <- cx$longestString
+      p[[i]] <- gg_cxplot(built, t)
+      p[[i]]$isGGMatrix <- TRUE
     }
     cx$datasets <- p
   } else {
