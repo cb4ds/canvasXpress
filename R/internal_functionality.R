@@ -28,7 +28,7 @@ assertDataCorrectness <- function(data, graphType, config) {
                          "StackedPercent", "StackedPercentLine", "Streamgraph",
                          "Sunburst", "TagCloud", "TimeSeries", "Tornado", "Tree",
                          "TreeBracket", "Treemap", "Venn", "Violin", "Volcano",
-                         "Waterfall")
+                         "Waterfall", "OptionsWall")
     noDataNecessary  <- c("Map")
 
     if (is.null(graphType)) stop("graphType cannot be NULL!")
