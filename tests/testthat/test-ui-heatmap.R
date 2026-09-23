@@ -83,5 +83,5 @@ test_that("cXheatmap18", {
 })
 
 test_that("cXheatmap19", {
-    check_ui_test(cXheatmap18())
+    check_ui_test(cXheatmap19())
 })
