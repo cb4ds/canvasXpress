@@ -91,20 +91,27 @@ test_that("cxConfigParams handles null descriptions and null options in JSON cat
     )
   )
 
-  with_mocked_bindings(
-    fromJSON = function(...) mock_catalog,
-    .package = "jsonlite",
-    {
-      res <- cxConfigParams()
-      expect_equal(nrow(res), 2)
-      expect_true(is.na(res$description[1]))
-      expect_equal(res$description[2], "Some description")
-      expect_equal(res$options[[1]], c("val1", "val2"))
-      expect_null(res$options[[2]])
-    }
-  )
+  # Temporarily mock jsonlite::fromJSON using base R unlockBinding
+  ns            <- asNamespace("jsonlite")
+  orig_fromJSON <- ns$fromJSON
 
-  .cx_config_params_cache$df <- NULL
+  unlockBinding("fromJSON", ns)
+  assign("fromJSON", function(...) mock_catalog, envir = ns)
+  lockBinding("fromJSON", ns)
+
+  on.exit({
+    unlockBinding("fromJSON", ns)
+    assign("fromJSON", orig_fromJSON, envir = ns)
+    lockBinding("fromJSON", ns)
+    .cx_config_params_cache$df <- NULL
+  })
+
+  res <- cxConfigParams()
+  expect_equal(nrow(res), 2)
+  expect_true(is.na(res$description[1]))
+  expect_equal(res$description[2], "Some description")
+  expect_equal(res$options[[1]], c("val1", "val2"))
+  expect_null(res$options[[2]])
 })
 
 # ------------------------------------------------------------------------------
@@ -144,9 +151,9 @@ test_that("cxValidateConfig detects unknown parameters and bad enumerated option
   expect_equal(res_clean$bad_options, list())
 
   # 2. Config with blank parameter name (nzchar filtering check)
-  blank_name_cfg        <- list("Bar")
+  blank_name_cfg <- list("Bar")
   names(blank_name_cfg) <- ""
-  res_blank             <- cxValidateConfig(blank_name_cfg)
+  res_blank <- cxValidateConfig(blank_name_cfg)
   expect_equal(res_blank$unknown, character(0))
 
   # 3. Non-string scalar / vector option values should skip option validation
