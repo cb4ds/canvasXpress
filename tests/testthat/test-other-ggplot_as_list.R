@@ -1705,6 +1705,7 @@ test_that("gg_lodes_to_alluvia returns original plot if mappings are incomplete"
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
 
     lodes_df <- data.frame(
         x                = factor(rep(c("A", "B"), each = 2)),
@@ -1725,6 +1726,7 @@ test_that("gg_lodes_to_alluvia returns original plot if mapped columns not in da
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
 
     lodes_df <- data.frame(
         x                = factor(rep(c("A", "B"), each = 2)),
@@ -1745,6 +1747,7 @@ test_that("gg_lodes_to_alluvia returns original plot if data is not in lodes for
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
 
     # Invalid lodes data structure
     bad_lodes_df <- data.frame(
@@ -1765,6 +1768,7 @@ test_that("gg_lodes_to_alluvia handles is_lodes_form execution error gracefully"
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
 
     lodes_df <- data.frame(
         x = factor(rep(c("A", "B"), each = 2)),
@@ -1831,6 +1835,7 @@ test_that("gg_lodes_to_alluvia returns original plot if axis_cols < 2", {
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
 
     # Data with only 1 x level
     single_axis_df <- data.frame(
@@ -1851,7 +1856,7 @@ test_that("gg_lodes_to_alluvia converts lodes plot with factor x, y weight, and 
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
-
+    library(ggalluvial)
 
     lodes_df <- data.frame(
         x                = factor(rep(c("Stage1", "Stage2"), each = 2), levels = c("Stage1", "Stage2")),
@@ -1884,7 +1889,7 @@ test_that("gg_lodes_to_alluvia converts plot with character x, no y weight, and 
     skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
-
+    library(ggalluvial)
 
     # Non-factor character x vector
     char_lodes_df <- data.frame(

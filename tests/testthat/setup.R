@@ -14,7 +14,6 @@ try({
     require(dplyr)
     require(tibble)
     require(jsonlite)
-    require(ggalluvial)
 }, silent = T)
 
 try({

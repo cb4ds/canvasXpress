@@ -34,7 +34,6 @@ jobs:
             R -e 'install.packages("GGally")'
             R -e 'install.packages("ggpubr")'
             R -e 'install.packages("ggpattern")'
-            R -e 'install.packages("ggalluvial")'
 
       - run:
           name: Session information and installed package versions
@@ -94,7 +93,6 @@ jobs:
             R -e 'install.packages("ggpubr")'
             R -e 'install.packages("ggpattern")'
             R -e 'install.packages("ggh4x")'
-            R -e 'install.packages("ggalluvial")'
 
       - run:
           name: Session information and installed package versions
