@@ -1919,3 +1919,197 @@ test_that("gg_lodes_to_alluvia converts plot with character x, no y weight, and 
     expect_true("axis1" %in% names(res$mapping))
     expect_true("axis2" %in% names(res$mapping))
 })
+
+
+# ------------------------------------------------------------------------------
+# Unit Tests for gg_sankey_to_alluvia
+# ------------------------------------------------------------------------------
+
+test_that("gg_sankey_to_alluvia returns original plot if sankey aesthetics are missing", {
+    p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+        geom_point()
+
+    res <- canvasXpress:::gg_sankey_to_alluvia(p)
+    expect_equal(res, p)
+})
+
+test_that("gg_sankey_to_alluvia returns original plot when ggalluvial is not available", {
+    skip_if(getRversion() < "4.4.0")
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggalluvial")
+
+    sankey_df <- data.frame(
+        x                = c("S1", "S2"),
+        node             = c("A", "B"),
+        next_x           = c("S2", NA),
+        next_node        = c("B", NA),
+        stringsAsFactors = FALSE
+    )
+
+    p <- suppressWarnings(
+        ggplot(sankey_df, aes(x = x, node = node, next_x = next_x, next_node = next_node))
+    )
+
+    # Mock requireNamespace to return FALSE specifically for ggalluvial
+    ns       <- asNamespace("base")
+    orig_req <- ns$requireNamespace
+
+    unlockBinding("requireNamespace", ns)
+    assign("requireNamespace", function(package, ...) {
+        if (package == "ggalluvial") return(FALSE)
+        orig_req(package, ...)
+    }, envir = ns)
+    lockBinding("requireNamespace", ns)
+
+    on.exit({
+        unlockBinding("requireNamespace", ns)
+        assign("requireNamespace", orig_req, envir = ns)
+        lockBinding("requireNamespace", ns)
+    })
+
+    res <- canvasXpress:::gg_sankey_to_alluvia(p)
+    expect_equal(res, p)
+})
+
+test_that("gg_sankey_to_alluvia attaches ggalluvial namespace if not present in search path", {
+    skip_if(getRversion() < "4.4.0")
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggalluvial")
+
+    if ("package:ggalluvial" %in% search()) {
+        detach("package:ggalluvial", character.only = TRUE)
+    }
+
+    sankey_df <- data.frame(
+        x = factor(rep(c("S1", "S2"), times = 2)),
+        node             = c("A", "B", "A", "C"),
+        next_x           = c("S2", NA, "S2", NA),
+        next_node        = c("B", NA, "C", NA),
+        stringsAsFactors = FALSE
+    )
+
+    p <- suppressWarnings(
+        ggplot(sankey_df, aes(x = x, node = node, next_x = next_x, next_node = next_node)) +
+            geom_point()
+    )
+
+    res <- canvasXpress:::gg_sankey_to_alluvia(p)
+    expect_true("package:ggalluvial" %in% search())
+})
+
+test_that("gg_sankey_to_alluvia returns original plot if mapped columns are not in data", {
+    skip_if(getRversion() < "4.4.0")
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggalluvial")
+
+    sankey_df <- data.frame(
+        x                = c("S1", "S2"),
+        node             = c("A", "B"),
+        stringsAsFactors = FALSE
+    )
+
+    p <- suppressWarnings(
+        ggplot(sankey_df, aes(x = x, node = node, next_x = missing_next_x, next_node = missing_next_node))
+    )
+
+    res <- canvasXpress:::gg_sankey_to_alluvia(p)
+    expect_equal(res, p)
+})
+
+test_that("gg_sankey_to_alluvia returns original plot when stages < 2 or row count invalid", {
+    skip_if(getRversion() < "4.4.0")
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggalluvial")
+
+    # Scenario 1: Only 1 stage (k < 2)
+    df_single_stage <- data.frame(
+        x                = c("S1", "S1"),
+        node             = c("A", "B"),
+        next_x           = c(NA, NA),
+        next_node        = c(NA, NA),
+        stringsAsFactors = FALSE
+    )
+
+    p1 <- suppressWarnings(
+        ggplot(df_single_stage, aes(x = x, node = node, next_x = next_x, next_node = next_node))
+    )
+    expect_equal(canvasXpress:::gg_sankey_to_alluvia(p1), p1)
+
+    # Scenario 2: Row count is not a multiple of k (nrow %% k != 0)
+    df_unbalanced <- data.frame(
+        x = c("S1", "S2", "S1"),
+        node             = c("A", "B", "A"),
+        next_x           = c("S2", NA, "S2"),
+        next_node        = c("B", NA, "B"),
+        stringsAsFactors = FALSE
+    )
+
+    p2 <- suppressWarnings(
+        ggplot(df_unbalanced, aes(x = x, node = node, next_x = next_x, next_node = next_node))
+    )
+    expect_equal(canvasXpress:::gg_sankey_to_alluvia(p2), p2)
+})
+
+test_that("gg_sankey_to_alluvia converts valid ggsankey with factor x, layer mappings, and fill legend", {
+    skip_if(getRversion() < "4.4.0")
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
+
+    sankey_df <- data.frame(
+        x                = factor(rep(c("Stage1", "Stage2"), times = 2), levels = c("Stage1", "Stage2")),
+        node             = c("Alpha", "Beta", "Alpha", "Beta"),
+        next_x           = c("Stage2", NA, "Stage2", NA),
+        next_node        = c("Beta", NA, "Beta", NA),
+        node_fill        = c("Alpha", "Beta", "Alpha", "Beta"),
+        stringsAsFactors = FALSE
+    )
+
+    p <- suppressWarnings(
+        ggplot(sankey_df, aes(x = x, node = node, next_x = next_x)) +
+            geom_point(aes(next_node = next_node, fill = node_fill))
+    )
+
+    res <- canvasXpress:::gg_sankey_to_alluvia(p)
+
+    expect_equal(attr(res, "cx_sankey_style"), "ggsankey")
+    expect_equal(attr(res, "cx_sankey_legend_title"), "node_fill")
+    expect_equal(attr(res, "cx_sankey_node_levels"), c("Alpha", "Beta"))
+    expect_type(attr(res, "cx_sankey_node_colors"), "character")
+
+    expect_true("axis1" %in% names(res$mapping))
+    expect_true("axis2" %in% names(res$mapping))
+    expect_true("y" %in% names(res$mapping))
+    expect_true("fill" %in% names(res$mapping))
+
+    expect_length(res$layers, 3)
+})
+
+test_that("gg_sankey_to_alluvia converts plot with character x, missing fill mapping, and path aggregation", {
+    skip_if(getRversion() < "4.4.0")
+    skip_if_not_installed("ggplot2")
+    skip_if_not_installed("ggalluvial")
+    library(ggalluvial)
+
+    sankey_df <- data.frame(
+        x                = c("T1", "T2", "T1", "T2"),
+        node             = c("N1", "N2", "N1", "N2"),
+        next_x           = c("T2", NA, "T2", NA),
+        next_node        = c("N2", NA, "N2", NA),
+        stringsAsFactors = FALSE
+    )
+
+    p <- suppressWarnings(
+        ggplot(sankey_df, aes(x = x, node = node, next_x = next_x, next_node = next_node)) +
+            geom_point()
+    )
+
+    res <- canvasXpress:::gg_sankey_to_alluvia(p)
+
+    expect_null(attr(res, "cx_sankey_legend_title"))
+    expect_equal(attr(res, "cx_sankey_style"), "ggsankey")
+
+    expect_equal(res$data$freq, 2)
+    expect_s3_class(res$data$T1, "factor")
+    expect_s3_class(res$data$T2, "factor")
+})
