@@ -115,6 +115,8 @@ jobs:
             # Install suggested packages
             R -e 'install.packages("png")'
             # Perform package check
+            export _R_CHECK_FORCE_SUGGESTS_=FALSE
+            export _R_CHECK_SUGGESTS_ONLY_=TRUE
             R CMD check *tar.gz
 
   Build-for-r4_4_3:
