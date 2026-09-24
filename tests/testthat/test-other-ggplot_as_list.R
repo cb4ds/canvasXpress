@@ -1667,7 +1667,7 @@ test_that("ggplot.as.list - ggmatrix fallback for ggmatrix_plot_obj when GGally 
 test_that("ggplot.as.list - ggmatrix fallback for plain ggplot elements when GGally is missing", {
   skip_if_not_installed("ggplot2")
 
-  plain_gplot <- ggplot2::ggplot(mtcars, ggplot2::aes(x = hp, y = mpg)) + ggplot2::geom_point()
+  plain_gplot <- ggplot(mtcars, aes(x = hp, y = mpg)) + geom_point()
 
   mock_matrix <- structure(
     list(
@@ -1684,12 +1684,12 @@ test_that("ggplot.as.list - ggmatrix fallback for plain ggplot elements when GGa
   mock_env <- new.env(parent = environment(ggplot.as.list))
   mock_env$requireNamespace <- function(package, ...) {
     if (package == "GGally") return(FALSE)
-    base::requireNamespace(package, ...)
+      requireNamespace(package, ...)
   }
   environment(fn) <- mock_env
 
   cxplot      <- suppressWarnings(fn(mock_matrix))
-  cxplot_list <- parse_json(cxplot)
+  cxplot_list <- jsonlite::parse_json(cxplot)
 
   expect_equal(class(cxplot), "json")
   expect_true(cxplot_list$isGGMatrix)
