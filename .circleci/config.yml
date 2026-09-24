@@ -152,6 +152,7 @@ jobs:
             R -e 'install.packages("ggpattern")'
             R -e 'install.packages("ggh4x")'
             R -e 'install.packages("ggalluvial")'
+            R -e 'install.packages("repr")'
 
       - run:
           name: Session information and installed package versions
@@ -209,6 +210,7 @@ jobs:
             R -e 'install.packages("ggpattern")'
             R -e 'install.packages("ggh4x")'
             R -e 'install.packages("ggalluvial")'
+            R -e 'install.packages("repr")'
 
       - run:
           name: Session information and installed package versions
