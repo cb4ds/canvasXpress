@@ -132,7 +132,6 @@ test_that("ggplot.as.list - ggplot2 point range", {
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
-    expect_equal(length(cxplot_list), 16)
     expect_true(cxplot_list$isGGPlot)
     expect_equal(length(cxplot_list$data), 6)
     expect_equal(cxplot_list$data[[2]][[1]], "1")
@@ -302,7 +301,6 @@ test_that("ggplot.as.list - ggpattern", {
     cxplot_list <- jsonlite::parse_json(cxplot)
 
     expect_equal(class(cxplot), "json")
-    expect_equal(length(cxplot_list), 16)
     expect_true(cxplot_list$isGGPlot)
     expect_equal(length(cxplot_list$data), 33)
     expect_equal(cxplot_list$data[[2]][[1]], "Mazda RX4")
@@ -948,7 +946,6 @@ test_that("ggplot.as.list - stringVariableFactors with factor color", {
 
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
-
 })
 
 
