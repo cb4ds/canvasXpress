@@ -1700,13 +1700,9 @@ test_that("ggplot.as.list - ggmatrix fallback for plain ggplot elements when GGa
 # ------------------------------------------------------------------------------
 # gg_lodes_to_alluvia Unit Tests
 # ------------------------------------------------------------------------------
-tryCatch({
-  library(ggalluvial)
-}, error = function(e) {
-  message("ggalluvial is not installed")
-})
 
 test_that("gg_lodes_to_alluvia returns original plot if mappings are incomplete", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1726,6 +1722,7 @@ test_that("gg_lodes_to_alluvia returns original plot if mappings are incomplete"
 })
 
 test_that("gg_lodes_to_alluvia returns original plot if mapped columns not in data", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1745,6 +1742,7 @@ test_that("gg_lodes_to_alluvia returns original plot if mapped columns not in da
 })
 
 test_that("gg_lodes_to_alluvia returns original plot if data is not in lodes form", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1764,6 +1762,7 @@ test_that("gg_lodes_to_alluvia returns original plot if data is not in lodes for
 })
 
 test_that("gg_lodes_to_alluvia handles is_lodes_form execution error gracefully", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1796,6 +1795,7 @@ test_that("gg_lodes_to_alluvia handles is_lodes_form execution error gracefully"
 })
 
 test_that("gg_lodes_to_alluvia handles to_alluvia_form failure gracefully", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1828,6 +1828,7 @@ test_that("gg_lodes_to_alluvia handles to_alluvia_form failure gracefully", {
 })
 
 test_that("gg_lodes_to_alluvia returns original plot if axis_cols < 2", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1847,6 +1848,7 @@ test_that("gg_lodes_to_alluvia returns original plot if axis_cols < 2", {
 })
 
 test_that("gg_lodes_to_alluvia converts lodes plot with factor x, y weight, and layer mappings", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
@@ -1879,6 +1881,7 @@ test_that("gg_lodes_to_alluvia converts lodes plot with factor x, y weight, and 
 })
 
 test_that("gg_lodes_to_alluvia converts plot with character x, no y weight, and handles empty layer mappings", {
+    skip_if(getRversion() < "4.4.0")
     skip_if_not_installed("ggplot2")
     skip_if_not_installed("ggalluvial")
 
