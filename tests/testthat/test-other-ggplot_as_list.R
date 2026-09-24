@@ -1939,7 +1939,7 @@ test_that("gg_sankey_to_alluvia returns original plot when ggalluvial is not ava
     skip_if_not_installed("ggalluvial")
 
     sankey_df <- data.frame(
-        x                = c("S1", "S2"),
+        x = c("S1", "S2"),
         node             = c("A", "B"),
         next_x           = c("S2", NA),
         next_node        = c("B", NA),
@@ -2004,12 +2004,14 @@ test_that("gg_sankey_to_alluvia returns original plot if mapped columns are not 
 
     sankey_df <- data.frame(
         x                = c("S1", "S2"),
-        node             = c("A", "B"),
+        next_x           = c("S2", NA),
+        next_node        = c("B", NA),
         stringsAsFactors = FALSE
     )
 
+    # 'missing_node' is mapped to 'node' aesthetic, but is absent from sankey_df columns
     p <- suppressWarnings(
-        ggplot(sankey_df, aes(x = x, node = node, next_x = missing_next_x, next_node = missing_next_node))
+        ggplot(sankey_df, aes(x = x, node = missing_node, next_x = next_x, next_node = next_node))
     )
 
     res <- canvasXpress:::gg_sankey_to_alluvia(p)
@@ -2037,7 +2039,7 @@ test_that("gg_sankey_to_alluvia returns original plot when stages < 2 or row cou
 
     # Scenario 2: Row count is not a multiple of k (nrow %% k != 0)
     df_unbalanced <- data.frame(
-        x = c("S1", "S2", "S1"),
+        x                = c("S1", "S2", "S1"),
         node             = c("A", "B", "A"),
         next_x           = c("S2", NA, "S2"),
         next_node        = c("B", NA, "B"),
