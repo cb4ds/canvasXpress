@@ -1,4 +1,5 @@
 context("ggplot as list")
+library(jsonlite)
 
 test_that("ggplot.as.list - pass non ggplot2 object", {
     skip_if_not_installed("ggplot2")
@@ -1689,7 +1690,7 @@ test_that("ggplot.as.list - ggmatrix fallback for plain ggplot elements when GGa
   environment(fn) <- mock_env
 
   cxplot      <- suppressWarnings(fn(mock_matrix))
-  cxplot_list <- jsonlite::parse_json(cxplot)
+  cxplot_list <- parse_json(cxplot)
 
   expect_equal(class(cxplot), "json")
   expect_true(cxplot_list$isGGMatrix)
