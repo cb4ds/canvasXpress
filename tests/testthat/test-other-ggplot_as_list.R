@@ -948,6 +948,7 @@ test_that("ggplot.as.list - stringVariableFactors with factor color", {
 
     expect_equal(class(cxplot), "json")
     expect_true(cxplot_list$isGGPlot)
+
 })
 
 
