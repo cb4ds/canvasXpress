@@ -54,6 +54,5 @@ Suggests:
     GGally,
     ggpubr,
     ggpattern,
-    ggh4x,
-    ggalluvial
+    ggh4x
 VignetteBuilder: knitr
