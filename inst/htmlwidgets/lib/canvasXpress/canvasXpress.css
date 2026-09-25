@@ -1206,8 +1206,9 @@ textarea.cX-Chat-Code-Output {
   color: var(--cx-customizer-text-color, var(--cx-font-color));
   margin-left: 0px;
   margin-top: 0px;
-  max-height: 100vh;
-  min-height: calc(100vh);
+  /* --cx-view-h: set when the page is not the viewport (a VS Code notebook webview) */
+  max-height: var(--cx-view-h, 100vh);
+  min-height: var(--cx-view-h, 100vh);
 }
 
 .cX-Customizer-LeftPanelItems {
@@ -1235,8 +1236,9 @@ textarea.cX-Chat-Code-Output {
   font-size: var(--cx-customizer-font-size, var(--cx-font-size)) !important;
   font-weight: normal;
   color: var(--cx-customizer-text-color, var(--cx-font-color));
-  max-height: 100vh;
-  min-height: calc(100vh);
+  /* --cx-view-h: set when the page is not the viewport (a VS Code notebook webview) */
+  max-height: var(--cx-view-h, 100vh);
+  min-height: var(--cx-view-h, 100vh);
   overflow-y: auto;
 }
 
@@ -4287,6 +4289,18 @@ svg.cX-DataFilter-Toolbar-Image,
 svg.cX-DataFilter-Toolbar-ImageNB {
   margin: 0px !important;
   cursor: pointer;
+}
+
+.cX-DataFilter-Summary {
+  width: 100%;
+  padding: 2px 8px 4px 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.7;
+  color: var(--cx-datafilter-text-color, var(--cx-font-color));
+  font-size: var(--cx-datafilter-font-size, var(--cx-font-size));
 }
 
 
