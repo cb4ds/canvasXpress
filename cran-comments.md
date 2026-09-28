@@ -1,6 +1,6 @@
 ## Comments from Maintainer
 
-- This is an update to underlying JS library (canvasXpress) 
+- This is an update to underlying JS library (canvasXpress) with support for new charts
 
 ---  
 
