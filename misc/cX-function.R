@@ -476,7 +476,7 @@ cXarea21 <- function() {
     varAnnot=z,
     background="white",
     colorScheme="Prism",
-    customLegend=list(list(line=list(True, True), lineColor=list("#5b9bd5", "#6c757d"), lineType=list("solid", "solid"), lineWidth=list(2, 2), paddingX=10, paddingY=10, text=list("ROC curve", "Random Guess (AUC = 0.5)"), title="")),
+    customLegend=list(list(line=list(TRUE, TRUE), lineColor=list("#5b9bd5", "#6c757d"), lineType=list("solid", "solid"), lineWidth=list(2, 2), paddingX=10, paddingY=10, text=list("ROC curve", "Random Guess (AUC = 0.5)"), title="")),
     decorations=list(line=list(list(color="#6c757d", id="roc-grafico-decoration-line-0", label="Random Guess (AUC = 0.5)", width=2, x=0, x2=1, y=0, y2=1))),
     graphOrientation="horizontal",
     graphType="Area",
@@ -9411,7 +9411,7 @@ cXscatter2d22 <- function() {
     lineBy="Carrier",
     scatterType="line",
     showForecast="Carrier",
-    subtitle="showForecast: "Carrier"",
+    subtitle="showForecast: 'Carrier'",
     title="Two carriers, one forecast each",
     xAxis=list("Year"),
     yAxis=list("Passengers")
