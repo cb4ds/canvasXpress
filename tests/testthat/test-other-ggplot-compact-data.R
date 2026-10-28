@@ -50,15 +50,16 @@ test_that("an unescapable control character falls back to the standard path", {
 })
 
 test_that("large matrices serialize compactly and parse to the same plot", {
-  cx <- list(data = legacy_matrix(), config = list(graphType = "Bar"))
-  legacy <- jsonlite::fromJSON(
-    jsonlite::toJSON(cx, pretty = TRUE, auto_unbox = TRUE),
-    simplifyVector = FALSE)
-  testthat::local_mocked_bindings(gg_compact_rows = 1L, .package = "canvasXpress")
-  compact <- canvasXpress:::gg_serialize(cx)
-  expect_s3_class(compact, "json")
-  parsed <- jsonlite::fromJSON(compact, simplifyVector = FALSE)
-  expect_identical(parsed$config, legacy$config)
-  expect_identical(cell_strings(parsed$data), cell_strings(legacy$data))
-  expect_true(is.numeric(parsed$data[[2]][[2]]))
+    skip_if_not_installed("testthat", "3.1.4")
+    cx <- list(data = legacy_matrix(), config = list(graphType = "Bar"))
+    legacy <- jsonlite::fromJSON(
+        jsonlite::toJSON(cx, pretty = TRUE, auto_unbox = TRUE),
+        simplifyVector = FALSE)
+    testthat::local_mocked_bindings(gg_compact_rows = 1L, .package = "canvasXpress")
+    compact <- canvasXpress:::gg_serialize(cx)
+    expect_s3_class(compact, "json")
+    parsed <- jsonlite::fromJSON(compact, simplifyVector = FALSE)
+    expect_identical(parsed$config, legacy$config)
+    expect_identical(cell_strings(parsed$data), cell_strings(legacy$data))
+    expect_true(is.numeric(parsed$data[[2]][[2]]))
 })
