@@ -93,9 +93,9 @@ test_that("cXtimeseries23", {
     check_ui_test(cXtimeseries23())
 })
 
-# test_that("cXtimeseries24", {
-#     check_ui_test(cXtimeseries24())
-# })
+test_that("cXtimeseries24", {
+    check_ui_test(cXtimeseries24())
+})
 
 test_that("cXtimeseries25", {
     check_ui_test(cXtimeseries25())
