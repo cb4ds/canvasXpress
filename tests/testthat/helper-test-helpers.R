@@ -10,7 +10,7 @@
 # --- Load suggested packages ----------------------------------------------- #
 # Use tryCatch so missing packages produce warnings instead of silent failures.
 
-_load_suggested <- function() {
+.load_suggested <- function() {
     suggested <- c(
         "canvasXpress.data", "readr", "ggplot2", "patchwork",
         "GGally", "ggpubr", "ggpattern", "dplyr", "tibble", "jsonlite"
@@ -25,15 +25,15 @@ _load_suggested <- function() {
     }
 }
 
-_load_suggested()
+.load_suggested()
 
 # --- Load UI examples (not exported from the package) ---------------------- #
 # cX-function.R.gz contains the export scaffold that defines cXbar1,
 # cXscatter2d1, etc. Used across many test-ui-*.R files.
 
-_ui_examples_loaded <- FALSE
+.ui_examples_loaded <- FALSE
 
-load_ui_examples <- function() {
+.load_ui_examples <- function() {
     if (.ui_examples_loaded) {
         return(invisible(NULL))
     }
@@ -72,7 +72,7 @@ load_ui_examples <- function() {
     }
 }
 
-load_ui_examples()
+.load_ui_examples()
 
 # --- UI test helper ------------------------------------------------------ #
 
