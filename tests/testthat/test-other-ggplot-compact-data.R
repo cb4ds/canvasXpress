@@ -50,6 +50,7 @@ test_that("an unescapable control character falls back to the standard path", {
 })
 
 test_that("large matrices serialize compactly and parse to the same plot", {
+  skip_if(utils::packageVersion("testthat") < "3.0.0")
   cx <- list(data = legacy_matrix(), config = list(graphType = "Bar"))
   legacy <- jsonlite::fromJSON(
     jsonlite::toJSON(cx, pretty = TRUE, auto_unbox = TRUE),
