@@ -57,7 +57,7 @@ test_that("cxConfigParams throws error when config file is missing or invalid pa
 })
 
 test_that("cxConfigParams handles null descriptions and null options in JSON catalog", {
-  skip_if(utils::packageVersion("testthat") < "3.0.0")
+  skip_if(!exists("local_mocked_bindings", where = "package:testthat"))
     skip_if(getRversion() < "4.1.0")
     on.exit(.cx_config_params_cache$df <- NULL)
 
