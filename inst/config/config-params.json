@@ -1,7 +1,7 @@
 {
- "x-cx-version": "73.1",
+ "x-cx-version": "74.2",
  "generatedBy": "tools/schema/generate-rd.js",
- "count": 1793,
+ "count": 1807,
  "parameters": [
   {
    "parameter": "Rdataset",
@@ -326,6 +326,24 @@
     false
    ],
    "description": "Alignment for the data points when binned"
+  },
+  {
+   "parameter": "binMethod",
+   "type": "string|boolean",
+   "default": "dotdensity",
+   "options": [
+    "dotdensity",
+    "histodot",
+    "exact",
+    false
+   ],
+   "description": "How binned data points are grouped into stacks. dotdensity is the Wilkinson algorithm R geom_dotplot uses (a bin starts at the first value that does not fit the previous one, and every dot in it is drawn at the bin centre); histodot uses fixed-width bins from the data minimum; exact stacks only values that are strictly equal, leaving every dot on its own value"
+  },
+  {
+   "parameter": "binWidth",
+   "type": "number|boolean",
+   "default": 0,
+   "description": "Width of a bin, in data units, when binned data points are grouped with binMethod dotdensity or histodot. Zero (the default) derives it from the data as the R geom_dotplot default does: the value range divided by 30"
   },
   {
    "parameter": "binned",
@@ -1944,6 +1962,12 @@
    "description": "Numeric vector to set the contour levels. It is automatically calculated if not defined using the axisAlgorithm setting and the contourLevelNumber"
   },
   {
+   "parameter": "contourPoints",
+   "type": "integer|boolean",
+   "default": 100,
+   "description": "Number of grid points in each direction for the two dimensional kernel density estimate underlying the scatter plot contours, as the n argument of the kde2d function in the R package MASS and of stat_density_2d in ggplot2"
+  },
+  {
    "parameter": "contourStat",
    "type": "string|boolean",
    "default": "density",
@@ -3359,6 +3383,12 @@
     false
    ],
    "description": "Histogram density kernels"
+  },
+  {
+   "parameter": "densityPoints",
+   "type": "integer|boolean",
+   "default": 512,
+   "description": "Number of equally spaced points at which the density is estimated, as the n argument of the density function in R. Values above 512 are rounded up to a power of two as in R"
   },
   {
    "parameter": "densityPosition",
@@ -5346,6 +5376,12 @@
    "description": "Flag to remove empty combinations in segregated layouts"
   },
   {
+   "parameter": "layoutSpaceFree",
+   "type": "boolean",
+   "default": false,
+   "description": "Flag to give each facet of a single-column layout a height proportional to the data it holds, the way ggplot2 facet_grid(space = \"free\") sizes its panels, instead of splitting the canvas into equal rows. A facet whose values span a small range is drawn short and a busy one tall, so no facet wastes empty space. Ignored when the layout has more than one column, and for heatmap, DOE and scatter-plot-matrix layouts"
+  },
+  {
    "parameter": "layoutSpacing",
    "type": "integer|boolean",
    "default": 8,
@@ -5504,7 +5540,7 @@
    "parameter": "legendHorizontalJustification",
    "type": "number|boolean",
    "default": 0.5,
-   "description": "Horizontal justification for legends when legend are in top or bottom positions"
+   "description": "Horizontal justification (0 left, 0.5 centre, 1 right) for a legend in the top or bottom position. A corner legendPosition supplies its own justification and ignores this. The edge it is measured from is set by legendJustifyTo"
   },
   {
    "parameter": "legendInside",
@@ -5521,7 +5557,7 @@
     "plot",
     false
    ],
-   "description": "What a left/right-justified top or bottom legend (legendHorizontalJustification 0 or 1) aligns to: the panel (plot area) edge or the whole plot (canvas) edge, like titleAlign plot::0"
+   "description": "What a justified legend aligns to: the panel (plot area) edge or the whole plot (canvas) edge, like titleAlign plot::0. Applies to every justification of a top or bottom legend, centred included, and to the corner positions"
   },
   {
    "parameter": "legendKeyBackgroundBorderColor",
@@ -5609,7 +5645,13 @@
     "top",
     false
    ],
-   "description": "Position for the the legend"
+   "description": "Position for the legend. All eight positions work whether the legend is inside or outside the plot. Inside, a corner anchors the legend to that corner of the plotting panel. Outside, the legend gets one band or one column, so a corner is the top or bottom band flush with that side: topLeft / bottomLeft are justified left and topRight / bottomRight right, overriding legendHorizontalJustification; left and right are a column justified by legendVerticalJustification"
+  },
+  {
+   "parameter": "legendPositionAuto",
+   "type": "boolean",
+   "default": true,
+   "description": "Flag to automatically select the legend position (top or right) that maximizes the area available for the plot. When true the legend dimensions are computed for both candidates and the one that leaves the larger plotting area wins. Ignored when legendPosition is set explicitly in the configuration, when legendInside is true, for a faceted (layout) chart or for cxplot / ggplot specifications"
   },
   {
    "parameter": "legendRows",
@@ -5761,7 +5803,7 @@
    "parameter": "legendVerticalJustification",
    "type": "number|boolean",
    "default": 0.5,
-   "description": "Vertical justification for legends when legend are in left or right positions"
+   "description": "Vertical justification (0 top, 0.5 middle, 1 bottom) for a legend in the left or right position, down the column the legend reserves. The mirror of legendHorizontalJustification for a side legend"
   },
   {
    "parameter": "lineBy",
@@ -6085,6 +6127,23 @@
    "description": "Color for the region bubbles on maps (sizeBy a sample: a circle per region sized by its value); the size legend uses it too"
   },
   {
+   "parameter": "mapCartogramScale",
+   "type": "string|boolean",
+   "default": "area",
+   "options": [
+    "area",
+    "olson",
+    false
+   ],
+   "description": "Scaling for the non-contiguous cartogram (mapType cartogram). area: each region is scaled relative to its own area. olson: the densest region keeps its size and every other shrinks proportionally (classic Olson)"
+  },
+  {
+   "parameter": "mapCartogramSilhouette",
+   "type": "boolean",
+   "default": true,
+   "description": "For the non-contiguous cartogram (mapType cartogram), draw each region full-size silhouette in grey behind the scaled shape so the two can be compared"
+  },
+  {
    "parameter": "mapCentralMeridian",
    "type": "number|boolean",
    "default": -96,
@@ -6209,6 +6268,25 @@
    "type": "number|boolean",
    "default": 45.5,
    "description": "Map Standard Parallel 2 in degrees. (Applicable to Albers projection only). Default adjusts to USA maps"
+  },
+  {
+   "parameter": "mapType",
+   "type": "string|boolean",
+   "default": "region",
+   "options": [
+    "region",
+    "dorling",
+    "cartogram",
+    "contiguous",
+    false
+   ],
+   "description": "Map distortion. region: a normal map (default). The other three are cartograms driven by sizeBy: dorling draws one non-overlapping circle per region sized by value; cartogram keeps each region shape and scales it about its own centre (non-contiguous); contiguous deforms the borders so regions stay joined while their areas match the value (Dougenik rubber-sheet)"
+  },
+  {
+   "parameter": "mapVectorField",
+   "type": "boolean",
+   "default": false,
+   "description": "Flag to draw a vector-field overlay (raw arrows / gridded quiver / integrated streamlines) on a Map. Positions are read from the lat / lng marker columns of data.x and the velocity components from vectorUBy / vectorVBy (defaulting to vx eastward / vy northward)"
   },
   {
    "parameter": "mapZipCodeIds",
@@ -8683,6 +8761,12 @@
    "description": "Color for the Thumb hover color for custom scrollbars"
   },
   {
+   "parameter": "segregateLevelOrder",
+   "type": "object|boolean",
+   "default": false,
+   "description": "Object giving the explicit order of the facet levels, keyed by the annotation used in segregateSamplesBy / segregateVariablesBy, i.e. {\"parameter\": [\"depicted\", \"speech\", \"thought\", \"narrative\"]}. The facets are drawn in the order the array lists, the way an ordered factor fixes the panel order in R; a level the array omits keeps its natural order after the listed ones. Without it the levels are sorted (numerically when they are numbers, otherwise alphabetically)"
+  },
+  {
    "parameter": "segregateSamplesBy",
    "type": "array|boolean|string|number",
    "default": [],
@@ -9765,6 +9849,12 @@
    "type": "string|boolean",
    "default": false,
    "description": "Name of the variable annotation to size the labels in Scatter2D plots"
+  },
+  {
+   "parameter": "sizeLegendNested",
+   "type": "boolean",
+   "default": false,
+   "description": "Flag to draw the size legend as nested (concentric) bubbles sharing a common bottom edge, with a dashed leader line from each circle to its value label, instead of a column of separate size keys. Applies to proportional-circle size legends (e.g. a sizeBy bubble map or Dorling cartogram)"
   },
   {
    "parameter": "sizeLegendTitle",
@@ -11092,6 +11182,12 @@
    "description": "Color for the set bar plot"
   },
   {
+   "parameter": "upsetSetsBarRatio",
+   "type": "number|boolean",
+   "default": 0.2,
+   "description": "Ratio of the canvas width used by the set size bar plot on the left"
+  },
+  {
    "parameter": "upsetShadeAlpha",
    "type": "number|boolean",
    "default": 0.1,
@@ -11234,6 +11330,12 @@
    "type": "integer|boolean",
    "default": 0,
    "description": "Rotation in degrees for the variable text"
+  },
+  {
+   "parameter": "varTextRotateAuto",
+   "type": "boolean",
+   "default": true,
+   "description": "Flag to automatically keep the variable labels along the bottom of a horizontal heatmap horizontal when the longest label fits its column band, falling back to varTextRotate otherwise. Re-evaluated on resize"
   },
   {
    "parameter": "varTextScaleFontFactor",
