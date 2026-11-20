@@ -1,5 +1,4 @@
 context("canvasXpress cxHtmlPage creation")
-skip_if_offline(host = "www.canvasxpress.org")
 
 
 # ---------------------------------------------------------------------------
@@ -16,6 +15,7 @@ skip_if_no_pandoc <- function() {
 # Returns NULL (rather than failing) if the remote data files can't
 # be read, so callers can skip().
 get_scatter_chart <- function() {
+    skip_if_offline(host = "www.canvasxpress.org")
     y       <- NULL
     x       <- NULL
     cx_plot <- NULL
